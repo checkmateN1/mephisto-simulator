@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>simulator</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <meta name="author" content="bred<" />
+        <meta name="keywords" content="покер, холдем, обучение, анализ, равновесие, Нэш, GTO, гто, EV, математическое ожидание, искусственный интеллект, ИИ" />
+        <meta name="description" content="MEPHISTO – обучение покеру, анализ раздач. Загрузка истории сыгранных рук, расчет математического ожидания EV, равновесия Нэша. Нейро моделирование, адаптация." />
+        <meta name="robots" content="all" />
+
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "css/sim-style.css";
+        </style>
+
+        <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body class="simulator_body wrapper">
+        <header>
+            <nav>
+                <ul class="navigation-menu">
+                    <li><a href="index.html">main</a></li>
+                    <li><a href="user.html">login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="cards">
+                <div class="user-cards big-cards">
+                    <div class="hole" onclick="showModalCardsLeft()"></div>
+                    <div class="hole" onclick="showModalCardsLeft()"></div>
+                </div>
+                <div class="board-cards big-cards">
+                    <div class="flop" onclick="showModalCardsRight()"></div>
+                    <div class="flop" onclick="showModalCardsRight()"></div>
+                    <div class="flop" onclick="showModalCardsRight()"></div>
+                    <div class="turn" onclick="showModalCardsRight()"></div>
+                    <div class="river" onclick="showModalCardsRight()"></div>
+                </div>
+
+                <div class="hidden-cards-select-modal">
+                    <div class="modal-cards-close" onclick="modalCardsClose()"></div>
+                    <ul class="mini-card-list">
+                    </ul>
+
+                </div>
+            </section>
+        </main>
+        <script src="js/script.js"></script>
+    </body>
+</html>
