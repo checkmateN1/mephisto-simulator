@@ -28,6 +28,7 @@ function showModalCardsRight() {
 function modalCardsClose() {
     cardsModal.classList.remove("visually");
     checkedCards.wherefrom = null;
+    setBigCardState();                   //вызываем перерисовку больших карт
     if (cardsModal.classList.contains("position-right")) {
         cardsModal.classList.remove("position-right");
     }
@@ -38,6 +39,7 @@ window.addEventListener("keydown", function (event) {
         if (cardsModal.classList.contains("visually")) {
             cardsModal.classList.remove("visually");
             checkedCards.wherefrom = null;
+            setBigCardState();                   //вызываем перерисовку больших карт
         }
         if (cardsModal.classList.contains("position-right")) {
             cardsModal.classList.remove("position-right");
@@ -46,7 +48,7 @@ window.addEventListener("keydown", function (event) {
 });
 
 
-var checkedCards = [null, null, null, 7, null, null, null, null];
+var checkedCards = [null, null, null, null, null, null, null, null]; //первая hole = 3h
 
 //записываем в карту какой улицы мы кликнули
 cards.addEventListener('click', function(e){
@@ -61,28 +63,132 @@ cards.addEventListener('click', function(e){
     } else if (id.contains("river")){
         checkedCards[0] = "river";
     }
-    alert("записали в нулевой элемента массива - какую карту мы хотим выбрать: " + checkedCards[0]);
+    //alert("записали в нулевой элемента массива - какую карту мы хотим выбрать: " + checkedCards[0]);
 });
 
 // ожидаем клика в миникарту
 ul.addEventListener('click', function(e){
     let id = e.target.id;
     changeCardState(id);  // вызываем функцию которая отображает и меняет состояние карты и добавляет/удаляет в массив
-    document.getElementById(id).style.opacity = "0.15";
-
 });
 
 function changeCardState(id) {
     if (checkedCards[0] == "hole") { // если это карта на руках
-        if (checkedCards.indexOf(id) > 0){ // если эта карта уже выбрана
-            if (checkedCards.indexOf(id) == 1) { // если это первая карта на руках
+
+        if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
+
+            if (checkedCards.indexOf(id) == 1) { // если это первая карта hole
                 document.getElementById(id).style.opacity = "1";
                 checkedCards[1] = null;
+                return;
+            } else if (checkedCards.indexOf(id) == 2) {
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[2] = null;
+                return;
             }
+        } else if (checkedCards[1] !== null) { //если первая карта hole выбрана
+            if (checkedCards[2] !== null) {// если и вторая выбрана - ничего не делать
+                return;
+            } else {
+                document.getElementById(id).style.opacity = "0.15";
+                checkedCards[2] = id;
+                return;
+            }
+        } else {
+            document.getElementById(id).style.opacity = "0.15";
+            checkedCards[1] = id;
+            return;
         }
+    }
+
+    if (checkedCards[0] == "flop") { // если это карта FLOP
+
+        if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
+
+            if (checkedCards.indexOf(id) == 3) { // если это первая карта flop отжимаем ее и выходим из ф-ции
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[3] = null;
+                return;
+            } else if (checkedCards.indexOf(id) == 4) { // если это вторая карта flop отжимаем ее и выходим из ф-ции
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[4] = null;
+                return;
+            } else if (checkedCards.indexOf(id) == 5) { // если это третья карта flop отжимаем ее и выходим из ф-ции
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[5] = null;
+                return;
+            }
+        } else if (checkedCards[3] !== null) { //если первая карта flop выбрана
+            if (checkedCards[4] !== null) { // если и вторая выбрана - ничего не делать
+                if (checkedCards[5] !== null) { // если и третья выбрана - ничего не делать
+                    return;
+                } else {
+                    document.getElementById(id).style.opacity = "0.15";
+                    checkedCards[5] = id;
+                    return;
+                }
+            } else {
+                document.getElementById(id).style.opacity = "0.15";
+                checkedCards[4] = id;
+                return;
+            }
+        } else {
+            document.getElementById(id).style.opacity = "0.15";
+            checkedCards[3] = id;
+            return;
+        }
+    }
+
+    if (checkedCards[0] == "turn") { // если это карта TURN
+
+        if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
+
+            if (checkedCards.indexOf(id) == 6) { // если это карта turn мы ее отжимаем
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[6] = null;
+                return;
+            }
+        } else if (checkedCards[6] !== null) { //если карта TURN выбрана
+            return;
+
+            } else {
+                document.getElementById(id).style.opacity = "0.15";
+                checkedCards[6] = id;
+                return;
+            }
+    }
+
+    if (checkedCards[0] == "river") { // если это карта RIVER
+
+        if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
+
+            if (checkedCards.indexOf(id) == 7) { // если это карта RIVER мы ее отжимаем
+                document.getElementById(id).style.opacity = "1";
+                checkedCards[7] = null;
+                return;
+            }
+        } else if (checkedCards[7] !== null) { //если карта TURN выбрана
+            return;
+
+        } else {
+            document.getElementById(id).style.opacity = "0.15";
+            checkedCards[7] = id;
+            return;
+        }
+    }
+
+}
+
+function setBigCardState() {
+    for (var i = 1; i <= checkedCards.length; i++) {
+        if (checkedCards[i] !== null) {
+            document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_" + checkedCards[i] + "_alt.png')";
+        } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back.png')";}
     }
 }
 
+//function changeCardOpacity(id)
+//test git
 
 /*
 var div = document.createElement("div");

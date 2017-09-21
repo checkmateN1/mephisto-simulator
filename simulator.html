@@ -29,22 +29,20 @@
         <main>
             <section class="cards">
                 <div class="user-cards big-cards">
-                    <div class="hole" onclick="showModalCardsLeft()"></div>
-                    <div class="hole" onclick="showModalCardsLeft()"></div>
+                    <div id="card_1" class="hole" onclick="showModalCardsLeft()"></div>
+                    <div id="card_2" class="hole" onclick="showModalCardsLeft()"></div>
                 </div>
                 <div class="board-cards big-cards">
-                    <div class="flop" onclick="showModalCardsRight()"></div>
-                    <div class="flop" onclick="showModalCardsRight()"></div>
-                    <div class="flop" onclick="showModalCardsRight()"></div>
-                    <div class="turn" onclick="showModalCardsRight()"></div>
-                    <div class="river" onclick="showModalCardsRight()"></div>
+                    <div id="card_3" class="flop" onclick="showModalCardsRight()"></div>
+                    <div id="card_4" class="flop" onclick="showModalCardsRight()"></div>
+                    <div id="card_5" class="flop" onclick="showModalCardsRight()"></div>
+                    <div id="card_6" class="turn" onclick="showModalCardsRight()"></div>
+                    <div id="card_7" class="river" onclick="showModalCardsRight()"></div>
                 </div>
 
                 <div class="hidden-cards-select-modal">
                     <div class="modal-cards-close" onclick="modalCardsClose()"></div>
-                    <ul class="mini-card-list">
-                    </ul>
-
+                    <ul class="mini-card-list"></ul>
                 </div>
             </section>
         </main>
