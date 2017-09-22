@@ -183,8 +183,8 @@ function changeCardState(id) {
 function setBigCardState() {
     for (var i = 1; i < checkedCards.length; i++) {
         if (checkedCards[i] !== null) {
-            document.getElementById('card_' + i).style.backgroundImage = "url('img/cards2/card_" + checkedCards[i] + "_alt.svg')";
-        } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back.png')";}
+            document.getElementById('card_' + i).style.backgroundImage = "url('img/cards3/card_" + checkedCards[i] + "_alt.svg')";
+        } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back6.png')";}
     }
 }
 
@@ -207,6 +207,8 @@ function cardsRemove() {
     setBigCardState();  //вызываем перерисовку больших карт
 
 }
+
+
 
 //function changeCardOpacity(id)
 //test git

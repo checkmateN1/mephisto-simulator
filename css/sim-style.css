@@ -51,7 +51,7 @@ body {
 .flop, .turn, .river {
     width: 62px;
     height: 87px;
-    background-image: url('../img/cards/card_back.png');
+    background-image: url('../img/cards/card_back6.png');
 }
 
 .cards {
@@ -65,11 +65,11 @@ body {
 }
 
 .user-cards div {
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .board-cards div {
-    margin-left: 10px;
+    margin-left: 8px;
 }
 
 .hidden-cards-select-modal {
