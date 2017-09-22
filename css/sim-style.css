@@ -50,7 +50,7 @@ body {
 .hole,
 .flop, .turn, .river {
     width: 62px;
-    height: 83px;
+    height: 87px;
     background-image: url('../img/cards/card_back.png');
 }
 
@@ -75,7 +75,7 @@ body {
 .hidden-cards-select-modal {
     display: none;
     position: absolute;
-    top: 90px;
+    top: 95px;
     left: 80px;
     width: 338px;
     height: 143px;
@@ -116,7 +116,10 @@ body {
     height: 33px;
     display: block;
     background-size: cover;
+}
 
+.big-cards div {
+    background-size: cover;
 }
 
 .modal-cards-close {
@@ -130,7 +133,22 @@ body {
     -webkit-filter: grayscale(100%);
 }
 
+.cards-remove {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url('../img/modal-close2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 1172px;
+    top: 95px;
+    -webkit-filter: grayscale(100%);
+}
+
 .modal-cards-close:hover {
     -webkit-filter: grayscale(0%);
 }
 
+.cards-remove:hover {
+    -webkit-filter: grayscale(0%);
+}

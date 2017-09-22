@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="50"
+   height="70"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 "
+   sodipodi:docname="K.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient6105">
+      <stop
+         style="stop-color:#00aaff;stop-opacity:1;"
+         offset="0"
+         id="stop6107" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0.50980395;"
+         offset="1"
+         id="stop6109" />
+    </linearGradient>
+    <g
+       style="fill:#ffffff;fill-opacity:1;stroke:none"
+       id="lys"
+       transform="matrix(0.4,0,0,0.4,236.59,667.12)">
+      <path
+         id="lys_1"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="translate(-1.35,-0.76)"
+         d="m 355.65,280.19 c 0,0 -3.75,-8.1 -8.1,-12.6 -4.36,-4.51 -9.68,-7.58 -11.04,-6.53" />
+      <path
+         id="lys_2"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         d="m 368.97,258.94 c -2.29,0.08 -5.9,1.92 -7.85,3.87 -2.59,2.6 -3.52,7.58 -3.59,9.44 -0.07,1.86 -1.32,-0.84 -2.19,-2.37 -0.86,-1.54 -1.93,-5.4 -2.22,-3.22 -0.28,2.2 -0.34,3.26 0.07,5.72 0.4,2.45 1.59,7.15 2.56,8.68 l 3.97,3.94 c 1.87,-1.88 3.1,-6.25 3.19,-6.25 l -0.07,9.34 4.35,4.32 c -1.16,-2.37 -1.94,-6.58 -1.63,-10.38 0.32,-3.8 2.3,-8.59 2.06,-10.44 -1.14,-0.4 -2.9,2.58 -5.21,1.88 -0.08,-1.75 0.74,-6.02 1.9,-7.69 1.17,-1.66 4.43,-5.7 6.41,-6.28 -0.36,-0.42 -0.99,-0.59 -1.75,-0.56 z" />
+      <path
+         id="lys_3"
+         style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         transform="translate(-1.35,-0.76)"
+         d="m 329.36,254.28 c 9.62,-4.95 19.64,8.3 19.64,8.3 0,0 1.44,-9.25 3.32,-9.36 1.88,-0.11 4.87,7.31 4.87,7.31 0,0 5.76,-7.64 15.72,-7.58 9.97,0.05 11.57,9.13 5.87,9.57 -5.66,0.44 -2.38,-5.15 -2.27,-3.65 0.06,0.17 -5.37,-7.75 -19.15,7.86 -2.03,2.3 -3.94,-8.46 -4.93,-6.09 -1.21,2.88 -0.22,6.26 -1.11,8.53 1.39,1.71 -11.35,-13.84 -16.77,-9.58" />
+      <use
+         height="1216.1899"
+         width="2178.99"
+         y="0"
+         x="0"
+         id="use646"
+         style="fill:#ffffff;fill-opacity:1;stroke:none"
+         xlink:href="#lys_3"
+         transform="matrix(0,1,1,0,74.5,-74.49)" />
+      <use
+         height="1216.1899"
+         width="2178.99"
+         y="0"
+         x="0"
+         id="use648"
+         style="fill:#ffffff;fill-opacity:1;stroke:none"
+         xlink:href="#lys_1"
+         transform="matrix(0,1,1,0,74.9,-74.93)" />
+      <use
+         height="1216.1899"
+         width="2178.99"
+         y="0"
+         x="0"
+         id="use650"
+         style="fill:#ffffff;fill-opacity:1;stroke:none"
+         xlink:href="#lys_2"
+         transform="matrix(0,1,1,0,74.82,-74.82)" />
+    </g>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6105"
+       id="radialGradient4110"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.4677513,0.02853153,-0.00586026,2.1318507,-46.913249,-10.690075)"
+       cx="20.746119"
+       cy="4.9713411"
+       fx="20.802559"
+       fy="8.2045326"
+       r="24.6875" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6105"
+       id="radialGradient4113"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.4678167,0.02490806,1.2243669e-7,2.7949367,-47.133417,-35.37225)"
+       cx="20.800816"
+       cy="37.336853"
+       fx="20.728724"
+       fy="35.280205"
+       r="24.6875" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="-65.938271"
+     inkscape:cy="54.262845"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1680"
+     inkscape:window-height="1028"
+     inkscape:window-x="-4"
+     inkscape:window-y="-4"
+     inkscape:window-maximized="1"
+     inkscape:snap-center="true">
+    <sodipodi:guide
+       orientation="1,0"
+       position="25,22"
+       id="guide3649" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3665" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="7,57"
+       id="guide3675" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="7,40"
+       id="guide4399" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-982.36218)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect4405"
+       width="48.979172"
+       height="68.979172"
+       x="0.51041466"
+       y="982.74762"
+       rx="4.4895864"
+       ry="4.4895606" />
+    <path
+       style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="M 5 0.375 C 2.5127692 0.375 0.5 2.3877834 0.5 4.875 L 0.5 64.875 C 0.5 67.362217 2.5127692 69.375 5 69.375 L 45 69.375 C 47.487231 69.375 49.5 67.362217 49.5 64.875 L 49.5 4.875 C 49.5 2.3877834 47.487231 0.375 45 0.375 L 5 0.375 z M 2.3125 2 L 5.25 2 L 5.25 12.5625 L 8.46875 2 L 11.15625 2 L 7.75 12.9375 L 11.6875 24 L 8.75 24 L 5.25 13.71875 L 5.25 24 L 2.3125 24 L 2.3125 2 z M 6.96875 24.96875 C 7.086191 25.37475 7.141374 25.50135 7.25 25.71875 C 7.743333 26.70585 8.7325279 27.8398 10.09375 28.9375 C 10.822934 29.5255 11.486516 29.90705 11.84375 29.96875 L 12 30 L 11.78125 30.03125 C 11.112574 30.16945 10.220249 30.812 9.25 31.8125 C 8.17744 32.9185 7.331978 34.07825 7.0625 34.84375 C 7.01692 34.97325 6.947219 35.06075 6.9375 35.03125 C 6.9278 35.00225 6.90836 34.87 6.875 34.75 C 6.642878 33.9151 5.599343 32.6189 4.3125 31.5 C 3.859062 31.1058 3.214621 30.59165 2.90625 30.40625 C 2.610918 30.22865 2.150255 30.03565 2.03125 30.03125 C 1.98125 30.03125 2.029605 29.99575 2.15625 29.96875 C 3.170113 29.74865 4.763492 28.32685 6.0625 26.53125 C 6.500191 25.92625 6.726402 25.57835 6.875 25.15625 C 6.92058 25.02685 6.96023 24.93925 6.96875 24.96875 z M 17.65625 30.78125 L 22.25 30.78125 L 22.25 47.28125 L 27.28125 30.78125 L 31.5 30.78125 L 26.15625 47.90625 L 32.34375 65.21875 L 27.75 65.21875 L 22.25 49.09375 L 22.25 65.21875 L 17.65625 65.21875 L 17.65625 30.78125 z "
+       transform="translate(0,982.36218)"
+       id="rect2816" />
+    <path
+       style="opacity:1;fill:url(#radialGradient4113);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="M 41.0625 0.125 C 37.405487 0.090788513 32.254066 0.5 25 0.5 C -3.8912665 2.3125 0.18750001 -7.6495918 0.5 35 C 1.0303301 75.007674 -5.2374603 69.5 25 69.5 C 54.437523 69.5 49.5 75.961549 49.5 35 C 49.5 4.278431 52.033538 0.22763446 41.0625 0.125 z M 2.3125 2 L 5.25 2 L 5.25 12.5625 L 8.46875 2 L 11.15625 2 L 7.75 12.9375 L 11.6875 24 L 8.75 24 L 5.25 13.71875 L 5.25 24 L 2.3125 24 L 2.3125 2 z M 6.96875 24.96875 C 7.086191 25.37475 7.141374 25.50135 7.25 25.71875 C 7.743333 26.70585 8.7325279 27.8398 10.09375 28.9375 C 10.822934 29.5255 11.486516 29.90705 11.84375 29.96875 L 12 30 L 11.78125 30.03125 C 11.112574 30.16945 10.220249 30.812 9.25 31.8125 C 8.17744 32.9185 7.331978 34.07825 7.0625 34.84375 C 7.01692 34.97325 6.947219 35.06075 6.9375 35.03125 C 6.9278 35.00225 6.90836 34.87 6.875 34.75 C 6.642878 33.9151 5.599343 32.6189 4.3125 31.5 C 3.859062 31.1058 3.214621 30.59165 2.90625 30.40625 C 2.610918 30.22865 2.150255 30.03565 2.03125 30.03125 C 1.98125 30.03125 2.029605 29.99575 2.15625 29.96875 C 3.170113 29.74865 4.763492 28.32685 6.0625 26.53125 C 6.500191 25.92625 6.726402 25.57835 6.875 25.15625 C 6.92058 25.02685 6.96023 24.93925 6.96875 24.96875 z M 17.65625 30.78125 L 22.25 30.78125 L 22.25 47.28125 L 27.28125 30.78125 L 31.5 30.78125 L 26.15625 47.90625 L 32.34375 65.21875 L 27.75 65.21875 L 22.25 49.09375 L 22.25 65.21875 L 17.65625 65.21875 L 17.65625 30.78125 z "
+       transform="translate(0,982.36218)"
+       id="path6176" />
+    <path
+       style="opacity:1;fill:url(#radialGradient4110);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       d="M 41.0625 0.125 C 37.405487 0.090788513 32.254066 0.5 25 0.5 C -3.8912665 2.3125 0.18750001 -7.6495918 0.5 35 C 1.0303301 75.007674 -5.2374603 69.5 25 69.5 C 54.437523 69.5 49.5 75.961549 49.5 35 C 49.5 4.278431 52.033538 0.22763446 41.0625 0.125 z M 2.3125 2 L 5.25 2 L 5.25 12.5625 L 8.46875 2 L 11.15625 2 L 7.75 12.9375 L 11.6875 24 L 8.75 24 L 5.25 13.71875 L 5.25 24 L 2.3125 24 L 2.3125 2 z M 6.96875 24.96875 C 7.086191 25.37475 7.141374 25.50135 7.25 25.71875 C 7.743333 26.70585 8.7325279 27.8398 10.09375 28.9375 C 10.822934 29.5255 11.486516 29.90705 11.84375 29.96875 L 12 30 L 11.78125 30.03125 C 11.112574 30.16945 10.220249 30.812 9.25 31.8125 C 8.17744 32.9185 7.331978 34.07825 7.0625 34.84375 C 7.01692 34.97325 6.947219 35.06075 6.9375 35.03125 C 6.9278 35.00225 6.90836 34.87 6.875 34.75 C 6.642878 33.9151 5.599343 32.6189 4.3125 31.5 C 3.859062 31.1058 3.214621 30.59165 2.90625 30.40625 C 2.610918 30.22865 2.150255 30.03565 2.03125 30.03125 C 1.98125 30.03125 2.029605 29.99575 2.15625 29.96875 C 3.170113 29.74865 4.763492 28.32685 6.0625 26.53125 C 6.500191 25.92625 6.726402 25.57835 6.875 25.15625 C 6.92058 25.02685 6.96023 24.93925 6.96875 24.96875 z M 17.65625 30.78125 L 22.25 30.78125 L 22.25 47.28125 L 27.28125 30.78125 L 31.5 30.78125 L 26.15625 47.90625 L 32.34375 65.21875 L 27.75 65.21875 L 22.25 49.09375 L 22.25 65.21875 L 17.65625 65.21875 L 17.65625 30.78125 z "
+       transform="translate(0,982.36218)"
+       id="path6103" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       x="-143.54268"
+       y="40.655067"
+       id="text3638"
+       sodipodi:linespacing="100%"
+       transform="translate(0,982.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan3640"
+         x="-143.54268"
+         y="40.655067" /></text>
+    <rect
+       ry="4.4895606"
+       rx="4.4895864"
+       y="982.87262"
+       x="0.51041466"
+       height="68.979172"
+       width="48.979172"
+       id="rect3596"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.02082932000000000;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       x="-105.71246"
+       y="89.798988"
+       id="text4401"
+       sodipodi:linespacing="100%"
+       transform="translate(0,982.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan4403"
+         x="-105.71246"
+         y="89.798988" /></text>
+    <g
+       transform="translate(0,982.36218)"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       id="text4480" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       x="-54.875"
+       y="57.375"
+       id="text3259"
+       sodipodi:linespacing="100%"
+       transform="translate(0,982.36218)"><tspan
+         sodipodi:role="line"
+         id="tspan3261" /></text>
+    <g
+       transform="translate(37.356689,986.15637)"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       id="text4080" />
+    <g
+       id="g4087"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       transform="matrix(0.63835876,0,0,0.63835876,14.888001,967.14301)" />
+    <g
+       id="g4091"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       transform="translate(37.356689,986.15637)" />
+    <g
+       transform="translate(37.356689,986.15637)"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:BigNoodleTitling;-inkscape-font-specification:BigNoodleTitling"
+       id="g4095" />
+  </g>
+</svg>

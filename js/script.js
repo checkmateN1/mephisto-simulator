@@ -179,12 +179,33 @@ function changeCardState(id) {
 
 }
 
+// Отрисовка больших карт
 function setBigCardState() {
-    for (var i = 1; i <= checkedCards.length; i++) {
+    for (var i = 1; i < checkedCards.length; i++) {
         if (checkedCards[i] !== null) {
-            document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_" + checkedCards[i] + "_alt.png')";
+            document.getElementById('card_' + i).style.backgroundImage = "url('img/cards2/card_" + checkedCards[i] + "_alt.svg')";
         } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back.png')";}
     }
+}
+
+
+function cardsRemove() {
+    for (var i = 0; i < checkedCards.length; i++) {
+        checkedCards[i] = null;
+    }
+    if (cardsModal.classList.contains("visually")) {
+        cardsModal.classList.remove("visually");
+        checkedCards.wherefrom = null;
+    }
+    if (cardsModal.classList.contains("position-right")) {
+        cardsModal.classList.remove("position-right");
+    }
+    for (let i = 0; i < 52; i++) {
+        document.getElementById(i).style.opacity = "1";
+    }
+
+    setBigCardState();  //вызываем перерисовку больших карт
+
 }
 
 //function changeCardOpacity(id)
