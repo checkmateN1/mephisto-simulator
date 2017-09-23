@@ -22,6 +22,7 @@ body {
     background-image: url('../img/demon.png');
     background-repeat: no-repeat;
     box-sizing: border-box;
+    z-index: -10;
 }
 
 .navigation-menu {
@@ -80,6 +81,18 @@ body {
     width: 338px;
     height: 143px;
     padding: 0;
+}
+
+.hidden-cards-select-modal:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 328px;
+    height: 131px;
+    background-color: #4f4f4f;
+    top: 5px;
+    left: 5px;
+    z-index: -9;
 }
 
 .visually {
@@ -152,3 +165,5 @@ body {
 .cards-remove:hover {
     -webkit-filter: grayscale(0%);
 }
+
+

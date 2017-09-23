@@ -56,6 +56,9 @@ cards.addEventListener('click', function(e){
 
     if (id.contains("hole")) {
         checkedCards[0] = "hole";
+        //if (checkedCards[3] !== null){document.getElementById(checkedCards[3]).style.opacity = "0";}
+       // if (checkedCards[4] !== null){document.getElementById(checkedCards[4]).style.opacity = "0";}
+       //if (checkedCards[5] !== null){document.getElementById(checkedCards[5]).style.opacity = "0";}
     } else if (id.contains("flop")) {
         checkedCards[0] = "flop";
     } else if (id.contains("turn")) {
@@ -90,12 +93,12 @@ function changeCardState(id) {
             if (checkedCards[2] !== null) {// если и вторая выбрана - ничего не делать
                 return;
             } else {
-                document.getElementById(id).style.opacity = "0.15";
+                document.getElementById(id).style.opacity = "0.1";
                 checkedCards[2] = id;
                 return;
             }
         } else {
-            document.getElementById(id).style.opacity = "0.15";
+            document.getElementById(id).style.opacity = "0.1";
             checkedCards[1] = id;
             return;
         }
@@ -123,17 +126,17 @@ function changeCardState(id) {
                 if (checkedCards[5] !== null) { // если и третья выбрана - ничего не делать
                     return;
                 } else {
-                    document.getElementById(id).style.opacity = "0.15";
+                    document.getElementById(id).style.opacity = "0.1";
                     checkedCards[5] = id;
                     return;
                 }
             } else {
-                document.getElementById(id).style.opacity = "0.15";
+                document.getElementById(id).style.opacity = "0.1";
                 checkedCards[4] = id;
                 return;
             }
         } else {
-            document.getElementById(id).style.opacity = "0.15";
+            document.getElementById(id).style.opacity = "0.1";
             checkedCards[3] = id;
             return;
         }
@@ -152,7 +155,7 @@ function changeCardState(id) {
             return;
 
             } else {
-                document.getElementById(id).style.opacity = "0.15";
+                document.getElementById(id).style.opacity = "0.1";
                 checkedCards[6] = id;
                 return;
             }
@@ -171,7 +174,7 @@ function changeCardState(id) {
             return;
 
         } else {
-            document.getElementById(id).style.opacity = "0.15";
+            document.getElementById(id).style.opacity = "0.1";
             checkedCards[7] = id;
             return;
         }
@@ -188,7 +191,7 @@ function setBigCardState() {
     }
 }
 
-
+// удаляем все карты и возвращаем все состояния в дефолт
 function cardsRemove() {
     for (var i = 0; i < checkedCards.length; i++) {
         checkedCards[i] = null;
