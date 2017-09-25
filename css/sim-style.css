@@ -17,7 +17,7 @@ body {
 
 .wrapper {
     width: 1246px;
-    padding: 0 25px;
+    padding: 0 15px;
     margin: 0 auto;
     background-image: url('../img/demon.png');
     background-repeat: no-repeat;
@@ -92,7 +92,7 @@ body {
     background-color: #4f4f4f;
     top: 5px;
     left: 5px;
-    z-index: -9;
+    z-index: 1;
 }
 
 .visually {
@@ -100,7 +100,7 @@ body {
 }
 
 .position-right {
-    left: 760px;
+    left: 770px;
 }
 /*
 .mini-card {
@@ -129,6 +129,8 @@ body {
     height: 33px;
     display: block;
     background-size: cover;
+    position: relative;
+    z-index: 2;
 }
 
 .big-cards div {
@@ -153,7 +155,7 @@ body {
     background-image: url('../img/modal-close2.png');
     background-repeat: no-repeat;
     background-size: cover;
-    left: 1172px;
+    right: 0;
     top: 95px;
     -webkit-filter: grayscale(100%);
 }
@@ -164,6 +166,29 @@ body {
 
 .cards-remove:hover {
     -webkit-filter: grayscale(0%);
+}
+
+.moves-history {
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.moves-history > div {
+    width: 400px;
+    height: 200px;
+    background-color: rgba(100, 100, 100, .3);
+    margin-bottom: 58px;
+}
+
+.moves-history > div:last-child {
+    position: relative;
+    left: 407px;
+}
+
+.moves-history .all-info-table {
+    width: 100%;
 }
 
 

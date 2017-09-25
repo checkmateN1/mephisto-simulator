@@ -208,10 +208,9 @@ function cardsRemove() {
     }
 
     setBigCardState();  //вызываем перерисовку больших карт
-
 }
 
-
+jQuery("body").append("<a href=\"index.html\">test ref!</a>");
 
 //function changeCardOpacity(id)
 //test git
