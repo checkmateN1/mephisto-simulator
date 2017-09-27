@@ -301,7 +301,7 @@ function displayActions() {
                 tr.appendChild(td);
 
                 td = document.createElement("td");
-                td.innerHTML = rawActionList[i].balance;
+                td.innerHTML = "$" + rawActionList[i].balance;
                 tr.appendChild(td);
 
                 td = document.createElement("td");
@@ -309,12 +309,12 @@ function displayActions() {
                 tr.appendChild(td);
 
                 td = document.createElement("td");
-                td.innerHTML = rawActionList[i].pot;
+                td.innerHTML = "$" + rawActionList[i].pot;
                 tr.appendChild(td);
 
                 td = document.createElement("td");
                 if (rawActionList[i].amount) {
-                    td.innerHTML = rawActionList[i].amount;
+                    td.innerHTML = "$" + rawActionList[i].amount;
                 } else {td.innerHTML = ""};
                 tr.appendChild(td);
 
