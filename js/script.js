@@ -255,8 +255,16 @@ rawActionList[3] = new ActionString(0, "Joooe84", 60, 2, 0.35, 0.75, 0); // bet 
 rawActionList[4] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
 rawActionList[5] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
 
-rawActionList[6] = new ActionString(1, "checkmateN1", 37, 4, 1.6, 0, 8);
+rawActionList[6] = new ActionString(1, "checkmateN1", 36.5, 4, 1.6, 0, 8);
 rawActionList[7] = new ActionString(1, "Joooe84", 50.25, 1, 1.6, 1.3, 0);
+rawActionList[8] = new ActionString(1, "checkmateN1", 36.5, 3, 2.9, 1.3, 8);
+
+rawActionList[9] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
+rawActionList[10] = new ActionString(2, "Joooe84", 48.95, 1, 4.2, 3, 0);
+rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
+
+rawActionList[12] = new ActionString(3, "checkmateN1", 32.2, 1, 10.2, 10.2, 8);
+rawActionList[13] = new ActionString(3, "Joooe84", 45.95, 2, 20.4, 45.95, 0);
 
 
 // функция копирующая в массив сырые действия из загруженной с сервера руки
@@ -357,9 +365,63 @@ function displayActions() {
                 flopMove.appendChild(tr);
                 flopMove.classList.remove("hide-table-row");
             } else if (rawActionList[i].street === 2) { //если улица TURN
+                let turnMove = document.querySelector(".turn-moves .all-info-table");
+                let tr = document.createElement("tr");  // создали строку
 
+                // (player, balance, action, pot, amount, position)
+                let td = document.createElement("td");
+                td.innerHTML = rawActionList[i].player;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].balance;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = getActionText(rawActionList[i].action);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].pot;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                if (rawActionList[i].amount) {
+                    td.innerHTML = "$" + rawActionList[i].amount;
+                } else {td.innerHTML = ""};
+                tr.appendChild(td);
+
+                turnMove.appendChild(tr);
+                turnMove.classList.remove("hide-table-row");
             } else if (rawActionList[i].street === 3) { //если улица RIVER
+                let riverMove = document.querySelector(".river-moves .all-info-table");
+                let tr = document.createElement("tr");  // создали строку
 
+                // (player, balance, action, pot, amount, position)
+                let td = document.createElement("td");
+                td.innerHTML = rawActionList[i].player;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].balance;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = getActionText(rawActionList[i].action);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].pot;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                if (rawActionList[i].amount) {
+                    td.innerHTML = "$" + rawActionList[i].amount;
+                } else {td.innerHTML = ""};
+                tr.appendChild(td);
+
+                riverMove.appendChild(tr);
+                riverMove.classList.remove("hide-table-row");
             }
         }
     }
