@@ -177,7 +177,7 @@ body {
 
 .moves-history > div {
     width: 400px;
-    height: 200px;
+    min-height: 200px;
     background-color: rgba(100, 100, 100, .3);
     margin-bottom: 58px;
 }
@@ -194,15 +194,22 @@ body {
     border-bottom: 1px solid rgba(255,255,255, .2);
     padding: 2px 2px;
     padding-bottom: 3px;
-    color: lightgrey;
+    font-weight: normal;
 }
 
 .moves-history table th:first-child {
-    width: 100px;
+    width: 90px;
 }
 
 .moves-history table th:last-child {
-    width: 100px;
+    width: 110px;
+}
+
+.moves-history table th:nth-child(2),
+.moves-history table th:nth-child(3),
+.moves-history table th:nth-child(4),
+.moves-history table th:nth-child(5) {
+    min-width: 55px;
 }
 
 .moves-history table td {
@@ -212,14 +219,14 @@ body {
 .moves-history table td:first-child {
     width: 100px;
     overflow: hidden;
-    display: inline-block;
-    margin-right: 5px;
+    margin-right: 2px;
     white-space: nowrap;
     vertical-align: middle;
+    display: block;
 }
 
 .moves-history table td:not(:first-child) {
-     text-align: center;
+    text-align: center;
 }
 
 .moves-history table th:not(:first-child) {
@@ -227,12 +234,16 @@ body {
 }
 
 table caption {
-    position: absolute;
-    top: -25px;
-    left: 190px;
-    font-family: Verdana, Geneva, sans-serif;
-    font-size: 15px;
-    color: lightgrey;
+     position: absolute;
+     top: -25px;
+     left: 185px;
+     font-family: Verdana, Geneva, sans-serif;
+     font-size: 15px;
+     color: lightgrey;
+ }
+
+.preflop-moves caption {
+    left: 175px;
 }
 
 .moves-history > div:last-child {
@@ -248,9 +259,8 @@ table caption {
     -webkit-appearance: none;
     width: 100%;
     border-radius: 8px;
-    height: 7px;
+    height: 3px;
     background-color: #fff;
-    padding-right: 2px;
     outline: none;
 }
 
@@ -262,5 +272,9 @@ table caption {
     height: 14px;
     border-radius: 7px;
     cursor: pointer;
+}
+
+.hide-table-row {
+    display: none !important;
 }
 
