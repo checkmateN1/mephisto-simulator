@@ -243,7 +243,7 @@ class ActionString {
 };
 
 
-// тестовый массив для префлопа из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
+// тестовый массив из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
 
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
@@ -254,6 +254,9 @@ rawActionList[2] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
 rawActionList[3] = new ActionString(0, "Joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
 rawActionList[4] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
 rawActionList[5] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
+
+rawActionList[6] = new ActionString(1, "checkmateN1", 37, 4, 1.6, 0, 8);
+rawActionList[7] = new ActionString(1, "Joooe84", 50.25, 1, 1.6, 1.3, 0);
 
 
 // функция копирующая в массив сырые действия из загруженной с сервера руки
@@ -325,7 +328,34 @@ function displayActions() {
                 preflopMove.classList.remove("hide-table-row");
 
             } else if (rawActionList[i].street === 1) { //если улица FLOP
+                let flopMove = document.querySelector(".flop-moves .all-info-table");
+                let tr = document.createElement("tr");  // создали строку
 
+                // (player, balance, action, pot, amount, position)
+                let td = document.createElement("td");
+                td.innerHTML = rawActionList[i].player;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].balance;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = getActionText(rawActionList[i].action);
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                td.innerHTML = "$" + rawActionList[i].pot;
+                tr.appendChild(td);
+
+                td = document.createElement("td");
+                if (rawActionList[i].amount) {
+                    td.innerHTML = "$" + rawActionList[i].amount;
+                } else {td.innerHTML = ""};
+                tr.appendChild(td);
+
+                flopMove.appendChild(tr);
+                flopMove.classList.remove("hide-table-row");
             } else if (rawActionList[i].street === 2) { //если улица TURN
 
             } else if (rawActionList[i].street === 3) { //если улица RIVER
