@@ -242,6 +242,9 @@ class ActionString {
 
 };
 
+
+// тестовый массив для префлопа из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
+
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 // (street, player, balance, action, pot, amount, position)
