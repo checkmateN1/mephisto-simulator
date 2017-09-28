@@ -50,7 +50,8 @@ window.addEventListener("keydown", function (event) {
 });
 
 
-var checkedCards = [null, null, null, null, null, null, null, null]; //первая hole = 3h
+var checkedCards = [null, null, null, null, null, null, null, null];
+//checkedCards = [null, 1, 2, 3, 4, 5, 6, 7];
 
 //записываем в карту какой улицы мы кликнули
 cards.addEventListener('click', function(e){
@@ -110,17 +111,9 @@ function changeCardState(id) {
 
         if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
 
-            if (checkedCards.indexOf(id) == 3) { // если это первая карта flop отжимаем ее и выходим из ф-ции
+            if (checkedCards.indexOf(id) >= 3 && checkedCards.indexOf(id) <= 5) { // если это первая карта flop отжимаем ее и выходим из ф-ции
                 document.getElementById(id).style.opacity = "1";
-                checkedCards[3] = null;
-                return;
-            } else if (checkedCards.indexOf(id) == 4) { // если это вторая карта flop отжимаем ее и выходим из ф-ции
-                document.getElementById(id).style.opacity = "1";
-                checkedCards[4] = null;
-                return;
-            } else if (checkedCards.indexOf(id) == 5) { // если это третья карта flop отжимаем ее и выходим из ф-ции
-                document.getElementById(id).style.opacity = "1";
-                checkedCards[5] = null;
+                checkedCards[checkedCards.indexOf(id)] = null;
                 return;
             }
         } else if (checkedCards[3] !== null) { //если первая карта flop выбрана
@@ -181,7 +174,6 @@ function changeCardState(id) {
             return;
         }
     }
-
 }
 
 // Отрисовка больших карт
@@ -217,7 +209,7 @@ jQuery("body").append("<a href=\"index.html\">test ref!</a>");
 //////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////
 
 // массив для хранения сырых строк действий
-var boardCardsList = [];
+
 var rawActionList = [];
 
 
@@ -251,20 +243,20 @@ class ActionString {
 rawActionList[0] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3);  // MP1
 rawActionList[1] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
 rawActionList[2] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
-rawActionList[3] = new ActionString(0, "Joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
+rawActionList[3] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
 rawActionList[4] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
 rawActionList[5] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
 
 rawActionList[6] = new ActionString(1, "checkmateN1", 36.5, 4, 1.6, 0, 8);
-rawActionList[7] = new ActionString(1, "Joooe84", 50.25, 1, 1.6, 1.3, 0);
+rawActionList[7] = new ActionString(1, "joooe84", 50.25, 1, 1.6, 1.3, 0);
 rawActionList[8] = new ActionString(1, "checkmateN1", 36.5, 3, 2.9, 1.3, 8);
 
 rawActionList[9] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
-rawActionList[10] = new ActionString(2, "Joooe84", 48.95, 1, 4.2, 3, 0);
+rawActionList[10] = new ActionString(2, "joooe84", 48.95, 1, 4.2, 3, 0);
 rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
 
 rawActionList[12] = new ActionString(3, "checkmateN1", 32.2, 1, 10.2, 10.2, 8);
-rawActionList[13] = new ActionString(3, "Joooe84", 45.95, 2, 20.4, 45.95, 0);
+rawActionList[13] = new ActionString(3, "joooe84", 45.95, 2, 20.4, 45.95, 0);
 
 
 // функция копирующая в массив сырые действия из загруженной с сервера руки

@@ -274,7 +274,7 @@ table caption {
     cursor: pointer;
 }
 
-.hide-table-row {
-    display: none !important;
+tr:nth-child(2n) {
+    background: rgba(255, 255, 255, .1);
 }
 
