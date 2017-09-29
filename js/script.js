@@ -300,7 +300,7 @@ function getActionText(action) {
 }
 
 
-// отрисовывает текущий массив
+// отрисовывает текущий массив действий 
 function displayActions() {
 
     if (rawActionList.length > 0) {
@@ -435,6 +435,30 @@ function displayActions() {
 
 displayActions();
 
+//определяет терминальное состояние на улице
+function isTerminalStreetState() {
+
+}
+
+// функция возвращает позицию игрока который будет ходить следующим
+// если функция возвращает -1 то это абсолютно терминальное состояние
+function whoIsNexMove() {
+    // 1 игрок который сделал фолд ИЛИ у которого УМНЫЙ баланс = 0 выбывает из игроков в игре которые могут ходить - нужен массив игроки в игре
+    let playersInGame = []; //добавляем всех у кого УМНЫЙ баланc больше нуля и кто не делал фолд
+    let index = 0;
+    let lastPlayerMovePosition = rawActionList[rawActionList.length - 1].position;
+    //alert("Кто ходил последний? " + lastPlayerMovePosition);
+    for (let i = rawActionList.length - 1; i >= 0; i--) {
+        if (rawActionList[i].action != 5 && Math.abs(rawActionList[i].balance - rawActionList[i].amount) > 0.0001 && playersInGame.indexOf(rawActionList[i].position) == -1) {
+            // действие не фолд И разница баланса со ставкой  больше нуля И такого игрока еще не было
+
+            playersInGame.push(rawActionList[i].position); //добавили позицицию такого игрока в массив всех кто в игре
+        }
+    }
+    return playersInGame; 
+}
+
+//alert("whoIsNexMove() = " + whoIsNexMove());
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 

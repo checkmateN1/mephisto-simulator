@@ -102,13 +102,7 @@ body {
 .position-right {
     left: 770px;
 }
-/*
-.mini-card {
-    width: 15px;
-    height: 21px;
-    background-image: url('../img/cards/card_0_alt.png');
-}
-*/
+
 .list-none {
     list-style: none;
 }
@@ -153,7 +147,6 @@ body {
     width: 16px;
     height: 16px;
     background-image: url('../img/modal-close2.png');
-    background-repeat: no-repeat;
     background-size: cover;
     right: 0;
     top: 95px;
@@ -175,11 +168,12 @@ body {
     flex-wrap: wrap;
 }
 
-.moves-history > div {
+.moves-history > div > div {
     width: 400px;
     min-height: 200px;
-    background-color: rgba(100, 100, 100, .3);
-    margin-bottom: 58px;
+    background-color: rgba(100, 100, 100, .45);
+    margin-bottom: 48px;
+
 }
 
 .moves-history table {
@@ -194,7 +188,7 @@ body {
     border-bottom: 1px solid rgba(255,255,255, .2);
     padding: 2px 2px;
     padding-bottom: 3px;
-    font-weight: normal;
+    font-weight: 600;
 }
 
 .moves-history table th:first-child {
@@ -240,10 +234,11 @@ table caption {
      font-family: Verdana, Geneva, sans-serif;
      font-size: 15px;
      color: lightgrey;
+     font-weight: 600;
  }
 
 .preflop-moves caption {
-    left: 175px;
+    left: 173px;
 }
 
 .moves-history > div:last-child {
@@ -280,4 +275,56 @@ tr:nth-child(2n) {
 
 .min-cards-opacity {
     opacity: 0.1;
+}
+
+.moves-wrapper {
+
+}
+
+.moves-history .add-move-button,
+.moves-history .sub-move-button {
+    position: relative;
+    top: -45px;
+    background: none;
+    border: none;
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+    cursor: pointer;
+    margin-left: 5px;
+    -webkit-filter: grayscale(100%);
+}
+
+.moves-history .add-move-button {
+    background-image: url('../img/add-button.png');
+    margin-right: 3px;
+}
+
+.moves-history .sub-move-button {
+    background-image: url('../img/sub-button.png');
+}
+
+.moves-history .add-move-button:hover {
+    -webkit-filter: grayscale(0%);
+}
+
+.moves-history .sub-move-button:hover {
+    -webkit-filter: grayscale(0%);
+}
+
+#all-moves-remove {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    background: none;
+    border: none;
+    top: -40px;
+    left: 335px;
+    background-image: url('../img/modal-close2.png');
+    background-size: cover;
+    -webkit-filter: grayscale(100%);
+}
+
+#all-moves-remove:hover {
+    -webkit-filter: grayscale(0%);
 }
