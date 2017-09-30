@@ -283,8 +283,7 @@ tr:nth-child(2n) {
 
 .moves-history .add-move-button,
 .moves-history .sub-move-button {
-    position: relative;
-    top: -43px;
+    position: absolute;
     background: none;
     border: none;
     width: 14px;
@@ -294,6 +293,10 @@ tr:nth-child(2n) {
     margin-left: 5px;
     -webkit-filter: grayscale(100%);
     outline: none;
+}
+
+.moves-history .sub-move-button {
+    left: 27px;
 }
 
 .river-buttons {
@@ -334,6 +337,14 @@ tr:nth-child(2n) {
 
 #all-moves-remove:hover {
     -webkit-filter: grayscale(0%);
+}
+
+.add-button-wrapper {
+    width: 50px;
+    height: 20px;
+    display: block;
+    position: relative;
+    top: -43px;
 }
 
 .hidden  {

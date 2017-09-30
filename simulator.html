@@ -62,8 +62,10 @@
                                 <!--<td><input class="raise-amount" type="range"></td> -->
                         </table>
                     </div>
-                    <button class="add-move-button flop hidden"></button>
-                    <button class="sub-move-button flop hidden" onclick="removeLastActionString()"></button>
+                    <span class="add-button-wrapper">
+                        <button class="add-move-button flop hidden" onclick="addActionString()"></button>
+                        <button class="sub-move-button flop hidden" onclick="removeLastActionString()"></button>
+                    </span>
                 </div>
                 <div class="moves-wrapper">
                     <div class="turn-moves">
@@ -78,8 +80,10 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="add-move-button turn hidden"></button>
-                    <button class="sub-move-button turn hidden" onclick="removeLastActionString()"></button>
+                    <span class="add-button-wrapper">
+                        <button class="add-move-button turn hidden"></button>
+                        <button class="sub-move-button turn hidden" onclick="removeLastActionString()"></button>
+                    </span>
                 </div>
                 <div class="moves-wrapper">
                     <div class="river-moves">
@@ -96,8 +100,10 @@
                     </div>
                     <span class="river-buttons">
                         <span>
-                            <button class="add-move-button river hidden"></button>
-                            <button class="sub-move-button river hidden" onclick="removeLastActionString()"></button>
+                            <span class="add-button-wrapper">
+                                <button class="add-move-button river hidden"></button>
+                                <button class="sub-move-button river hidden" onclick="removeLastActionString()"></button>
+                            </span>
                         </span>
                         <button id="all-moves-remove" onclick="removeAllActions()"></button>
                     </span>
