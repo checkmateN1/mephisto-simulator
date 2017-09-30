@@ -96,7 +96,7 @@ body {
 }
 
 .visually {
-    display: block;
+    display: block !important;
 }
 
 .position-right {
@@ -284,7 +284,7 @@ tr:nth-child(2n) {
 .moves-history .add-move-button,
 .moves-history .sub-move-button {
     position: relative;
-    top: -45px;
+    top: -43px;
     background: none;
     border: none;
     width: 14px;
@@ -293,6 +293,12 @@ tr:nth-child(2n) {
     cursor: pointer;
     margin-left: 5px;
     -webkit-filter: grayscale(100%);
+    outline: none;
+}
+
+.river-buttons {
+    display: flex;
+    justify-content: space-between;
 }
 
 .moves-history .add-move-button {
@@ -319,12 +325,17 @@ tr:nth-child(2n) {
     background: none;
     border: none;
     top: -40px;
-    left: 335px;
+    right: 0px;
     background-image: url('../img/modal-close2.png');
     background-size: cover;
     -webkit-filter: grayscale(100%);
+    outline: none;
 }
 
 #all-moves-remove:hover {
     -webkit-filter: grayscale(0%);
+}
+
+.hidden  {
+    display: none !important;
 }

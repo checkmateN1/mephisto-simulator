@@ -62,8 +62,8 @@
                                 <!--<td><input class="raise-amount" type="range"></td> -->
                         </table>
                     </div>
-                    <button class="add-move-button"></button>
-                    <button class="sub-move-button"></button>
+                    <button class="add-move-button flop hidden"></button>
+                    <button class="sub-move-button flop hidden" onclick="removeLastActionString()"></button>
                 </div>
                 <div class="moves-wrapper">
                     <div class="turn-moves">
@@ -78,8 +78,8 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="add-move-button"></button>
-                    <button class="sub-move-button"></button>
+                    <button class="add-move-button turn hidden"></button>
+                    <button class="sub-move-button turn hidden" onclick="removeLastActionString()"></button>
                 </div>
                 <div class="moves-wrapper">
                     <div class="river-moves">
@@ -94,9 +94,13 @@
                             </tr>
                         </table>
                     </div>
-                    <button class="add-move-button"></button>
-                    <button class="sub-move-button"></button>
-                    <button id="all-moves-remove"></button>
+                    <span class="river-buttons">
+                        <span>
+                            <button class="add-move-button river hidden"></button>
+                            <button class="sub-move-button river hidden" onclick="removeLastActionString()"></button>
+                        </span>
+                        <button id="all-moves-remove" onclick="removeAllActions()"></button>
+                    </span>
                 </div>
                 <div class="moves-wrapper">
                     <div class="preflop-moves">
