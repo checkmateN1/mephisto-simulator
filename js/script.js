@@ -253,23 +253,25 @@ class ActionString {
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 // (street, player, balance, action, pot, amount, position)
-rawActionList[0] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3);  // MP1
-rawActionList[1] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
-rawActionList[2] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
-rawActionList[3] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
-rawActionList[4] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
-rawActionList[5] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
+rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9); // post SB
+rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8); // post BB
+rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3);  // MP1
+rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
+rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
+rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
+rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
+rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
 
-rawActionList[6] = new ActionString(1, "checkmateN1", 36.5, 4, 1.6, 0, 8);
-rawActionList[7] = new ActionString(1, "joooe84", 50.25, 1, 1.6, 1.3, 0);
-rawActionList[8] = new ActionString(1, "checkmateN1", 36.5, 3, 2.9, 1.3, 8);
+rawActionList[8] = new ActionString(1, "checkmateN1", 36.50, 4, 1.60, 0, 8);
+rawActionList[9] = new ActionString(1, "joooe84", 59.25, 1, 1.6, 1.30, 0);
+rawActionList[10] = new ActionString(1, "checkmateN1", 36.5, 3, 2.90, 1.3, 8);
 
-rawActionList[9] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
-rawActionList[10] = new ActionString(2, "joooe84", 48.95, 1, 4.2, 3, 0);
-rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
+rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
+rawActionList[12] = new ActionString(2, "joooe84", 57.95, 1, 4.2, 3, 0);
+rawActionList[13] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
 
-rawActionList[12] = new ActionString(3, "checkmateN1", 32.2, 1, 10.2, 10.2, 8);
-//rawActionList[13] = new ActionString(3, "joooe84", 45.95, 2, 20.4, 45.95, 0);
+rawActionList[14] = new ActionString(3, "checkmateN1", 32.2, 1, 10.2, 10.20, 8);
+rawActionList[15] = new ActionString(3, "joooe84", 54.95, 2, 20.4, 45.95, 0);
 
 
 
@@ -298,16 +300,6 @@ function copyActionList(arr) {
     // далее копируем масссив действий
 }
 
-// функция добавляющая строку в существующий массив с заполненным префлопом
-function addRow() {
-
-}
-
-// функция удаляющая строку в существующий массив с заполненным префлопом
-function removeRow() {
-
-}
-
 function getPositionText(position) {
     let arr = ["BTN", "CO", "MP3", "MP2", "MP1", "UTG2", "UTG1", "UTG0", "BB", "SB"];
     return arr[position];
@@ -324,7 +316,7 @@ displayActions();
 function displayActions() {
 
     if (rawActionList.length > 0) {
-        for (let i = 0; i < rawActionList.length; i++) {
+        for (let i = 2; i < rawActionList.length; i++) {
 
             if (rawActionList[i].street === 0) { // если улица PREFLOP
 
@@ -528,11 +520,82 @@ function isTerminalStreetState() {
     }
 }
 
+//alert("whoIsInGame() = " + whoIsInGame());
+//alert("isTerminalStreetState = " + isTerminalStreetState());
+
+// удаляет все действия постфлопа
+function removeAllActions() {
+    let length = rawActionList.length -1;
+    for (let i = length; i >= 0; i--) {
+        if (rawActionList[i].street > 0) {
+            rawActionList.pop();
+        }
+    }
+
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+}
+
+// bet 1, raise 2, call 3, check 4, fold 5
+// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
+// (street, player, balance, action, pot, amount, position)
+// добавляет строку в массив сырых действий и вызывает перерисовывание строк
+function addActionString() {
+    let oldActionListLength = rawActionList.length;
+    let isTerminalStreetStateTmp = isTerminalStreetState();
+    //alert("test");
+    let whoIsNextMoveTmp = whoIsNextMove();
+    // начинаем заполнять новую строку после нажатия кнопки +
+    rawActionList[oldActionListLength] = new ActionString();
+    //alert("Сейчас терминальное состояние? " + isTerminalStreetStateTmp);
+    rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+    //alert("Первое присвоение rawActionList[oldActionListLength].street = " + rawActionList[oldActionListLength].street);
+    for (let i = oldActionListLength - 1; i > 0; i--) {
+        if (rawActionList[i].position === whoIsNextMoveTmp) {
+            rawActionList[oldActionListLength].player = rawActionList[i].player;
+            rawActionList[oldActionListLength].balance = whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2);
+            rawActionList[oldActionListLength].action = null; // нужно выбрать - появляется селект
+            rawActionList[oldActionListLength].pot = whatIsThePot(oldActionListLength).toFixed(2);
+            rawActionList[oldActionListLength].amount = null; // нужно выбрать - появляется слайдер
+            rawActionList[oldActionListLength].position = rawActionList[i].position;
+        }
+    }
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+}
+
+// удаляет последнее действие
+function removeLastActionString() {
+    if (rawActionList[rawActionList.length - 1].street > 0) {
+        rawActionList.pop();
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+    }
+
+
+}
+
+//очищает таблицы c действиями постфлопа
+function removeActions() {
+    let preflopMoves = document.querySelector(".preflop-moves .all-info-table");
+    let flopMoves = document.querySelector(".flop-moves .all-info-table");
+    let turnMoves = document.querySelector(".turn-moves .all-info-table");
+    let riverMoves = document.querySelector(".river-moves .all-info-table");
+
+    while(preflopMoves.childElementCount > 2) {preflopMoves.removeChild(preflopMoves.lastChild);}
+    while(flopMoves.childElementCount > 2) {flopMoves.removeChild(flopMoves.lastChild);}
+    while(turnMoves.childElementCount > 2) {turnMoves.removeChild(turnMoves.lastChild);}
+    while(riverMoves.childElementCount > 2) {riverMoves.removeChild(riverMoves.lastChild);}
+
+}
+
 // функция возвращает массив всех игроков кто еще в игре и может вкладывать деньги, не учитывая супер терминального состояния раздачи
 function whoIsInGame() {
     // 1 игрок который сделал фолд ИЛИ у которого УМНЫЙ баланс = 0 выбывает из игроков в игре которые могут ходить - нужен массив игроки в игре
     let playersInGame = []; //добавляем всех у кого УМНЫЙ баланc больше нуля и кто не делал фолд
-    let index = 0;
     //alert("Кто ходил последний? " + lastPlayerMovePosition);
     for (let i = rawActionList.length - 1; i >= 0; i--) {
         if (rawActionList[i].action != 5 && Math.abs(rawActionList[i].balance - rawActionList[i].amount) > 0.0001) {
@@ -559,56 +622,65 @@ function whoIsInGame() {
             }
         }
     }
-    return playersInGame; 
+    return playersInGame;
+}
+// возвращает позицию того кто будет ходить следующим
+
+//alert("Кто походит следующий? Это игрок с позицией = " + whoIsNextMove());
+function whoIsNextMove() {
+    if (isTerminalStreetState()) {
+        return Math.max.apply(null, whoIsInGame()); // наибольшее число из массива
+    } else {
+        let nPlayers = whoIsInGame().slice();
+        nPlayers.sort(function(a,b){return a-b;});
+        //alert("Зашли узнать кто следующий, и отсортированный массив = " + nPlayers.join());
+        nPlayers.join(); // посортировали массив
+        for (let i = rawActionList.length - 1; i > 0; i--) {
+            if (nPlayers.indexOf(rawActionList[i].position >= 0)) {
+                if (nPlayers.indexOf(rawActionList[i].position) > 0) { // если игрок не в позиции ко всем оставшимся
+                    return nPlayers[nPlayers.indexOf(rawActionList[i].position) - 1]; // возвращаем более ближнего к BTN
+                } else {return nPlayers[nPlayers.length - 1];} // если он ближайший к бтн - ходить будет ближайший к SB
+            }
+        }
+    }
 }
 
-//alert("whoIsInGame() = " + whoIsInGame());
-//alert("isTerminalStreetState = " + isTerminalStreetState());
+// определяет текущий размер пота на момент добавления нового действия
+function whatIsThePot(oldActionListLength) {
+    let lastPlayerPosition = rawActionList[oldActionListLength - 1].position;
+    let curentLastAmount = rawActionList[oldActionListLength - 1].amount;
 
-// удаляет все действия постфлопа
-function removeAllActions() {
-    let length = rawActionList.length -1;
-    for (let i = length; i >= 0; i--) {
-        if (rawActionList[i].street > 0) {
-            rawActionList.pop();
+    for (let i = oldActionListLength - 2; i >= 0; i--) {
+        if (rawActionList[i].position === lastPlayerPosition && rawActionList[i].street === rawActionList[oldActionListLength - 1].street) {
+            return rawActionList[oldActionListLength - 1].pot + curentLastAmount - rawActionList[i].amount;
+        }
+    }
+    return rawActionList[oldActionListLength - 1].pot + curentLastAmount;
+}
+
+// определяет баланс игрока на момент добавления нового действия для него
+function whatIsPlayerBalance(position, oldActionListLength) {
+    let curentStreetForBalance;
+    let lastPlayerAmount;
+    let initBalance;
+    for (let i = oldActionListLength - 1; i > 0; i--) {
+        if (rawActionList[i].position === position) {
+            curentStreetForBalance = rawActionList[i].street;
+            lastPlayerAmount = rawActionList[i].amount;
+            initBalance = rawActionList[i].balance;
+            break;
         }
     }
 
-    removeActions();
-    displayActions();
-    displayAddRemoveButtons();
-}
-
-// удаляет последнее действие
-function removeLastActionString() {
-    if (rawActionList[rawActionList.length - 1].street > 0) {
-        rawActionList.pop();
-        removeActions();
-        displayActions();
-        displayAddRemoveButtons();
+    for (let i = oldActionListLength - 1; i > 0; i--) {
+        if (rawActionList[i].position === position) {
+           if (rawActionList[i].street === curentStreetForBalance) {
+               initBalance = rawActionList[i].balance;
+           } else {return initBalance - lastPlayerAmount;}
+        }
     }
-
-
+    return initBalance - lastPlayerAmount; // если улица префлоп
 }
-
-//очищает таблицы постфлопа
-function removeActions() {
-    let preflopMoves = document.querySelector(".preflop-moves .all-info-table");
-    let flopMoves = document.querySelector(".flop-moves .all-info-table");
-    let turnMoves = document.querySelector(".turn-moves .all-info-table");
-    let riverMoves = document.querySelector(".river-moves .all-info-table");
-
-    while(preflopMoves.childElementCount > 2) {preflopMoves.removeChild(preflopMoves.lastChild);}
-    while(flopMoves.childElementCount > 2) {flopMoves.removeChild(flopMoves.lastChild);}
-    while(turnMoves.childElementCount > 2) {turnMoves.removeChild(turnMoves.lastChild);}
-    while(riverMoves.childElementCount > 2) {riverMoves.removeChild(riverMoves.lastChild);}
-
-}
-
-function whoIsNextMove() {
-
-}
-
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 
@@ -655,6 +727,5 @@ document.body.appendChild(ul);
 for (let i = 0; i < 3; i++) {
     let li = document.body.createElement('li');
     ul.appendChild(li);
-    li.innerHTML = i;
-}
-*/
+    li.inn
+    */
