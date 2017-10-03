@@ -65,9 +65,6 @@ cards.addEventListener('click', function(e){
 
     if (id.contains("hole")) {
         checkedCards[0] = "hole";
-        //if (checkedCards[3] !== null){document.getElementById(checkedCards[3]).style.opacity = "0";}
-        // if (checkedCards[4] !== null){document.getElementById(checkedCards[4]).style.opacity = "0";}
-        //if (checkedCards[5] !== null){document.getElementById(checkedCards[5]).style.opacity = "0";}
     } else if (id.contains("flop")) {
         checkedCards[0] = "flop";
     } else if (id.contains("turn")) {
@@ -260,18 +257,18 @@ rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
 rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
 rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
 rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
-rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.1, 0.75, 8); // call BB
+rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.10, 0.75, 8); // call BB
 
 rawActionList[8] = new ActionString(1, "checkmateN1", 36.50, 4, 1.60, 0, 8);
-rawActionList[9] = new ActionString(1, "joooe84", 59.25, 1, 1.6, 1.30, 0);
-rawActionList[10] = new ActionString(1, "checkmateN1", 36.5, 3, 2.90, 1.3, 8);
+//rawActionList[9] = new ActionString(1, "joooe84", 59.25, 1, 1.60, 1.30, 0);
+//rawActionList[10] = new ActionString(1, "checkmateN1", 36.5, 3, 2.90, 1.3, 8);
 
-rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
-rawActionList[12] = new ActionString(2, "joooe84", 57.95, 1, 4.2, 3, 0);
-rawActionList[13] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
+//rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 4, 4.20, 0, 8);
+//rawActionList[12] = new ActionString(2, "joooe84", 57.95, 1, 4.20, 3, 0);
+//rawActionList[13] = new ActionString(2, "checkmateN1", 35.2, 3, 7.20, 3, 8);
 
-rawActionList[14] = new ActionString(3, "checkmateN1", 32.2, 1, 10.2, 10.20, 8);
-rawActionList[15] = new ActionString(3, "joooe84", 54.95, 2, 20.4, 45.95, 0);
+//rawActionList[14] = new ActionString(3, "checkmateN1", 32.20, 1, 10.20, 10.20, 8);
+//rawActionList[15] = new ActionString(3, "joooe84", 54.95, 2, 20.40, 45.95, 0);
 
 
 
@@ -306,10 +303,20 @@ function getPositionText(position) {
 }
 
 function getActionText(action) {
-    let arr = [null, "bet", "raise", "call", "check", "fold"];
+    let arr = [null, "bet", "raise", "call", "check", "fold", "(choose)"];
     return arr[action];
 }
 
+function getActionIndex(text) {
+    let arr = [null, "bet", "raise", "call", "check", "fold", "(choose)"];
+    return arr.indexOf(text);
+}
+
+
+
+// bet 1, raise 2, call 3, check 4, fold 5
+// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
+// (street, player, balance, action, pot, amount, position)
 
 displayActions();
 // отрисовывает текущий массив действий
@@ -503,13 +510,14 @@ function displayAddRemoveButtons() {
 
 //определяет терминальное состояние на улице
 function isTerminalStreetState() {
-    let curentAmount = rawActionList[rawActionList.length - 1].amount;
+    let currentAmount = rawActionList[rawActionList.length - 1].amount;
     let nPlayers = whoIsInGame().slice();
-    let curentStreet = rawActionList[rawActionList.length - 1].street;
+    let currentStreet = rawActionList[rawActionList.length - 1].street;
+    if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
 
     for (let i = rawActionList.length - 1; i > 0; i--) {
         if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
-            if (rawActionList[i].amount == curentAmount && rawActionList[i].street == curentStreet) { // проверяем совпадает ли значение его ставки и улица
+            if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
                 nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
 
                 if (nPlayers.length == 0) {
@@ -519,9 +527,6 @@ function isTerminalStreetState() {
         }
     }
 }
-
-//alert("whoIsInGame() = " + whoIsInGame());
-//alert("isTerminalStreetState = " + isTerminalStreetState());
 
 // удаляет все действия постфлопа
 function removeAllActions() {
@@ -537,33 +542,52 @@ function removeAllActions() {
     displayAddRemoveButtons();
 }
 
-// bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
-// (street, player, balance, action, pot, amount, position)
 // добавляет строку в массив сырых действий и вызывает перерисовывание строк
 function addActionString() {
+    // валидатор
+    if (rawActionList[rawActionList.length - 1].action === 1 && rawActionList[rawActionList.length - 1].amount === 0) {
+        alert("Choose bet amount!");
+        return;
+    }
+    if (rawActionList[rawActionList.length - 1].action === 2 && rawActionList[rawActionList.length - 1].amount === 0) {
+        alert("Choose raise amount!");
+        return;
+    }
+
     let oldActionListLength = rawActionList.length;
+    //alert("oldActionListLength = " + oldActionListLength);
     let isTerminalStreetStateTmp = isTerminalStreetState();
+    //alert("isTerminalStreetStateTmp = " + isTerminalStreetStateTmp);
     //alert("test");
     let whoIsNextMoveTmp = whoIsNextMove();
+    //alert("whoIsNextMoveTmp = " + whoIsNextMoveTmp);
     // начинаем заполнять новую строку после нажатия кнопки +
     rawActionList[oldActionListLength] = new ActionString();
+    //alert("создали новую строку и тперь rawActionList.length = " + rawActionList.length);
     //alert("Сейчас терминальное состояние? " + isTerminalStreetStateTmp);
     rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
     //alert("Первое присвоение rawActionList[oldActionListLength].street = " + rawActionList[oldActionListLength].street);
+    //alert("typeof rawActionList[rawActionList.length -2].player = " + typeof rawActionList[rawActionList.length -2].player);
+    //alert("typeof rawActionList[rawActionList.length -2].balance = " + typeof rawActionList[rawActionList.length -2].balance);
+    //alert("typeof rawActionList[rawActionList.length -2].action = " + typeof rawActionList[rawActionList.length -2].action);
+    //alert("typeof rawActionList[rawActionList.length -2].pot = " + typeof rawActionList[rawActionList.length -2].pot);
+    //alert("typeof rawActionList[rawActionList.length -2].amount = " + typeof rawActionList[rawActionList.length -2].amount);
+    //alert("typeof rawActionList[rawActionList.length -2].position = " + typeof rawActionList[rawActionList.length -2].position);
     for (let i = oldActionListLength - 1; i > 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
             rawActionList[oldActionListLength].player = rawActionList[i].player;
-            rawActionList[oldActionListLength].balance = whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2);
-            rawActionList[oldActionListLength].action = null; // нужно выбрать - появляется селект
-            rawActionList[oldActionListLength].pot = whatIsThePot(oldActionListLength).toFixed(2);
-            rawActionList[oldActionListLength].amount = null; // нужно выбрать - появляется слайдер
+            rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
+            rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
+            rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength).toFixed(2));
+            rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
             rawActionList[oldActionListLength].position = rawActionList[i].position;
         }
     }
+
     removeActions();
     displayActions();
     displayAddRemoveButtons();
+    restartListener();
 }
 
 // удаляет последнее действие
@@ -573,9 +597,8 @@ function removeLastActionString() {
         removeActions();
         displayActions();
         displayAddRemoveButtons();
+        restartListener();
     }
-
-
 }
 
 //очищает таблицы c действиями постфлопа
@@ -624,9 +647,8 @@ function whoIsInGame() {
     }
     return playersInGame;
 }
-// возвращает позицию того кто будет ходить следующим
 
-//alert("Кто походит следующий? Это игрок с позицией = " + whoIsNextMove());
+// возвращает позицию того кто будет ходить следующим
 function whoIsNextMove() {
     if (isTerminalStreetState()) {
         return Math.max.apply(null, whoIsInGame()); // наибольшее число из массива
@@ -681,51 +703,154 @@ function whatIsPlayerBalance(position, oldActionListLength) {
     }
     return initBalance - lastPlayerAmount; // если улица префлоп
 }
-// bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 
 
+var tdAmount = $(".all-info-table td:nth-child(5)"); // селектим amount
+tdAmount.on('click', amountClick);
+// функция обрабатывающая клик в amount
+function amountClick() {
+
+//var tdAmount = document.querySelector(".all-info-table td:nth-child(5)");
+//tdAmount.addEventListener('click', function() {
+        var el = $(this);
+        if (rawActionList[rawActionList.length - 1].action > 3) {
+            return;
+        }
+        var slider = $("<form class=\"raise-form\" onsubmit=\"return false\" oninput=\"level.value = flevel.valueAsNumber.toFixed(2)\">\n" +
+            "  <label for=\"flying\"></label>\n" +
+            "  <input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\" min=\"0\" max=\"100\" step=\"0.05\" value=\"0\"> \n" +
+            "  <span class=\"dollar\">$</span> \n" +
+            "  <output for=\"flying\" name=\"level\">0.00</output>" +
+            "</form>");
+        el.replaceWith(slider);
+
+        slider.focusout(function(){
+            let td = document.createElement("td");
+            td.innerHTML = "$" + $("#flying").val();
+            rawActionList[rawActionList.length - 1].amount = parseFloat($("#flying").val());
+            slider.replaceWith(td);
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+        });
+
+}
 
 
+var tdAction = $(".all-info-table td:nth-child(3)"); // селектим action
+tdAction.on('click', actionClick);
+// функция обрабатывающая клик в action
+function actionClick() {
+    var el = $(this);
+    let oldActionListLength = rawActionList.length - 1;
+    if (wasBet(oldActionListLength)) {
+        var arr = [
+            {val : 1, text: 'raise'},
+            {val : 2, text: 'call'},
+            {val : 3, text: 'fold'}
+        ];
 
+        var sel = $("<select id=\"flying2\">");
 
+        $(arr).each(function() {
+            sel.append($("<option>").attr('value',this.val).text(this.text));
+        });
+    } else {
+        var arr = [
+            {val : 1, text: 'bet'},
+            {val : 2, text: 'check'}
+        ];
 
+        var sel = $("<select id=\"flying2\">");
+        $(arr).each(function() {
+            sel.append($("<option>").attr('value',this.val).text(this.text));
+        });
+    }
 
+    el.replaceWith(sel);
+    sel.focusout(function(){
+        let td = document.createElement("td");
+        var sel = document.getElementById("flying2");
+        td.innerHTML = sel.options[sel.selectedIndex].text;
+        rawActionList[rawActionList.length - 1].action = parseFloat(getActionIndex(sel.options[sel.selectedIndex].text));
+        if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 3) {
+            rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(rawActionList[rawActionList.length - 1].balance, maxAmountAtCurrentStreet()));
+        }
+        if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 5 || parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 4) {
+            rawActionList[rawActionList.length - 1].amount = parseFloat(0);
+        }
+        sel.replaceWith(td);
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+    });
 
+}
 
+// возвращает наибольший Amount на текущей улице
+function maxAmountAtCurrentStreet() {
+   let currentStreet = rawActionList[rawActionList.length - 1].street;
+    for (let i = rawActionList.length - 2; i > 0; i--) {
+       if (rawActionList[i].street === currentStreet) {
+           if (rawActionList[i].action < 3) {
+               return parseFloat(rawActionList[i].amount);
+           }
+       } else {return parseFloat(0);}
+   }
+}
 
+// функция перезагружающая listener
+function restartListener() {
+    tdAmount.off();
+    tdAmount = $(".all-info-table td:nth-child(5)");
+    tdAmount.on('click', amountClick);
 
+    tdAction.off();
+    tdAction = $(".all-info-table td:nth-child(3)");
+    tdAction.on('click', actionClick);
+}
 
+// был ли бет на улице с последним ходом?
+function wasBet(oldActionListLength) {
+    let currentStreet = rawActionList[oldActionListLength].street;
+    for (let i = oldActionListLength - 1; i > 0; i--) {
+        if (rawActionList[i].street === currentStreet) {
+            if (rawActionList[i].action < 3) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//function changeCardOpacity(id)
-//test git
 
 /*
-var div = document.createElement("div");
-div.className = "alert alert-success";
-div.innerHTML = "<strong>Ура!</strong> Вы прочитали это важное сообщение.";
+//alert(document.querySelector("td").classList.contains("hidden"));
+// bet 1, raise 2, call 3, check 4, fold 5
+// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
+*/
 
-cardsModal.appendChild(ul);
-ul.appendChild(li);
-li.innerHTML = "test li";
-document.body.appendChild(ul);
 
-for (let i = 0; i < 3; i++) {
-    let li = document.body.createElement('li');
-    ul.appendChild(li);
-    li.inn
-    */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

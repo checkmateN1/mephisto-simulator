@@ -210,6 +210,19 @@ body {
     padding: 2px 2px;
 }
 
+.moves-history select {
+    -webkit-appearance: none;
+    line-height: 1em;
+    background-color: rgba(100, 100, 100, .45);
+    outline: none;
+    width: 50px;
+}
+
+.moves-history select * {
+    width: 50px;
+    line-height: 1em;
+}
+
 .moves-history table td:first-child {
     width: 100px;
     overflow: hidden;
@@ -252,7 +265,7 @@ table caption {
 
 .raise-amount {
     -webkit-appearance: none;
-    width: 100%;
+    width: 95%;
     border-radius: 8px;
     height: 3px;
     background-color: #fff;
@@ -349,4 +362,21 @@ tr:nth-child(2n) {
 
 .hidden  {
     display: none !important;
+}
+
+output {
+    position: absolute;
+    top: 15px;
+    left: -26px;
+}
+.dollar {
+    position: absolute;
+    top: 15px;
+    left: -34px;
+}
+
+.raise-form {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
 }
