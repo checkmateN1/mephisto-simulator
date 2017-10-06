@@ -701,21 +701,21 @@ function whatIsThePot(oldActionListLength) {
 
 // определяет баланс игрока на момент добавления нового действия для него
 function whatIsPlayerBalance(position, oldActionListLength) {
-    let curentStreetForBalance;
+    let currentStreetForBalance;
     let lastPlayerAmount; //34.45 last amount joooe84
     let initBalance; //57.25 init balance joooe84
-    for (let i = oldActionListLength - 1; i > 0; i--) {
+    for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === position) {
-            curentStreetForBalance = rawActionList[i].street;
+            currentStreetForBalance = rawActionList[i].street;
             lastPlayerAmount = rawActionList[i].amount; //34.45 last amount joooe84
             initBalance = rawActionList[i].balance; //57.25 init balance joooe84
             break;
         }
     }
 
-    for (let i = oldActionListLength - 1; i > 0; i--) {
+    for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === position) {
-           if (rawActionList[i].street === curentStreetForBalance) {
+           if (rawActionList[i].street === currentStreetForBalance) {
                initBalance = rawActionList[i].balance;
            } else {return initBalance - lastPlayerAmount;}
         }
