@@ -258,14 +258,14 @@ rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3);  // MP1
 rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
 rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
 rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
-rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9); // fold SB
+rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9);
 rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8); // call BB
 
 rawActionList[8] = new ActionString(1, "mammoth", 24.40, 1, 2.25, 1.00, 9);
-
-
-
-
+rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 3, 3.25, 1.00, 8);
+rawActionList[10] = new ActionString(1, "joooe84", 59.25, 2, 4.25, 4.95, 0);
+rawActionList[11] = new ActionString(1, "mammoth", 23.40, 2, 9.20, 10.00, 9);
+rawActionList[12] = new ActionString(1, "checkmateN1", 35.5, 5, 18.20, 0.00, 8);
 
 
 //rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
@@ -316,12 +316,12 @@ function getPositionText(position) {
 }
 
 function getActionText(action) {
-    let arr = [null, "bet", "raise", "call", "check", "fold", "(choose)"];
+    let arr = [null, "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
     return arr[action];
 }
 
 function getActionIndex(text) {
-    let arr = [null, "bet", "raise", "call", "check", "fold", "(choose)"];
+    let arr = [null, "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
     return arr.indexOf(text);
 }
 
@@ -482,7 +482,7 @@ function displayAddRemoveButtons() {
         document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
         return;
     }
-    if (whoIsInGame().length == 1 && (whoIsInGame() == rawActionList[rawActionList.length - 1].position) || whoIsInGame().length == 0 || (isTerminalStreetState() && whoIsInGame().length <= 1)) {
+    if ((whoIsInGame().length == 1 && (whoIsInGame() == rawActionList[rawActionList.length - 1].position)) || whoIsInGame().length == 0 || (isTerminalStreetState() && whoIsInGame().length <= 1)) {
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             return;
@@ -536,19 +536,19 @@ function displayAddRemoveButtons() {
 
 //определяет терминальное состояние на улице
 function isTerminalStreetState() {
-    let currentAmount = rawActionList[rawActionList.length - 1].amount;
+    let currentAmount = maxAmountAtCurrentStreet();
     let nPlayers = whoIsInGame().slice();
+    //alert("nPlayers.length = " + nPlayers.length);
     if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3) {return true;}
 
     //alert("nPlayers.length = " + nPlayers.length);
     let currentStreet = rawActionList[rawActionList.length - 1].street;
     if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
-
+    //alert("ищем утечку");
     for (let i = rawActionList.length - 1; i > 0; i--) {
         if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
             if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
                 nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
-
                 if (nPlayers.length == 0) {
                     return true;
                 }
@@ -677,7 +677,7 @@ function whoIsNextMove() {
         //alert("Зашли узнать кто следующий, и отсортированный массив = " + nPlayers.join());
         nPlayers.join(); // посортировали массив
         for (let i = rawActionList.length - 1; i > 0; i--) {
-            if (nPlayers.indexOf(rawActionList[i].position >= 0)) {
+            if (nPlayers.indexOf(rawActionList[i].position) >= 0) {
                 if (nPlayers.indexOf(rawActionList[i].position) > 0) { // если игрок не в позиции ко всем оставшимся
                     return nPlayers[nPlayers.indexOf(rawActionList[i].position) - 1]; // возвращаем более ближнего к BTN
                 } else {return nPlayers[nPlayers.length - 1];} // если он ближайший к бтн - ходить будет ближайший к SB
