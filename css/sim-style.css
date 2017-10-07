@@ -390,7 +390,7 @@ output {
     position: absolute;
     width: 427px;
     height: 350px;
-    background: rgba(130, 130, 40, .92);
+    background: rgba(160, 160, 80, .92);
     z-index: 11;
 }
 
