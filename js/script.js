@@ -261,11 +261,11 @@ rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 
 rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9);
 rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8); // call BB
 
-rawActionList[8] = new ActionString(1, "mammoth", 24.40, 1, 2.25, 1.00, 9);
-rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 3, 3.25, 1.00, 8);
-rawActionList[10] = new ActionString(1, "joooe84", 59.25, 2, 4.25, 4.95, 0);
-rawActionList[11] = new ActionString(1, "mammoth", 23.40, 2, 9.20, 10.00, 9);
-rawActionList[12] = new ActionString(1, "checkmateN1", 35.5, 5, 18.20, 0.00, 8);
+rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9);
+rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8);
+rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0);
+rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9);
+rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8);
 
 
 //rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
@@ -476,13 +476,21 @@ function displayAddRemoveButtons() {
     document.querySelector(".sub-move-button.turn").classList.add("hidden");
     document.querySelector(".add-move-button.river").classList.add("hidden");
     document.querySelector(".sub-move-button.river").classList.add("hidden");
-
-
+    //alert("Ну сцуко может хоть здесь?");
+    //alert("whoIsInGame() ? " + whoIsInGame());
     if(rawActionList[rawActionList.length - 1].street == 0) { // если улица последнего действия preflop
+        //alert("ну это капец!");
         document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
         return;
     }
-    if ((whoIsInGame().length == 1 && (whoIsInGame() == rawActionList[rawActionList.length - 1].position)) || whoIsInGame().length == 0 || (isTerminalStreetState() && whoIsInGame().length <= 1)) {
+    //alert("test point");
+    //alert("whoIsInGame().length ? " + whoIsInGame().length);
+    //alert("isTerminalStreetState() ?" + isTerminalStreetState());
+    if ((whoIsInGame().length == 1 && (whoIsInGame() == rawActionList[rawActionList.length - 1].position)) || whoIsInGame().length == 0 || rawActionList[rawActionList.length - 1].action == 6 || (isTerminalStreetState() && whoIsInGame().length <= 1)) {
+        //alert("Якого хэра?");
+        //alert("whoIsInGame().length ? " + whoIsInGame().length);
+        //alert("isTerminalStreetState() ?" + isTerminalStreetState());
+        //alert("test point 2");
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             return;
@@ -496,6 +504,8 @@ function displayAddRemoveButtons() {
             return;
         }
     }
+
+    //alert("isTerminalStreetState() ? " + isTerminalStreetState());
     if (!isTerminalStreetState()) { // если не терминальное состояние
         //alert("Зашли в действие префлопа");
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
@@ -539,8 +549,15 @@ function isTerminalStreetState() {
     let currentAmount = maxAmountAtCurrentStreet();
     let nPlayers = whoIsInGame().slice();
     //alert("nPlayers.length = " + nPlayers.length);
-    if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3) {return true;}
+    //alert("whatIsPlayerBalance ? " + whatIsPlayerBalance(rawActionList[rawActionList.length - 1], rawActionList.length));
+    //alert("whoIsInGame() ? " + whoIsInGame());
 
+    if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3 && whoIsInGame() == rawActionList[rawActionList.length - 1].position) {
+        //alert("Глюк мультипота");
+       //alert("whoIsInGame() = " + whoIsInGame());
+        return true;
+    } // Глюк мультипота
+    //alert("point");
     //alert("nPlayers.length = " + nPlayers.length);
     let currentStreet = rawActionList[rawActionList.length - 1].street;
     if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
@@ -652,6 +669,7 @@ function whoIsInGame() {
     for (let i = rawActionList.length - 1; i >= 0; i--) { //добавляем всех кто сфолдил или баланс = 0
         if (Math.abs(initPlayerBalance(rawActionList[i].position, rawActionList.length - 1) - rawActionList[i].amount) < 0.0001 || rawActionList[i].action === 5) {
             blackList.push(rawActionList[i].position);
+            //if (rawActionList[i].position === 0) {alert("Added joe to black list");}
         }
     }
     for (let i = rawActionList.length - 1; i >= 0; i--) { // добавляем всех игроков
@@ -664,6 +682,7 @@ function whoIsInGame() {
             playersInGame.push(allPlayers[i]);
         }
     }
+    //alert("playersInGame = " + playersInGame);
     return playersInGame;
 }
 
@@ -702,13 +721,19 @@ function whatIsThePot(oldActionListLength) {
 // определяет баланс игрока на момент добавления нового действия для него
 function whatIsPlayerBalance(position, oldActionListLength) {
     let currentStreetForBalance;
-    let lastPlayerAmount; //34.45 last amount joooe84
-    let initBalance; //57.25 init balance joooe84
+    let lastPlayerAmount;
+    let initBalance;
+    //alert("position for whatIsPlayerBalance = " + position);
     for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === position) {
             currentStreetForBalance = rawActionList[i].street;
-            lastPlayerAmount = rawActionList[i].amount; //34.45 last amount joooe84
-            initBalance = rawActionList[i].balance; //57.25 init balance joooe84
+            lastPlayerAmount = rawActionList[i].amount;
+            initBalance = rawActionList[i].balance;
+            //alert("rawActionList[i].player = " + rawActionList[i].player);
+            //alert("rawActionList[i].balance = " + rawActionList[i].balance);
+            //alert("initBalance = " + initBalance);
+            //alert("lastPlayerAmount = " + lastPlayerAmount);
+            //alert("currentStreetForBalance = " + currentStreetForBalance);
             break;
         }
     }
@@ -762,10 +787,13 @@ function amountClick(e) {
     if (!lastActionString.contains(el2)) {
         return;
     }
-
+    //alert("min = " + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2));
+    //alert("initPlayerBalance(rawActionList[rawActionList.length - 1].position = " + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length));
+    //alert("rawActionList[rawActionList.length - 1].amount = " + rawActionList[rawActionList.length - 1].amount);
+    //alert("minAmount())).toFixed(2) = " + minAmount().toFixed(2));
     var slider = $("<form class=\"raise-form\" onsubmit=\"return false\" oninput=\"level.value = flevel.valueAsNumber.toFixed(2)\">\n" +
         "  <label for=\"flying\"></label>\n" +
-        "  <input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\" min=\"" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), Math.max(rawActionList[rawActionList.length - 1].amount, minAmount())).toFixed(2) + "\" max=\"" + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2) + "\" step=\"0.05\" value=\"" + rawActionList[rawActionList.length - 1].amount + "\"> \n" +
+        "  <input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\" min=\"" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2) + "\" max=\"" + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2) + "\" step=\"0.05\" value=\"" + rawActionList[rawActionList.length - 1].amount + "\"> \n" +
         "  <span class=\"dollar\">$</span> \n" +
         "  <output for=\"flying\" name=\"level\">" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), Math.max(rawActionList[rawActionList.length - 1].amount, minAmount())).toFixed(2) + "</output>" +
         "</form>");
@@ -836,10 +864,12 @@ function actionClick(e){
     }
 
     el.replaceWith(sel);
+
     sel.mouseout(function(){
         let td = document.createElement("td");
         var sel = document.getElementById("flying2");
         td.innerHTML = sel.options[sel.selectedIndex].text;
+
         rawActionList[rawActionList.length - 1].action = parseFloat(getActionIndex(sel.options[sel.selectedIndex].text));
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 3) {
             //rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(rawActionList[rawActionList.length - 1].balance, maxAmountAtCurrentStreet()));
