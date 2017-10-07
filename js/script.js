@@ -1,7 +1,7 @@
 var cardsModal = document.querySelector(".hidden-cards-select-modal");
 var ul = document.querySelector(".mini-card-list");
 var cards = document.querySelector(".cards");
-
+let playerStats = document.getElementById("player-stats");
 
 
 //создаем миникарты
@@ -49,16 +49,16 @@ window.addEventListener("keydown", function (event) {
         if (cardsModal.classList.contains("position-right")) {
             cardsModal.classList.remove("position-right");
         }
+        if (!playerStats.classList.contains("hidden")) {
+            playerStats.classList.add("hidden");
+        }
     }
 });
-
 
 var checkedCards = [null, null, null, null, null, null, null, null];
 var testBoard = [null, "12", "24", "25", "4", "37", "22", "41"];
 loadCardsState(testBoard);
-//loadCardsState();
-//setBigCardState();
-//loadCardsState();
+
 //записываем в карту какой улицы мы кликнули
 cards.addEventListener('click', function(e){
     let id = e.target.classList;
@@ -72,7 +72,6 @@ cards.addEventListener('click', function(e){
     } else if (id.contains("river")){
         checkedCards[0] = "river";
     }
-    //alert("записали в нулевой элемента массива - какую карту мы хотим выбрать: " + checkedCards[0]);
 });
 
 // ожидаем клика в миникарту
@@ -218,15 +217,12 @@ function cardsRemove() {
 }
 
 
+
 //////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////
 
+
 // массив для хранения сырых строк действий
-
 var rawActionList = [];
-
-
-// bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 
 // Класс строка действий
 class ActionString {
@@ -282,26 +278,6 @@ rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8);
 
 //rawActionList[14] = new ActionString(3, "checkmateN1", 32.20, 1, 10.20, 10.20, 8);
 //rawActionList[15] = new ActionString(3, "joooe84", 54.95, 2, 20.40, 45.95, 0);
-
-
-
-// bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
-// (street, player, balance, action, pot, amount, position)
-/*
-rawActionList[9] = new ActionString(2, "checkmateN1", 35.2, 4, 4.2, 0, 8);
-rawActionList[10] = new ActionString(2, "james", 21.5, 4, 4.2, 3, 2);
-rawActionList[11] = new ActionString(2, "joooe84", 48.95, 1, 4.2, 3, 0);
-rawActionList[12] = new ActionString(2, "checkmateN1", 35.2, 3, 7.2, 3, 8);
-rawActionList[13] = new ActionString(2, "james", 21.5, 3, 7.2, 3, 2);
-
-rawActionList[14] = new ActionString(3, "checkmateN1", 32.2, 4, 10.2, 0, 8);
-rawActionList[15] = new ActionString(3, "james", 20.5, 4, 4.2, 0, 2);
-rawActionList[16] = new ActionString(3, "joooe84", 45.95, 1, 20.4, 10, 0);
-*/
-
-
-
 
 
 // функция копирующая в массив сырые действия из загруженной с сервера руки
@@ -476,21 +452,13 @@ function displayAddRemoveButtons() {
     document.querySelector(".sub-move-button.turn").classList.add("hidden");
     document.querySelector(".add-move-button.river").classList.add("hidden");
     document.querySelector(".sub-move-button.river").classList.add("hidden");
-    //alert("Ну сцуко может хоть здесь?");
-    //alert("whoIsInGame() ? " + whoIsInGame());
+
     if(rawActionList[rawActionList.length - 1].street == 0) { // если улица последнего действия preflop
-        //alert("ну это капец!");
         document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
         return;
     }
-    //alert("test point");
-    //alert("whoIsInGame().length ? " + whoIsInGame().length);
-    //alert("isTerminalStreetState() ?" + isTerminalStreetState());
+
     if ((whoIsInGame().length == 1 && (whoIsInGame() == rawActionList[rawActionList.length - 1].position)) || whoIsInGame().length == 0 || rawActionList[rawActionList.length - 1].action == 6 || (isTerminalStreetState() && whoIsInGame().length <= 1)) {
-        //alert("Якого хэра?");
-        //alert("whoIsInGame().length ? " + whoIsInGame().length);
-        //alert("isTerminalStreetState() ?" + isTerminalStreetState());
-        //alert("test point 2");
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             return;
@@ -505,11 +473,8 @@ function displayAddRemoveButtons() {
         }
     }
 
-    //alert("isTerminalStreetState() ? " + isTerminalStreetState());
     if (!isTerminalStreetState()) { // если не терминальное состояние
-        //alert("Зашли в действие префлопа");
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
-            //alert("зашли в иф которой говорит, что последнее действие на флопе");
             document.querySelector(".add-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             return;
@@ -527,7 +492,6 @@ function displayAddRemoveButtons() {
     }
     if (isTerminalStreetState()) {   // если терминальное состояние
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
-            //alert("зашли в иф которой говорит, что последнее действие на флопе");
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
             document.querySelector(".add-move-button.turn").classList.remove("hidden"); // добавили кнопку флопа
             return;
@@ -601,24 +565,11 @@ function addActionString() {
     }
 
     let oldActionListLength = rawActionList.length;
-    //alert("oldActionListLength = " + oldActionListLength);
     let isTerminalStreetStateTmp = isTerminalStreetState();
-    //alert("isTerminalStreetStateTmp = " + isTerminalStreetStateTmp);
-    //alert("test");
     let whoIsNextMoveTmp = whoIsNextMove();
-    //alert("whoIsNextMoveTmp = " + whoIsNextMoveTmp);
-    // начинаем заполнять новую строку после нажатия кнопки +
     rawActionList[oldActionListLength] = new ActionString();
-    //alert("создали новую строку и тперь rawActionList.length = " + rawActionList.length);
-    //alert("Сейчас терминальное состояние? " + isTerminalStreetStateTmp);
     rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
-    //alert("Первое присвоение rawActionList[oldActionListLength].street = " + rawActionList[oldActionListLength].street);
-    //alert("typeof rawActionList[rawActionList.length -2].player = " + typeof rawActionList[rawActionList.length -2].player);
-    //alert("typeof rawActionList[rawActionList.length -2].balance = " + typeof rawActionList[rawActionList.length -2].balance);
-    //alert("typeof rawActionList[rawActionList.length -2].action = " + typeof rawActionList[rawActionList.length -2].action);
-    //alert("typeof rawActionList[rawActionList.length -2].pot = " + typeof rawActionList[rawActionList.length -2].pot);
-    //alert("typeof rawActionList[rawActionList.length -2].amount = " + typeof rawActionList[rawActionList.length -2].amount);
-    //alert("typeof rawActionList[rawActionList.length -2].position = " + typeof rawActionList[rawActionList.length -2].position);
+
     for (let i = oldActionListLength - 1; i > 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
             rawActionList[oldActionListLength].player = rawActionList[i].player;
@@ -629,7 +580,6 @@ function addActionString() {
             rawActionList[oldActionListLength].position = rawActionList[i].position;
         }
     }
-
     removeActions();
     displayActions();
     displayAddRemoveButtons();
@@ -658,7 +608,6 @@ function removeActions() {
     while(flopMoves.childElementCount > 2) {flopMoves.removeChild(flopMoves.lastChild);}
     while(turnMoves.childElementCount > 2) {turnMoves.removeChild(turnMoves.lastChild);}
     while(riverMoves.childElementCount > 2) {riverMoves.removeChild(riverMoves.lastChild);}
-
 }
 
 // функция возвращает массив всех игроков кто еще в игре и может вкладывать деньги, не учитывая супер терминального состояния раздачи
@@ -669,7 +618,6 @@ function whoIsInGame() {
     for (let i = rawActionList.length - 1; i >= 0; i--) { //добавляем всех кто сфолдил или баланс = 0
         if (Math.abs(initPlayerBalance(rawActionList[i].position, rawActionList.length - 1) - rawActionList[i].amount) < 0.0001 || rawActionList[i].action === 5) {
             blackList.push(rawActionList[i].position);
-            //if (rawActionList[i].position === 0) {alert("Added joe to black list");}
         }
     }
     for (let i = rawActionList.length - 1; i >= 0; i--) { // добавляем всех игроков
@@ -682,7 +630,6 @@ function whoIsInGame() {
             playersInGame.push(allPlayers[i]);
         }
     }
-    //alert("playersInGame = " + playersInGame);
     return playersInGame;
 }
 
@@ -693,7 +640,6 @@ function whoIsNextMove() {
     } else {
         let nPlayers = whoIsInGame().slice();
         nPlayers.sort(function(a,b){return a-b;});
-        //alert("Зашли узнать кто следующий, и отсортированный массив = " + nPlayers.join());
         nPlayers.join(); // посортировали массив
         for (let i = rawActionList.length - 1; i > 0; i--) {
             if (nPlayers.indexOf(rawActionList[i].position) >= 0) {
@@ -723,17 +669,12 @@ function whatIsPlayerBalance(position, oldActionListLength) {
     let currentStreetForBalance;
     let lastPlayerAmount;
     let initBalance;
-    //alert("position for whatIsPlayerBalance = " + position);
+
     for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === position) {
             currentStreetForBalance = rawActionList[i].street;
             lastPlayerAmount = rawActionList[i].amount;
             initBalance = rawActionList[i].balance;
-            //alert("rawActionList[i].player = " + rawActionList[i].player);
-            //alert("rawActionList[i].balance = " + rawActionList[i].balance);
-            //alert("initBalance = " + initBalance);
-            //alert("lastPlayerAmount = " + lastPlayerAmount);
-            //alert("currentStreetForBalance = " + currentStreetForBalance);
             break;
         }
     }
@@ -787,10 +728,7 @@ function amountClick(e) {
     if (!lastActionString.contains(el2)) {
         return;
     }
-    //alert("min = " + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2));
-    //alert("initPlayerBalance(rawActionList[rawActionList.length - 1].position = " + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length));
-    //alert("rawActionList[rawActionList.length - 1].amount = " + rawActionList[rawActionList.length - 1].amount);
-    //alert("minAmount())).toFixed(2) = " + minAmount().toFixed(2));
+
     var slider = $("<form class=\"raise-form\" onsubmit=\"return false\" oninput=\"level.value = flevel.valueAsNumber.toFixed(2)\">\n" +
         "  <label for=\"flying\"></label>\n" +
         "  <input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\" min=\"" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2) + "\" max=\"" + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2) + "\" step=\"0.05\" value=\"" + rawActionList[rawActionList.length - 1].amount + "\"> \n" +
@@ -811,6 +749,125 @@ function amountClick(e) {
     });
 }
 
+
+var tdPlayerStats = $(".all-info-table td:nth-child(1)"); // nickname stats
+tdPlayerStats.on('contextmenu', displayStats);
+// функция обрабатывающая клик в amount
+function displayStats(e) {
+    event.preventDefault();
+    let x = e.pageX;
+    let y = e.pageY;
+    //alert("clientX = " + x);
+    //alert("clientY = " + y);
+
+    let el2 = $(this);
+    let div = document.getElementById("player-stats");
+    div.style.left = getValidXCoordinates(x) +'px';
+    div.style.top = getValidYCoordinates(y) +'px';
+    div.classList.remove("hidden");
+    let el = e.target; // nodeType == 1
+    this.classList.add("color-yellow");
+
+    $(document).mouseup(function (e) {
+        var container = $("#player-stats");
+        if (container.has(e.target).length === 0){
+            el.classList.remove("color-yellow");
+            div.classList.add("hidden");
+        }
+    });
+
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // escape
+            var container = $("#player-stats");
+            if (container.has(e.target).length === 0){
+                el.classList.remove("color-yellow");
+                div.classList.add("hidden");
+            }
+        }
+    });
+
+}
+
+
+var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
+tdActionMenu.on('contextmenu', actionMenu);
+// функция обрабатывающая клик в amount
+function actionMenu(e) {
+    event.preventDefault();
+    let x = e.pageX;
+    let y = e.pageY;
+    //alert("clientX = " + x);
+    //alert("clientY = " + y);
+
+    let el2 = $(this);
+    let div = document.getElementById("action-menu");
+    div.style.left = getValidXCoordinatesM(x) +'px';
+    div.style.top = getValidYCoordinatesM(y) +'px';
+    div.classList.remove("hidden");
+    let el = e.target; // nodeType == 1
+    this.classList.add("color-violet");
+
+    $(document).mouseup(function (e) {
+        var container = $("#action-menu");
+        if (container.has(e.target).length === 0){
+            el.classList.remove("color-violet");
+            div.classList.add("hidden");
+        }
+    });
+
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // escape
+            var container = $("#action-menu");
+            if (container.has(e.target).length === 0){
+                el.classList.remove("color-violet");
+                div.classList.add("hidden");
+            }
+        }
+    });
+
+}
+
+function getValidXCoordinates(x) {
+    //alert("x = " + x);
+    if (x < 70) {
+        return parseInt(70);
+    }
+    if (x > 421 && x < 490) {
+        return parseInt(490);
+    }
+    if (x > 800) {
+        return parseInt(804);
+    }
+    return x;
+}
+
+function getValidYCoordinates(y) {
+    //alert("y = " + y);
+    if (y > 340) {
+        return parseInt(340);
+    } else {return y;}
+}
+
+function getValidXCoordinatesM(x) {
+    //alert("x = " + x);
+    if (x < 215) {
+        return parseInt(215);
+    }
+    if (x > 589 && x < 620) {
+        return parseInt(620);
+    }
+    if (x > 980) {
+        return parseInt(1031);
+    }
+    return x;
+}
+
+function getValidYCoordinatesM(y) {
+    //alert("y = " + y);
+    if (y > 330) {
+        return parseInt(330);
+    } else {return y;}
+}
 
 var tdAction = $(".all-info-table td:nth-child(3)"); // селектим action
 tdAction.on('click', actionClick);
@@ -872,9 +929,7 @@ function actionClick(e){
 
         rawActionList[rawActionList.length - 1].action = parseFloat(getActionIndex(sel.options[sel.selectedIndex].text));
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 3) {
-            //rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(rawActionList[rawActionList.length - 1].balance, maxAmountAtCurrentStreet()));
             rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, oldActionListLength), maxAmountAtCurrentStreet()));
-            //initPlayerBalance(position, oldActionListLength)
         }
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 5 || parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 4) {
             rawActionList[rawActionList.length - 1].amount = parseFloat(0);
@@ -930,6 +985,14 @@ function restartListener() {
     tdAction.off();
     tdAction = $(".all-info-table td:nth-child(3)");
     tdAction.on('click', actionClick);
+
+    tdPlayerStats.off();
+    tdPlayerStats = $(".all-info-table td:nth-child(1)"); // селектим amount
+    tdPlayerStats.on('contextmenu', displayStats);
+
+    tdActionMenu.off();
+    tdActionMenu = $(".all-info-table td:nth-child(3)");
+    tdActionMenu.on('contextmenu', actionMenu);
 }
 
 // был ли бет на улице с последним ходом?

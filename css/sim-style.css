@@ -263,6 +263,11 @@ table caption {
     width: 100%;
 }
 
+.all-info-table td:nth-child(1),
+.all-info-table td:nth-child(3) {
+    cursor: pointer;
+}
+
 .raise-amount {
     -webkit-appearance: none;
     width: 95%;
@@ -379,4 +384,47 @@ output {
     display: flex;
     justify-content: space-between;
     position: relative;
+}
+
+#player-stats {
+    position: absolute;
+    width: 427px;
+    height: 350px;
+    background: rgba(130, 130, 40, .92);
+    z-index: 11;
+}
+
+#action-menu label:hover {
+    /*color: royalblue;*/
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+#action-menu label:last-child:hover {
+    /*color: royalblue;*/
+    color: blueviolet;
+}
+
+#action-menu {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    box-sizing: border-box;
+    background: rgba(20, 40, 130, .92);
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 15px;
+    padding-top: 15px;
+    padding-left: 35px;
+    font-size: 14px;
+}
+
+.color-yellow {
+    color: lime;
+}
+
+.color-violet {
+    color: dodgerblue;
 }
