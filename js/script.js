@@ -226,7 +226,7 @@ var rawActionList = [];
 
 // Класс строка действий
 class ActionString {
-    constructor(street, player, balance, action, pot, amount, position) {
+    constructor(street, player, balance, action, pot, amount, position, gto) {
         this.street = street;
         this.player = player;
         this.balance = balance;
@@ -234,6 +234,7 @@ class ActionString {
         this.pot = pot;
         this.amount = amount;
         this.position = position;
+        this.gto = gto;
     }
 
     set setNickname(newNickname) {
@@ -248,20 +249,20 @@ class ActionString {
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 // (street, player, balance, action, pot, amount, position)
-rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9); // post SB
-rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8); // post BB
-rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3);  // MP1
-rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2); // MP2
-rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1); // CO
-rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0); // bet 0.75 BTN
-rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9);
-rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8); // call BB
+rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false); // post SB
+rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false); // post BB
+rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false);  // MP1
+rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2, false); // MP2
+rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1, false); // CO
+rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false); // bet 0.75 BTN
+rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9, false);
+rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false); // call BB
 
-rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9);
-rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8);
-rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0);
-rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9);
-rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8);
+rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false);
+rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false);
+rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0, false);
+rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9, false);
+rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8, false);
 
 
 //rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
@@ -376,6 +377,7 @@ function displayActions() {
                 tr.appendChild(td);
 
                 flopMove.appendChild(tr);
+                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
                 flopMove.classList.remove("hide-table-row");
             } else if (rawActionList[i].street === 2) { //если улица TURN
                 let turnMove = document.querySelector(".turn-moves .all-info-table");
@@ -405,6 +407,7 @@ function displayActions() {
                 tr.appendChild(td);
 
                 turnMove.appendChild(tr);
+                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
                 turnMove.classList.remove("hide-table-row");
             } else if (rawActionList[i].street === 3) { //если улица RIVER
                 let riverMove = document.querySelector(".river-moves .all-info-table");
@@ -434,6 +437,7 @@ function displayActions() {
                 tr.appendChild(td);
 
                 riverMove.appendChild(tr);
+                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
                 riverMove.classList.remove("hide-table-row");
             }
         }
@@ -578,6 +582,9 @@ function addActionString() {
             rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength).toFixed(2));
             rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
             rawActionList[oldActionListLength].position = rawActionList[i].position;
+            if (rawActionList[oldActionListLength - 1].gto) {
+                rawActionList[oldActionListLength].gto = true;
+            } else {rawActionList[oldActionListLength].gto = false;}
         }
     }
     removeActions();
@@ -620,6 +627,7 @@ function whoIsInGame() {
             blackList.push(rawActionList[i].position);
         }
     }
+    //alert("blackList + " + blackList);
     for (let i = rawActionList.length - 1; i >= 0; i--) { // добавляем всех игроков
         if (allPlayers.indexOf(rawActionList[i].position) < 0) {
             allPlayers.push(rawActionList[i].position);
@@ -719,13 +727,12 @@ tdAmount.on('click', amountClick);
 // функция обрабатывающая клик в amount
 function amountClick(e) {
     var el = $(this);
-    let el2= e.target; // nodeType == 1
+    let elNode= e.target; // nodeType == 1
 
     if (rawActionList[rawActionList.length - 1].action >= 3) {
         return;
     }
-    let lastActionString = document.querySelector(getCurrentTableClass() + " .all-info-table").lastElementChild; // последняя строка действий c таблицей на соотв улице
-    if (!lastActionString.contains(el2)) {
+    if (getRawActionsIndex(elNode) != rawActionList.length - 1) {
         return;
     }
 
@@ -752,76 +759,115 @@ function amountClick(e) {
 
 var tdPlayerStats = $(".all-info-table td:nth-child(1)"); // nickname stats
 tdPlayerStats.on('contextmenu', displayStats);
-// функция обрабатывающая клик в amount
+// функция показывающая статистику на игрока
 function displayStats(e) {
     event.preventDefault();
-    let x = e.pageX;
-    let y = e.pageY;
-    //alert("clientX = " + x);
-    //alert("clientY = " + y);
+    $('#player-stats').remove();
+    $(".all-info-table td:nth-child(1)").removeClass("color-yellow");
+    var el = $(this);
 
-    let el2 = $(this);
-    let div = document.getElementById("player-stats");
-    div.style.left = getValidXCoordinates(x) +'px';
-    div.style.top = getValidYCoordinates(y) +'px';
-    div.classList.remove("hidden");
-    let el = e.target; // nodeType == 1
+    let playerStats = $("<div id=\"player-stats\" class=\"hidden\"></div>");
+
     this.classList.add("color-yellow");
+    el.append(playerStats);
+    el.css("overflow", "visible");
+    let div = document.getElementById("player-stats");
+    div.classList.remove("hidden");
+    let offset = el.offset();
 
-    $(document).mouseup(function (e) {
-        var container = $("#player-stats");
-        if (container.has(e.target).length === 0){
-            el.classList.remove("color-yellow");
-            div.classList.add("hidden");
+    div.style.left = getValidXCoordinates(offset.left) +'px';
+    div.style.top = getValidYCoordinates(offset.top) +'px';
+
+    $(document).on('click', dontCloseStats);
+    function dontCloseStats(e) {
+        if($(e.target).closest('#player-stats').length === 0) {
+            el.removeClass("color-yellow");
+            el.css("overflow", "hidden");
+            playerStats.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
         }
-    });
+    }
 
     $(document).keyup(function(e) {
         if (e.keyCode == 27) { // escape
-            var container = $("#player-stats");
-            if (container.has(e.target).length === 0){
-                el.classList.remove("color-yellow");
-                div.classList.add("hidden");
-            }
+            el.removeClass("color-yellow");
+            el.css("overflow", "hidden");
+            playerStats.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
         }
     });
 
 }
 
-
 var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
 tdActionMenu.on('contextmenu', actionMenu);
-// функция обрабатывающая клик в amount
+// функция обрабатывающая ПРАВЫЙ клик в amount
 function actionMenu(e) {
     event.preventDefault();
-    let x = e.pageX;
-    let y = e.pageY;
-    //alert("clientX = " + x);
-    //alert("clientY = " + y);
 
-    let el2 = $(this);
-    let div = document.getElementById("action-menu");
-    div.style.left = getValidXCoordinatesM(x) +'px';
-    div.style.top = getValidYCoordinatesM(y) +'px';
-    div.classList.remove("hidden");
-    let el = e.target; // nodeType == 1
+    var el = $(this);
+    let elNode = e.target; // nodeType == 1
+    let isGTO = "";
+    if (whatIsFirstGTOindex() == getRawActionsIndex(elNode)) {
+        isGTO = "checked";
+    }
+
+    let actionMenu = $("<div id=\"action-menu\" class=\"hidden\">\n" +
+        "            <input type=\"button\" id=\"range\" name=\"action-checkbox\" hidden>\n" +
+        "            <label for=\"range\">Show range</label>\n" +
+        "            <input type=\"button\" id=\"probabilities\" name=\"action-checkbox\" hidden>\n" +
+        "            <label for=\"probabilities\">Show probabilities</label>\n" +
+        "            <input type=\"button\" id=\"ev\" name=\"action-checkbox\" hidden>\n" +
+        "            <label for=\"ev\">Evaluate EV's</label>\n" +
+        "            <input type=\"checkbox\" id=\"gto\" name=\"action-checkbox\" " + isGTO + " hidden>\n" +
+        "            <label for=\"gto\">Start GTO from here</label>\n" +
+        "        </div>");
+
     this.classList.add("color-violet");
-
-    $(document).mouseup(function (e) {
-        var container = $("#action-menu");
-        if (container.has(e.target).length === 0){
-            el.classList.remove("color-violet");
-            div.classList.add("hidden");
+    el.append(actionMenu);
+    let div = document.getElementById("action-menu");
+    div.classList.remove("hidden");
+    div.style.left = 35 +'px';
+    div.style.top = 13 +'px';
+    //tdAction.off();
+    tdAction.off();
+    $("#gto").on("click", function () {
+        if (isGTO == "checked") {
+            removeAllGTOstrings();
+        } else {
+            for (let i = rawActionList.length - 1; i >= 0; i--) {
+                rawActionList[i].gto = false;
+            }
+            setGTOtoAllStings(getRawActionsIndex(elNode));
         }
     });
 
+    $(document).on('click', dontCloseAction);
+    function dontCloseAction(e) {
+        if($(e.target).closest('#action-menu').length === 0) {
+            el.removeClass("color-violet");
+            actionMenu.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+        }
+    }
+
     $(document).keyup(function(e) {
         if (e.keyCode == 27) { // escape
-            var container = $("#action-menu");
-            if (container.has(e.target).length === 0){
-                el.classList.remove("color-violet");
-                div.classList.add("hidden");
-            }
+            el.removeClass("color-violet");
+            actionMenu.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
         }
     });
 
@@ -829,52 +875,37 @@ function actionMenu(e) {
 
 function getValidXCoordinates(x) {
     //alert("x = " + x);
-    if (x < 70) {
-        return parseInt(70);
+    let width = 427;
+    let xOffset = 55;
+    let needWidth = x + width + xOffset;
+    if ($(window).width() - needWidth > 0) {
+        return xOffset;
+    } else {
+        return ($(window).width() - x - width);
     }
-    if (x > 421 && x < 490) {
-        return parseInt(490);
-    }
-    if (x > 800) {
-        return parseInt(804);
-    }
-    return x;
 }
 
 function getValidYCoordinates(y) {
-    //alert("y = " + y);
-    if (y > 340) {
-        return parseInt(340);
-    } else {return y;}
-}
-
-function getValidXCoordinatesM(x) {
     //alert("x = " + x);
-    if (x < 215) {
-        return parseInt(215);
+    let height = 350;
+    let yOffset = 13;
+    let needHeight = y + height + yOffset;
+    if ($(window).height() - needHeight > 0) {
+        return yOffset;
+    } else {
+        return ($(window).height() - y - height);
     }
-    if (x > 589 && x < 620) {
-        return parseInt(620);
-    }
-    if (x > 980) {
-        return parseInt(1031);
-    }
-    return x;
 }
 
-function getValidYCoordinatesM(y) {
-    //alert("y = " + y);
-    if (y > 330) {
-        return parseInt(330);
-    } else {return y;}
-}
 
 var tdAction = $(".all-info-table td:nth-child(3)"); // селектим action
 tdAction.on('click', actionClick);
-// функция обрабатывающая клик в action
+// функция обрабатывающая ЛЕВЫЙ клик в action
 function actionClick(e){
     var el = $(this);
     let el2= e.target; // nodeType == 1
+
+    rawActionList[rawActionList.length - 1].action = parseInt(6); // необходимо для глюка с количеством оставшихся игроков и невозможностью рейзить
 
     let lastActionString = document.querySelector(getCurrentTableClass() + " .all-info-table").lastElementChild; // последняя строка действий c таблицей на соотв улице
     if (!lastActionString.contains(el2)) {
@@ -903,7 +934,7 @@ function actionClick(e){
             ];
         }
 
-        var sel = $("<select id=\"flying2\">");
+        var sel = $("<select id=\"flying2\" name=\"selectAmount\">");
 
         $(arr).each(function() {
             sel.append($("<option>").attr('value',this.val).text(this.text));
@@ -922,7 +953,7 @@ function actionClick(e){
 
     el.replaceWith(sel);
 
-    sel.mouseout(function(){
+    sel.focusout(function(){
         let td = document.createElement("td");
         var sel = document.getElementById("flying2");
         td.innerHTML = sel.options[sel.selectedIndex].text;
@@ -991,8 +1022,10 @@ function restartListener() {
     tdPlayerStats.on('contextmenu', displayStats);
 
     tdActionMenu.off();
-    tdActionMenu = $(".all-info-table td:nth-child(3)");
+    tdActionMenu = $(".all-info-table.postflop td:nth-child(3)");
     tdActionMenu.on('contextmenu', actionMenu);
+
+    $(document).off();
 }
 
 // был ли бет на улице с последним ходом?
@@ -1025,30 +1058,69 @@ function getCurrentTableClass() {
     }
 }
 
+// возвращает номер массива rawActionList в элемент строки которого мы кликнули в симулятор
+function getRawActionsIndex(elNode) {
+    let currentStreet;
+    let curSreetTable;
+    let flopStrings = document.querySelector(".flop-moves .all-info-table");
+    let turnStrings = document.querySelector(".turn-moves .all-info-table");
+    let riverStrings = document.querySelector(".river-moves .all-info-table");
+    if (flopStrings.contains(elNode)) {
+        currentStreet = 1;
+        curSreetTable = flopStrings;
+    } else if (turnStrings.contains(elNode)) {
+        currentStreet = 2;
+        curSreetTable = turnStrings;
+    } else if (riverStrings.contains(elNode)) {
+        currentStreet = 3;
+        curSreetTable = riverStrings;
+    }
+
+    for (let i = curSreetTable.children.length - 1; i > 0; i--) {
+        if (curSreetTable.children[i].contains(elNode)) {
+            for (let j = rawActionList.length - 1; j > 0; j--) {
+                if (rawActionList[j].street == currentStreet - 1) {
+                    //alert("Функция возвращает i + j - 1 = " + (i + j - 1));
+                    return i + j - 1;
+                }
+            }
+        }
+    }
+
+}
+
+//усанавливает флаг гто на конкретной строке и добавляет его всем следующим 
+function setGTOtoAllStings(startRawGTOIndex) {
+    for(let i = startRawGTOIndex; i < rawActionList.length; i++) {
+        rawActionList[i].gto = true;
+    }
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+
+}
+
+// возвращает индекс первого элемента массива с включенным GTO
+function whatIsFirstGTOindex() {
+    for (let i = 2; i < rawActionList.length; i++) {
+        if (rawActionList[i].gto == true) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+function removeAllGTOstrings() {
+    for (let i = rawActionList.length - 1; i >= 0; i--) {
+        rawActionList[i].gto = false;
+    }
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
 /*
 //alert(document.querySelector("td").classList.contains("hidden"));
 // bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 9 sb, 8 bb, BTN 0, CO */

@@ -200,9 +200,16 @@ body {
 }
 
 .moves-history table th:nth-child(2),
-.moves-history table th:nth-child(3),
 .moves-history table th:nth-child(4),
 .moves-history table th:nth-child(5) {
+    min-width: 55px;
+}
+
+.moves-history table th:nth-child(3) {
+    min-width: 60px;
+}
+
+.preflop-moves table th:nth-child(3) {
     min-width: 55px;
 }
 
@@ -230,6 +237,7 @@ body {
     white-space: nowrap;
     vertical-align: middle;
     display: block;
+    position: relative;
 }
 
 .moves-history table td:not(:first-child) {
@@ -264,8 +272,9 @@ table caption {
 }
 
 .all-info-table td:nth-child(1),
-.all-info-table td:nth-child(3) {
+.all-info-table.postflop td:nth-child(3) {
     cursor: pointer;
+    position: relative;
 }
 
 .raise-amount {
@@ -296,7 +305,8 @@ tr:nth-child(2n) {
 }
 
 .moves-wrapper {
-
+    position: relative;
+    box-sizing: border-box;
 }
 
 .moves-history .add-move-button,
@@ -391,7 +401,13 @@ output {
     width: 427px;
     height: 350px;
     background: rgba(160, 160, 80, .92);
-    z-index: 11;
+    z-index: 1999;
+}
+
+#action-menu label {
+    /*color: royalblue;*/
+    color: rgb(230,230,230);
+    cursor: pointer;
 }
 
 #action-menu label:hover {
@@ -415,6 +431,7 @@ output {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 20px 15px;
     padding-top: 15px;
     padding-left: 35px;
@@ -427,4 +444,8 @@ output {
 
 .color-violet {
     color: dodgerblue;
+}
+
+#gto:checked + label {
+    color: crimson;
 }
