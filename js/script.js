@@ -255,7 +255,7 @@ class Player {
 
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
-// (street, player, balance, action, pot, amount, position)
+// (street, player, balance, action, pot, amount, position, isGTO)
 rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false); // post SB
 rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false); // post BB
 rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false);  // MP1

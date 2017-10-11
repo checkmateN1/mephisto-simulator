@@ -452,7 +452,8 @@ output {
 
 #upload-button,
 #random-button,
-#iq-button {
+#iq-button,
+#learn-button {
     border: none;
     position: absolute;
     background: none;
@@ -496,15 +497,32 @@ output {
     background-image: url("../img/iq_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 110px;
-    height: 110px;
-    top: 587px;
-    left: 155px;
+    width: 104px;
+    height: 104px;
+    top: 591px;
+    left: 275px;
     background-size: contain;
     outline: none;
 }
 
 #iq-button:hover {
     background-image: url("../img/iq_g_hover.png");
+    cursor: pointer;
+}
+
+#learn-button {
+    background-image: url("../img/learn_g.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 135px;
+    height: 135px;
+    top: 598px;
+    left: 140px;
+    background-size: contain;
+    outline: none;
+}
+
+#learn-button:hover {
+    background-image: url("../img/learn_g_hover2.png");
     cursor: pointer;
 }
