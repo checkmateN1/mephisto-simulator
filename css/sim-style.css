@@ -189,6 +189,7 @@ body {
     padding: 2px 2px;
     padding-bottom: 3px;
     font-weight: 600;
+    color: white;
 }
 
 .moves-history table th:first-child {
@@ -254,7 +255,7 @@ table caption {
      left: 185px;
      font-family: Verdana, Geneva, sans-serif;
      font-size: 15px;
-     color: lightgrey;
+     color: #ffffff;
      font-weight: 600;
  }
 
@@ -497,8 +498,8 @@ output {
     background-image: url("../img/iq_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 104px;
-    height: 104px;
+    width: 100px;
+    height: 100px;
     top: 591px;
     left: 275px;
     background-size: contain;
@@ -514,8 +515,8 @@ output {
     background-image: url("../img/learn_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 135px;
-    height: 135px;
+    width: 125px;
+    height: 125px;
     top: 598px;
     left: 140px;
     background-size: contain;
