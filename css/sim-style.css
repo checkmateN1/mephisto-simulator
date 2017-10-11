@@ -462,31 +462,49 @@ output {
     background-image: url("../img/upload_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 70px;
-    height: 70px;
+    width: 73px;
+    height: 73px;
     top: 450px;
     left: 30px;
     background-size: cover;
+    outline: none;
+}
+
+#upload-button:hover {
+    background-image: url("../img/upload_g_hover.png");
+    cursor: pointer;
 }
 
 #random-button {
     background-image: url("../img/random_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     top: 560px;
-    left: 3px;
+    left: 13px;
     background-size: cover;
+    outline: none;
+}
+
+#random-button:hover {
+    background-image: url("../img/random_g_hover.png");
+    cursor: pointer;
 }
 
 #iq-button {
     background-image: url("../img/iq_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 120px;
-    height: 120px;
+    width: 104px;
+    height: 104px;
     top: 593px;
-    left: 160px;
+    left: 155px;
     background-size: contain;
+    outline: none;
+}
+
+#iq-button:hover {
+    background-image: url("../img/iq_g_hover.png");
+    cursor: pointer;
 }
