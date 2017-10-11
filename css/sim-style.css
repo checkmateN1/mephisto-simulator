@@ -449,3 +449,44 @@ output {
 #gto:checked + label {
     color: crimson;
 }
+
+#upload-button,
+#random-button,
+#iq-button {
+    border: none;
+    position: absolute;
+    background: none;
+}
+
+#upload-button {
+    background-image: url("../img/upload_g.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 70px;
+    height: 70px;
+    top: 450px;
+    left: 30px;
+    background-size: cover;
+}
+
+#random-button {
+    background-image: url("../img/random_g.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 120px;
+    height: 120px;
+    top: 560px;
+    left: 3px;
+    background-size: cover;
+}
+
+#iq-button {
+    background-image: url("../img/iq_g.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 120px;
+    height: 120px;
+    top: 593px;
+    left: 160px;
+    background-size: contain;
+}

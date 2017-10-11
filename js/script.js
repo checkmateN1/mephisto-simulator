@@ -243,6 +243,13 @@ class ActionString {
 
 };
 
+class Player {
+    constructor(player, id) {
+        this.player = player;
+        this.id = id;
+    }
+};
+
 
 // тестовый массив из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
 
@@ -697,7 +704,6 @@ function whatIsPlayerBalance(position, oldActionListLength) {
     return initBalance - lastPlayerAmount; // если улица префлоп
 }
 
-
 // возвращает начальны баланс на улице заданного игрока
 function initPlayerBalance(position, oldActionListLength) {
     let currentStreetForBalance;
@@ -767,6 +773,12 @@ function displayStats(e) {
     var el = $(this);
 
     let playerStats = $("<div id=\"player-stats\" class=\"hidden\"></div>");
+    let nickname = $("<h3 id=\"stats-nickname\"></h3>");
+    let allStats = $("<h4>Preflop</h4>\n" +
+        "            <div class=\"preflop-stats\">\n" +
+        "                <p><span></span></p>\n" +
+        "                <p><span></span></p>\n" +
+        "            </div>");
 
     this.classList.add("color-yellow");
     el.append(playerStats);
