@@ -767,6 +767,7 @@ var tdPlayerStats = $(".all-info-table td:nth-child(1)"); // nickname stats
 tdPlayerStats.on('contextmenu', displayStats);
 // функция показывающая статистику на игрока
 function displayStats(e) {
+    alert("зашли в функцию правым кликом в ФФ");
     event.preventDefault();
     $('#player-stats').remove();
     $(".all-info-table td:nth-child(1)").removeClass("color-yellow");
