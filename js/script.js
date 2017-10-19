@@ -267,9 +267,26 @@ rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, fals
 
 rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false);
 rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false);
-rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0, false);
-rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9, false);
-rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8, false);
+rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false);
+rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false);
+rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false);
+
+rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false);
+rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false);
+rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false);
+
+
+
+
+
+
+
+
+//rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false);
+//rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false);
+//rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0, false);
+//rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9, false);
+//rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8, false);
 
 
 //rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
@@ -583,10 +600,16 @@ function addActionString() {
 
     for (let i = oldActionListLength - 1; i > 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
+            //console.group("addActionString test group");
+                //console.log("rawActionList[i].player = " + rawActionList[i].player);
+                //console.log("parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2) = " + parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2)));
+                //console.log("parseFloat(whatIsThePot(oldActionListLength).toFixed(2)) = " + parseFloat(whatIsThePot(oldActionListLength).toFixed(2)));
+                //console.log("rawActionList[i].position = " + rawActionList[i].position);
+            //console.groupEnd();
             rawActionList[oldActionListLength].player = rawActionList[i].player;
             rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
             rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
-            rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength).toFixed(2));
+            rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength)).toFixed(2);
             rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
             rawActionList[oldActionListLength].position = rawActionList[i].position;
             if (rawActionList[oldActionListLength - 1].gto) {
@@ -669,14 +692,13 @@ function whoIsNextMove() {
 // определяет текущий размер пота на момент добавления нового действия
 function whatIsThePot(oldActionListLength) {
     let lastPlayerPosition = rawActionList[oldActionListLength - 1].position;
-    let curentLastAmount = rawActionList[oldActionListLength - 1].amount;
-
+    let currentLastAmount = parseFloat(rawActionList[oldActionListLength - 1].amount);
     for (let i = oldActionListLength - 2; i >= 0; i--) {
-        if (rawActionList[i].position === lastPlayerPosition && rawActionList[i].street === rawActionList[oldActionListLength - 1].street) {
-            return rawActionList[oldActionListLength - 1].pot + curentLastAmount - rawActionList[i].amount;
+        if (rawActionList[i].position == lastPlayerPosition && rawActionList[i].street == rawActionList[oldActionListLength - 1].street) {
+            return parseFloat(rawActionList[oldActionListLength - 1].pot) + currentLastAmount - parseFloat(rawActionList[i].amount);
         }
     }
-    return rawActionList[oldActionListLength - 1].pot + curentLastAmount;
+    return parseFloat(rawActionList[oldActionListLength - 1].pot) + currentLastAmount;
 }
 
 // определяет баланс игрока на момент добавления нового действия для него
@@ -741,6 +763,17 @@ function amountClick(e) {
     if (getRawActionsIndex(elNode) != rawActionList.length - 1) {
         return;
     }
+    if(Math.abs(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2) - initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2)) < 0.0001) {
+            let td = document.createElement("td");
+            td.innerHTML = "$" + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2);
+            el.replaceWith(td);
+            rawActionList[rawActionList.length - 1].amount = initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2);
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+            return;
+    }
 
     var slider = $("<form class=\"raise-form\" onsubmit=\"return false\" oninput=\"level.value = flevel.valueAsNumber.toFixed(2)\">\n" +
         "  <label for=\"flying\"></label>\n" +
@@ -748,8 +781,16 @@ function amountClick(e) {
         "  <span class=\"dollar\">$</span> \n" +
         "  <output for=\"flying\" name=\"level\">" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), Math.max(rawActionList[rawActionList.length - 1].amount, minAmount())).toFixed(2) + "</output>" +
         "</form>");
+    /*
+
+        var slider = $("<form>\n" +
+            "\t\t<input type=\"range\" name=\"amountRange\" min=\"0\" max=\"20\" value=\"0\" oninput=\"this.form.amountInput.value=this.value\" />\n" +
+            "\t\t<input type=\"number\" name=\"amountInput\" min=\"0\" max=\"20\" value=\"0\" oninput=\"this.form.amountRange.value=this.value\" />\n" +
+            "\t</form>");
+    */
+    //var slider = $("<input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\">");
     el.replaceWith(slider);
-    $('input').focus();
+    //$('input').focus();
     slider.focusout(function(){
         let td = document.createElement("td");
         td.innerHTML = "$" + $("#flying").val();
@@ -767,23 +808,49 @@ var tdPlayerStats = $(".all-info-table td:nth-child(1)"); // nickname stats
 tdPlayerStats.on('contextmenu', displayStats);
 // функция показывающая статистику на игрока
 function displayStats(e) {
-    alert("зашли в функцию правым кликом в ФФ");
-    event.preventDefault();
+    //alert("зашли в функцию правым кликом в ФФ");
+    e.preventDefault();
+    let elNode= e.target; // nodeType == 1
     $('#player-stats').remove();
     $(".all-info-table td:nth-child(1)").removeClass("color-yellow");
     var el = $(this);
 
+    //let player = rawActionList[getRawActionsIndex(elNode)].player;   - НЕ  РАБОТАЕТ НА ПРЕФЛОПЕ!!!
+
     let playerStats = $("<div id=\"player-stats\" class=\"hidden\"></div>");
-    let nickname = $("<h3 id=\"stats-nickname\"></h3>");
+
     let allStats = $("<h4>Preflop</h4>\n" +
-        "            <div class=\"preflop-stats\">\n" +
-        "                <p><span></span></p>\n" +
-        "                <p><span></span></p>\n" +
-        "            </div>");
+        "\n" +
+        "            <p><span>VPIP: </span><span id=\"stats-vpip\">22</span><span>, PFR: </span><span id=\"stats-pfr\">17.5</span><span>, 3-Bet: </span><span id=\"stats-3bet\">7.3</span><span>, hands: </span><span id=\"stats-hands\">13300</span></p>\n" +
+        "            <p><span>Steal CO: </span><span id=\"stats-stealCO\">27</span><span>, Steal BTN: </span><span id=\"stats-stealBTN\">55</span><span>, Steal SB: </span><span id=\"stats-stealSB\">47</span></p>\n" +
+        "            <p><span>Fold To Steal BB vs SB: </span><span id=\"stats-foldStealBBvsSB\">55</span><span>, Fold To Steal BB vs BTN: </span><span id=\"stats-foldStealBBvsBTN\">60</span><span>, Fold To Steal BB vs CO: </span><span id=\"stats-foldStealBBvsCO\">73</span></p>\n" +
+        "            <p><span>Fold To Steal SB vs BTN: </span><span id=\"stats-foldStealSBvsBTN\">80</span><span>, Fold To Steal SB vs CO: </span><span id=\"stats-foldStealSBvsCO\">86</span><span>, Fold To 3-Bet Steal: </span><span id=\"stats-foldTo3BetSteal\">53</span></p>\n" +
+        "            <p><span>4-Bet: </span><span id=\"stats-4bet\">11.4</span><span>, Fold To 4-Bet: </span><span id=\"stats-foldTo4Bet\">48</span></p>\n" +
+        "\n" +
+        "            <h4>Postflop</h4>\n" +
+        "\n" +
+        "            <p><span>Raise%: </span><span id=\"stats-raisePersent\">8</span><span>, Call%: </span><span id=\"stats-callPercent\">40</span></p>\n" +
+        "            <p><span>WTSD: </span><span id=\"stats-WTSD\">27</span><span>, WSF: </span><span id=\"stats-WSF\">44</span><span>, W$SD No Raise: </span><span id=\"stats-WSD\">53</span></p>\n" +
+        "\n" +
+        "            <h4>Flop</h4>\n" +
+        "\n" +
+        "            <p><span>Agg% Flop: </span><span id=\"stats-aggPersentFlop\">28</span><span>, Cbet Flop: </span><span id=\"stats-cbetFlop\">54</span><span>, Fold To Cbet Flop: </span><span id=\"stats-foldToCbetFlop\">45</span></p>\n" +
+        "            <p><span>Donk Flop: </span><span id=\"stats-donkFlop\">4</span><span>, Fold To Raise Flop: </span><span id=\"stats-foldRaiseFlop\">40</span><span>, W$SD Raise Flop: </span><span id=\"stats-WSDraiseFlop\">58</span></p>\n" +
+        "\n" +
+        "            <h4>Turn</h4>\n" +
+        "\n" +
+        "            <p><span>Agg% Turn: </span><span id=\"stats-aggPersentTurn\">27</span><span>, Cbet Turn: </span><span id=\"stats-cbetTurn\">50</span><span>, Fold To Cbet Turn: </span><span id=\"stats-foldToCbetTurn\">39</span></p>\n" +
+        "            <p><span>Fold To Raise Turn: </span><span id=\"stats-foldRaiseTurn\">38</span><span>, W$SD Raise Turn: </span><span id=\"stats-WSDraiseTurn\">60</span></p>\n" +
+        "\n" +
+        "            <h4>River</h4>\n" +
+        "\n" +
+        "            <p><span>Agg% River: </span><span id=\"stats-aggPersentRiver\">23</span><span>, W$SD Raise River: </span><span id=\"stats-WSDraiseRiver\">61</span><span>, River Call Win%: </span><span id=\"stats-riverCallWin\">48</span></p>\n");
 
     this.classList.add("color-yellow");
     el.append(playerStats);
     el.css("overflow", "visible");
+    $("#player-stats").append(allStats);
+    //$("#player-stats").append(nicknameTXT);
     let div = document.getElementById("player-stats");
     div.classList.remove("hidden");
     let offset = el.offset();
@@ -822,7 +889,7 @@ var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
 tdActionMenu.on('contextmenu', actionMenu);
 // функция обрабатывающая ПРАВЫЙ клик в amount
 function actionMenu(e) {
-    event.preventDefault();
+    e.preventDefault();
 
     var el = $(this);
     let elNode = e.target; // nodeType == 1
@@ -888,7 +955,7 @@ function actionMenu(e) {
 
 function getValidXCoordinates(x) {
     //alert("x = " + x);
-    let width = 427;
+    let width = 447;
     let xOffset = 55;
     let needWidth = x + width + xOffset;
     if ($(window).width() - needWidth > 0) {
@@ -900,7 +967,7 @@ function getValidXCoordinates(x) {
 
 function getValidYCoordinates(y) {
     //alert("x = " + x);
-    let height = 350;
+    let height = 315;
     let yOffset = 13;
     let needHeight = y + height + yOffset;
     if ($(window).height() - needHeight > 0) {
@@ -976,6 +1043,9 @@ function actionClick(e){
             rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, oldActionListLength), maxAmountAtCurrentStreet()));
         }
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 5 || parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 4) {
+            rawActionList[rawActionList.length - 1].amount = parseFloat(0);
+        }
+        if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 2) {
             rawActionList[rawActionList.length - 1].amount = parseFloat(0);
         }
         sel.replaceWith(td);
@@ -1133,7 +1203,3 @@ function removeAllGTOstrings() {
     displayAddRemoveButtons();
     restartListener();
 }
-/*
-//alert(document.querySelector("td").classList.contains("hidden"));
-// bet 1, raise 2, call 3, check 4, fold 5
-// 9 sb, 8 bb, BTN 0, CO */

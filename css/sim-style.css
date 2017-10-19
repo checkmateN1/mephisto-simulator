@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    background: black;
+    background-color: #0c0e18;
 }
 
 body {
@@ -13,14 +13,16 @@ body {
     height: 100%;
     position: relative;
     top: -10px;
+    /*left: -850px;*/
 }
 
 .wrapper {
     width: 1246px;
     padding: 0 15px;
     margin: 0 auto;
-    background-image: url('../img/demon.png');
-    background-repeat: no-repeat;
+    /*background-image: url('../img/demon.png');
+    background-repeat: no-repeat; */
+    background-color: #10131d;
     box-sizing: border-box;
     z-index: -10;
 }
@@ -220,10 +222,13 @@ body {
 
 .moves-history select {
     -webkit-appearance: none;
+    -moz-appearance:none;
     line-height: 1em;
     background-color: rgba(100, 100, 100, .45);
     outline: none;
     width: 50px;
+    text-indent: 0.01px;
+    text-overflow: '';
 }
 
 .moves-history select * {
@@ -399,11 +404,59 @@ output {
 
 #player-stats {
     position: absolute;
-    width: 427px;
-    height: 350px;
-    background: rgba(160, 160, 80, .92);
-    z-index: 1999;
+    width: 447px;
+    height: 310px;
+    background: rgba(255, 255, 255, 0.96);
+    z-index: 100;
+    padding: 8px 5px;
+    color: #000000;
+    font-size: 10px;
+    line-height: 10px;
+    margin: 0;
 }
+
+#player-stats h4 {
+    margin: 0;
+    color: #cc0004;
+    font-size: 12px;
+}
+
+#player-stats h4:not(:first-child) {
+    margin-top: 17px;
+}
+
+#player-stats h3 {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    margin: 0;
+}
+
+#player-stats p {
+    margin: 5px 0;
+}
+
+#player-stats input {
+    background: inherit;
+    border: none;
+    font-size: 10px;
+    color: #cad0ff;
+    display: inline-block;
+    max-width: 2.5em;
+    text-overflow: ellipsis;
+}
+
+#player-stats span[id] {
+    font-size: 12px;
+    color: #2239a8;
+    cursor: pointer;
+    font-family: 'Asap', sans-serif;
+}
+
+/*
+#player-stats input::-webkit-input-placeholder {color: white;}
+#player-stats input::-moz-placeholder          {color: white;}
+*/
 
 #action-menu label {
     /*color: royalblue;*/
@@ -435,7 +488,7 @@ output {
     align-items: flex-start;
     padding: 20px 15px;
     padding-top: 15px;
-    padding-left: 35px;
+    padding-left: 30px;
     font-size: 14px;
 }
 

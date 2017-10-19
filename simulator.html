@@ -59,7 +59,15 @@
                                 <th>Pot</th>
                                 <th>Amount</th>
                             </tr>
-                                <!--<td><input class="raise-amount" type="range"></td> -->
+
+                            <!--
+                                <div class="raise-form">
+                                    <label for="flying"></label>
+                                    <input class="raise-amount" name="flevel" id="flying" type="range" min="0" max="100" step="0.05" value="50">
+                                    <span class="dollar">$</span>
+                                    <output for="flying" name="level"></output>
+                                </div>
+                            -->
                         </table>
                     </div>
                     <span class="add-button-wrapper">
@@ -130,14 +138,36 @@
             <button id="learn-button"></button>
             <!--
             <h4>Preflop</h4>
-            <div class="preflop-stats">
-                <p><span></span></p>
-                <p><span></span></p>
-            </div>
+
+            <p><span>VPIP: </span><span id="stats-vpip">22</span><span>, PFR: </span><span id="stats-pfr">17.5</span><span>, 3-Bet: </span><span id="stats-3bet">7.3</span><span>, hands: </span><span id="stats-hands">13300</span></p>
+            <p><span>Steal CO: </span><span id="stats-stealCO">27</span><span>, Steal BTN: </span><span id="stats-stealBTN">55</span><span>, Steal SB: </span><span id="stats-stealSB">47</span></p>
+            <p><span>Fold To Steal BB vs SB: </span><span id="stats-foldStealBBvsSB">55</span><span>, Fold To Steal BB vs BTN: </span><span id="stats-foldStealBBvsBTN">60</span><span>, Fold To Steal BB vs CO: </span><span id="stats-foldStealBBvsCO">73</span></p>
+            <p><span>Fold To Steal SB vs BTN: </span><span id="stats-foldStealSBvsBTN">80</span><span>, Fold To Steal SB vs CO: </span><span id="stats-foldStealSBvsCO">86</span><span>, Fold To 3-Bet Steal: </span><span id="stats-foldTo3BetSteal">53</span></p>
+            <p><span>4-Bet: </span><span id="stats-4bet">11.4</span><span>, Fold To 4-Bet: </span><span id="stats-foldTo4Bet">48</span></p>
+
+            <h4>Postflop</h4>
+
+            <p><span>Raise%: </span><span id="stats-raisePersent">8</span><span>, Call%: </span><span id="stats-callPercent">40</span></p>
+            <p><span>WTSD: </span><span id="stats-WTSD">27</span><span>, WSF: </span><span id="stats-WSF">44</span><span>, W$SD No Raise: </span><span id="stats-WSD">53</span></p>
+
+            <h4>Flop</h4>
+
+            <p><span>Agg% Flop: </span><span id="stats-aggPersentFlop">28</span><span>, Cbet Flop: </span><span id="stats-cbetFlop">54</span><span>, Fold To Cbet Flop: </span><span id="stats-foldToCbetFlop">45</span></p>
+            <p><span>Donk Flop: </span><span id="stats-donkFlop">4</span><span>, Fold To Raise Flop: </span><span id="stats-foldRaiseFlop">40</span><span>, W$SD Raise Flop: </span><span id="stats-WSDraiseFlop">58</span></p>
+
+            <h4>Turn</h4>
+
+            <p><span>Agg% Turn: </span><span id="stats-aggPersentTurn">27</span><span>, Cbet Turn: </span><span id="stats-cbetTurn">50</span><span>, Fold To Cbet Turn: </span><span id="stats-foldToCbetTurn">39</span></p>
+            <p><span>Fold To Raise Turn: </span><span id="stats-foldRaiseTurn">38</span><span>, W$SD Raise Turn: </span><span id="stats-WSDraiseTurn">60</span></p>
+
+            <h4>River</h4>
+
+            <p><span>Agg% River: </span><span id="stats-aggPersentRiver">23</span><span>, W$SD Raise River: </span><span id="stats-WSDraiseRiver">61</span><span>, River Call Win%: </span><span id="stats-riverCallWin">48</span></p>
+
             -->
         </main>
         <script src="js/jquery-3.2.1.slim.min.js"></script>
         <script src="js/script.js"></script>
     </body>
 </html>
-  
+                                                         
