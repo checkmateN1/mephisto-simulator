@@ -1273,17 +1273,7 @@ function removeAllGTOstrings() {
     restartListener();
 }
 
-
-//test code
-
-// In your Javascript (external .js resource or <script> tag)
-$(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-
-
-
-// собственно поиск
+// поиск никнейма игрока
 $('#nickname-input').on('keyup', playerSearch);
 function playerSearch() {
     //console.log("зашли в функцию меняющую содержимое select");

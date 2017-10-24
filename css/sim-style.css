@@ -73,6 +73,10 @@ body {
     padding-left: 3px;
 }
 
+.navigation-menu li a:not(.nav-active):hover {
+    color: white !important;
+}
+
 .cards {
     position: relative;
     padding: 0;
