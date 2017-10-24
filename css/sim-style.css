@@ -18,6 +18,7 @@ body {
 
 .wrapper {
     width: 1246px;
+    height: 700px;
     padding: 0 15px;
     margin: 0 auto;
     /*background-image: url('../img/demon.png');
@@ -29,20 +30,47 @@ body {
 
 .navigation-menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin-bottom: 25px;
     position: relative;
-    left: -20px;
+    padding-left: 0;
 }
 
 .navigation-menu li {
     list-style: none;
-    margin: 0 100px;
+    margin: 0 50px;
+    display: inline-block;
 }
 
 .navigation-menu li a {
+    color: #3f4148;
     text-decoration: none;
-    color: white;
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.nav-active {
+    color: white !important;
+    font-size: 15px !important;
+}
+
+.navigation-menu li:not(:last-child) {
+    flex-grow: 0;
+    padding: 0;
+    margin: 0 10px;
+}
+
+.navigation-menu li:last-child {
+    flex-grow: 1;
+    margin: 0;
+    text-align: right;
+    padding-right: 3px;
+}
+
+.navigation-menu li:first-child {
+    margin-left: 0;
+    padding-left: 3px;
 }
 
 .cards {
@@ -220,7 +248,7 @@ body {
     padding: 2px 2px;
 }
 
-.moves-history select {
+#flying2 {
     -webkit-appearance: none;
     -moz-appearance:none;
     line-height: 1em;
@@ -231,7 +259,7 @@ body {
     text-overflow: '';
 }
 
-.moves-history select * {
+#flying2 * {
     width: 50px;
     line-height: 1em;
 }
@@ -504,6 +532,46 @@ output {
     color: crimson;
 }
 
+@keyframes button-hover {
+    from {opacity: 0.7;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);}
+    to {opacity: 1;
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);}
+}
+
+@keyframes button-focusout {
+    from {opacity: 1;
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);}
+    to {opacity: 0.7;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);}
+}
+
+@keyframes button-hover-rotate {
+    from {}
+    to {-moz-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);}
+}
+
+@keyframes button-focusout-rotate {
+    from {opacity: 1;
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);}
+    to {opacity: 0.7;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);}
+}
+
 #upload-button,
 #random-button,
 #iq-button,
@@ -525,9 +593,30 @@ output {
     outline: none;
 }
 
+#upload-button:after {
+    content: '';
+    background-image: url("../img/upload_circle.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 30px;
+    height: 30px;
+    bottom: 9px;
+    left: 35px;
+    position: absolute;
+    background-size: cover;
+    outline: none;
+}
+
+
+
 #upload-button:hover {
-    background-image: url("../img/upload_g_hover2.png");
     cursor: pointer;
+    background-image: url("../img/upload_g_hover2.png");
+    background-repeat: no-repeat;
+}
+
+#upload-button:hover:after {
+    animation: button-hover-rotate 0.7s 1 ease-in-out;
 }
 
 #random-button {
@@ -540,11 +629,24 @@ output {
     left: 13px;
     background-size: cover;
     outline: none;
+    opacity: 0.7;
 }
 
 #random-button:hover {
-    background-image: url("../img/random_g_hover.png");
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 1;
     cursor: pointer;
+    animation: button-hover 0.25s 1 ease-in-out;
+}
+
+#random-button:not(:hover) {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 0.7;
+    animation: button-focusout 0.6s 1 ease-in-out;
 }
 
 #iq-button {
@@ -557,11 +659,26 @@ output {
     left: 275px;
     background-size: contain;
     outline: none;
+    opacity: 0.7;
 }
 
 #iq-button:hover {
-    background-image: url("../img/iq_g_hover.png");
+    /*background-image: url("../img/iq_g_hover.png"); */
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 1;
     cursor: pointer;
+    animation: button-hover 0.25s 1 ease-in-out;
+}
+
+#iq-button:not(:hover) {
+    /*background-image: url("../img/iq_g_hover.png"); */
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 0.7;
+    animation: button-focusout 0.6s 1 ease-in-out;
 }
 
 #learn-button {
@@ -569,14 +686,88 @@ output {
     background-repeat: no-repeat;
     display: block;
     width: 125px;
-    height: 125px;
+    height: 80px;
     top: 598px;
     left: 140px;
     background-size: contain;
     outline: none;
+    opacity: 0.7;
 }
 
 #learn-button:hover {
-    background-image: url("../img/learn_g_hover2.png");
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    opacity: 1;
     cursor: pointer;
+    animation: button-hover 0.25s 1 ease-in-out;
+}
+
+#learn-button:not(:hover) {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 0.7;
+    animation: button-focusout 0.6s 1 ease-in-out;
+}
+
+.select2-container .select2-choice {
+    padding: 5px 10px;
+    height: 20px;
+    font-size: 1.2em;
+}
+
+.select2-container .select2-choice .select2-arrow {
+    background-image: -moz-linear-gradient(top, #424242, #030303);
+    background-image: -ms-linear-gradient(top, #424242, #030303);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #424242), color-stop(100%, #030303));
+    background-image: -webkit-linear-gradient(top, #424242, #030303);
+    background-image: -o-linear-gradient(top, #424242, #030303);
+    background-image: linear-gradient(#424242, #030303);
+    width: 40px;
+    color: #fff;
+    font-size: 1.3em;
+    padding: 4px 12px;
+}
+
+.select2-option {
+    background-color: red;
+    width: 100px;
+    height: 40px;
+    color: red;
+    list-style: none;
+    display: inline-block;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: green;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria] {
+    background-color: green;
+}
+
+#user_id {
+    position: relative;
+}
+
+#user_id option {
+    position: relative;
+    top: 50px;
+}
+
+#nickname-input,
+#list {
+    width: 100%;
+    margin: 10px auto;
+    display: block;
+}
+
+#list {
+    position: absolute;
+    z-index: 99;
+}
+
+#nickname-input {
+    margin: 0;
 }

@@ -14,6 +14,7 @@
         </style>
 
         <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
+        <!--<link href="css/select2.min.css" rel="stylesheet" /> -->
 
     </head>
     <body class="simulator_body wrapper">
@@ -21,6 +22,11 @@
             <nav>
                 <ul class="navigation-menu">
                     <li><a href="index.html">main</a></li>
+                    <li><a href="index.html">mephisto</a></li>
+                    <li><a href="index.html">manual</a></li>
+                    <li><a href="index.html">buy</a></li>
+                    <li><a href="index.html">contacts</a></li>
+                    <li><a href="index.html" class="nav-active">simulator</a></li>
                     <li><a href="user.html">login</a></li>
                 </ul>
             </nav>
@@ -59,7 +65,49 @@
                                 <th>Pot</th>
                                 <th>Amount</th>
                             </tr>
+                            <!--
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input class="type-search" type="text" id="nickname-input"/>
+                                    <select size="7" id="list">
+                                        <option value="1">Text1</option>
+                                        <option value="2">Text2</option>
+                                        <option value="3">Text3</option>
+                                        <option value="4">Text4</option>
+                                        <option value="5">Text5</option>
+                                        <option value="6">Text6</option>
+                                        <option value="7">Text7</option>
+                                        <option value="8">Text8</option>
+                                        <option value="9">Text9</option>
+                                        <option value="10">Text10</option>
+                                    </select>
+                                    <!--
+                                    <select id="user_id">
+                                        <option value="1">Пункт 1</option>
+                                        <option value="2">Пункт 2</option>
+                                        <option value="3">Пункт 3</option>
+                                    </select>
 
+                                    <input  id="inp">
+
+                                    <input type="button" value="choose"
+                                           onclick = "
+                                            a = document.getElementById('user_id');
+                                            b = document.getElementById('inp');
+                                            for (i=1; i<a.options.length; i++) {
+                                               if (a.options[i].innerHTML == b.value) {a.options[i].selected = true; return}
+                                            }
+                                            ">
+                                    <!--<select class="js-example-basic-single" name="state" hidden>
+                                    <option value="AL">Alabama</option>
+                                    <option value="WY">Wyoming</option>
+                                    </select>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr> -->
                             <!--
                                 <div class="raise-form">
                                     <label for="flying"></label>
@@ -137,6 +185,9 @@
             <button id="iq-button"></button>
             <button id="learn-button"></button>
             <!--
+
+            <select name="playersList" id="playersList"></select>
+
             <h4>Preflop</h4>
 
             <p><span>VPIP: </span><span id="stats-vpip">22</span><span>, PFR: </span><span id="stats-pfr">17.5</span><span>, 3-Bet: </span><span id="stats-3bet">7.3</span><span>, hands: </span><span id="stats-hands">13300</span></p>
@@ -168,6 +219,7 @@
         </main>
         <script src="js/jquery-3.2.1.slim.min.js"></script>
         <script src="js/script.js"></script>
+        <!--<script src="js/select2.min.js"></script> -->
     </body>
 </html>
                                                          

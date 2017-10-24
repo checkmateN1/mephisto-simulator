@@ -56,7 +56,7 @@ window.addEventListener("keydown", function (event) {
 });
 
 var checkedCards = [null, null, null, null, null, null, null, null];
-var testBoard = [null, "12", "24", "25", "4", "37", "22", "41"];
+var testBoard = [null, "12", "24", "25", "4", "37", "22", null];
 loadCardsState(testBoard);
 
 //записываем в карту какой улицы мы кликнули
@@ -817,7 +817,7 @@ function displayStats(e) {
 
     //let player = rawActionList[getRawActionsIndex(elNode)].player;   - НЕ  РАБОТАЕТ НА ПРЕФЛОПЕ!!!
 
-    let playerStats = $("<div id=\"player-stats\" class=\"hidden\"></div>");
+    let playerStats = $("<div id=\"player-stats\"></div>");
 
     let allStats = $("<h4>Preflop</h4>\n" +
         "\n" +
@@ -851,8 +851,11 @@ function displayStats(e) {
     el.css("overflow", "visible");
     $("#player-stats").append(allStats);
     //$("#player-stats").append(nicknameTXT);
+    tdPlayerStats.off();
+    tdPlayerStats = $(".all-info-table td:nth-child(1)");
+    tdPlayerStats.on('contextmenu', displayStats);
+
     let div = document.getElementById("player-stats");
-    div.classList.remove("hidden");
     let offset = el.offset();
 
     div.style.left = getValidXCoordinates(offset.left) +'px';
@@ -883,6 +886,87 @@ function displayStats(e) {
         }
     });
 
+}
+
+//тестовый массив с игроками на выбор
+var playersList = [];
+playersList.push("TAG1", "TAG2", "Fish1", "TAG3", "Fish2", "TAG4", "TAG5", "TAG6", "TAG7", "Fish3", "TAG8", "Fish4", "TAG9", "TAG10");
+
+var tdPlayer2 = $(".all-info-table td:nth-child(1)"); // nickname
+tdPlayer2.on('click', selectPlayer);
+// функция меняющая никнейм игрока в данной строке
+function selectPlayer(e) {
+    //alert("зашли в функцию правым кликом в ФФ");
+    e.preventDefault();
+    let elNode= e.target; // nodeType == 1
+    var el = $(this);
+
+
+    //let playersSelect = $("<select name=\"playersList\" id=\"playersList\"></select>");
+
+    let playersSelect = $("<input class=\"type-search\" type=\"text\" id=\"nickname-input\"/>\n" +
+        "                                    <select size=\"7\" id=\"list\">\n" +
+        "                                    </select>");
+
+    var arr = [];
+    for (let i = 0; i < playersList.length; i++) {
+        arr[i] = {val: 1, text: playersList[i]};
+    }
+    $(arr).each(function() {
+        playersSelect.append($("<option>").attr('value',this.val).text(this.text));
+    });
+
+
+    //$(".all-info-table td:nth-child(1)").css("overflow", "visible");
+    this.classList.add("color-yellow");
+
+    el.append(playersSelect);
+    $(".all-info-table td:nth-child(1)").css("overflow", "visible");
+    tdPlayer2.off();
+    $('#nickname-input').off();
+    $('#nickname-input').on('keyup', playerSearch);
+    $('#list').off('change');
+    $('#list').change(playerSearchSelectedList);
+    $('#list option').off();
+    $('#list option').on('dblclick', setNewPlayer);
+
+    //this.parentNode.firstChild.innerHTML = "test text"; - меняет на то, что нужно.. использовать в конце в конце
+        playersSelect.focusout(function(){
+            let td = document.createElement("td");
+            var sel = document.getElementById("nickname-input");
+            td.innerHTML = sel.options[sel.selectedIndex].text;
+            sel.replaceWith(td);
+
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+        });
+
+    /*$(document).on('click', dontCloseSelect);
+    function dontCloseSelect(e) {
+        if($(e.target).closest('#player-stats').length === 0) {
+            el.removeClass("color-yellow");
+            el.css("overflow", "hidden");
+            playerStats.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+        }
+    }
+    */
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // escape
+            el.removeClass("color-yellow");
+            el.css("overflow", "hidden");
+            playersSelect.remove();
+            removeActions();
+            displayActions();
+            displayAddRemoveButtons();
+            restartListener();
+        }
+    });
 }
 
 var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
@@ -961,7 +1045,7 @@ function getValidXCoordinates(x) {
     if ($(window).width() - needWidth > 0) {
         return xOffset;
     } else {
-        return ($(window).width() - x - width);
+        return ($(window).width() - x - width - 10);
     }
 }
 
@@ -973,7 +1057,7 @@ function getValidYCoordinates(y) {
     if ($(window).height() - needHeight > 0) {
         return yOffset;
     } else {
-        return ($(window).height() - y - height);
+        return ($(window).height() - y - height -15);
     }
 }
 
@@ -1090,27 +1174,6 @@ function minAmount() {
     }
 }
 
-// функция перезагружающая listener
-function restartListener() {
-    tdAmount.off();
-    tdAmount = $(".all-info-table td:nth-child(5)");
-    tdAmount.on('click', amountClick);
-
-    tdAction.off();
-    tdAction = $(".all-info-table td:nth-child(3)");
-    tdAction.on('click', actionClick);
-
-    tdPlayerStats.off();
-    tdPlayerStats = $(".all-info-table td:nth-child(1)"); // селектим amount
-    tdPlayerStats.on('contextmenu', displayStats);
-
-    tdActionMenu.off();
-    tdActionMenu = $(".all-info-table.postflop td:nth-child(3)");
-    tdActionMenu.on('contextmenu', actionMenu);
-
-    $(document).off();
-}
-
 // был ли бет на улице с последним ходом?
 function wasBet(oldActionListLength) {
     let currentStreet = rawActionList[oldActionListLength].street;
@@ -1145,10 +1208,16 @@ function getCurrentTableClass() {
 function getRawActionsIndex(elNode) {
     let currentStreet;
     let curSreetTable;
+    let preflopStrings = document.querySelector(".preflop-moves .all-info-table");
     let flopStrings = document.querySelector(".flop-moves .all-info-table");
     let turnStrings = document.querySelector(".turn-moves .all-info-table");
     let riverStrings = document.querySelector(".river-moves .all-info-table");
-    if (flopStrings.contains(elNode)) {
+
+    if (preflopStrings.contains(elNode)) {
+        //alert("Зашли в улицу префлоп в getRawActionsIndex()");
+        currentStreet = 0;
+        curSreetTable = preflopStrings;
+    } else if (flopStrings.contains(elNode)) {
         currentStreet = 1;
         curSreetTable = flopStrings;
     } else if (turnStrings.contains(elNode)) {
@@ -1159,10 +1228,10 @@ function getRawActionsIndex(elNode) {
         curSreetTable = riverStrings;
     }
 
-    for (let i = curSreetTable.children.length - 1; i > 0; i--) {
+    for (let i = curSreetTable.children.length - 1; i >= 0; i--) {
         if (curSreetTable.children[i].contains(elNode)) {
-            for (let j = rawActionList.length - 1; j > 0; j--) {
-                if (rawActionList[j].street == currentStreet - 1) {
+            for (let j = rawActionList.length - 1; j >= 0; j--) {
+                if (rawActionList[j].street == currentStreet - 1 || (j == 1 && currentStreet == 0)) {
                     //alert("Функция возвращает i + j - 1 = " + (i + j - 1));
                     return i + j - 1;
                 }
@@ -1203,3 +1272,106 @@ function removeAllGTOstrings() {
     displayAddRemoveButtons();
     restartListener();
 }
+
+
+//test code
+
+// In your Javascript (external .js resource or <script> tag)
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+
+
+
+// собственно поиск
+$('#nickname-input').on('keyup', playerSearch);
+function playerSearch() {
+    //console.log("зашли в функцию меняющую содержимое select");
+    var q = new RegExp($(this).val(), 'ig');
+    var field = $('#list').find('option');
+    for (var i = 0, l = field.length; i < l; i += 1) {
+        var option = $(field[i]),
+            parent = option.parent();
+
+        if ($(field[i]).text().match(q)) {
+            if (parent.is('span')) {
+                option.show();
+                parent.replaceWith(option);
+            }
+        } else {
+            if (option.is('option') && (!parent.is('span'))) {
+                option.wrap('<span>').hide();
+            }
+        }
+    }
+}
+
+//работа со списком поиска и выбором никнейма
+$('#list').change(playerSearchSelectedList);
+function playerSearchSelectedList() {
+    var val = $("#list option:selected").text();
+    //alert(val);
+
+}
+
+
+$('#list option').on('dblclick', setNewPlayer);
+function setNewPlayer() {
+    //alert("удачно зашли в изменить плеера");
+    var val = $("#list option:selected").text();
+    //alert(val);
+    //$('#nickname-input').value =  $("#list option:selected").text();
+    this.parentNode.parentNode.classList.remove("color-yellow");
+    //alert("getRawActionsIndex(this.parentNode.parentNode) = " + getRawActionsIndex(this.parentNode.parentNode)); work!
+    setNewRawPlayer(this.parentNode.parentNode, val);
+    //this.parentNode.parentNode.innerHTML = val;
+}
+
+function setNewRawPlayer(elNode, val) {
+    let oldPlayer = rawActionList[getRawActionsIndex(elNode)].player;
+    for (let i = 0; i < rawActionList.length; i++) {
+        if (rawActionList[i].player == oldPlayer) {
+            rawActionList[i].player = val;
+        }
+    }
+
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
+
+
+// функция перезагружающая listener
+function restartListener() {
+    tdAmount.off();
+    tdAmount = $(".all-info-table td:nth-child(5)");
+    tdAmount.on('click', amountClick);
+
+    tdAction.off();
+    tdAction = $(".all-info-table td:nth-child(3)");
+    tdAction.on('click', actionClick);
+
+    tdPlayerStats.off();
+    tdPlayerStats = $(".all-info-table td:nth-child(1)"); // селектим amount
+    tdPlayerStats.on('contextmenu', displayStats);
+
+    tdActionMenu.off();
+    tdActionMenu = $(".all-info-table.postflop td:nth-child(3)");
+    tdActionMenu.on('contextmenu', actionMenu);
+
+    tdPlayer2.off();
+    tdPlayer2 = $(".all-info-table td:nth-child(1)");
+    tdPlayer2.on('click', selectPlayer);
+
+
+    $('#nickname-input').off();
+    $('#nickname-input').on('keyup', playerSearch);
+    $('#list').off('change');
+    $('#list').change(playerSearchSelectedList);
+    $('#list option').off();
+    $('#list option').on('dblclick', setNewPlayer);
+
+    $(document).off();
+}
+
