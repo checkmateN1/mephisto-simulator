@@ -32,6 +32,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-bottom: 25px;
+    margin-top: 15px;
     position: relative;
     padding-left: 0;
 }
@@ -45,9 +46,14 @@ body {
 .navigation-menu li a {
     color: #3f4148;
     text-decoration: none;
-    font-family: Verdana, Geneva, sans-serif;
+    font-size: 12px;
+    font-family: Helvetica, Verdana, Geneva, sans-serif;
     font-weight: 600;
     text-transform: uppercase;
+    -webkit-transition: color 0.25s, font-size 0.25s;
+    -moz-transition: color 0.25s, font-size 0.25s;
+    -o-transition: color 0.25s, font-size 0.25s;
+    transition: color 0.25s, font-size 0.25s;
 }
 
 .nav-active {
@@ -73,8 +79,11 @@ body {
     padding-left: 3px;
 }
 
+
+
 .navigation-menu li a:not(.nav-active):hover {
     color: white !important;
+    font-size: 13px;
 }
 
 .cards {
@@ -290,7 +299,7 @@ table caption {
      position: absolute;
      top: -25px;
      left: 185px;
-     font-family: Verdana, Geneva, sans-serif;
+     font-family: Helvetica, Verdana, Geneva, sans-serif;
      font-size: 15px;
      color: #ffffff;
      font-weight: 600;
