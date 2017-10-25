@@ -6,7 +6,7 @@
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <meta name="author" content="bred<" />
         <meta name="keywords" content="покер, холдем, обучение, анализ, равновесие, Нэш, GTO, гто, EV, математическое ожидание, искусственный интеллект, ИИ" />
-        <meta name="description" content="MEPHISTO – обучение покеру, анализ раздач. Загрузка истории сыгранных рук, расчет математического ожидания EV, равновесия Нэша. Нейро моделирование, адаптация." />
+        <meta name="description" content="MEPHISTO – обучение покеру, анализ раздач. Загрузка истории сыгранных рук, расет математического ожидания EV, равновесия Нэша. Нейро моделирование, адаптация." />
         <meta name="robots" content="all" />
 
         <style type="text/css" title="currentStyle" media="screen">
@@ -17,6 +17,7 @@
         <!--<link href="css/select2.min.css" rel="stylesheet" /> -->
 
     </head>
+    <div id="bg_layer"></div>
     <body class="simulator_body wrapper">
         <header>
             <nav>
@@ -27,12 +28,39 @@
                     <li><a href="index.html">buy</a></li>
                     <li><a href="index.html">contacts</a></li>
                     <li><a class="nav-active">simulator</a></li>
-                    <li><a href="user.html">login</a></li>
+                    <li><a class="cd-signin" href="#0" id="user-login" onclick="displayLoginForm()">login</a></li>
                 </ul>
             </nav>
         </header>
 
         <main>
+
+            <div id="login-form">
+                <div class="login-form-close" onclick="loginFormClose()"></div>
+                <h1>Авторизация на сайте</h1>
+
+                <fieldset>
+                    <form action="javascript:void(0);" method="get">
+                        <input type="email" required value="Почта" onBlur="if(this.value=='')this.value='Почта'" onFocus="if(this.value=='Почта')this.value='' ">
+                        <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
+                        <input type="submit" value="ВОЙТИ">
+                        <footer class="clearfix">
+                            <p><span class="info">?</span><a href="#">Забыли пароль?</a></p>
+                        </footer>
+                    </form>
+                </fieldset>
+
+            </div>
+            <!--
+            <div id="login-modal">
+                <form action="#">
+                    <input id="login-input">
+                    <input type="password" id="password-input">
+                    <input id="security-code">
+                    <input type="checkbox" id="login-remember">
+                    <input type="submit" id="login-submit">
+                </form>
+            </div> -->
             <section class="cards">
                 <div class="user-cards big-cards">
                     <div id="card_1" class="hole" onclick="showModalCardsLeft()"></div>
@@ -222,4 +250,4 @@
         <!--<script src="js/select2.min.js"></script> -->
     </body>
 </html>
-                                                         
+                                      

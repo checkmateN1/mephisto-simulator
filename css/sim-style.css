@@ -28,6 +28,17 @@ body {
     z-index: -10;
 }
 
+#bg_layer {
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: none;
+    opacity: 0.65;
+    left: 0;
+}
+
 .navigation-menu {
     display: flex;
     justify-content: space-between;
@@ -35,6 +46,7 @@ body {
     margin-top: 15px;
     position: relative;
     padding-left: 0;
+    padding-top: 5px;
 }
 
 .navigation-menu li {
@@ -79,13 +91,174 @@ body {
     padding-left: 3px;
 }
 
-
-
 .navigation-menu li a:not(.nav-active):hover {
     color: white !important;
     font-size: 13px;
 }
 
+#user-login:after {
+    content: '';
+    display: block;
+    background-image: url('../img/user.svg');
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    right: 38px;
+    top: 6px;
+}
+
+#login-modal {
+    position: absolute;
+    width: 425px;
+    height: 265px;
+    background-color: #142882;
+    left: 410px;
+    top: 170px;
+    z-index: 999;
+    display: none;
+}
+
+/* ---------- LOGIN-FORM ---------- */
+
+#login-form a {
+    color: #999;
+    text-decoration: none;
+}
+
+#login-form fieldset {
+    border: none;
+    margin: 0;
+}
+
+#login-form h1 { margin: 0; }
+
+#login-form input {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    outline: none;
+    -webkit-appearance: none;
+}
+
+input[type="submit"] { cursor: pointer; }
+
+.clearfix { *zoom: 1; }
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after { clear: both; }
+
+#login-form {
+    margin: 150px auto;
+    width: 300px;
+    position: absolute;
+    z-index: 999;
+    left: 474px;
+    top: 20px;
+    display: none;
+}
+
+#login-form h1 {
+    background-color: #282830;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#login-form fieldset {
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+    position: relative;
+}
+
+.login-form-close {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-image: url('../img/modal-close2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    left: 304px;
+    -webkit-filter: grayscale(100%);
+}
+
+.login-form-close:hover {
+    -webkit-filter: grayscale(0%);
+}
+
+#login-form fieldset:before {
+    background-color: #fff;
+    content: "";
+    height: 8px;
+    left: 50%;
+    margin: -4px 0 0 -4px;
+    position: absolute;
+    top: 0;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 8px;
+}
+
+#login-form input {
+    font-size: 14px;
+}
+
+#login-form input[type="email"],
+#login-form input[type="password"] {
+    border: 1px solid #dcdcdc;
+    padding: 12px 10px;
+    width: 238px;
+}
+
+#login-form input[type="email"] {
+    border-radius: 3px 3px 0 0;
+}
+
+#login-form input[type="password"] {
+    border-top: none;
+    border-radius: 0px 0px 3px 3px;
+}
+
+#login-form input[type="submit"] {
+    background: #2727ff;
+    border-radius: 3px;
+    color: #fff;
+    float: right;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 12px 20px;
+}
+
+#login-form input[type="submit"]:hover { background: #2727dd; }
+
+#login-form footer {
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+.info {
+    background: #e5e5e5;
+    border-radius: 50%;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 10px 0 0;
+    text-align: center;
+    width: 20px;
+    color: #5e6361;
+}
+
+/*    CARDS        CARDS          CARDS          CARDS          CARDS          CARDS          CARDS          CARDS      */
 .cards {
     position: relative;
     padding: 0;
@@ -424,6 +597,7 @@ tr:nth-child(2n) {
 
 .hidden  {
     display: none !important;
+    visibility: hidden !important;
 }
 
 output {
@@ -669,7 +843,7 @@ output {
     width: 100px;
     height: 100px;
     top: 591px;
-    left: 275px;
+    left: 268px;
     background-size: contain;
     outline: none;
     opacity: 0.7;
@@ -698,10 +872,10 @@ output {
     background-image: url("../img/learn_g.png");
     background-repeat: no-repeat;
     display: block;
-    width: 125px;
+    width: 107px;
     height: 80px;
-    top: 598px;
-    left: 143px;
+    top: 603px;
+    left: 145px;
     background-size: contain;
     outline: none;
     opacity: 0.7;

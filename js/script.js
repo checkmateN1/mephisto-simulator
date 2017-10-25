@@ -41,6 +41,11 @@ function modalCardsClose() {
 
 window.addEventListener("keydown", function (event) {
     if (event.keyCode === 27) {
+
+        if (loginForm.classList.contains("visually")) {
+            loginForm.classList.remove("visually");
+            $('#bg_layer').removeClass("visually");
+        }
         if (cardsModal.classList.contains("visually")) {
             cardsModal.classList.remove("visually");
             checkedCards[0] = null;
@@ -250,6 +255,22 @@ class Player {
     }
 };
 
+var loginNavigationButton = document.getElementById("login-form");
+function displayLoginForm() {
+    loginNavigationButton.classList.add("visually");
+    $('#bg_layer').addClass("visually");
+}
+
+var loginForm = document.getElementById("login-form");
+function loginFormClose() {
+    loginForm.classList.remove("visually");
+    $('#bg_layer').removeClass("visually");
+}
+
+$('#bg_layer').click(function(){
+    loginForm.classList.remove("visually");
+    $('#bg_layer').removeClass("visually");
+});
 
 // тестовый массив из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
 
