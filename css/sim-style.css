@@ -1095,6 +1095,7 @@ output {
     left: 30px;
     opacity: 0;
     z-index: -100;
+    padding-left: 3px;
 }
 
 .hill-info div {
