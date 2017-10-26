@@ -41,7 +41,7 @@
 
                 <fieldset>
                     <form action="javascript:void(0);" method="get">
-                        <input type="email" required value="Почта" onBlur="if(this.value=='')this.value='Почта'" onFocus="if(this.value=='Почта')this.value='' ">
+                        <input type="email" required value="Email Address" onBlur="if(this.value=='')this.value='Email Address'" onFocus="if(this.value=='Email Address')this.value='' ">
                         <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
                         <input type="submit" value="ВОЙТИ">
                         <footer class="clearfix">
@@ -208,6 +208,21 @@
                     </div>
                 </div>
             </section>
+
+                <div class="hill-info">
+                    <h4 id="h4id">test hill</h4>
+                    <button id="remove-hill-info" onclick="removeHillInfo()"></button>
+                </div>
+
+            <div id="waiting-progress-bar">
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+            </div>
             <button id="upload-button"></button>
             <button id="random-button"></button>
             <button id="iq-button"></button>

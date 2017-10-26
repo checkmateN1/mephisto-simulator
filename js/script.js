@@ -41,7 +41,7 @@ function modalCardsClose() {
 
 window.addEventListener("keydown", function (event) {
     if (event.keyCode === 27) {
-
+        $(".hill-info").removeClass("appear-fast");
         if (loginForm.classList.contains("visually")) {
             loginForm.classList.remove("visually");
             $('#bg_layer').removeClass("visually");
@@ -61,7 +61,7 @@ window.addEventListener("keydown", function (event) {
 });
 
 var checkedCards = [null, null, null, null, null, null, null, null];
-var testBoard = [null, "12", "24", "25", "4", "37", "22", null];
+var testBoard = [null, "12", "24", "25", "4", "37", "48", null];
 loadCardsState(testBoard);
 
 //записываем в карту какой улицы мы кликнули
@@ -266,11 +266,11 @@ function loginFormClose() {
     loginForm.classList.remove("visually");
     $('#bg_layer').removeClass("visually");
 }
-
+/*
 $('#bg_layer').click(function(){
     loginForm.classList.remove("visually");
     $('#bg_layer').removeClass("visually");
-});
+}); */
 
 // тестовый массив из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
 
@@ -340,6 +340,11 @@ function getPositionText(position) {
 function getActionText(action) {
     let arr = [null, "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
     return arr[action];
+}
+
+function getStreetText(street) {
+    let arr = ["Preflop", "Flop", "Turn", "River"];
+    return arr[street];
 }
 
 function getActionIndex(text) {
@@ -990,9 +995,10 @@ function selectPlayer(e) {
     });
 }
 
+
 var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
 tdActionMenu.on('contextmenu', actionMenu);
-// функция обрабатывающая ПРАВЫЙ клик в amount
+// функция обрабатывающая ПРАВЫЙ клик в action
 function actionMenu(e) {
     e.preventDefault();
 
@@ -1020,9 +1026,49 @@ function actionMenu(e) {
     div.classList.remove("hidden");
     div.style.left = 35 +'px';
     div.style.top = 13 +'px';
-    //tdAction.off();
+
     tdAction.off();
-    $("#gto").on("click", function () {
+
+    $('#range').on('click', showRange); //переприсваеваем обработчик клика в range
+
+    function showRange() {
+        tdActionMenu.off();
+        actionMenu.remove();
+        $("#waiting-progress-bar").addClass("appear");
+        setTimeout(function() {
+            el.removeClass("color-violet");
+            $('#waiting-progress-bar').removeClass("appear");
+            createHillInfo();
+            $(".hill-info").addClass("appear-fast");
+
+            $(document).keyup(function(e) {
+                if (e.keyCode == 27) { // escape
+                    $(".hill-info").removeClass("appear-fast");
+                    removeActions();
+                    displayActions();
+                    displayAddRemoveButtons();
+                    restartListener();
+                }
+            });
+        }, 14000);
+
+        return false;
+    }
+
+    function createHillInfo() {
+        /*var hillWindow = $("<div class=\"hill-info\">\n" +
+            "                    <h4>test hill</h4>\n" +
+            "                </div>");
+        $("main").append(hillWindow);
+        $(".hill-info").addClass("appear-fast"); */
+        let hillTitle = document.getElementById("h4id");
+        let indexRaw = getRawActionsIndex(elNode);
+        hillTitle.innerText = rawActionList[indexRaw].player + " " + getActionText(rawActionList[indexRaw].action) + " $" + rawActionList[indexRaw].amount + " on " + getStreetText(rawActionList[indexRaw].street);
+    }
+
+
+
+    $("#gto").on("click", function() {
         if (isGTO == "checked") {
             removeAllGTOstrings();
         } else {
@@ -1058,6 +1104,14 @@ function actionMenu(e) {
 
 }
 
+function removeHillInfo() {
+    $(".hill-info").removeClass("appear-fast");
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
+
 function getValidXCoordinates(x) {
     //alert("x = " + x);
     let width = 447;
@@ -1081,6 +1135,8 @@ function getValidYCoordinates(y) {
         return ($(window).height() - y - height -15);
     }
 }
+
+
 
 
 var tdAction = $(".all-info-table td:nth-child(3)"); // селектим action
