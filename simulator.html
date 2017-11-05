@@ -12,23 +12,35 @@
         <style type="text/css" title="currentStyle" media="screen">
             @import "css/sim-style.css";
         </style>
+        <link rel="stylesheet" media="screen" href="css/style_particles.css">
+        <!--<link rel="stylesheet" href="css/style.css"> -->
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "css/sim-style.css";
+        </style>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
 
-        <link href='http://fonts.googleapis.com/css?family=Asap:400,700' rel='stylesheet' type='text/css'>
-        <!--<link href="css/select2.min.css" rel="stylesheet" /> -->
+        <!-- custom scrollbar stylesheet -->
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
 
     </head>
     <div id="bg_layer"></div>
-    <body class="simulator_body wrapper">
+    <body id="particles-js" class="simulator_body wrapper">
+        <div >
         <header>
-            <nav>
+            <nav id="nav-3">
                 <ul class="navigation-menu">
-                    <li><a href="#">main</a></li>
-                    <li><a href="#">mephisto</a></li>
-                    <li><a href="#">manual</a></li>
-                    <li><a href="#">buy</a></li>
-                    <li><a href="#">contacts</a></li>
-                    <li><a class="nav-active">simulator</a></li>
-                    <li><a href="#" id="user-login" onclick="displayLoginForm()">login</a></li>
+                    <li><a class="link-3" href="#">contacts</a></li>
+                    <li><a class="link-3" href="#">buy</a></li>
+                    <li><a class="link-3" href="#">manual</a></li>
+                    <li><a class="link-3" href="#">neuromodeling</a></li>
+                    <li><a class="link-3" href="#">mephisto</a></li>
+                    <li class="nav-active"><a class="link-3">simulator</a></li>
+                    <li class="link-void"><a></a></li>
+                    <li><a class="link-3" href="#" id="user-login" onclick="displayLoginForm()">login</a></li>
                 </ul>
             </nav>
         </header>
@@ -37,15 +49,15 @@
 
             <div id="login-form">
                 <div class="login-form-close" onclick="loginFormClose()"></div>
-                <h1>Авторизация на сайте</h1>
+                <h1>Authorization</h1>
 
                 <fieldset>
                     <form action="javascript:void(0);" method="get">
                         <input type="email" required value="Email Address" onBlur="if(this.value=='')this.value='Email Address'" onFocus="if(this.value=='Email Address')this.value='' ">
                         <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
-                        <input type="submit" value="ВОЙТИ">
+                        <input type="submit" value="Login">
                         <footer class="clearfix">
-                            <p><span class="info">?</span><a href="#">Забыли пароль?</a></p>
+                            <p><span class="info">?</span><a href="#">Forgot your password?</a></p>
                         </footer>
                     </form>
                 </fieldset>
@@ -75,10 +87,7 @@
                     <div class="cards-remove" onclick="cardsRemove()"></div>
                 </div>
 
-                <div class="hidden-cards-select-modal">
-                    <div class="modal-cards-close" onclick="modalCardsClose()"></div>
-                    <ul class="mini-card-list"></ul>
-                </div>
+
             </section>
 
             <section class="moves-history">
@@ -194,7 +203,7 @@
                 </div>
                 <div class="moves-wrapper">
                     <div class="preflop-moves">
-                        <table class="all-info-table">
+                        <table class="all-info-table preflop">
                             <caption class="table-title">PREFLOP</caption>
                             <tr>
                                 <th>Player</th>
@@ -209,13 +218,24 @@
                 </div>
             </section>
 
-                <div class="hill-info">
+                <div id="draggable" class="hill-info ui-widget-content">
                     <h4 id="h4id">test hill</h4>
+                    <div id="content-m" class="content">
+                    </div>
                     <button id="remove-hill-info" onclick="removeHillInfo()"></button>
+                    <!--
                     <div class="hill-main"> MAIN HILL</div>
                     <div class="hill-matrix"> MATRIX HILL</div>
                     <div class="hill-crewstyle"> CREW HILL</div>
+                    -->
                 </div>
+
+            <div class="probabilities-info">
+                <h4 id="h4-probabilities">test probab</h4>
+                <div id="content-probab">
+                </div>
+                <button id="remove-probab-info" onclick="removeProbabInfo()"></button>
+            </div>
 
             <div id="waiting-progress-bar">
                 <div class="ball"></div>
@@ -226,10 +246,24 @@
                 <div class="ball"></div>
                 <div class="ball"></div>
             </div>
-            <button id="upload-button"></button>
+
+            <div id="waiting-progress-bar2" class="load-bar">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <button id="upload-button" onclick="displayUploadWindow()"></button>
             <button id="random-button"></button>
             <button id="iq-button"></button>
             <button id="learn-button"></button>
+
+            <div id="upload-window">
+                <form action="#">
+                    <p><textarea id="upload-text-area" autofocus name="hand_history_text" placeholder="Copy here your Pokerstars Hold'em No Limit Short-handed hand history text"></textarea></p>
+                    <p><input  id="submit-hand-history" type="submit" value="Upload"></p>
+                    <button id="remove-upload" onclick="removeUpload()"></button>
+                </form>
+            </div>
             <!--
 
             <select name="playersList" id="playersList"></select>
@@ -262,10 +296,36 @@
             <p><span>Agg% River: </span><span id="stats-aggPersentRiver">23</span><span>, W$SD Raise River: </span><span id="stats-WSDraiseRiver">61</span><span>, River Call Win%: </span><span id="stats-riverCallWin">48</span></p>
 
             -->
+            <div class="hidden-cards-select-modal">
+                <div class="modal-cards-close" onclick="modalCardsClose()"></div>
+                <ul class="mini-card-list"></ul>
+            </div>
         </main>
+            <footer>
+                <h4>Mephisto - neuro-gto tooltip trainer simulator &#169</h4>
+            </footer>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/jquery-3.2.1.slim.min.js"></script>
         <script src="js/script.js"></script>
-        <!--<script src="js/select2.min.js"></script> -->
+
+        <script src="js/particles.js"></script>
+        <script src="js/app_particles.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
+
+        <!-- custom scrollbar plugin -->
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script>
+            (function($){
+                $(window).on("load",function(){
+                    //$.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
+                    //$.mCustomScrollbar.defaults.axis="y"; //enable 2 axis scrollbars by default
+
+                    $("#content-m").mCustomScrollbar({theme:"minimal"});
+                });
+            })(jQuery);
+        </script>
+        </div>
     </body>
 </html>
-                                      

@@ -2,7 +2,7 @@ var cardsModal = document.querySelector(".hidden-cards-select-modal");
 var ul = document.querySelector(".mini-card-list");
 var cards = document.querySelector(".cards");
 let playerStats = document.getElementById("player-stats");
-
+var uploadWindow = document.getElementById("upload-window");
 
 //создаем миникарты
 createMinCards();
@@ -11,27 +11,27 @@ function createMinCards() {
         let li = document.createElement("li");
         ul.appendChild(li);
         li.id = i; // добавили мини-картам id
-        li.style.backgroundImage = "url('img/cards/card_" + i + "_alt.png')";
+        li.style.backgroundImage = "url('img/png_cards_min/card_" + i + "_alt.png')";
     }
 }
 
 
 function showModalCardsLeft() {
-    cardsModal.classList.add("visually");
+    cardsModal.classList.add("appear-very-fast");
     if (cardsModal.classList.contains("position-right")) {
         cardsModal.classList.remove("position-right");
     }
 }
 
 function showModalCardsRight() {
-    cardsModal.classList.add("visually");
+    cardsModal.classList.add("appear-very-fast");
     cardsModal.classList.add("position-right");
 }
 
 
 //закрываем модальное окно с мини-картами
 function modalCardsClose() {
-    cardsModal.classList.remove("visually");
+    cardsModal.classList.remove("appear-very-fast");
     checkedCards[0] = null;
     setBigCardState();                   //вызываем перерисовку больших карт
     if (cardsModal.classList.contains("position-right")) {
@@ -41,13 +41,16 @@ function modalCardsClose() {
 
 window.addEventListener("keydown", function (event) {
     if (event.keyCode === 27) {
-        $(".hill-info").removeClass("appear-fast");
+        if (uploadWindow.classList.contains("appear-fast")) {
+            uploadWindow.classList.remove("appear-fast");
+        }
+
         if (loginForm.classList.contains("visually")) {
             loginForm.classList.remove("visually");
             $('#bg_layer').removeClass("visually");
         }
-        if (cardsModal.classList.contains("visually")) {
-            cardsModal.classList.remove("visually");
+        if (cardsModal.classList.contains("appear-very-fast")) {
+            cardsModal.classList.remove("appear-very-fast");
             checkedCards[0] = null;
             setBigCardState();                   //вызываем перерисовку больших карт
         }
@@ -57,6 +60,7 @@ window.addEventListener("keydown", function (event) {
         if (!playerStats.classList.contains("hidden")) {
             playerStats.classList.add("hidden");
         }
+
     }
 });
 
@@ -186,7 +190,7 @@ function setBigCardState() {
     for (let i = 1; i < checkedCards.length; i++) {
         if (checkedCards[i] !== null) {
             document.getElementById('card_' + i).style.backgroundImage = "url('img/cards3/card_" + checkedCards[i] + "_alt.svg')";
-        } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back6.png')";}
+        } else {document.getElementById('card_' + i).style.backgroundImage = "url('img/cards/card_back7.png')";}
     }
 }
 
@@ -295,7 +299,6 @@ rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, fa
 rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false);
 rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false);
 rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false);
-
 
 
 
@@ -886,9 +889,20 @@ function displayStats(e) {
 
     div.style.left = getValidXCoordinates(offset.left) +'px';
     div.style.top = getValidYCoordinates(offset.top) +'px';
+    //document.querySelector("canvas").style.zIndex = "-1";
+    /*document.querySelector(".turn-moves").style.zIndex = "0";
+    document.querySelector(".river-moves").style.zIndex = "0";
+    document.querySelector(".preflop-moves").style.zIndex = "0";
+    document.querySelector("#upload-button").style.zIndex = "0";
+    document.querySelector("#random-button").style.zIndex = "0";
+    document.querySelector("#iq-button").style.zIndex = "0";
+    document.querySelector("#learn-button").style.zIndex = "0"; */
 
     $(document).on('click', dontCloseStats);
     function dontCloseStats(e) {
+        if(document.getElementById("player-stats") == null) {
+            return;
+        }
         if($(e.target).closest('#player-stats').length === 0) {
             el.removeClass("color-yellow");
             el.css("overflow", "hidden");
@@ -947,8 +961,10 @@ function selectPlayer(e) {
     this.classList.add("color-yellow");
 
     el.append(playersSelect);
+
     $(".all-info-table td:nth-child(1)").css("overflow", "visible");
     tdPlayer2.off();
+
     $('#nickname-input').off();
     $('#nickname-input').on('keyup', playerSearch);
     $('#list').off('change');
@@ -996,7 +1012,7 @@ function selectPlayer(e) {
 }
 
 
-var tdActionMenu = $(".all-info-table.postflop td:nth-child(3)"); // action menu
+var tdActionMenu = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)"); // action menu
 tdActionMenu.on('contextmenu', actionMenu);
 // функция обрабатывающая ПРАВЫЙ клик в action
 function actionMenu(e) {
@@ -1024,49 +1040,56 @@ function actionMenu(e) {
     el.append(actionMenu);
     let div = document.getElementById("action-menu");
     div.classList.remove("hidden");
-    div.style.left = 35 +'px';
+    div.style.left = 40 +'px';
     div.style.top = 13 +'px';
 
     tdAction.off();
 
-    $('#range').on('click', showRange); //переприсваеваем обработчик клика в range
-
+    $('#range').on('click', showRange); //присваеваем обработчик клика в range
+    $('#probabilities').on('click', showProbabilitiesInfo);
+    //открывает окно с отобажением спектра игрока
     function showRange() {
         tdActionMenu.off();
         actionMenu.remove();
-        $("#waiting-progress-bar").addClass("appear");
+        //$("#waiting-progress-bar").addClass("appear");
+        $("#waiting-progress-bar2").addClass("appear");
         setTimeout(function() {
             el.removeClass("color-violet");
-            $('#waiting-progress-bar').removeClass("appear");
+            //$('#waiting-progress-bar').removeClass("appear");
+            $('#waiting-progress-bar2').removeClass("appear");
             createHillInfo();
             $(".hill-info").addClass("appear-fast");
+            createAllCombinationsArr(); //вызвали функцию рисующую график
+            restartListener();
 
-            $(document).keyup(function(e) {
-                if (e.keyCode == 27) { // escape
-                    $(".hill-info").removeClass("appear-fast");
-                    removeActions();
-                    displayActions();
-                    displayAddRemoveButtons();
-                    restartListener();
-                }
-            });
-        }, 14000);
+        }, 2000);
 
         return false;
     }
 
     function createHillInfo() {
-        /*var hillWindow = $("<div class=\"hill-info\">\n" +
-            "                    <h4>test hill</h4>\n" +
-            "                </div>");
-        $("main").append(hillWindow);
-        $(".hill-info").addClass("appear-fast"); */
         let hillTitle = document.getElementById("h4id");
         let indexRaw = getRawActionsIndex(elNode);
         hillTitle.innerText = rawActionList[indexRaw].player + " " + getActionText(rawActionList[indexRaw].action) + " $" + rawActionList[indexRaw].amount + " on " + getStreetText(rawActionList[indexRaw].street);
     }
 
+    function showProbabilitiesInfo() {
+        tdActionMenu.off();
+        actionMenu.remove();
+        $("#waiting-progress-bar").addClass("appear");
+        //$("#waiting-progress-bar2").addClass("appear");
+        setTimeout(function() {
+            el.removeClass("color-violet");
+            $('#waiting-progress-bar').removeClass("appear");
+            //$('#waiting-progress-bar2').removeClass("appear");
+            createProbabilitiesInfo();
+            $(".probabilities-info").addClass("appear-fast");
+            restartListener();
 
+        }, 2000);
+
+        return false;
+    }
 
     $("#gto").on("click", function() {
         if (isGTO == "checked") {
@@ -1081,6 +1104,9 @@ function actionMenu(e) {
 
     $(document).on('click', dontCloseAction);
     function dontCloseAction(e) {
+        if(document.getElementById("action-menu") == null) {
+            return;
+        }
         if($(e.target).closest('#action-menu').length === 0) {
             el.removeClass("color-violet");
             actionMenu.remove();
@@ -1104,8 +1130,105 @@ function actionMenu(e) {
 
 }
 
+
+/*
+var hillInfoWindow = document.querySelector(".hill-info:not(:first-child)");
+
+hillInfoWindow.onmousedown = function(e) { // 1. отследить нажатие
+    // подготовить к перемещению
+    // 2. разместить на том же месте, но в абсолютных координатах
+
+    moveAt(e);
+    // передвинуть мяч под координаты курсора
+    // и сдвинуть на половину ширины/высоты для центрирования
+
+
+    function moveAt(e) {
+        hillInfoWindow.style.left = e.pageX - hillInfoWindow.offsetWidth / 2 + 'px';
+        hillInfoWindow.style.top = e.pageY - hillInfoWindow.offsetHeight / 2 + 'px';
+    }
+
+    // 3, перемещать по экрану
+    document.onmousemove = function(e) {
+        moveAt(e);
+    };
+
+    // 4. отследить окончание переноса
+    hillInfoWindow.onmouseup = function() {
+        document.onmousemove = null;
+        hillInfoWindow.onmouseup = null;
+    }
+}; */
+
+//заполняет окно спектра информацией
+function createAllCombinationsArr() {
+    var phones = [ {name: 'AA', price: 1},
+        {name: 'AA', price: 1},
+        {name: 'AA', price: 1},
+        {name: 'AA', price: 1},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'AK', price: 0.95},
+        {name : 'KK', price: 0.7},
+        {name : 'KK', price: 0.7},
+        {name : 'KK', price: 0.7},
+        {name : 'KK', price: 0.7},
+        {name : 'QQ', price: 0.5},
+        {name : 'QQ', price: 0.5},
+        {name : 'QQ', price: 0.5},
+        {name : 'QQ', price: 0.5},
+        {name : 'JJ', price: 0.25},
+        {name : 'JJ', price: 0.25},
+        {name : 'JJ', price: 0.25},
+        {name : 'JJ', price: 0.25},
+        {name : 'TT', price: 0.12},
+        {name : 'TT', price: 0.12},
+        {name : 'TT', price: 0.12},
+        {name : 'TT', price: 0.12},
+        {name : '99', price: 0.07},
+        {name : '99', price: 0.07},
+        {name : '99', price: 0.07},
+        {name : '99', price: 0.07},
+        ];
+
+    // Enter
+    d3.select('#mCSB_1_container').selectAll('div').data(phones).enter().append('div').attr('class', 'item')
+        .append('div').attr('class', 'data').append('span');
+
+    // Update
+    d3.select('#mCSB_1_container').selectAll('div.item').data(phones)
+        .select('div').style('width', function (d) { return (d.price * 250) + 'px';})
+        //.select('span').text(function () { return "1";});
+        .select('span').text(function (d) { return d.price;});
+
+    d3.select('#mCSB_1_container').selectAll('div.item').data(phones).append('div').attr('class', 'name')
+        .text(function (d) {return d.name;});
+
+    // Exit
+    d3.select('#mCSB_1_container').selectAll('div.item').data(phones).exit().remove();
+}
+
+//заполняет информацией окно с вероятностями
+function createProbabilitiesInfo() {
+    return;
+}
+
 function removeHillInfo() {
     $(".hill-info").removeClass("appear-fast");
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
+
+function removeProbabInfo() {
+    $(".probabilities-info").removeClass("appear-fast");
     removeActions();
     displayActions();
     displayAddRemoveButtons();
@@ -1330,7 +1453,7 @@ function setGTOtoAllStings(startRawGTOIndex) {
 
 }
 
-// возвращает индекс первого элемента массива с включенным GTO
+// возвращает индекс первого элемента массива в сырых действиях с включенным GTO
 function whatIsFirstGTOindex() {
     for (let i = 2; i < rawActionList.length; i++) {
         if (rawActionList[i].gto == true) {
@@ -1393,7 +1516,6 @@ function setNewPlayer() {
     setNewRawPlayer(this.parentNode.parentNode, val);
     //this.parentNode.parentNode.innerHTML = val;
 }
-
 function setNewRawPlayer(elNode, val) {
     let oldPlayer = rawActionList[getRawActionsIndex(elNode)].player;
     for (let i = 0; i < rawActionList.length; i++) {
@@ -1424,7 +1546,7 @@ function restartListener() {
     tdPlayerStats.on('contextmenu', displayStats);
 
     tdActionMenu.off();
-    tdActionMenu = $(".all-info-table.postflop td:nth-child(3)");
+    tdActionMenu = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)");
     tdActionMenu.on('contextmenu', actionMenu);
 
     tdPlayer2.off();
@@ -1438,7 +1560,16 @@ function restartListener() {
     $('#list').change(playerSearchSelectedList);
     $('#list option').off();
     $('#list option').on('dblclick', setNewPlayer);
-
-    $(document).off();
 }
 
+function removeUpload() {
+    if (uploadWindow.classList.contains("appear-fast")) {
+        uploadWindow.classList.remove("appear-fast");
+    }
+}
+
+function displayUploadWindow() {
+    if (!uploadWindow.classList.contains("appear-fast")) {
+        uploadWindow.classList.add("appear-fast");
+    }
+}
