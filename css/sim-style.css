@@ -424,7 +424,7 @@ input[type="submit"] { cursor: pointer; }
     background-image: url('../img/modal-close2.png');
     background-size: cover;
     right: 0;
-    top: 88px;
+    top: 93px;
     -webkit-filter: grayscale(100%);
 }
 
@@ -454,10 +454,6 @@ input[type="submit"] { cursor: pointer; }
     background: linear-gradient(to top, rgba(62, 62, 64, 0.85), #41435d);
     margin-bottom: 48px;
     position: relative;
-}
-
-.all-info-table {
-
 }
 
 .moves-history table {
@@ -787,7 +783,7 @@ output {
 }
 
 .color-violet {
-    color: dodgerblue;
+    color: #00dc25;
 }
 
 #gto:checked + label {
@@ -870,7 +866,6 @@ output {
 }
 
 
-
 #upload-button:hover {
     cursor: pointer;
     background-image: url("../img/upload_g_hover2.png");
@@ -912,14 +907,14 @@ output {
 }
 
 #iq-button {
-    background-image: url("../img/iq_g.png");
+    background-image: url("../img/q.png");
     background-repeat: no-repeat;
     display: block;
-    width: 100px;
-    height: 100px;
-    top: 591px;
+    width: 105px;
+    height: 83px;
+    top: 588px;
     left: 268px;
-    background-size: contain;
+    background-size: cover;
     outline: none;
     opacity: 1;
 }
@@ -1359,8 +1354,8 @@ div.diagram {
     width: 600px;
     height: 590px;
     position: absolute;
-    top: 70px;
-    left: 220px;
+    top: 85px;
+    left: 240px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

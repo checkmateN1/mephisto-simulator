@@ -64,6 +64,9 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
+var cardsName = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
+
+// checkedCards[0] = null || hole || flop || turn || river... все остальные элементы массива - карты
 var checkedCards = [null, null, null, null, null, null, null, null];
 var testBoard = [null, "12", "24", "25", "4", "37", "48", null];
 loadCardsState(testBoard);
@@ -235,7 +238,7 @@ var rawActionList = [];
 
 // Класс строка действий
 class ActionString {
-    constructor(street, player, balance, action, pot, amount, position, gto) {
+    constructor(street, player, balance, action, pot, amount, position, gto, isHero) {
         this.street = street;
         this.player = player;
         this.balance = balance;
@@ -244,6 +247,7 @@ class ActionString {
         this.amount = amount;
         this.position = position;
         this.gto = gto;
+        this.isHero = isHero;
     }
 
     set setNickname(newNickname) {
@@ -280,25 +284,25 @@ $('#bg_layer').click(function(){
 
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
-// (street, player, balance, action, pot, amount, position, isGTO)
-rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false); // post SB
-rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false); // post BB
-rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false);  // MP1
-rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2, false); // MP2
-rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1, false); // CO
-rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false); // bet 0.75 BTN
-rawActionList[6] = new ActionString(0, "mammoth", 25, 3, 1.10, 0.75, 9, false);
-rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false); // call BB
+// (street, player, balance, action, pot, amount, position, isGTO, isHero)
+rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false, true); // post SB
+rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false, false); // post BB
+rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false, false);  // MP1
+rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2, false, false); // MP2
+rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1, false, false); // CO
+rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN
+rawActionList[6] = new ActionString(0, "mammoth", 25.05, 3, 1.10, 0.75, 9, false, true);
+rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false, false); // call BB
 
-rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false);
-rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false);
-rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false);
-rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false);
-rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false);
+rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false, true);
+rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false, false);
+rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false, false);
+rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false, true);
+rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false, false);
 
-rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false);
-rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false);
-rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false);
+rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false, true);
+rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false, false);
+rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false, false);
 
 
 
@@ -354,6 +358,10 @@ function getActionIndex(text) {
     let arr = [null, "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
     return arr.indexOf(text);
 }
+function getStreetName(streetNumber) {
+    let streets = ["preflop", "flop", "turn", "river"];
+    return streets[streetNumber];
+}
 
 
 // bet 1, raise 2, call 3, check 4, fold 5
@@ -367,131 +375,47 @@ function displayActions() {
     if (rawActionList.length > 0) {
         for (let i = 2; i < rawActionList.length; i++) {
 
-            if (rawActionList[i].street === 0) { // если улица PREFLOP
+            let Move = document.querySelector("." + getStreetName(rawActionList[i].street) + "-moves .all-info-table");
+            let tr = document.createElement("tr");  // создали строку
 
-                let preflopMove = document.querySelector(".preflop-moves .all-info-table");
-                let tr = document.createElement("tr");  // создали строку
+            // (player, balance, action, pot, amount, position)
+            let td = document.createElement("td");
+            td.innerHTML = rawActionList[i].player;
+            tr.appendChild(td);
 
-                // (player, balance, action, pot, amount, position)
-                let td = document.createElement("td");
-                td.innerHTML = rawActionList[i].player;
-                tr.appendChild(td);
-
+            if (rawActionList[i].street === 0) {
                 td = document.createElement("td");
                 td.innerHTML = getPositionText(rawActionList[i].position);
                 tr.appendChild(td);
+            }
 
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].balance;
-                tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = "$" + rawActionList[i].balance;
+            tr.appendChild(td);
 
-                td = document.createElement("td");
-                td.innerHTML = getActionText(rawActionList[i].action);
-                tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = getActionText(rawActionList[i].action);
+            tr.appendChild(td);
 
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].pot;
-                tr.appendChild(td);
+            td = document.createElement("td");
+            td.innerHTML = "$" + rawActionList[i].pot;
+            tr.appendChild(td);
 
-                td = document.createElement("td");
-                if (rawActionList[i].amount) {
-                    td.innerHTML = "$" + rawActionList[i].amount;
-                } else {td.innerHTML = ""};
-                tr.appendChild(td);
+            td = document.createElement("td");
+            if (rawActionList[i].amount) {
+                td.innerHTML = "$" + rawActionList[i].amount;
+            } else {td.innerHTML = ""};
+            tr.appendChild(td);
 
-                preflopMove.appendChild(tr);
-                preflopMove.classList.remove("hide-table-row");
-
-            } else if (rawActionList[i].street === 1) { //если улица FLOP
-                let flopMove = document.querySelector(".flop-moves .all-info-table");
-                let tr = document.createElement("tr");  // создали строку
-
-                // (player, balance, action, pot, amount, position)
-                let td = document.createElement("td");
-                td.innerHTML = rawActionList[i].player;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].balance;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = getActionText(rawActionList[i].action);
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].pot;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                if (rawActionList[i].amount) {
-                    td.innerHTML = "$" + rawActionList[i].amount;
-                } else {td.innerHTML = ""};
-                tr.appendChild(td);
-
-                flopMove.appendChild(tr);
-                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
-                flopMove.classList.remove("hide-table-row");
-            } else if (rawActionList[i].street === 2) { //если улица TURN
-                let turnMove = document.querySelector(".turn-moves .all-info-table");
-                let tr = document.createElement("tr");  // создали строку
-
-                // (player, balance, action, pot, amount, position)
-                let td = document.createElement("td");
-                td.innerHTML = rawActionList[i].player;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].balance;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = getActionText(rawActionList[i].action);
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].pot;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                if (rawActionList[i].amount) {
-                    td.innerHTML = "$" + rawActionList[i].amount;
-                } else {td.innerHTML = ""};
-                tr.appendChild(td);
-
-                turnMove.appendChild(tr);
-                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
-                turnMove.classList.remove("hide-table-row");
-            } else if (rawActionList[i].street === 3) { //если улица RIVER
-                let riverMove = document.querySelector(".river-moves .all-info-table");
-                let tr = document.createElement("tr");  // создали строку
-
-                // (player, balance, action, pot, amount, position)
-                let td = document.createElement("td");
-                td.innerHTML = rawActionList[i].player;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].balance;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = getActionText(rawActionList[i].action);
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                td.innerHTML = "$" + rawActionList[i].pot;
-                tr.appendChild(td);
-
-                td = document.createElement("td");
-                if (rawActionList[i].amount) {
-                    td.innerHTML = "$" + rawActionList[i].amount;
-                } else {td.innerHTML = ""};
-                tr.appendChild(td);
-
-                riverMove.appendChild(tr);
-                if (rawActionList[i].gto == true) {tr.style.color = "crimson"}
-                riverMove.classList.remove("hide-table-row");
+            Move.appendChild(tr);
+            Move.classList.remove("hide-table-row");
+            if (rawActionList[i].gto) {
+                if (rawActionList[i].isHero) {
+                    tr.style.color = "#7793ff";
+                } else {tr.style.color = "#c737ff";}
+            } else if (rawActionList[i].isHero) {tr.style.color = "#7793ff";}
+            if (i === whatIsFirstGTOindex()) {
+                tr.style.color = "red";
             }
         }
     }
@@ -644,6 +568,7 @@ function addActionString() {
             if (rawActionList[oldActionListLength - 1].gto) {
                 rawActionList[oldActionListLength].gto = true;
             } else {rawActionList[oldActionListLength].gto = false;}
+            rawActionList[oldActionListLength].isHero = rawActionList[i].isHero;
         }
     }
     removeActions();
@@ -1049,6 +974,7 @@ function actionMenu(e) {
     $('#probabilities').on('click', showProbabilitiesInfo);
     //открывает окно с отобажением спектра игрока
     function showRange() {
+        actionToJson(getRawActionsIndex(elNode), "range");
         tdActionMenu.off();
         actionMenu.remove();
         //$("#waiting-progress-bar").addClass("appear");
@@ -1057,7 +983,7 @@ function actionMenu(e) {
             el.removeClass("color-violet");
             //$('#waiting-progress-bar').removeClass("appear");
             $('#waiting-progress-bar2').removeClass("appear");
-            createHillInfo();
+            createHillInfo(); // заголовок окна со спектром
             $(".hill-info").addClass("appear-fast");
             createAllCombinationsArr(); //вызвали функцию рисующую график
             restartListener();
@@ -1074,6 +1000,7 @@ function actionMenu(e) {
     }
 
     function showProbabilitiesInfo() {
+        actionToJson(getRawActionsIndex(elNode), "probability");
         tdActionMenu.off();
         actionMenu.remove();
         $("#waiting-progress-bar").addClass("appear");
@@ -1090,6 +1017,25 @@ function actionMenu(e) {
 
         return false;
     }
+
+    $("#ev").on("click", function() {
+        actionToJson(getRawActionsIndex(elNode), "ev");
+        tdActionMenu.off();
+        actionMenu.remove();
+        $("#waiting-progress-bar").addClass("appear");
+        //$("#waiting-progress-bar2").addClass("appear");
+        setTimeout(function() {
+            el.removeClass("color-violet");
+            $('#waiting-progress-bar').removeClass("appear");
+            //$('#waiting-progress-bar2').removeClass("appear");
+            createEVinfo();
+            $(".probabilities-info").addClass("appear-fast");
+            restartListener();
+
+        }, 2000);
+
+        return false;
+    });
 
     $("#gto").on("click", function() {
         if (isGTO == "checked") {
@@ -1216,6 +1162,13 @@ function createAllCombinationsArr() {
 
 //заполняет информацией окно с вероятностями
 function createProbabilitiesInfo() {
+    document.getElementById("h4-probabilities").innerHTML = "Probab";
+    return;
+}
+
+//заполняет информацией окно с вероятностями
+function createEVinfo() {
+    document.getElementById("h4-probabilities").innerHTML = "EV";
     return;
 }
 
@@ -1258,7 +1211,6 @@ function getValidYCoordinates(y) {
         return ($(window).height() - y - height -15);
     }
 }
-
 
 
 
@@ -1500,8 +1452,6 @@ function playerSearch() {
 $('#list').change(playerSearchSelectedList);
 function playerSearchSelectedList() {
     var val = $("#list option:selected").text();
-    //alert(val);
-
 }
 
 
@@ -1529,7 +1479,6 @@ function setNewRawPlayer(elNode, val) {
     displayAddRemoveButtons();
     restartListener();
 }
-
 
 // функция перезагружающая listener
 function restartListener() {
@@ -1573,3 +1522,343 @@ function displayUploadWindow() {
         uploadWindow.classList.add("appear-fast");
     }
 }
+
+//actionToJson(12);
+function actionToJson(rawActionListIndex, request) {
+
+    var myJSON = {
+        hand: {
+            lm: Math.max(rawActionList[0].amount, rawActionList[1].amount),
+            c1: getCardName(checkedCards[3]),
+            c2: getCardName(checkedCards[4]),
+            c3: getCardName(checkedCards[5]),
+            c4: getCardName(checkedCards[6]),
+            c5: getCardName(checkedCards[7]),
+        },
+        players: [],
+        actions: createStreets(),
+        request: createRequest()
+    }
+
+    function createStreets() {
+        if (rawActionList[rawActionList.length - 1].street === 3) {
+            var objRiver = {
+                preflop: [],
+                flop: [],
+                turn: [],
+                river: []
+            }
+            return objRiver;
+
+        } else if (rawActionList[rawActionList.length - 1].street === 2) {
+            var objTurn = {
+                preflop: [],
+                flop: [],
+                turn: []
+            }
+            return objTurn;
+        } else if (rawActionList[rawActionList.length - 1].street === 1) {
+            var objFlop = {
+                preflop: [],
+                flop: []
+            }
+            return objFlop;
+        } else {
+            var objPreflop = {
+                preflop: []
+            }
+            return objPreflop;
+        }
+    }
+
+    function createRequest() {
+        var obj = {
+            type: request,
+            street: getStreetName(rawActionList[rawActionListIndex].street),
+            act_num: rawActionListIndex - 1
+        }
+        return obj;
+    }
+
+    playersForJson();
+    function playersForJson() {
+        var allPlayersIndexes = initPreflopPlayersIndexes();
+        for (let i = 0; i < allPlayersIndexes.length; i++) {
+            myJSON.players.push({name: rawActionList[allPlayersIndexes[i]].player,
+                position: getPositionText(rawActionList[allPlayersIndexes[i]].position),
+                stack: rawActionList[allPlayersIndexes[i]].balance,
+                bet: rawActionList[allPlayersIndexes[i]].amount,
+                hole1: getHeroHole1(),
+                hole2: getHeroHole2()
+            });
+
+
+            function getHeroHole1() {
+                if (rawActionList[i].isHero) {
+                    return cardsName[checkedCards[1]];
+                } else {return}
+            }
+            function getHeroHole2() {
+                if (rawActionList[i].isHero) {
+                    return cardsName[checkedCards[2]];
+                } else {return}
+            }
+        }
+    }
+
+    ActionForJson();
+    function ActionForJson() {
+        //var streetNames = ["preflop", "flop", "turn", "river"];
+        for (let i = 2; i < rawActionList.length; i++) {
+            if (rawActionList[i].street === 0) {
+                myJSON.actions.preflop.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                    })
+            }
+            if (rawActionList[i].street === 1) {
+                myJSON.actions.flop.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+            if (rawActionList[i].street === 2) {
+                myJSON.actions.turn.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+            if (rawActionList[i].street === 3) {
+                myJSON.actions.river.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+        }
+
+        function getAmountForJson(i) {
+            if (rawActionList[i].amount != 0) {
+                return rawActionList[i].amount;
+            } else {return}
+        }
+    }
+
+    requestsForJson(rawActionListIndex);
+    function requestsForJson(rawActionListIndex) {
+
+    }
+
+    var jsonObj = JSON.stringify(myJSON, "", 3);
+    console.log(jsonObj);
+    //alert(jsonObj);
+}
+
+function getCardName(cardNumber) {
+    return cardsName[cardNumber];
+}
+
+function initPreflopPlayersIndexes() {
+    var players = [];
+    var playersIndexes = [];
+    for (let i = 0; i < rawActionList.length; i++) {
+        if (rawActionList[i].street === 0) {
+            if (players.indexOf(rawActionList[i].player) === -1) {
+               players.push(rawActionList[i].player);
+               playersIndexes.push(i);
+            }
+        } else {return playersIndexes;}
+    }
+}
+
+/*
+
+// bet 1, raise 2, call 3, check 4, fold 5
+// 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
+// (street, player, balance, action, pot, amount, position, isGTO)
+rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false); // post SB
+rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false); // post BB
+rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false);  // MP1
+
+
+//JSON
+{
+  "hand": {
+    "lm": 0.25,
+    "c1": "Ac",
+    "c2": "7c",
+    "c3": "Kd",
+    "c4": "Js"
+  },
+  "players": [
+    {
+      "name": "gulyaka",
+      "position": "MP2",
+      "stack": 27,
+      "bet": 0
+    },
+    {
+      "name": "zlo-Mishka",
+      "position": "MP3",
+      "stack": 32,
+      "bet": 0
+    },
+    {
+      "name": "3D action",
+      "position": "CO",
+      "stack": 45.37,
+      "bet": 0
+    },
+    {
+      "name": "joooe84",
+      "position": "BTN",
+      "stack": 60,
+      "bet": 0
+    },
+    {
+      "name": "mammoth",
+      "position": "SB",
+      "stack": 25.1,
+      "bet": 0.1,
+      "hole1": "Ah",
+      "hole2": "Kc"
+    },
+    {
+      "name": "checkmateN1",
+      "position": "BB",
+      "stack": 37.25,
+      "bet": 0.25
+    }
+  ],
+  "actions": {
+    "preflop": [
+      {
+        "act_num": 1,
+        "player": "gulyaka",
+        "balance": 27,
+        "action": "fold",
+        "pot": 0.35
+      },
+      {
+        "act_num": 2,
+        "player": "zlo-Mishka",
+        "balance": 32,
+        "action": "fold",
+        "pot": 2.25
+      },
+      {
+        "act_num": 3,
+        "player": "3D action",
+        "balance": 45.37,
+        "action": "fold",
+        "pot": 2.25
+      },
+      {
+        "act_num": 4,
+        "player": "joooe84",
+        "balance": 60,
+        "action": "raise",
+        "pot": 3.85,
+        "amount": 0.5
+      },
+      {
+        "act_num": 5,
+        "player": "mammoth",
+        "balance": 25,
+        "action": "call",
+        "pot": 1.1,
+        "amount": 0.65
+      },
+      {
+        "act_num": 6,
+        "player": "checkmateN1",
+        "balance": 37,
+        "action": "call",
+        "pot": 1.75,
+        "amount": 0.5
+      }
+    ],
+    "flop": [
+      {
+        "act_num": 1,
+        "player": "mammoth",
+        "balance": 24.4,
+        "action": "check",
+        "pot": 2.25
+      },
+      {
+        "act_num": 2,
+        "player": "checkmateN1",
+        "balance": 36.5,
+        "action": "check",
+        "pot": 2.25
+      },
+      {
+        "act_num": 3,
+        "player": "joooe84",
+        "balance": 59.25,
+        "action": "bet",
+        "pot": 2.25,
+        "amount": 1.6
+      },
+      {
+        "act_num": 4,
+        "player": "mammoth",
+        "balance": 24.4,
+        "action": "call",
+        "pot": 3.85,
+        "amount": 1.6
+      },
+      {
+        "act_num": 5,
+        "player": "checkmateN1",
+        "balance": 36.5,
+        "action": "call",
+        "pot": 5.45,
+        "amount": 1.6
+      }
+    ],
+    "turn": [
+      {
+        "act_num": 1,
+        "player": "mammoth",
+        "balance": 22.8,
+        "action": "bet",
+        "pot": 7.05,
+        "amount": 4
+      },
+      {
+        "act_num": 2,
+        "player": "checkmateN1",
+        "balance": 36.5,
+        "action": "raise",
+        "pot": 30.9
+      },
+      {
+        "act_num": 3,
+        "player": "joooe84",
+        "balance": 57.65,
+        "action": "raise",
+        "pot": 45.95,
+        "amount": 22.75
+      }
+    ]
+  },
+  "request": {
+    "type": "ev",
+    "street": "turn",
+    "act_num": 4
+  }
+}
+ */
