@@ -1663,6 +1663,22 @@ function actionToJson(rawActionListIndex, request) {
     var jsonObj = JSON.stringify(myJSON, "", 3);
     console.log(jsonObj);
     //alert(jsonObj);
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8888/request",
+        dataType: "json",
+        success: function (msg) {
+            if (msg) {
+                alert("Somebody" + name + " was added in list !");
+                location.reload(true);
+            } else {
+                alert("Cannot add to list !");
+            }
+        },
+
+        data: jsonObj
+    });
 }
 
 function getCardName(cardNumber) {
