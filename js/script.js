@@ -1664,6 +1664,7 @@ function actionToJson(rawActionListIndex, request) {
     console.log(jsonObj);
     //alert(jsonObj);
 
+<<<<<<< HEAD
     var xhr = new XMLHttpRequest();
 
     var json = JSON.stringify({
@@ -1679,6 +1680,23 @@ function actionToJson(rawActionListIndex, request) {
 // Отсылаем объект в формате JSON и с Content-Type application/json
 // Сервер должен уметь такой Content-Type принимать и раскодировать
     xhr.send(json);
+=======
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8888/request",
+        dataType: "json",
+        success: function (msg) {
+            if (msg) {
+                alert("Somebody" + name + " was added in list !");
+                location.reload(true);
+            } else {
+                alert("Cannot add to list !");
+            }
+        },
+
+        data: jsonObj
+    });
+>>>>>>> 8454558e9246b008a1817e2679e066525699040c
 }
 
 function getCardName(cardNumber) {
