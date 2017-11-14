@@ -1663,6 +1663,22 @@ function actionToJson(rawActionListIndex, request) {
     var jsonObj = JSON.stringify(myJSON, "", 3);
     console.log(jsonObj);
     //alert(jsonObj);
+
+    var xhr = new XMLHttpRequest();
+
+    var json = JSON.stringify({
+        name: "Виктор",
+        surname: "Цой"
+    });
+
+    xhr.open("POST", '/submit', true)
+    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+    xhr.onreadystatechange = ...;
+
+// Отсылаем объект в формате JSON и с Content-Type application/json
+// Сервер должен уметь такой Content-Type принимать и раскодировать
+    xhr.send(json);
 }
 
 function getCardName(cardNumber) {

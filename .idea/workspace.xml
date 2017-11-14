@@ -37,8 +37,8 @@
       <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2641">
-              <caret line="990" column="17" lean-forward="false" selection-start-line="990" selection-start-column="17" selection-end-line="990" selection-end-column="17" />
+            <state relative-caret-position="485">
+              <caret line="1676" column="33" lean-forward="true" selection-start-line="1676" selection-start-column="33" selection-end-line="1676" selection-end-column="33" />
               <folding>
                 <element signature="n#!!block;n#changeCardState#0" expanded="false" />
                 <element signature="n#!!block;n#displayActions#0" expanded="false" />
@@ -76,7 +76,6 @@
                 <element signature="n#!!block;n#restartListener#0" expanded="false" />
                 <element signature="n#!!block;n#removeUpload#0" expanded="false" />
                 <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-                <element signature="n#!!block;n#actionToJson#0" expanded="false" />
                 <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
                 <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
                 <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -119,6 +118,7 @@
       <find>iq</find>
       <find>probabilities-info</find>
       <find>createProbabilitiesInfo</find>
+      <find>actionToJson</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,12 +208,12 @@
       <workItem from="1505934011652" duration="2421000" />
       <workItem from="1505938282303" duration="20580000" />
       <workItem from="1509914010771" duration="52181000" />
-      <workItem from="1510564449331" duration="1061000" />
+      <workItem from="1510564449331" duration="2714000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118586000" />
+    <option name="totallyTimeSpent" value="120239000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
@@ -325,7 +325,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -409,7 +408,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -478,7 +476,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -536,7 +533,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -613,7 +609,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
@@ -673,8 +668,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2641">
-          <caret line="990" column="17" lean-forward="false" selection-start-line="990" selection-start-column="17" selection-end-line="990" selection-end-column="17" />
+        <state relative-caret-position="485">
+          <caret line="1676" column="33" lean-forward="true" selection-start-line="1676" selection-start-column="33" selection-end-line="1676" selection-end-column="33" />
           <folding>
             <element signature="n#!!block;n#changeCardState#0" expanded="false" />
             <element signature="n#!!block;n#displayActions#0" expanded="false" />
@@ -712,7 +707,6 @@
             <element signature="n#!!block;n#restartListener#0" expanded="false" />
             <element signature="n#!!block;n#removeUpload#0" expanded="false" />
             <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#requestsForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
             <element signature="n#!!block;n#getCardName#0" expanded="false" />
