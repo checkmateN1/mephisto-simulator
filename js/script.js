@@ -4,6 +4,97 @@ var cards = document.querySelector(".cards");
 let playerStats = document.getElementById("player-stats");
 var uploadWindow = document.getElementById("upload-window");
 
+//обработка событий главного меню навигации
+navigationListener();
+function navigationListener() {
+    var mephisto_links = $(".navigation-menu li:not(:last-child) a");
+    var pages = $(".pages");
+    var left_navigation = $(".left-navigation");
+    var navigationMenu = $("#nav-3 li");
+    mephisto_links.on("click", function (e) {
+        pages.addClass("hidden");
+        pages.removeClass("text-pages-appear");
+        left_navigation.addClass("hidden");
+        left_navigation.removeClass("left-navigation-appear");
+        left_navigation.addClass("left-navigation-appear");
+        left_navigation.empty();
+        navigationMenu.removeClass("nav-active");
+        let elNode= e.target; // nodeType == 1
+        //alert(elNode.textContent);
+        let selectedPage = $("#" + elNode.textContent + "-html");
+        selectedPage.removeClass("hidden");
+        selectedPage.addClass("text-pages-appear");
+        if (elNode.textContent !== 'simulator') {
+            if (elNode.textContent === 'mephisto') {
+                left_navigation.css("background-color", "dodgerblue");
+                let text = $("<h2>Особенности ИИ Mephisto:</h2>\n" +
+                    "                <ul>\n" +
+                    "                    <li>- Высокая скорость симуляций</li>\n" +
+                    "                    <li>- Точность модели оппонента в любой ситуации</li>\n" +
+                    "                    <li>- Рассчет EV в реальном времени на любой улице</li>\n" +
+                    "                    <li>- Любое количество игроков за столом</li>\n" +
+                    "                    <li>- Любые сайзинги ставок</li>\n" +
+                    "                    <li>- Расчет равновесия Нэша с флопа в реальном времени</li>\n" +
+                    "                </ul>");
+                left_navigation.append(text);
+            } else if (elNode.textContent === 'neuromodeling') {
+                left_navigation.css("background-color", "#8c2eac");
+                let text = $("<h2>Средства разработки:</h2>\n" +
+                    "                <ul>\n" +
+                    "                    <li>- C++</li>\n" +
+                    "                    <li>- Oracle</li>\n" +
+                    "                    <li>- Python</li>\n" +
+                    "                    <li>- CNTK</li>\n" +
+                    "                    <li>- Sparse autoencoder</li>\n" +
+                    "                    <li>- Deep belief networks</li>\n" +
+                    "                    <li>- Hopfield network</li>\n" +
+                    "                </ul>");
+                left_navigation.append(text);
+            } else if (elNode.textContent === 'manual') {
+                left_navigation.css("background-color", "#47ac1b");
+                let text = $("<h2>Основные возможности:</h2>\n" +
+                    "                <p>- Загрузка истории раздач</p>\n" +
+                    "                <p>- Вычисление EV</p>\n" +
+                    "                <p>- Отображение стратегии</p>\n" +
+                    "                <p>- Отображение спектров</p>\n" +
+                    "                <p>- Отображение вероятности действий</p>\n" +
+                    "                <p>- Режим обучения</p>\n" +
+                    "                <p>- Тестирование</p>\n" +
+                    "                <p>- Расчет равновесия Нэша</p>\n" +
+                    "                <p>- Обработка 100 000 сыгранных игроком рук с выводом ошибочных ходов</p>");
+                left_navigation.append(text);
+            } else if (elNode.textContent === 'buy') {
+                left_navigation.css("background-color", "#492cac"); //#ac3935
+                let text = $("<h2>Особенности тренировок:</h2>\n" +
+                    "                <ul>\n" +
+                    "                    <li>- Опыт тренировки с реальными оппонентами из покер румов</li>\n" +
+                    "                    <li>- Тренировка по реальным раздачам</li>\n" +
+                    "                    <li>- Работа над слабыми местами в вашей игре</li>\n" +
+                    "                    <li>- Глубокое понимание адаптации после тренировок</li>\n" +
+                    "                    <li>- Ощутимая практическая польза, в отличие от чисто равновесных программ</li>\n" +
+                    "                    <li>- Образцовая player-ориентированная игра от ИИ Mephisto</li>\n" +
+                    "                    <li>- Загрузка вашей раздачи в один клик</li>\n" +
+                    "                    <li>- Получение результатов анализа за 15секунд</li>\n" +
+                    "                </ul>");
+                left_navigation.append(text);
+            } else if (elNode.textContent === 'contacts') {
+                left_navigation.css("background-color", "#2987ac");
+                let text = $("<h2>Будем рады:</h2>\n" +
+                    "                <ul>\n" +
+                    "                    <li>- Услышать любые отзывы</li>\n" +
+                    "                    <li>- Прочитать любые пожелания</li>\n" +
+                    "                    <li>- Рассмотреть предложения по сотрудничеству</li>\n" +
+                    "                </ul>");
+                left_navigation.append(text);
+            }
+
+            left_navigation.removeClass("hidden");
+            left_navigation.addClass("left-navigation-appear");
+        }
+        elNode.parentNode.classList.add("nav-active");
+    });
+}
+
 //создаем миникарты
 createMinCards();
 function createMinCards() {
@@ -232,6 +323,66 @@ function cardsRemove() {
 
 //////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////   ДЕЙСТВИЯ  /////////////////
 
+/*
+// пример простейшей функции с мемоизацией
+const add = (n) => (n + 10);
+add(9);
+
+// a simple memoized function to add something
+const memoizedAdd = () => { //идентично объявлению function memoizedAdd() {.....}
+    let cache = {};
+    return (n) => {
+        if (n in cache) {
+            console.log('Fetching from cache');
+            return cache[n];
+        }
+        else {
+            console.log('Calculating result');
+            let result = n + 10;
+            cache[n] = result;
+            return result;
+        }
+    }
+};
+
+// returned function from memoizedAdd
+const newAdd = memoizedAdd();
+alert(newAdd(9));	// calculated
+alert(newAdd(9));	// cached
+//const pii = 3.14;
+//alert(`Проверка новых данных ${pii}`);
+
+*/
+
+// a simple pure function to get a value adding 10
+const add = (n) => (n + 10);
+console.log('Simple call', add(3));
+
+// a simple memoize function that takes in a function
+// and returns a memoized function
+const memoize = (fn) => {
+    let cache = {};
+    return (...args) => {
+        let n = args[0];
+        if (n in cache) {
+            console.log('Fetching from cache');
+            return cache[n];
+        }
+        else {
+            console.log('Calculating result');
+            let result = fn(n);
+            cache[n] = result;
+            return result;
+        }
+    }
+}
+
+// creating a memoized function for the 'add' pure function
+const memoizedAdd = memoize(add);
+console.log(memoizedAdd(3));
+console.log(memoizedAdd(3));
+console.log(memoizedAdd(4));
+console.log(memoizedAdd(4));
 
 // массив для хранения сырых строк действий
 var rawActionList = [];
@@ -274,11 +425,6 @@ function loginFormClose() {
     loginForm.classList.remove("visually");
     $('#bg_layer').removeClass("visually");
 }
-/*
-$('#bg_layer').click(function(){
-    loginForm.classList.remove("visually");
-    $('#bg_layer').removeClass("visually");
-}); */
 
 // тестовый массив из бекенда  // тестовый массив для префлопа из бекенда   // тестовый массив для префлопа из бекенда
 
@@ -306,37 +452,10 @@ rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, fa
 
 
 
-
-
-
-
-//rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false);
-//rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false);
-//rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 30.25, 0, false);
-//rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 32.75, 24.40, 9, false);
-//rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 5, 57.15, 0.00, 8, false);
-
-
-//rawActionList[6] = new ActionString(0, "mammoth", 25, 5, 0.35, 0, 9); // fold SB
-//rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.10, 0.75, 8); // call BB
-
-//rawActionList[8] = new ActionString(1, "checkmateN1", 36.50, 1, 1.60, 1.00, 8);
-//rawActionList[8] = new ActionString(1, "checkmateN1", 36.50, 4, 1.60, 0, 8);
-//rawActionList[9] = new ActionString(1, "joooe84", 59.25, 1, 1.60, 1.30, 0);
-//rawActionList[10] = new ActionString(1, "checkmateN1", 36.5, 3, 2.90, 1.3, 8);
-
-//rawActionList[11] = new ActionString(2, "checkmateN1", 35.2, 4, 4.20, 0, 8);
-//rawActionList[12] = new ActionString(2, "joooe84", 57.95, 1, 4.20, 3, 0);
-//rawActionList[13] = new ActionString(2, "checkmateN1", 35.2, 3, 7.20, 3, 8);
-
-//rawActionList[14] = new ActionString(3, "checkmateN1", 32.20, 1, 10.20, 10.20, 8);
-//rawActionList[15] = new ActionString(3, "joooe84", 54.95, 2, 20.40, 45.95, 0);
-
-
 // функция копирующая в массив сырые действия из загруженной с сервера руки
 function copyActionList(arr) {
     rawActionList.length=0;
-    // далее копируем масссив действий
+
 }
 
 function getPositionText(position) {
@@ -493,20 +612,14 @@ function displayAddRemoveButtons() {
 function isTerminalStreetState() {
     let currentAmount = maxAmountAtCurrentStreet();
     let nPlayers = whoIsInGame().slice();
-    //alert("nPlayers.length = " + nPlayers.length);
-    //alert("whatIsPlayerBalance ? " + whatIsPlayerBalance(rawActionList[rawActionList.length - 1], rawActionList.length));
-    //alert("whoIsInGame() ? " + whoIsInGame());
 
     if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3 && whoIsInGame() == rawActionList[rawActionList.length - 1].position) {
-        //alert("Глюк мультипота");
-       //alert("whoIsInGame() = " + whoIsInGame());
         return true;
-    } // Глюк мультипота
-    //alert("point");
-    //alert("nPlayers.length = " + nPlayers.length);
+    }
+
     let currentStreet = rawActionList[rawActionList.length - 1].street;
     if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
-    //alert("ищем утечку");
+
     for (let i = rawActionList.length - 1; i > 0; i--) {
         if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
             if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
@@ -735,14 +848,7 @@ function amountClick(e) {
         "  <span class=\"dollar\">$</span> \n" +
         "  <output for=\"flying\" name=\"level\">" + Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), Math.max(rawActionList[rawActionList.length - 1].amount, minAmount())).toFixed(2) + "</output>" +
         "</form>");
-    /*
 
-        var slider = $("<form>\n" +
-            "\t\t<input type=\"range\" name=\"amountRange\" min=\"0\" max=\"20\" value=\"0\" oninput=\"this.form.amountInput.value=this.value\" />\n" +
-            "\t\t<input type=\"number\" name=\"amountInput\" min=\"0\" max=\"20\" value=\"0\" oninput=\"this.form.amountRange.value=this.value\" />\n" +
-            "\t</form>");
-    */
-    //var slider = $("<input class=\"raise-amount\" name=\"flevel\" id=\"flying\" type=\"range\">");
     el.replaceWith(slider);
     //$('input').focus();
     slider.focusout(function(){
@@ -760,6 +866,8 @@ function amountClick(e) {
 
 var tdPlayerStats = $(".all-info-table td:nth-child(1)"); // nickname stats
 tdPlayerStats.on('contextmenu', displayStats);
+var PlayerStatsInStrategy = $("#h4id");
+PlayerStatsInStrategy.on('contextmenu', displayStats);
 // функция показывающая статистику на игрока
 function displayStats(e) {
     //alert("зашли в функцию правым кликом в ФФ");
@@ -814,14 +922,6 @@ function displayStats(e) {
 
     div.style.left = getValidXCoordinates(offset.left) +'px';
     div.style.top = getValidYCoordinates(offset.top) +'px';
-    //document.querySelector("canvas").style.zIndex = "-1";
-    /*document.querySelector(".turn-moves").style.zIndex = "0";
-    document.querySelector(".river-moves").style.zIndex = "0";
-    document.querySelector(".preflop-moves").style.zIndex = "0";
-    document.querySelector("#upload-button").style.zIndex = "0";
-    document.querySelector("#random-button").style.zIndex = "0";
-    document.querySelector("#iq-button").style.zIndex = "0";
-    document.querySelector("#learn-button").style.zIndex = "0"; */
 
     $(document).on('click', dontCloseStats);
     function dontCloseStats(e) {
@@ -857,6 +957,10 @@ function displayStats(e) {
 var playersList = [];
 playersList.push("TAG1", "TAG2", "Fish1", "TAG3", "Fish2", "TAG4", "TAG5", "TAG6", "TAG7", "Fish3", "TAG8", "Fish4", "TAG9", "TAG10");
 
+var playersSelect = $("<input class=\"type-search\" type=\"text\" id=\"nickname-input\"/>\n" +
+    "                                    <select size=\"7\" id=\"list\">\n" +
+    "                                    </select>");
+
 var tdPlayer2 = $(".all-info-table td:nth-child(1)"); // nickname
 tdPlayer2.on('click', selectPlayer);
 // функция меняющая никнейм игрока в данной строке
@@ -865,13 +969,6 @@ function selectPlayer(e) {
     e.preventDefault();
     let elNode= e.target; // nodeType == 1
     var el = $(this);
-
-
-    //let playersSelect = $("<select name=\"playersList\" id=\"playersList\"></select>");
-
-    let playersSelect = $("<input class=\"type-search\" type=\"text\" id=\"nickname-input\"/>\n" +
-        "                                    <select size=\"7\" id=\"list\">\n" +
-        "                                    </select>");
 
     var arr = [];
     for (let i = 0; i < playersList.length; i++) {
@@ -910,19 +1007,7 @@ function selectPlayer(e) {
             restartListener();
         });
 
-    /*$(document).on('click', dontCloseSelect);
-    function dontCloseSelect(e) {
-        if($(e.target).closest('#player-stats').length === 0) {
-            el.removeClass("color-yellow");
-            el.css("overflow", "hidden");
-            playerStats.remove();
-            removeActions();
-            displayActions();
-            displayAddRemoveButtons();
-            restartListener();
-        }
-    }
-    */
+
     $(document).keyup(function(e) {
         if (e.keyCode == 27) { // escape
             el.removeClass("color-yellow");
@@ -949,14 +1034,18 @@ function actionMenu(e) {
     if (whatIsFirstGTOindex() == getRawActionsIndex(elNode)) {
         isGTO = "checked";
     }
-
+    function showEV() {
+       if (rawActionList[getRawActionsIndex(elNode)].isHero)  {
+           return "<input type=\"button\" id=\"ev\" name=\"action-checkbox\" hidden>\n" +
+               "                        <label for=\"ev\">Evaluate EV's</label>"
+       } else {return "";}
+    }
     let actionMenu = $("<div id=\"action-menu\" class=\"hidden\">\n" +
         "            <input type=\"button\" id=\"range\" name=\"action-checkbox\" hidden>\n" +
         "            <label for=\"range\">Show range</label>\n" +
         "            <input type=\"button\" id=\"probabilities\" name=\"action-checkbox\" hidden>\n" +
-        "            <label for=\"probabilities\">Show probabilities</label>\n" +
-        "            <input type=\"button\" id=\"ev\" name=\"action-checkbox\" hidden>\n" +
-        "            <label for=\"ev\">Evaluate EV's</label>\n" +
+        "            <label for=\"probabilities\">Show strategy</label>\n" +
+        showEV() +
         "            <input type=\"checkbox\" id=\"gto\" name=\"action-checkbox\" " + isGTO + " hidden>\n" +
         "            <label for=\"gto\">Start GTO from here</label>\n" +
         "        </div>");
@@ -964,6 +1053,14 @@ function actionMenu(e) {
     this.classList.add("color-violet");
     el.append(actionMenu);
     let div = document.getElementById("action-menu");
+
+    //меняет размер окна action menu в зависимости от наличия пункта Evaluate EV's
+    if (!rawActionList[getRawActionsIndex(elNode)].isHero) {
+        div.style.height = "120px";
+    } else {
+        div.style.height = "150px";
+    }
+
     div.classList.remove("hidden");
     div.style.left = 40 +'px';
     div.style.top = 13 +'px';
@@ -971,7 +1068,7 @@ function actionMenu(e) {
     tdAction.off();
 
     $('#range').on('click', showRange); //присваеваем обработчик клика в range
-    $('#probabilities').on('click', showProbabilitiesInfo);
+    $('#probabilities').on('click', showStrategy);
     //открывает окно с отобажением спектра игрока
     function showRange() {
         actionToJson(getRawActionsIndex(elNode), "range");
@@ -983,9 +1080,9 @@ function actionMenu(e) {
             el.removeClass("color-violet");
             //$('#waiting-progress-bar').removeClass("appear");
             $('#waiting-progress-bar2').removeClass("appear");
-            createHillInfo(); // заголовок окна со спектром
+            //createHillInfo(); // заголовок окна со спектром
             $(".hill-info").addClass("appear-fast");
-            createAllCombinationsArr(); //вызвали функцию рисующую график
+            createAllCombinationsArr("range", getRawActionsIndex(elNode)); //вызвали функцию рисующую график// Первый аргумент - превышение ставки над максимальной
             restartListener();
 
         }, 2000);
@@ -993,24 +1090,18 @@ function actionMenu(e) {
         return false;
     }
 
-    function createHillInfo() {
-        let hillTitle = document.getElementById("h4id");
-        let indexRaw = getRawActionsIndex(elNode);
-        hillTitle.innerText = rawActionList[indexRaw].player + " " + getActionText(rawActionList[indexRaw].action) + " $" + rawActionList[indexRaw].amount + " on " + getStreetText(rawActionList[indexRaw].street);
-    }
-
-    function showProbabilitiesInfo() {
-        actionToJson(getRawActionsIndex(elNode), "probability");
+    function showStrategy() {
+        actionToJson(getRawActionsIndex(elNode), "strategy");
         tdActionMenu.off();
         actionMenu.remove();
-        $("#waiting-progress-bar").addClass("appear");
-        //$("#waiting-progress-bar2").addClass("appear");
+        $("#waiting-progress-bar2").addClass("appear");
         setTimeout(function() {
             el.removeClass("color-violet");
-            $('#waiting-progress-bar').removeClass("appear");
-            //$('#waiting-progress-bar2').removeClass("appear");
-            createProbabilitiesInfo();
-            $(".probabilities-info").addClass("appear-fast");
+            //$('#waiting-progress-bar').removeClass("appear");
+            $('#waiting-progress-bar2').removeClass("appear");
+            //createHillInfo(); // заголовок окна со спектром
+            $(".hill-info").addClass("appear-fast");
+            createAllCombinationsArr("strategy", getRawActionsIndex(elNode)); //вызвали функцию рисующую график
             restartListener();
 
         }, 2000);
@@ -1076,88 +1167,1539 @@ function actionMenu(e) {
 
 }
 
+//обйект с названием всех комбинаций
+var combinations = {
+    "no made hand": 0,
+    "ace high": 0,
+    "weak pair": 0,
+    "middle pair": 0,
+    "top pair": 0,
+    "over pair": 0,
+    "two pair": 0,
+    "set": 0,
+    "straight": 0,
+    "flash": 0,
+    "full house": 0,
+    "care": 0,
+    "straight flash": 0,
+    "royal flash": 0
+};
 
-/*
-var hillInfoWindow = document.querySelector(".hill-info:not(:first-child)");
 
-hillInfoWindow.onmousedown = function(e) { // 1. отследить нажатие
-    // подготовить к перемещению
-    // 2. разместить на том же месте, но в абсолютных координатах
+function combination() {
 
-    moveAt(e);
-    // передвинуть мяч под координаты курсора
-    // и сдвинуть на половину ширины/высоты для центрирования
-
-
-    function moveAt(e) {
-        hillInfoWindow.style.left = e.pageX - hillInfoWindow.offsetWidth / 2 + 'px';
-        hillInfoWindow.style.top = e.pageY - hillInfoWindow.offsetHeight / 2 + 'px';
-    }
-
-    // 3, перемещать по экрану
-    document.onmousemove = function(e) {
-        moveAt(e);
-    };
-
-    // 4. отследить окончание переноса
-    hillInfoWindow.onmouseup = function() {
-        document.onmousemove = null;
-        hillInfoWindow.onmouseup = null;
-    }
-}; */
+}
 
 //заполняет окно спектра информацией
-function createAllCombinationsArr() {
-    var phones = [ {name: 'AA', price: 1},
-        {name: 'AA', price: 1},
-        {name: 'AA', price: 1},
-        {name: 'AA', price: 1},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'AK', price: 0.95},
-        {name : 'KK', price: 0.7},
-        {name : 'KK', price: 0.7},
-        {name : 'KK', price: 0.7},
-        {name : 'KK', price: 0.7},
-        {name : 'QQ', price: 0.5},
-        {name : 'QQ', price: 0.5},
-        {name : 'QQ', price: 0.5},
-        {name : 'QQ', price: 0.5},
-        {name : 'JJ', price: 0.25},
-        {name : 'JJ', price: 0.25},
-        {name : 'JJ', price: 0.25},
-        {name : 'JJ', price: 0.25},
-        {name : 'TT', price: 0.12},
-        {name : 'TT', price: 0.12},
-        {name : 'TT', price: 0.12},
-        {name : 'TT', price: 0.12},
-        {name : '99', price: 0.07},
-        {name : '99', price: 0.07},
-        {name : '99', price: 0.07},
-        {name : '99', price: 0.07},
-        ];
+function createAllCombinationsArr(strategyORrange, rawActionIndex) {
 
-    // Enter
-    d3.select('#mCSB_1_container').selectAll('div').data(phones).enter().append('div').attr('class', 'item')
-        .append('div').attr('class', 'data').append('span');
+    //Width and height svg on the left
+    var w = 300;
+    var h = 2000;
 
-    // Update
-    d3.select('#mCSB_1_container').selectAll('div.item').data(phones)
-        .select('div').style('width', function (d) { return (d.price * 250) + 'px';})
-        //.select('span').text(function () { return "1";});
-        .select('span').text(function (d) { return d.price;});
+    //цвета диаграмм
+    var agroColor = "#7d1008";
+    var callColor = "#899600";
+    var foldColor = "#36342d";
 
-    d3.select('#mCSB_1_container').selectAll('div.item').data(phones).append('div').attr('class', 'name')
-        .text(function (d) {return d.name;});
+    var currentColor = "#000082";
+    var nodeColor = "#628cb9";
+    var preflopColor = "#9fab00";
 
-    // Exit
-    d3.select('#mCSB_1_container').selectAll('div.item').data(phones).exit().remove();
+    var testStrategy = {
+        allHands: [
+            {
+                hand: 'AhKh',
+                moves: {
+                    "1.3": {strategy: 0.24, ev: 0.8},
+                    "1": {strategy: 0.26, ev: 1},
+                    "0.5": {strategy: 0.1, ev: 0.55},
+                    "0": {strategy: 0.25, ev: 0.3},
+                    "-1": {strategy: 0.15}
+                },
+                weight: 0.67,
+                preflopWeight: 0.97,
+                combination: "A high"
+            },
+            {
+                hand: 'AcKc',
+                moves: {
+                    "1.3": {strategy: 0, ev: 0.8},
+                    "1": {strategy: 0, ev: 1},
+                    "0.5": {strategy: 0, ev: 0.55},
+                    "0": {strategy: 0, ev: 0.3},
+                    "-1": {strategy: 1}
+                },
+                weight: 0.77,
+                preflopWeight: 0.97,
+                combination: "A high"
+            },
+            {
+                hand: 'AsKs',
+                moves: {
+                    "1.3": {strategy: 0, ev: 0.8},
+                    "1": {strategy: 0.2, ev: 1},
+                    "0.5": {strategy: 0.05, ev: 0.55},
+                    "0": {strategy: 0.75, ev: 1.52},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.55,
+                preflopWeight: 0.97,
+                combination: "A high"
+            },
+            {
+                hand: 'AdKd',
+                moves: {
+                    "1.3": {strategy: 0, ev: 0.8},
+                    "1": {strategy: 0.2, ev: 1},
+                    "0.5": {strategy: 0.05, ev: 0.55},
+                    "0": {strategy: 0.75, ev: 0.55},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.2,
+                preflopWeight: 0.97,
+                combination: "A high"
+            },
+            {
+                hand: 'AdAh',
+                moves: {
+                    "1.3": {strategy: 0.33, ev: 1.8},
+                    "1": {strategy: 0.5, ev: 20.13},
+                    "0.5": {strategy: 0.17, ev: 1.55},
+                    "0": {strategy: 0, ev: 1.33},
+                    "-1": {strategy: 0}
+                },
+                weight: 1,
+                preflopWeight: 0.88,
+                combination: "tptk"
+            },
+            {
+                hand: 'KsKc',
+                moves: {
+                    "1.3": {strategy: 0.03, ev: 1.3},
+                    "1": {strategy: 0.1, ev: 1.66},
+                    "0.5": {strategy: 0.35, ev: 1.1},
+                    "0": {strategy: 0.52, ev: -0.27},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.77,
+                preflopWeight: 0.92,
+                combination: "tptk"
+            },
+            {
+                hand: 'KcKh',
+                moves: {
+                    "1.3": {strategy: 0, ev: 1.3},
+                    "1": {strategy: 0, ev: 1.66},
+                    "0.5": {strategy: 0, ev: 1.1},
+                    "0": {strategy: 1, ev: 0.3},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.55,
+                preflopWeight: 0.92,
+                combination: "tptk"
+            },
+            {
+                hand: 'QsQc',
+                moves: {
+                    "1.3": {strategy: 0, ev: -0.37},
+                    "1": {strategy: 0, ev: 1.66},
+                    "0.5": {strategy: 0.25, ev: 1.1},
+                    "0": {strategy: 0.1, ev: 0.3},
+                    "-1": {strategy: 0.65}
+                },
+                weight: 0.68,
+                preflopWeight: 0.83,
+                combination: "2d pair"
+            },
+            {
+                hand: 'AsKc',
+                moves: {
+                    "1.3": {strategy: 0.2, ev: 1.3},
+                    "1": {strategy: 0, ev: 1.66},
+                    "0.5": {strategy: 0.03, ev: 1.1},
+                    "0": {strategy: 0.77, ev: 0.3},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.88,
+                preflopWeight: 0.92,
+                combination: "tptk"
+            },
+            {
+                hand: 'AhKs',
+                moves: {
+                    "1.3": {strategy: 0.1, ev: 1.3},
+                    "1": {strategy: 0, ev: 1.66},
+                    "0.5": {strategy: 0, ev: 1.1},
+                    "0": {strategy: 0.9, ev: 0.3},
+                    "-1": {strategy: 0}
+                },
+                weight: 0.88,
+                preflopWeight: 0.92,
+                combination: "tptk"
+            }
+        ]
+    };
+
+    if (strategyORrange != "strategy") {
+        strategyORrange = "1.3"; //временно - будем парсить нужный сайзинг из джейсона с сервера
+    }
+
+    //текущее отображение в окне: strategy/сайзинг рейнжа
+    var currentMoveOrStrategyState = strategyORrange;
+
+    //текущая выбранная группа рук в матрице
+    var currentMatrixHand = null;
+    //текущая выбранная конкретная рука в левой диаграмме
+    var currentHandInDiagram = null;
+
+    function getHandEV(hand, sizing) {
+        for (let i = 0; i < testStrategy.allHands.length; i++) {
+            if (testStrategy.allHands[i].hand == hand) {
+                for(var key in testStrategy.allHands[i].moves) {
+                    if (key == sizing) {return parseFloat(testStrategy.allHands[i].moves[key].ev);}
+                }
+            }
+      }
+    }
+
+    //дает вес в сайзинге мува - способен дать суммарный вес всех агромувов
+    function getWeightInSizing(sizing) {
+        let curWeight = 0;
+        let otherWeight = 0;
+        if (currentMatrixHand == null) {
+            for (let i = 0; i < testStrategy.allHands.length; i++) {
+                for (let key in testStrategy.allHands[i].moves) {
+                    if (sizing == "agro" && parseFloat(key) > 0) {
+                        curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                    } else if (key == sizing) {
+                        curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                    } else {
+                        otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                    }
+                }
+            }
+        } else {
+            for (let i = 0; i < testStrategy.allHands.length; i++) {
+                for (let key in testStrategy.allHands[i].moves) {
+                    if (isCombinationNameEqualMatrix(currentMatrixHand, i)) {
+                        if (currentHandInDiagram != null) {
+                            if (testStrategy.allHands[i].hand == currentHandInDiagram) {
+                                if (key == sizing) {
+                                    curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                                } else {
+                                    otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                                }
+                            }
+                        } else if (sizing == "agro" && parseFloat(key) > 0) {
+                            curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        } else if (key == sizing) {
+                            curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        } else {
+                            otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        }
+                    }
+                }
+            }
+        }
+
+        return (curWeight * 100/(curWeight + otherWeight)).toFixed(2);
+    }
+
+    createStrategyList();
+    //создает визуальное отображение всех возможных мувов с их сайзингами над матрицей в верхней части окна
+    function createStrategyList() {
+        var sortable = [];
+        for (var key in testStrategy.allHands[0].moves) {
+            sortable.push([parseFloat(key), testStrategy.allHands[0].moves[key]]);
+        }
+
+        sortable.sort(function(a, b) {
+            return b[0] - a[0];
+        });
+
+        var strategyMoves = document.getElementById("strategy-moves");
+        strategyMoves.innerHTML = ''; // удаляем childNodes
+
+        let wasBet2 = wasBet(rawActionIndex);
+        for (let i = 0; i < sortable.length; i++) {
+            let currentSizing;
+            let li = document.createElement("li");
+            if (sortable[i][0] < 0) {
+                li.style.color = "#1f1d18";
+                li.innerHTML = "fold";
+                currentSizing = -1;
+                li.id = "strategyMove_-1";
+            } else if (sortable[i][0]  == 0) {
+                if (wasBet2) {
+                    li.style.color = callColor;
+                    li.id = "strategyMove_0";
+                    currentSizing = +Math.min(maxAmountAtCurrentIndex(rawActionIndex), rawActionList[rawActionIndex].balance).toFixed(2); //меньшее из баланса или макс ставки
+                    li.innerHTML = "call $" + currentSizing;
+                } else {
+                    li.style.color = "#a0ad00";
+                    li.id = "strategyMove_0";
+                    currentSizing = 0;
+                    li.innerHTML = "check";
+                }
+            } else {
+                if (wasBet2) {
+                    li.style.color = "#ba000b";
+                    li.id = "strategyMove_" + +parseFloat(sortable[i][0] ).toFixed(2);
+                    currentSizing = +parseFloat(maxAmountAtCurrentIndex(rawActionIndex) + parseFloat(sortable[i][0] )).toFixed(2)
+                    li.innerHTML = "raise $" + currentSizing;
+                } else {
+                    li.style.color = "#ba000b";
+                    li.id = "strategyMove_" + +sortable[i][0];
+                    currentSizing = +sortable[i][0];
+                    li.innerHTML = "bet $" + currentSizing;
+                }
+            }
+            let span = document.createElement("span");
+            span.innerHTML = +getWeightInSizing(sortable[i][0]) + "%";
+            span.classList.add("stat-probability");
+            li.appendChild(span);
+            li.classList.add("oneOfStrategyMove");
+            strategyMoves.appendChild(li);
+            if(currentHandInDiagram != null) {
+              var spanEV = document.createElement("span");
+              if (currentSizing >= 0) {
+                  let EV = getHandEV(currentHandInDiagram, currentSizing);
+                  if (EV >= 0) {
+                    spanEV.innerHTML = "EV:$" + EV;
+                  } else {spanEV.innerHTML = "EV:-$" + Math.abs(EV);}
+              }
+              spanEV.classList.add("ev-sizing");
+              li.appendChild(spanEV);
+              spanEV.style.width = li.clientWidth + "px";
+            }
+            span.style.width = li.clientWidth + "px";
+        }
+    }
+
+    changeInfoDiagram(strategyORrange);
+    //перерисовывает info-diagram цвета кубиков и тексты в зависимости от значения move сайзинг/стратегия
+    function changeInfoDiagram(move) {
+        let curWeight = document.getElementById("curWeight");
+        let curSpan = document.querySelector("#curWeight + span");
+        let nodeWeight = document.getElementById("nodeWeight");
+        let nodeSpan = document.querySelector("#nodeWeight + span");
+        let preflopWeight = document.getElementById("preflopWeight");
+        let preflopSpan = document.querySelector("#preflopWeight + span");
+
+        if (move == "strategy") {
+            curWeight.style.background = agroColor;
+            curSpan.innerHTML = "-aggressive weight";
+            nodeWeight.style.background = callColor;
+            if (wasBet(rawActionIndex)) {
+                nodeSpan.innerHTML = "-call weight";
+            } else {nodeSpan.innerHTML = "-check weight";}
+            preflopWeight.style.background = "#2e2c24";
+            preflopSpan.innerHTML = "-fold weight";
+        } else {
+            curWeight.style.background = currentColor;
+            curSpan.innerHTML = "-current weight";
+            nodeWeight.style.background = nodeColor;
+            nodeSpan.innerHTML = "-node weight";
+            preflopWeight.style.background = preflopColor;
+            preflopSpan.innerHTML = "-preflop weight";
+        }
+    }
+
+    //выделяет цветом текущий мув в стратегии над матрицей или снимает выделение в зависимости от currentMoveOrStrategyState
+    function setSelectedStrategyList() {
+        if (currentMoveOrStrategyState != "strategy") {
+            var li = document.getElementById("strategyMove_" + currentMoveOrStrategyState);
+            $("#strategy-moves li").addClass("not-selected-move");
+            li.classList.add("selected-move");
+            li.classList.remove("not-selected-move");
+        }
+    }
+
+    //меняем цвет кликнутого мува в стратегии и выводим стратегию/спектр в зависимости от состояния мува
+    $("#strategy-moves > li").on('click', changeStrategyListOn);
+    function changeStrategyListOn(e) {
+        let li = e.target;
+        if (li.type == undefined) {return;}
+        if (li.classList.contains("selected-move")) {
+            li.classList.remove("selected-move");
+            $("#strategy-moves li").removeClass("not-selected-move");
+
+            //меняем глобальное состояние окна
+            currentMoveOrStrategyState = "strategy";
+
+            //удаляем рейнж и рисуем стратегию
+            removeAllPreviousElements("all");
+            displayAllMoveStrategyInfo("strategy", "all");
+
+            //меняем hill-info
+            changeInfoDiagram("strategy");
+
+            //меняем заголовок окна со стратегией
+            createHillInfo("strategy");
+
+        } else {
+            $("#strategy-moves li").addClass("not-selected-move");
+            $("#strategy-moves li").removeClass("selected-move");
+            li.classList.remove("not-selected-move");
+            li.classList.add("selected-move");
+
+            //меняем глобальное состояние мува окна
+            currentMoveOrStrategyState = li.id.split('strategyMove_')[1];
+
+            //удаляем рейнж или стратегию и рисуем рейнж с целевым сайзингом
+            removeAllPreviousElements("all");
+            displayAllMoveStrategyInfo(li.id.split('strategyMove_')[1], "all");
+
+            //меняем hill-info
+            changeInfoDiagram(li.id.split('strategyMove_')[1]);
+
+            //меняем заголовок окна со стратегией
+            createHillInfo(li.id.split('strategyMove_')[1]);
+        }
+    }
+
+    createHillInfo(strategyORrange);
+    //создет текст заголовка окна
+    function createHillInfo(move) {
+        let hillTitle = document.getElementById("h4id");
+        if (move == "strategy") {
+            hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "strategy on " + getStreetText(rawActionList[rawActionIndex].street);
+        } else if (move == 0) {
+            if (wasBet(rawActionIndex)) {
+                hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "call " + " $" + +Math.min(maxAmountAtCurrentIndex(rawActionIndex), rawActionList[rawActionIndex].balance).toFixed(2) + " on " + getStreetText(rawActionList[rawActionIndex].street);
+            } else {
+                hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "check" + " on " + getStreetText(rawActionList[rawActionIndex].street);
+            }
+        } else if (move < 0) {
+            hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "fold" + " on " + getStreetText(rawActionList[rawActionIndex].street);
+        } else if (move > 0) {
+            if (wasBet(rawActionIndex)) {
+                hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "raise" + " $" + +parseFloat(maxAmountAtCurrentIndex(rawActionIndex) + +parseFloat(move)).toFixed(2) + " on " + getStreetText(rawActionList[rawActionIndex].street);
+            } else {
+                hillTitle.innerText = rawActionList[rawActionIndex].player + "'s " + "bet" + " $" + move + " on " + getStreetText(rawActionList[rawActionIndex].street);
+                }
+            }
+       }
+
+    //создает и сортирует данные под конкретный мув с сайзингом или под стратегию из стратегии в джейсоне
+    //подаем любую цифру в качестве второго аргумента если хотим посортировать по весу в узле или префлопу
+    function createHillData(strategy, move, orderBy) { // orderBy: strategy/preflop/range
+        let handsSize = strategy.allHands.length;
+        let data_strategy = {};
+        let maxWeight = 0; //максимальный вес какой-то руки в конкретном муве(для масштаба диаграммы)
+        let tmpWeight = 0;
+
+        if (orderBy == "strategy") {
+            maxWeight = 1;
+            if (currentMatrixHand == null) {
+                for (let i = 0; i < handsSize; i++) {
+                    data_strategy[strategy.allHands[i].hand] = strategy.allHands[i].weight;
+                }
+            } else {
+                for (let i = 0; i < handsSize; i++) {
+                    if (isCombinationNameEqualMatrix(currentMatrixHand, i)) {
+                        data_strategy[strategy.allHands[i].hand] = strategy.allHands[i].weight;
+                    }
+                }
+            }
+
+        } else if (orderBy == "preflop") {
+            maxWeight = 1;
+            for (let i = 0; i < handsSize; i++) {
+                data_strategy[strategy.allHands[i].hand] = strategy.allHands[i].preflopWeight;
+            }
+        } else if (orderBy == "range") {
+            if (currentMatrixHand == null) {
+                for (let i = 0; i < handsSize; i++) {
+                    for (var key in strategy.allHands[i].moves) {
+                        if (move == key) {
+                            tmpWeight = strategy.allHands[i].moves[key].strategy * strategy.allHands[i].weight;
+                            if (tmpWeight > maxWeight) {
+                                maxWeight = tmpWeight;
+                            }
+                            data_strategy[strategy.allHands[i].hand] = tmpWeight;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (let i = 0; i < handsSize; i++) {
+                    for (var key in strategy.allHands[i].moves) {
+                        if (move == key) {
+                            tmpWeight = strategy.allHands[i].moves[key].strategy * strategy.allHands[i].weight;
+                            if (tmpWeight > maxWeight) {
+                                maxWeight = tmpWeight;
+                            }
+                            if (isCombinationNameEqualMatrix(currentMatrixHand, i)) {
+                                data_strategy[strategy.allHands[i].hand] = tmpWeight;
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+
+        //сортируем ключи по убыванию веса комбинации в спектре для диаграммы
+        keysSorted = Object.keys(data_strategy).sort(function(a,b){return data_strategy[b] - data_strategy[a]});
+
+        //записали все веса агромувов в один ключ W если это стратегия для диаграммы(orderBy)
+        //Нужно записать в файнал дата в ключ W для агромувов вес всех агромувов для каждой руки
+        function createFinalDate(keysSorted, handsSize, move, maxWeight, orderBy) {
+            let hillData = [];
+                for (let i = 0; i < keysSorted.length; i++) {
+                let hand = keysSorted[i];
+                for (let j = 0; j < handsSize; j++) {
+                    if (strategy.allHands[j].hand == hand) {
+                        hillData[i] = {
+                            w: 0,
+                            h: hand,
+                            pw: strategy.allHands[j].preflopWeight,
+                            nw: strategy.allHands[j].weight,
+                            cb: strategy.allHands[j].combination
+                        };
+                        for (var key in strategy.allHands[j].moves) {
+                            if (orderBy == "strategy" && parseFloat(key) == 0) {
+                                hillData[i].call = strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
+                            } else if (orderBy == "strategy" && parseFloat(key) < 0) {
+                                hillData[i].fold = strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
+                            } else if (orderBy == "strategy" && parseFloat(key) > 0) {
+                                hillData[i].w += strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
+                            } else if (move == key) {
+                                hillData[i] = {
+                                    h: hand,
+                                    w: strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight * (1/Math.max(maxWeight, 0.00000001)), //weight in current move
+                                    pw: strategy.allHands[j].preflopWeight,
+                                    nw: strategy.allHands[j].weight,
+                                    cb: strategy.allHands[j].combination,
+                                    ev: strategy.allHands[j].moves[key].ev
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            return hillData;
+        }
+        return createFinalDate(keysSorted, handsSize, move, maxWeight, orderBy);
+    }
+
+    var data_strategy = [];
+
+    displayAllMoveStrategyInfo(strategyORrange, "all");
+    function displayAllMoveStrategyInfo(move, whatDisplay) {
+        if (move == "strategy") {
+            data_strategy = createHillData(testStrategy, "0", "strategy"); //strategy, preflop, range(3й аргумент)
+            currentHandInDiagram = null;
+            createDiagram("strategy"); //если хотим рейнж - передаем "range" а не сайзинг
+            if (whatDisplay == "all") {
+                createMatrix("strategy");
+            }
+
+        } else {
+            $("#strategy-moves li").addClass("not-selected-move");
+            let arr = document.getElementById("strategy-moves").childNodes;
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].id.split('strategyMove_')[1] == move) {
+                    arr[i].classList.remove("not-selected-move");
+                    arr[i].classList.add("selected-move");
+                    break;
+                }
+            }
+
+            data_strategy = createHillData(testStrategy, move, "range"); //strategy, preflop, range(3й аргумент)
+            currentHandInDiagram = null;
+            createDiagram("range"); //если хотим рейнж - передаем "range" а не сайзинг
+            if (whatDisplay == "all") {
+                createMatrix(move);
+            }
+        }
+    }
+
+    function removeAllPreviousElements(whatRemove) {
+        if (whatRemove == "strategy") {
+            let strategyMoves = document.getElementById("strategy-moves");
+            strategyMoves.innerHTML = '';
+            return;
+        }
+        let oldSVG = document.getElementById("mCSB_1_container");
+        oldSVG.innerHTML = ''; // медленный способ// удаляем childNodes
+
+        if (whatRemove == "all") {
+            let paras = document.getElementsByClassName('matrix-strategy');
+            for (let i = paras.length - 1; i >= 0; i--) {
+                paras[i].parentNode.removeChild(paras[i]);
+            }
+        }
+
+
+    }
+
+    function getMaxAgroEV(hand) {
+        for (let i = 0; i < testStrategy.allHands.length; i++) {
+            if (testStrategy.allHands[i].hand == hand) {
+                let maxEV = -9000;
+                for (var key in testStrategy.allHands[i].moves) {
+                    if (parseFloat(key) > 0 && parseFloat(testStrategy.allHands[i].moves[key].ev) > maxEV) {
+                        maxEV = parseFloat(testStrategy.allHands[i].moves[key].ev);
+                    }
+                }
+                return maxEV;
+            }
+        }
+    }
+
+    var currentHandInDiagram = null;
+    //создаем диаграмму в левой части главного окна hill info
+    function createDiagram(move) {
+        removeAllPreviousElements("left");
+
+        var offset = 0;
+        var offsetOld = 0;
+        var offsetTMP = 0;
+
+        //Create SVG element
+        var svg = d3.select("#mCSB_1_container")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+        var transparentLvl = ".15";
+        var transparentTXT = ".5";
+        createOrderSVG();
+        function createOrderSVG() {
+            if (move == "strategy") {
+                if (currentMatrixHand != null) {
+                    drawText();
+                    drawText2();
+                    drawAgroWeight();
+                    drawAgroEV();
+                    drawAgroPercent();
+                    drawCallWeight();
+                    drawCallEV();
+                    drawCallPercent();
+                    drawFoldWeight();
+                    drawFoldPercent();
+                } else {
+                    drawFoldWeight();
+                    drawCallWeight();
+                    drawAgroWeight();
+                    drawText();
+                    drawText2();
+                }
+                if (currentMatrixHand != null) {
+
+                } else {
+                    drawWeight("node");
+                }
+
+            } else {
+                drawPreflopWeight();
+                drawNodeWeight();
+                drawCurrentWeight();
+                drawText();
+                drawText2();
+                drawWeight();
+            }
+        }
+
+        function getSuit(char) {
+            if (char === 'c') {return String.fromCharCode(9827)}
+            if (char === 's') {return String.fromCharCode(9824)}
+            if (char === 'h') {return String.fromCharCode(9829)}
+            if (char === 'd') {return String.fromCharCode(9830)}
+        }
+
+        function getColor(char) {
+            if (char === 'c') {return "#88b750"}
+            if (char === 's') {return "#cfac40"}
+            if (char === 'h') {return "#d92f21"}
+            if (char === 'd') {return "#5d91d1"}
+        }
+
+        function drawPreflopWeight() {
+            // рисуем префлоп вес
+            svg.selectAll("rect.preflop")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "preflop")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    /*if (currentMatrixHand != null) {
+                        return i * 85 + 30;
+                    }*/
+                    return i * 25 + 6;
+                })
+                .attr("width", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    //console.log(d.h);
+                    return (d.pw * 250) + "px";
+                })
+                .attr("height", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    return preflopColor;
+                });
+        }
+        function drawNodeWeight() {
+            // рисуем вес руки на входе в узел
+            svg.selectAll("rect.node")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "node")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    /*if (currentMatrixHand != null) {
+                        return i * 85 + 15;
+                    }*/
+                    return i * 25 + 3;
+                })
+                .attr("width", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    //console.log(d.h);
+                    return (d.nw * 250) + "px";
+                })
+                .attr("height", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    return nodeColor;
+                });
+        }
+        function drawCurrentWeight() {
+            // рисуем прямоугольники текущего спектра
+            svg.selectAll("rect.current")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "current")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    /*if (currentMatrixHand != null) {
+                        return i * 85;
+                    }*/
+                    return i * 25;
+                })
+                .attr("width", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    //console.log(d.h);
+                    return (d.w * 250) + "px";
+                })
+                .attr("height", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    return "rgb(0, 0, 130)";
+                });
+
+        }
+        function drawText() {
+            // выводим текст названия комбинации
+            offset = 0;
+            var hole;
+            svg.selectAll("text.title")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "title")
+                .attr("id", function(d) {
+                    return d.h;
+                })
+                .text(function(d) {
+                    hole = (d.h).split('');
+                    return hole[0] + getSuit(hole[1]);
+                })
+                .attr("x", 0)
+                .attr("y", function(d, i) {
+                    if (currentMatrixHand != null && currentMoveOrStrategyState == "strategy") {
+                        offsetTMP = 0;
+                        offsetOld = offset;
+                        if (d.w < 0.002) {offsetTMP += 15;}
+                        if (d.call < 0.002) {offsetTMP += 15;}
+                        if (d.fold < 0.002) {offsetTMP += 15;}
+                        if (offsetTMP > 30) {offsetTMP = 30;}
+                        offset += offsetTMP;
+                        return i * 85 + 26 - offsetOld - offsetTMP/2;
+                    }
+                    return i * 25 + 12;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return getColor((d.h).split('')[1]);
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(219, 219, 219, " + transparentLvl + ")");
+                    } else {return getColor((d.h).split('')[1]);}
+                });
+        }
+        function drawText2() {// выводим текст названия комбинации
+            offset = 0;
+            var hole;
+            svg.selectAll("text.title2")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "title2")
+                .attr("id", function(d) {
+                    return d.h + "2";
+                })
+                .text(function(d) {
+                    hole = (d.h).split('');
+                    return hole[2] + getSuit(hole[3]);
+                })
+                .attr("x", 15)
+                .attr("y", function(d, i) {
+                    if (currentMatrixHand != null && currentMoveOrStrategyState == "strategy") {
+                        offsetTMP = 0;
+                        offsetOld = offset;
+                        if (d.w < 0.002) {offsetTMP += 15;}
+                        if (d.call < 0.002) {offsetTMP += 15;}
+                        if (d.fold < 0.002) {offsetTMP += 15;}
+                        if (offsetTMP > 30) {offsetTMP = 30;}
+                        offset += offsetTMP;
+                        return i * 85 + 26 - offsetOld - offsetTMP/2;
+                    }
+                    return i * 25 + 12;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return getColor((d.h).split('')[3]);
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(219, 219, 219, " + transparentLvl + ")");
+                    } else {return getColor((d.h).split('')[3]);}
+                });
+
+            $('#content-m svg .title').on('click', function(e){
+                let el = e.target;
+                //alert(el.id);
+                if (currentMatrixHand != null) {
+                    if (currentHandInDiagram != null) {
+                        if (el.id != currentHandInDiagram) {
+                            return
+                        } else {
+                            removeAllPreviousElements("left");
+                            currentHandInDiagram = null;
+                            createDiagram(currentMoveOrStrategyState);
+                            removeAllPreviousElements("strategy");
+                            createStrategyList();
+                            $("#strategy-moves > li").on('click', changeStrategyListOn);
+                        }
+                    } else {
+                        removeAllPreviousElements("left");
+                        currentHandInDiagram = el.id;
+                        createDiagram(currentMoveOrStrategyState);
+                        removeAllPreviousElements("strategy");
+                        createStrategyList();
+                        $("#strategy-moves > li").on('click', changeStrategyListOn);
+                    }
+                }
+            })
+
+            $('#content-m svg .title2').on('click', function(e){
+                let el = e.target;
+                //alert(el.id.split('').slice(0, 4).join(''));
+                if (currentMatrixHand != null) {
+                    if (currentHandInDiagram != null) {
+                        if (el.id.split('').slice(0, 4).join('') != currentHandInDiagram) {
+                            return
+                        } else {
+                            removeAllPreviousElements("left");
+                            currentHandInDiagram = null;
+                            createDiagram(currentMoveOrStrategyState);
+                            removeAllPreviousElements("strategy");
+                            createStrategyList();
+                            $("#strategy-moves > li").on('click', changeStrategyListOn);
+                        }
+                    } else {
+                        removeAllPreviousElements("left");
+                        currentHandInDiagram = el.id.split('').slice(0, 4).join('');
+                        createDiagram(currentMoveOrStrategyState);
+                        removeAllPreviousElements("strategy");
+                        createStrategyList();
+                        $("#strategy-moves > li").on('click', changeStrategyListOn);
+                    }
+                }
+            })
+        }
+        function drawWeight(weightType) {
+            // выводим вес комбинации
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "value")
+                .text(function(d) {
+                    if (weightType == "node") {
+                        return d.nw.toFixed(2);
+                    } else {
+                        if (d.ev === undefined) {
+                            return d.w.toFixed(2);
+                        } else if (d.ev < 0) {
+                            return (d.w.toFixed(2) + "  \u00A0  EV: -$" + Math.abs(d.ev));
+                        } else {return (d.w.toFixed(2) + "  \u00A0  EV: $" + d.ev);}
+                    }
+                })
+                .attr("x", 35)
+                .attr("y", function(d, i) {
+                    return i * 25 + 12;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", "rgba(210, 210, 210, .75)");
+        }
+
+        function drawFoldWeight() {
+            // рисуем префлоп вес
+            offset = 0;
+            svg.selectAll("rect.fold")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "fold")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    if (currentMatrixHand != null) {
+                        if (d.call < 0.002) {offset += 15;}
+                        if (d.w < 0.002) {offset += 15;}
+                        if (d.fold < 0.002) {offset += 15;}
+                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                            offset -= 15;
+                        }
+                        return i * 85 + 30 - offset;
+                    }
+                    return i * 25 + 6;
+                })
+                .attr("width", function(d) {
+                    if (currentMatrixHand != null) {
+                        return d.fold * 185 + "px";
+                    } else {return d.fold * 250 + "px";}
+                })
+                .attr("height", function(d) {
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return foldColor;
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(54, 52, 45, " + transparentLvl + ")");
+                    } else {return foldColor;}
+                });
+        }
+        function drawCallWeight() {
+            // рисуем вес руки на входе в узел
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("rect.call")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "call")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    if (currentMatrixHand != null) {
+                        offsetTMP = 0;
+                        offsetOld = offset;
+                        if (d.call < 0.002) {offset += 15;}
+                        if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
+                        if (d.fold < 0.002) {offset += 15;}
+                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                            offset -= 15;
+                        }
+                        return i * 85 + 15 - offsetTMP - offsetOld;
+                    }
+                    return i * 25 + 3;
+                })
+                .attr("width", function(d) {
+                    if (currentMatrixHand != null) {
+                        return d.call * 185 + "px";
+                    } else {return d.call * 250 + "px";}
+                })
+                .attr("height", function(d) {
+                    //console.log('d.w = ' + d.w);
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return callColor;
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(137, 150, 0, " + transparentLvl + ")");
+                    } else {return callColor;}
+                });
+        }
+        function drawAgroWeight() {
+            // рисуем прямоугольники agro спектра
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("rect.agro")
+                .data(data_strategy)
+                .enter()
+                .append("rect")
+                .attr("class", "agro")
+                .attr("x", 31)
+                .attr("y", function(d, i) {
+                    if (currentMatrixHand != null) {
+                        offsetOld = offset;
+                        if (d.call < 0.002) {offset += 15;}
+                        if (d.w < 0.002) {offset += 15;}
+                        if (d.fold < 0.002) {offset += 15;}
+                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                            offset -= 15;
+                        }
+                        return i * 85 - offsetOld;
+                    }
+                    return i * 25;
+                })
+                .attr("width", function(d) {
+                    if (d.fold < 0.002 && d.call < 0.002 && d.w < 0.002) {return 0.002 * 200 + "px";}
+                    if (currentMatrixHand != null) {
+                        return d.w * 185 + "px";
+                    } else {return d.w * 250 + "px";}
+
+                })
+                .attr("height", function(d) {
+                    return 15 + "px";
+                })
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return agroColor;
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(125, 16, 8, " + transparentLvl + ")");
+                    } else {return agroColor;}
+                });
+
+        }
+        function drawAgroPercent() {
+            // выводим процент агро действий
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.w < 0.02) {return}
+                    return ((d.w * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                })
+                .attr("x", 35)
+                .attr("y", function(d, i) {
+                    offsetOld = offset;
+                    if (d.call < 0.002) {offset += 15;}
+                    if (d.w < 0.002) {offset += 15;}
+                    if (d.fold < 0.002) {offset += 15;}
+                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 12 - offsetOld;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+        function drawAgroEV() {
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.w < 0.02) {return}
+                    let maxAgroEV = parseFloat(getMaxAgroEV(d.h));
+                    if(maxAgroEV > 0) {
+                        return "EVmax: $" + maxAgroEV.toFixed(2);
+                    } else {
+                        return "EVmax: -$" + Math.abs(maxAgroEV).toFixed(2);
+                    }
+                })
+                .attr("x", function(d, i) {
+                    if (d.fold < 0.002 && d.call < 0.002 && d.w < 0.002) {return 70;}
+                    return Math.max((d.w * 185 + 35), 70);
+                })
+                .attr("y", function(d, i) {
+                    offsetOld = offset;
+                    if (d.call < 0.002) {offset += 15;}
+                    if (d.w < 0.002) {offset += 15;}
+                    if (d.fold < 0.002) {offset += 15;}
+                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 12 - offsetOld;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+        function drawCallPercent() {
+            // выводим процент агро действий
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.call < 0.002) {return}
+                    return ((d.call * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                })
+                .attr("x", 35)
+                .attr("y", function(d, i) {
+                    offsetTMP = 0;
+                    offsetOld = offset;
+                    if (d.call < 0.002) {offset += 15;}
+                    if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
+                    if (d.fold < 0.002) {offset += 15;}
+                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 15 + 12 - offsetTMP - offsetOld;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+        function drawCallEV() {
+            // выводим процент агро действий
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.call < 0.002) {return}
+                    let callEV = parseFloat(getHandEV(d.h, "0"));
+                    if(callEV > 0) {
+                        return "EV: $" + callEV.toFixed(2);
+                    } else {
+                        return "EV: -$" + Math.abs(callEV).toFixed(2);
+                    }
+                })
+                .attr("x", function(d, i) {
+                    return Math.max((d.call * 185 + 35), 70);
+                })
+                .attr("y", function(d, i) {
+                    offsetTMP = 0;
+                    offsetOld = offset;
+                    if (d.call < 0.002) {offset += 15;}
+                    if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
+                    if (d.fold < 0.002) {offset += 15;}
+                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 15 + 12 - offsetTMP - offsetOld;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+        function drawFoldPercent() {
+            // выводим процент агро действий
+            offset = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.fold < 0.002) {return}
+                    return ((d.fold * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                })
+                .attr("x", 35)
+                .attr("y", function(d, i) {
+                    if (d.call < 0.002) {offset += 15;}
+                    if (d.w < 0.002) {offset += 15;}
+                    if (d.fold < 0.002) {offset += 15;}
+                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 30 + 12 - offset;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+
+    }
+
+    //проверяет соответствие комбинации
+    function isCombinationNameEqual(combinationName, index) {
+        let handHillArr = data_strategy[index].h.split('');
+        let curCombArr = combinationName.split('');
+        if (handHillArr[0] != curCombArr[0] || handHillArr[2] != curCombArr[1]) {
+            return false;
+        } else if (curCombArr.length == 2) { // карманные пары
+            return true;
+        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] == "s") {
+            return true;
+        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] == "o") {
+            return true;
+        } else {return false;}
+    }
+
+    function isCombinationNameEqualMatrix(combinationName, index) {
+        let handHillArr = testStrategy.allHands[index].hand.split('');
+        let curCombArr = combinationName.split('');
+
+        if (handHillArr[0] != curCombArr[0] || handHillArr[2] != curCombArr[1]) {
+            return false;
+        } else if (curCombArr.length == 2) { // карманные пары
+            return true;
+        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] == "s") {
+            return true;
+        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] == "o") {
+            return true;
+        } else {return false;}
+    }
+
+    //функция отрисовывающая матрицу в центральной части окна
+    //createMatrix("1.3");
+
+    var cardsArr = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
+
+    //функция возвращающая название комбинации для матрицы
+    function createTD(i, j) {
+        if (i < j) {
+            //alert(cardsArr[i] + cardsArr[j]);
+            return (cardsArr[i] + cardsArr[j]) + "s";
+        } else if (i == j) {
+            return (cardsArr[i] + cardsArr[j]);
+        } else {
+            //alert(cardsArr[i] + cardsArr[j]);
+            return (cardsArr[j] + cardsArr[i]) + "o";
+        }
+    };
+
+    // создает и отображает матрицу // moveType = сайзинг мува или strategy
+    function createMatrix(moveType) {
+        let hill_matrix = document.querySelector("#matrix");
+        let cardsArr = ['A', 'K', 'Q', 'J', 'T', '9', '8', '7', '6', '5', '4', '3', '2'];
+
+        //функция возвращающая название комбинации для матрицы
+        function createTD(i, j) {
+            if (i < j) {
+                return (cardsArr[i] + cardsArr[j]) + "s";
+            } else if (i == j) {
+                return (cardsArr[i] + cardsArr[j]);
+            } else {
+                return (cardsArr[j] + cardsArr[i]) + "o";
+            }
+        };
+        
+        function getMatrixTdColor(title) {
+            let arr = title.split('');
+            if (arr.length == 2) {
+                return "rgba(150, 150, 150, 0.25)";
+            } else if (arr[2] == 's') {
+                return "rgba(251, 230, 175, 0.25)";
+            } else {return "rgba(229, 240, 244, 0.25)";}
+        }
+        //создаем матрицу если она пустая
+        if (hill_matrix.childNodes.length <= 1) {
+            //alert("hill_matrix.childNodes.length = " + hill_matrix.childNodes.length);
+            for(let i = 0; i < 13; i++) {
+                let tr = document.createElement("tr");
+                hill_matrix.appendChild(tr);
+                for(let j = 0; j < 13; j++) {
+                    let td = document.createElement("td");
+                    let span = document.createElement("span");
+                    let title = createTD(i, j);
+                    tr.appendChild(td);
+                    td.appendChild(span);
+                    td.setAttribute("class", "matrix_td");
+                    td.setAttribute("id", title);
+                    span.innerHTML = title;
+
+                    let div = document.createElement("div");
+                    div.style.background = getMatrixTdColor(title);
+                    div.style.width = "100%";
+                    div.style.height = "100%";
+                    div.style.position = "absolute";
+                    div.style.top = "0";
+                    div.style.zIndex = "-500";
+                    td.appendChild(div);
+                }
+            }
+        }
+
+        //возвращает массив с весами(если они разные внутри одной комбинации)
+        function getCombinationWeight(combinationName, moveType) {
+            let weightMin = 1;
+            let weightMax = 0;
+
+            function justDoIt(w) {
+                if (w > weightMax) {
+                    weightMax = w;
+                }
+                if (w < weightMin) {
+                    weightMin = w;
+                }
+            }
+
+            for(let i = 0; i < data_strategy.length; i++) {
+                if (isCombinationNameEqual(combinationName, i)) {
+                    if (moveType > 0 || moveType == "strategy" || moveType == "range") {
+                        let w = data_strategy[i].w;
+                        justDoIt(w);
+                    } else if (moveType == 0) {
+                        let w = data_strategy[i].call;
+                        justDoIt(w);
+                    } else if (moveType < 0) {
+                        let w = data_strategy[i].fold;
+                        justDoIt(w);
+                    } else if (moveType == "preflop") {
+                        let w = data_strategy[i].pw;
+                        justDoIt(w);
+                    } else if (moveType == "node") {
+                        let w = data_strategy[i].nw;
+                        justDoIt(w);
+                    }
+                }
+            }
+            return [weightMin, weightMax];
+        }
+
+        displayOrderMatrix();
+        function displayOrderMatrix() {
+            if (moveType != "strategy") {
+                createMatrixIMG("preflop", moveType);
+                createMatrixIMG("node", moveType);
+                createMatrixIMG("range", moveType);
+            } else {
+                if (wasBet(rawActionIndex)) {
+                    createMatrixIMG("-1");
+                    createMatrixIMG("0");
+                    createMatrixIMG("strategy", moveType);
+                } else {
+                    createMatrixIMG("-1"); //временно для проверки глюков, что ничего не фолдит сеть когда есть возможность чекать
+                    createMatrixIMG("0");
+                    createMatrixIMG("strategy", moveType);
+                }
+
+            }
+        }
+
+        function createMatrixIMG(moveType) {
+
+            function setMinRangeColor(weight) {
+                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
+                if(tmp > 3 || (weight[0] < 0.17 && tmp > 1.6) || (weight[0] < 0.12)) {
+                    return "rgb(0, 0, 250)";
+                } else {return "rgb(0, 0, " + Math.max((tmp * 12 + 130), 185) + ")";}
+            };
+
+            function setMinStrategyColor(weight) {
+                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
+                if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+                    return "rgb(190, 16, 8)";
+                } else {return "rgb(" + Math.max((tmp * 12 + 125), 145) + ", 16, 8)";}
+            };
+
+            function setMinNodeColor(weight) {
+                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
+                if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+                    return "rgb(120, 180, 240)";
+                } else {return "rgb(" + Math.max((tmp * 4 + 98), 101) + ", " + Math.max((tmp * 7 + 140), 150) + ", " + Math.max((tmp * 10 + 185), 200) + ")";}
+            };
+
+            function setMinCallColor(weight) {
+                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
+                if(tmp > 3 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+                    return "rgb(191, 204, 0)";
+                } else {return "rgb(" + Math.max((tmp * 11 + 126), 150) + ", " + Math.max((tmp * 14 + 126), 167) + ", 0)";}
+            };
+
+            for (let i = 0; i < 13; i++) {
+                for(let j = 0; j < 13; j++) {
+                    let comb = createTD(i, j);
+                    let td = document.getElementById(comb);
+                    let weight = getCombinationWeight(comb, moveType);
+                    //alert("weight = " + weight + "comb = " + comb);
+
+                    let div = document.createElement("div");
+                    div.classList.add("matrix-strategy");
+                    if (moveType == "strategy") {
+                        //div.style.background = "rgb(0, 0, 130)";
+                        div.style.background = agroColor;
+                        div.style.height = "86%";
+                        div.style.zIndex = "-30";
+                    } else if (moveType == "range") {
+                        div.style.background = currentColor;
+                        div.style.height = "86%";
+                        div.style.zIndex = "-30";
+                    } else if (moveType == 0 || moveType == "node") {
+                        if (moveType == "node") {
+                            div.style.background = nodeColor;
+                        } else {
+                            div.style.background = callColor;
+                        }
+                        div.style.zIndex = "-50";
+                        div.style.height = "93%";
+                    } else if (moveType < 0 || moveType == "preflop") {
+                        if (moveType == "preflop") {
+                            div.style.background = preflopColor;
+                        } else {div.style.background = foldColor}
+                        div.style.height = "100%";
+                        div.style.zIndex = "-70";
+                    }
+
+                    div.style.width = (weight[1] * 100) + "%";
+                    div.style.position = "absolute";
+                    div.style.top = "0";
+                    td.appendChild(div);
+
+                    if (weight[1] - weight[0] > 0.1) {
+                        let div = document.createElement("div");
+                        div.classList.add("matrix-strategy");
+
+
+                        if (moveType == "range") {
+                            div.style.background = setMinRangeColor(weight);
+                            //div.style.background = "#0000e7";
+                            div.style.height = "86%";
+                            div.style.zIndex = "-29";
+                        } else if (moveType > 0 || moveType == "strategy") {
+                            div.style.background = setMinStrategyColor(weight);
+                            div.style.zIndex = "1000";
+                            div.style.height = "86%";
+                            div.style.zIndex = "-29";
+                        } else if (moveType == 0 || moveType == "node") {
+                            if (moveType == "node"){
+                                div.style.background = setMinNodeColor(weight);
+                            } else {
+                                div.style.background = setMinCallColor(weight);
+                            }
+                            div.style.height = "93%";
+                            div.style.zIndex = "-49";
+                        } else if (moveType < 0) {
+                            div.style.background = "#525045";
+                            div.style.height = "100%";
+                            div.style.zIndex = "-69";
+                        }
+                        if (weight[0] < 0.06) {
+                            div.style.width = (0.06 * 100) + "%";
+                        } else {div.style.width = (weight[0] * 100) + "%";}
+                        div.style.position = "absolute";
+                        div.style.top = "0";
+                        td.appendChild(div);
+                    }
+                }
+            }
+        }
+    }
+
+    matrixTDclick();
+    //кликаем в ячейку матрицы чтобы посмотреть детально информацию о комбинациях
+    function matrixTDclick() {
+        $(".matrix_td").on('click', function (e) {
+            let td = e.target;
+            if (td.id == '') {
+                td = td.parentNode;
+            }
+
+            if (td.classList.contains("td-selected")) {
+                removeAllPreviousElements("left");
+                currentMatrixHand = null;
+                currentHandInDiagram = null;
+                createStrategyList();
+                setSelectedStrategyList();
+                $("#strategy-moves > li").off;
+                $("#strategy-moves > li").on('click', changeStrategyListOn);
+                if (currentMoveOrStrategyState != "strategy") {
+                    data_strategy = createHillData(testStrategy, currentMoveOrStrategyState, "range");
+                    currentHandInDiagram = null;
+                    createDiagram(currentMoveOrStrategyState);
+                    createMatrix(currentMoveOrStrategyState);
+                } else {
+                    data_strategy = createHillData(testStrategy, "0", "strategy");
+                    currentHandInDiagram = null;
+                    createDiagram("strategy");
+                    createMatrix("strategy");
+                }
+
+                var paras = document.getElementsByClassName("tmp-blur");
+                for (let i = paras.length - 1; i >= 0; i--) {
+                    paras[i].parentNode.removeChild(paras[i]);
+                }
+                td.classList.remove("td-selected");
+            } else {
+                var paras = document.getElementsByClassName("td-selected");
+                if (paras.length == 1) {return;}
+                currentMatrixHand = td.id;
+                createStrategyList();
+                setSelectedStrategyList();
+                //alert("test");
+                $("#strategy-moves > li").off;
+                $("#strategy-moves > li").on('click', changeStrategyListOn);
+                if (currentMoveOrStrategyState == "strategy") {
+                    data_strategy = createHillData(testStrategy, "0", "strategy");
+                    currentHandInDiagram = null;
+                    createDiagram("strategy");
+                } else {
+                    data_strategy = createHillData(testStrategy, currentMoveOrStrategyState, "range");
+                    currentHandInDiagram = null;
+                    createDiagram(currentMoveOrStrategyState);
+                }
+
+                for (let i = 0; i < 13; i++) {
+                    for (let j = 0; j < 13; j++) {
+                        let tdID = document.getElementById(createTD(i, j));
+                        if (tdID.id != td.id) {
+                            let div = document.createElement("div");
+                            div.classList.add("tmp-blur");
+                            tdID.appendChild(div);
+                        }
+                    }
+                }
+                td.classList.add("td-selected");
+            }
+        });
+    }
 }
 
 //заполняет информацией окно с вероятностями
@@ -1174,6 +2716,11 @@ function createEVinfo() {
 
 function removeHillInfo() {
     $(".hill-info").removeClass("appear-fast");
+    let matrix = document.getElementById("matrix");
+    while (matrix.firstChild) {
+        matrix.removeChild(matrix.firstChild);
+    }
+
     removeActions();
     displayActions();
     displayAddRemoveButtons();
@@ -1306,6 +2853,26 @@ function maxAmountAtCurrentStreet() {
            }
        } else {return parseFloat(0);}
    }
+}
+
+function maxAmountAtCurrentIndex(rawActionIndex) {
+    let currentStreet = rawActionList[rawActionIndex].street;
+    for (let i = rawActionIndex - 1; i >= 0; i--) {
+        if (rawActionList[i].street === currentStreet) {
+            if (rawActionList[i].action < 3) {
+                return parseFloat(rawActionList[i].amount);
+            }
+        } else {return parseFloat(0);}
+    }
+}
+
+//возвращает превышение над максимальной ставкой на улице
+function excessSmartOverMaximum(rawActionIndex) {
+    if (maxAmountAtCurrentIndex(rawActionIndex) == 0) {
+        return rawActionList[rawActionIndex].amount;
+    } else if (rawActionList[rawActionIndex].action < 3) {
+
+    }
 }
 
 // возвращает минимальную возможную ставку для игрока в последней строке
@@ -1491,8 +3058,12 @@ function restartListener() {
     tdAction.on('click', actionClick);
 
     tdPlayerStats.off();
-    tdPlayerStats = $(".all-info-table td:nth-child(1)"); // селектим amount
+    tdPlayerStats = $(".all-info-table td:nth-child(1)");
     tdPlayerStats.on('contextmenu', displayStats);
+
+    PlayerStatsInStrategy.off();
+    PlayerStatsInStrategy = $("#h4id");
+    PlayerStatsInStrategy.on('contextmenu', displayStats);
 
     tdActionMenu.off();
     tdActionMenu = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)");
@@ -1515,6 +3086,7 @@ function removeUpload() {
     if (uploadWindow.classList.contains("appear-fast")) {
         uploadWindow.classList.remove("appear-fast");
     }
+    return false;
 }
 
 function displayUploadWindow() {
@@ -1523,7 +3095,6 @@ function displayUploadWindow() {
     }
 }
 
-//actionToJson(12);
 function actionToJson(rawActionListIndex, request) {
 
     var myJSON = {
@@ -1670,7 +3241,7 @@ function actionToJson(rawActionListIndex, request) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8888/request",
+        url: "http://localhost:8888/request",  //url сервера mephisto
         dataType: "json",
         success: function (msg) {
             if (msg) {
@@ -1875,10 +3446,4 @@ rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false);  //
       }
     ]
   },
-  "request": {
-    "type": "ev",
-    "street": "turn",
-    "act_num": 4
-  }
-}
- */
+  */

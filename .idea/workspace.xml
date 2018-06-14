@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="54212599-1b86-4337-ab11-ad12541296e8" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
+    <list default="true" id="c0d7165d-6d2e-4ceb-9914-19a9205354b1" name="Default" comment="new version with strategy">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/sim-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/sim-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/particles.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/particles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simulator.html" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,13 +23,45 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="simulator.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simulator.html">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="140">
+              <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
+              <folding>
+                <element signature="n#section#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#1;n#section#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#3;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#4;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#5;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#section#6;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app_particles.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/app_particles.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="particles.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/particles.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="1486" column="13" lean-forward="true" selection-start-line="1486" selection-start-column="13" selection-end-line="1486" selection-end-column="13" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -27,58 +69,19 @@
       <file leaf-file-name="sim-style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/sim-style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="926" column="15" lean-forward="false" selection-start-line="926" selection-start-column="15" selection-end-line="926" selection-end-column="15" />
-              <folding />
+            <state relative-caret-position="35880">
+              <caret line="1794" column="13" selection-start-line="1794" selection-start-column="13" selection-end-line="1794" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/script.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="1584" column="28" lean-forward="true" selection-start-line="1584" selection-start-column="28" selection-end-line="1584" selection-end-column="28" />
+            <state relative-caret-position="-11314">
+              <caret line="93" column="54" lean-forward="true" selection-start-line="93" selection-start-column="54" selection-end-line="93" selection-end-column="54" />
               <folding>
-                <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-                <element signature="n#!!block;n#displayActions#0" expanded="false" />
-                <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-                <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-                <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-                <element signature="n#!!block;n#addActionString#0" expanded="false" />
-                <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-                <element signature="n#!!block;n#removeActions#0" expanded="false" />
-                <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-                <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-                <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-                <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-                <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-                <element signature="n#!!block;n#amountClick#0" expanded="false" />
-                <element signature="n#!!block;n#displayStats#0" expanded="false" />
-                <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-                <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-                <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-                <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-                <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-                <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-                <element signature="n#!!block;n#actionClick#0" expanded="false" />
-                <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-                <element signature="n#!!block;n#minAmount#0" expanded="false" />
-                <element signature="n#!!block;n#wasBet#0" expanded="false" />
-                <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-                <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-                <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-                <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-                <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-                <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-                <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-                <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-                <element signature="n#!!block;n#restartListener#0" expanded="false" />
-                <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-                <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-                <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-                <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-                <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
+                <element signature="e#1249#5782#0" />
               </folding>
             </state>
           </provider>
@@ -89,50 +92,69 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
-        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>grad</find>
-      <find>shado</find>
-      <find>gray</find>
-      <find>.id</find>
-      <find>on whoisingame</find>
-      <find>checkedCards[0]</find>
-      <find>checkedCards</find>
-      <find>upload-w</find>
-      <find>blin</find>
-      <find>color-violet</find>
-      <find>cards-re</find>
-      <find>footer</find>
-      <find>content-m</find>
-      <find>content</find>
-      <find>createAllCombinationsArr</find>
-      <find>createHillInfo</find>
-      <find>elNode</find>
-      <find>gto</find>
-      <find>iq</find>
-      <find>probabilities-info</find>
-      <find>createProbabilitiesInfo</find>
-      <find>actionToJson</find>
+      <find>uploadWindow</find>
+      <find>strategy-l</find>
+      <find>strategyMoves</find>
+      <find>strategy-mov</find>
+      <find>getCallEV</find>
+      <find>removeUp</find>
+      <find>pages</find>
+      <find>app</find>
+      <find>particles-js</find>
+      <find>path_config_json</find>
+      <find>font</find>
+      <find>simulator</find>
+      <find />
+      <find>cash-wrapper</find>
+      <find>mCustomScrollbar</find>
+      <find>cash</find>
+      <find>select2</find>
+      <find>special-offer</find>
+      <find>nav</find>
+      <find>linea</find>
+      <find>uploa</find>
+      <find>line</find>
+      <find>parti</find>
+      <find>linear-g</find>
+      <find>id</find>
+      <find>h1</find>
+      <find>&lt;h1&gt;</find>
+      <find>login-form</find>
+      <find>particlesJS.load</find>
+      <find>particlesJS</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Pushkar Evgeniy" />
+      </list>
+    </option>
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/style.css" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/css/global.css" />
+        <option value="$PROJECT_DIR$/css/style.css" />
         <option value="$PROJECT_DIR$/simulator.html" />
-        <option value="$PROJECT_DIR$/js/app_particles.js" />
-        <option value="$PROJECT_DIR$/css/sim-style.css" />
+        <option value="$PROJECT_DIR$/js/strategy_window.js" />
         <option value="$PROJECT_DIR$/js/script.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/css/sim-style.css" />
+        <option value="$PROJECT_DIR$/js/app_particles.js" />
+        <option value="$PROJECT_DIR$/js/particles.js" />
       </list>
     </option>
   </component>
@@ -141,7 +163,6 @@
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
-    <annotation-enable>false</annotation-enable>
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
@@ -150,35 +171,53 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-12" />
-    <option name="width" value="1622" />
-    <option name="height" value="1770" />
+    <option name="x" value="668" />
+    <option name="y" value="372" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="particles.js" type="620a8d5e:NestingTreeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="HbShouldOpenHtmlAsHb" value="" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
-    <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../learn/redux-intensive-boilerplate-reference" />
+    <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.selected.package.prettier" value="" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -192,68 +231,182 @@
       </list>
     </option>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="54212599-1b86-4337-ab11-ad12541296e8" name="Default" comment="" />
-      <created>1505738405421</created>
+      <changelist id="c0d7165d-6d2e-4ceb-9914-19a9205354b1" name="Default" comment="" />
+      <created>1520867843787</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1505738405421</updated>
-      <workItem from="1505738407257" duration="40980000" />
-      <workItem from="1505932576638" duration="1363000" />
-      <workItem from="1505934011652" duration="2421000" />
-      <workItem from="1505938282303" duration="20580000" />
-      <workItem from="1509914010771" duration="52181000" />
-      <workItem from="1510564449331" duration="2714000" />
-      <workItem from="1510677578928" duration="2211000" />
-      <workItem from="1510683347228" duration="3861000" />
+      <updated>1520867843787</updated>
+      <workItem from="1520867849375" duration="27756000" />
+      <workItem from="1521042176973" duration="14006000" />
+      <workItem from="1521222918812" duration="29472000" />
+      <workItem from="1522179023019" duration="26718000" />
+      <workItem from="1522749690779" duration="35963000" />
+      <workItem from="1523449580013" duration="13188000" />
+      <workItem from="1523904867051" duration="2184000" />
+      <workItem from="1523976537925" duration="9217000" />
+      <workItem from="1524767967610" duration="7024000" />
+      <workItem from="1524858816556" duration="1193000" />
+      <workItem from="1525166537411" duration="724000" />
+      <workItem from="1526398049499" duration="652000" />
+      <workItem from="1527339155067" duration="38272000" />
+      <workItem from="1527445500709" duration="38341000" />
+      <workItem from="1527844122924" duration="736000" />
+      <workItem from="1527846858663" duration="1601000" />
+      <workItem from="1527873880555" duration="1879000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126311000" />
+    <option name="totallyTimeSpent" value="248926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981412" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21115242" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3296845" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24981412" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21115242" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3296845" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info id="Favorites" order="6" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,561 +415,359 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="3" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/simulator.html">
+    <entry file="file://$PROJECT_DIR$/js/particles.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="30400">
+          <caret line="1520" lean-forward="true" selection-start-line="1520" selection-end-line="1520" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12920">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17594">
-          <caret line="926" column="15" lean-forward="false" selection-start-line="926" selection-start-column="15" selection-end-line="926" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="31280">
+          <caret line="1564" column="12" selection-start-line="1564" selection-start-column="12" selection-end-line="1564" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31806">
-          <caret line="1674" column="21" lean-forward="true" selection-start-line="1674" selection-start-column="21" selection-end-line="1674" selection-end-column="21" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="540">
+          <caret line="27" column="70" lean-forward="true" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6156">
-          <caret line="324" column="72" lean-forward="false" selection-start-line="324" selection-start-column="72" selection-end-line="324" selection-end-column="72" />
-          <folding />
+        <state relative-caret-position="12920">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17594">
-          <caret line="926" column="15" lean-forward="false" selection-start-line="926" selection-start-column="15" selection-end-line="926" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="30220">
+          <caret line="1511" column="20" selection-start-line="1511" selection-start-column="20" selection-end-line="1511" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31844">
-          <caret line="1676" column="33" lean-forward="true" selection-start-line="1676" selection-start-column="33" selection-end-line="1676" selection-end-column="33" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="60360">
+          <caret line="3018" column="17" selection-start-line="3018" selection-start-column="17" selection-end-line="3018" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="12920">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17594">
-          <caret line="926" column="15" lean-forward="true" selection-start-line="926" selection-start-column="15" selection-end-line="926" selection-end-column="15" />
-          <folding />
+        <state relative-caret-position="30220">
+          <caret line="1511" column="20" selection-start-line="1511" selection-start-column="20" selection-end-line="1511" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18810">
-          <caret line="990" column="17" lean-forward="false" selection-start-line="990" selection-start-column="17" selection-end-line="990" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="26680">
+          <caret line="1334" lean-forward="true" selection-start-line="1334" selection-end-line="1334" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/app_particles.js" />
-    <entry file="file://$PROJECT_DIR$/../../json.txt">
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3059">
-          <caret line="161" column="3" lean-forward="true" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="35" column="68" lean-forward="true" selection-start-line="35" selection-start-column="68" selection-end-line="35" selection-end-column="68" />
-          <folding />
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2584">
-          <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="60440">
+          <caret line="1511" column="20" lean-forward="true" selection-start-line="1511" selection-start-column="20" selection-end-line="1511" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1330">
-          <caret line="70" column="44" lean-forward="true" selection-start-line="70" selection-start-column="44" selection-end-line="70" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="55040">
+          <caret line="1376" column="43" selection-start-line="1376" selection-start-column="43" selection-end-line="1376" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="49" />
-          <folding />
+        <state relative-caret-position="61320">
+          <caret line="1533" column="16" selection-start-line="1533" selection-start-column="16" selection-end-line="1533" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55080">
+          <caret line="1377" column="66" selection-start-line="1377" selection-start-column="66" selection-end-line="1377" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2356">
-          <caret line="124" column="0" lean-forward="false" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/index.html" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/css/style.css" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/js/script.js" />
-    <entry file="file://$PROJECT_DIR$/js/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="32" column="3" lean-forward="true" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="39" column="75" lean-forward="false" selection-start-line="39" selection-start-column="75" selection-end-line="39" selection-end-column="75" />
-          <folding />
+        <state relative-caret-position="61320">
+          <caret line="1533" column="15" selection-start-line="1533" selection-start-column="15" selection-end-line="1533" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="47" lean-forward="true" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="65720">
+          <caret line="1643" column="34" lean-forward="true" selection-start-line="1643" selection-start-column="34" selection-end-line="1643" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/index.html" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/css/style.css" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/js/script.js" />
-    <entry file="file://$PROJECT_DIR$/css/sim-style.css">
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1729">
-          <caret line="91" column="15" lean-forward="true" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="61320">
+          <caret line="1533" column="15" selection-start-line="1533" selection-start-column="15" selection-end-line="1533" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="12360">
+          <caret line="309" column="28" selection-start-line="309" selection-start-column="28" selection-end-line="309" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/index.html" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/css/style.css" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/js/script.js" />
-    <entry file="file://$PROJECT_DIR$/style.css" />
-    <entry file="file://$PROJECT_DIR$/../../work_template/index.html" />
-    <entry file="file://$PROJECT_DIR$/css/global.css">
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="18" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/index.html" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/js/script.js" />
-    <entry file="file://$PROJECT_DIR$/../../intensive_learn_htmlcss-1/my_project/css/style.css" />
-    <entry file="file://$PROJECT_DIR$/../../json.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3059">
-          <caret line="161" column="3" lean-forward="false" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/app_particles.js" />
     <entry file="file://$PROJECT_DIR$/css/sim-style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="926" column="15" lean-forward="false" selection-start-line="926" selection-start-column="15" selection-end-line="926" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="61320">
+          <caret line="1533" column="15" selection-start-line="1533" selection-start-column="15" selection-end-line="1533" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/script.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="1584" column="28" lean-forward="true" selection-start-line="1584" selection-start-column="28" selection-end-line="1584" selection-end-column="28" />
+        <state relative-caret-position="10440">
+          <caret line="261" column="25" lean-forward="true" selection-start-line="261" selection-start-column="25" selection-end-line="261" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25840">
+          <caret line="646" column="48" lean-forward="true" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/sim-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61320">
+          <caret line="1533" column="15" lean-forward="true" selection-start-line="1533" selection-start-column="15" selection-end-line="1533" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86440">
+          <caret line="2161" column="53" selection-start-line="2161" selection-start-column="53" selection-end-line="2161" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33640">
+          <caret line="841" column="1" lean-forward="true" selection-start-line="841" selection-start-column="1" selection-end-line="841" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/sim-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60880">
+          <caret line="1522" column="14" lean-forward="true" selection-start-line="1522" selection-start-column="14" selection-end-line="1522" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95800">
+          <caret line="2395" column="36" selection-start-line="2395" selection-start-column="36" selection-end-line="2395" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27480">
+          <caret line="687" column="19" selection-start-line="687" selection-start-column="19" selection-end-line="687" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42240">
+          <caret line="1056" column="23" selection-start-line="1056" selection-start-column="23" selection-end-line="1056" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22880">
+          <caret line="572" column="22" selection-start-line="572" selection-start-column="22" selection-end-line="572" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67720">
+          <caret line="1693" column="34" selection-start-line="1693" selection-start-column="34" selection-end-line="1693" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22880">
+          <caret line="572" column="22" lean-forward="true" selection-start-line="572" selection-start-column="22" selection-end-line="572" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61960">
+          <caret line="1549" column="39" lean-forward="true" selection-start-line="1549" selection-start-column="39" selection-end-line="1549" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/strategy_window.js" />
+    <entry file="file://$PROJECT_DIR$/simulator.html" />
+    <entry file="file://$PROJECT_DIR$/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12920">
+          <caret line="646" column="48" selection-start-line="646" selection-start-column="48" selection-end-line="646" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/sim-style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35880">
+          <caret line="1794" column="13" selection-start-line="1794" selection-start-column="13" selection-end-line="1794" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/app_particles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding>
-            <element signature="n#!!block;n#changeCardState#0" expanded="false" />
-            <element signature="n#!!block;n#displayActions#0" expanded="false" />
-            <element signature="n#!!block;n#displayAddRemoveButtons#0" expanded="false" />
-            <element signature="n#!!block;n#isTerminalStreetState#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllActions#0" expanded="false" />
-            <element signature="n#!!block;n#addActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeLastActionString#0" expanded="false" />
-            <element signature="n#!!block;n#removeActions#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsInGame#0" expanded="false" />
-            <element signature="n#!!block;n#whoIsNextMove#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsThePot#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#initPlayerBalance#0" expanded="false" />
-            <element signature="n#!!block;n#amountClick#0" expanded="false" />
-            <element signature="n#!!block;n#displayStats#0" expanded="false" />
-            <element signature="n#!!block;n#selectPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#createHillInfo#0;n#!!block;n#actionMenu#0" expanded="false" />
-            <element signature="n#!!block;n#removeHillInfo#0" expanded="false" />
-            <element signature="n#!!block;n#removeProbabInfo#0" expanded="false" />
-            <element signature="n#!!block;n#getValidXCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#getValidYCoordinates#0" expanded="false" />
-            <element signature="n#!!block;n#actionClick#0" expanded="false" />
-            <element signature="n#!!block;n#maxAmountAtCurrentStreet#0" expanded="false" />
-            <element signature="n#!!block;n#minAmount#0" expanded="false" />
-            <element signature="n#!!block;n#wasBet#0" expanded="false" />
-            <element signature="n#!!block;n#getCurrentTableClass#0" expanded="false" />
-            <element signature="n#!!block;n#getRawActionsIndex#0" expanded="false" />
-            <element signature="n#!!block;n#setGTOtoAllStings#0" expanded="false" />
-            <element signature="n#!!block;n#whatIsFirstGTOindex#0" expanded="false" />
-            <element signature="n#!!block;n#removeAllGTOstrings#0" expanded="false" />
-            <element signature="n#!!block;n#playerSearch#0" expanded="false" />
-            <element signature="n#!!block;n#setNewPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#setNewRawPlayer#0" expanded="false" />
-            <element signature="n#!!block;n#restartListener#0" expanded="false" />
-            <element signature="n#!!block;n#removeUpload#0" expanded="false" />
-            <element signature="n#!!block;n#displayUploadWindow#0" expanded="false" />
-            <element signature="n#!!block;n#playersForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#ActionForJson#0;n#!!block;n#actionToJson#0" expanded="false" />
-            <element signature="n#!!block;n#initPreflopPlayersIndexes#0" expanded="false" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/particles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="1486" column="13" lean-forward="true" selection-start-line="1486" selection-start-column="13" selection-end-line="1486" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11314">
+          <caret line="93" column="54" lean-forward="true" selection-start-line="93" selection-start-column="54" selection-end-line="93" selection-end-column="54" />
+          <folding>
+            <element signature="e#1249#5782#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="74" selection-start-line="7" selection-start-column="74" selection-end-line="7" selection-end-column="74" />
+          <folding>
+            <element signature="n#section#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#1;n#section#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#3;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#4;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#5;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#section#6;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

@@ -1473,10 +1473,18 @@ function isInArray(value, array) {
 /* ---------- particles.js functions - start ------------ */
 
 window.pJSDom = [];
+window.partNumber = 200;
 
 window.particlesJS = function(tag_id, params){
 
-  //console.log(params);
+  // console.log(params.particles.number);
+  // setTimeout(() => {
+  //   if (params.particles.number.value <= 30) {
+  //       params.particles.number.value = 30;
+  //       window.particlesJS(tag_id, params);
+  //       console.log(params.particles.number);
+  //   }
+  // }, 5000)
 
   /* no string id? so it's object params, and set the id with default id */
   if(typeof(tag_id) != 'string'){

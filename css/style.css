@@ -567,6 +567,14 @@ hr + .content:nth-child(odd) h2{
 	background: rgba(0,0,0,0.1);
 }
 
+.hill-info * {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
+
+
+
 .content table tr{ border-bottom: 1px dashed #666; }
 
 .content table td{ padding: 10px 20px 9px 20px; }
@@ -675,6 +683,11 @@ body.colorbox-demo #cboxContent, body.colorbox-demo #cboxContent p, body.colorbo
 	height: auto;
 	max-height: 400px;
 }
+
+#content-m svg {
+	cursor: pointer;
+}
+
 
 .max-width-example{ min-width: 620px; }
 

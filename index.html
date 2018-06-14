@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Mephisto</title>
+        <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <meta name="author" content="bred<" />
+        <meta name="keywords" content="покер, poker, холдем, holdem, подсказчик, learn, обучение, анализ, равновесие, ai, Нэш, GTO, гто, EV, искусственный интеллект, ИИ" />
+        <meta name="description" content="Mephisto – передовые технологии покерного искусственного интеллекта" />
+        <meta name="robots" content="all" />
+
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "css/sim-style.css";
+        </style>
+        <link rel="stylesheet" media="screen" href="css/style_particles.css">
+        <!--<link rel="stylesheet" href="css/style.css"> -->
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "css/sim-style.css";
+        </style>
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+        <!-- custom scrollbar stylesheet -->
+        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+
+    </head>
+    <div id="bg_layer"></div>
+    <body id="particles-js" class="simulator_body wrapper">
+        <div >
+        <header>
+            <nav id="nav-3">
+                <ul class="navigation-menu">
+                    <li><a id="contacts-link" class="link-3">contacts</a></li>
+                    <li><a id="buy-link" class="link-3">buy</a></li>
+                    <li><a id="manual-link" class="link-3">manual</a></li>
+                    <li><a id="neuromodeling-link" class="link-3">neuromodeling</a></li>
+                    <li><a id="mephisto-link" class="link-3">mephisto</a></li>
+                    <li class="nav-active"><a id="simulator-link" class="link-3">simulator</a></li>
+                    <li class="link-void"><a class="login-button"></a></li>
+                    <li><a class="link-3" id="user-login" onclick="displayLoginForm()">login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <h1 hidden>Mephisto - искусственный интеллект для игры в покер</h1>
+            <div id="login-form">
+                <div class="login-form-close" onclick="loginFormClose()"></div>
+                <h3>Authorization</h3>
+
+                <fieldset>
+                    <form action="javascript:void(0);" method="get">
+                        <input type="email" required value="Email Address" onBlur="if(this.value=='')this.value='Email Address'" onFocus="if(this.value=='Email Address')this.value='' ">
+                        <input type="password" required value="Пароль" onBlur="if(this.value=='')this.value='Пароль'" onFocus="if(this.value=='Пароль')this.value='' ">
+                        <input type="submit" value="Login">
+                        <footer class="clearfix">
+                            <p><span class="info">?</span><a href="#">Forgot your password?</a></p>
+                        </footer>
+                    </form>
+                </fieldset>
+
+            </div>
+            <section id="simulator-html" class="pages">
+                <section class="cards">
+                    <div class="user-cards big-cards">
+                        <div id="card_1" class="hole" onclick="showModalCardsLeft()"></div>
+                        <div id="card_2" class="hole" onclick="showModalCardsLeft()"></div>
+                    </div>
+                    <div class="board-cards big-cards">
+                        <div id="card_3" class="flop" onclick="showModalCardsRight()"></div>
+                        <div id="card_4" class="flop" onclick="showModalCardsRight()"></div>
+                        <div id="card_5" class="flop" onclick="showModalCardsRight()"></div>
+                        <div id="card_6" class="turn" onclick="showModalCardsRight()"></div>
+                        <div id="card_7" class="river" onclick="showModalCardsRight()"></div>
+                        <div class="cards-remove" onclick="cardsRemove()"></div>
+                    </div>
+
+
+                </section>
+
+                <section class="moves-history">
+                    <div class="moves-wrapper">
+                        <div class="flop-moves">
+
+                            <table class="all-info-table postflop">
+                                <caption class="table-title">FLOP</caption>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                    <th>Pot</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <span class="add-button-wrapper">
+                            <button class="add-move-button flop hidden" onclick="addActionString()"></button>
+                            <button class="sub-move-button flop hidden" onclick="removeLastActionString()"></button>
+                        </span>
+                    </div>
+                    <div class="moves-wrapper">
+                        <div class="turn-moves">
+                            <table class="all-info-table postflop">
+                                <caption class="table-title">TURN</caption>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                    <th>Pot</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <span class="add-button-wrapper">
+                            <button class="add-move-button turn hidden" onclick="addActionString()"></button>
+                            <button class="sub-move-button turn hidden" onclick="removeLastActionString()"></button>
+                        </span>
+                    </div>
+                    <div class="moves-wrapper">
+                        <div class="river-moves">
+                            <table class="all-info-table postflop">
+                                <caption class="table-title">RIVER</caption>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                    <th>Pot</th>
+                                    <th id="test-id">Amount</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <span class="river-buttons">
+                            <span>
+                                <span class="add-button-wrapper">
+                                    <button class="add-move-button river hidden" onclick="addActionString()"></button>
+                                    <button class="sub-move-button river hidden" onclick="removeLastActionString()"></button>
+                                </span>
+                            </span>
+                            <button id="all-moves-remove" onclick="removeAllActions()"></button>
+                        </span>
+                    </div>
+                    <div class="moves-wrapper">
+                        <div class="preflop-moves">
+                            <table class="all-info-table preflop">
+                                <caption class="table-title">PREFLOP</caption>
+                                <tr>
+                                    <th>Player</th>
+                                    <th>Position</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                    <th>Pot</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                    <div id="draggable" class="hill-info ui-widget-content">
+                        <h4 id="h4id">test hill</h4>
+                        <div id="info-diagram">
+                            <div id="curWeight" class="colorsWeight"></div>
+                            <span>-current weight</span>
+                            <div id="nodeWeight" class="colorsWeight"></div>
+                            <span>-node weight</span>
+                            <div id="preflopWeight" class="colorsWeight"></div>
+                            <span>-preflop weight</span>
+                        </div>
+                        <div id="content-m" class="content"></div>
+                        <!--
+                        <div id="strategy-hill">
+                            <input type="radio" id="strategyChoice" name="strategy-hill" hidden>
+                            <label for="strategyChoice">strategy</label>
+
+                            <input type="radio" id="hillChoice" name="strategy-hill" hidden>
+                            <label for="hillChoice">range</label>
+                        </div>
+                        !-->
+                        <div id="strategy-moves-wrapper">
+                            <ul id="strategy-moves">
+                            </ul>
+                        </div>
+
+                        <div class="hill-matrix">
+                            <table id="matrix">
+                            </table>
+                        </div>
+                        <div class="hill-combination">combination HILL</div>
+                        <button id="remove-hill-info" onclick="removeHillInfo()"></button>
+                    </div>
+
+                <div class="probabilities-info">
+                    <h4 id="h4-probabilities">test probab</h4>
+                    <div id="content-probab">
+                    </div>
+                    <button id="remove-probab-info" onclick="removeProbabInfo()"></button>
+                </div>
+
+                <div id="waiting-progress-bar">
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                    <div class="ball"></div>
+                </div>
+
+                <div id="waiting-progress-bar2" class="load-bar">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <button id="upload-button" onclick="displayUploadWindow()"></button>
+                <button id="random-button"></button>
+                <button id="iq-button"></button>
+                <button id="learn-button"></button>
+
+                <div id="upload-window">
+                    <p><textarea id="upload-text-area" autofocus name="hand_history_text" placeholder="Copy here your Pokerstars Hold'em No Limit Short-handed hand history text"></textarea></p>
+                    <p><input  id="submit-hand-history" type="submit" value="Upload"></p>
+                    <button id="remove-upload" onclick="removeUpload()"></button>
+                </div>
+                <!--
+
+                <select name="playersList" id="playersList"></select>
+
+                <h4>Preflop</h4>
+
+                <p><span>VPIP: </span><span id="stats-vpip">22</span><span>, PFR: </span><span id="stats-pfr">17.5</span><span>, 3-Bet: </span><span id="stats-3bet">7.3</span><span>, hands: </span><span id="stats-hands">13300</span></p>
+                <p><span>Steal CO: </span><span id="stats-stealCO">27</span><span>, Steal BTN: </span><span id="stats-stealBTN">55</span><span>, Steal SB: </span><span id="stats-stealSB">47</span></p>
+                <p><span>Fold To Steal BB vs SB: </span><span id="stats-foldStealBBvsSB">55</span><span>, Fold To Steal BB vs BTN: </span><span id="stats-foldStealBBvsBTN">60</span><span>, Fold To Steal BB vs CO: </span><span id="stats-foldStealBBvsCO">73</span></p>
+                <p><span>Fold To Steal SB vs BTN: </span><span id="stats-foldStealSBvsBTN">80</span><span>, Fold To Steal SB vs CO: </span><span id="stats-foldStealSBvsCO">86</span><span>, Fold To 3-Bet Steal: </span><span id="stats-foldTo3BetSteal">53</span></p>
+                <p><span>4-Bet: </span><span id="stats-4bet">11.4</span><span>, Fold To 4-Bet: </span><span id="stats-foldTo4Bet">48</span></p>
+
+                <h4>Postflop</h4>
+
+                <p><span>Raise%: </span><span id="stats-raisePersent">8</span><span>, Call%: </span><span id="stats-callPercent">40</span></p>
+                <p><span>WTSD: </span><span id="stats-WTSD">27</span><span>, WSF: </span><span id="stats-WSF">44</span><span>, W$SD No Raise: </span><span id="stats-WSD">53</span></p>
+
+                <h4>Flop</h4>
+
+                <p><span>Agg% Flop: </span><span id="stats-aggPersentFlop">28</span><span>, Cbet Flop: </span><span id="stats-cbetFlop">54</span><span>, Fold To Cbet Flop: </span><span id="stats-foldToCbetFlop">45</span></p>
+                <p><span>Donk Flop: </span><span id="stats-donkFlop">4</span><span>, Fold To Raise Flop: </span><span id="stats-foldRaiseFlop">40</span><span>, W$SD Raise Flop: </span><span id="stats-WSDraiseFlop">58</span></p>
+
+                <h4>Turn</h4>
+
+                <p><span>Agg% Turn: </span><span id="stats-aggPersentTurn">27</span><span>, Cbet Turn: </span><span id="stats-cbetTurn">50</span><span>, Fold To Cbet Turn: </span><span id="stats-foldToCbetTurn">39</span></p>
+                <p><span>Fold To Raise Turn: </span><span id="stats-foldRaiseTurn">38</span><span>, W$SD Raise Turn: </span><span id="stats-WSDraiseTurn">60</span></p>
+
+                <h4>River</h4>
+
+                <p><span>Agg% River: </span><span id="stats-aggPersentRiver">23</span><span>, W$SD Raise River: </span><span id="stats-WSDraiseRiver">61</span><span>, River Call Win%: </span><span id="stats-riverCallWin">48</span></p>
+
+                -->
+                <div class="hidden-cards-select-modal">
+                    <div class="modal-cards-close" onclick="modalCardsClose()"></div>
+                    <ul class="mini-card-list"></ul>
+                </div>
+            </section>
+            <section id="additional-navigation" class="left-navigation not-simulator hidden"></section>
+
+            <section id="mephisto-html" class="pages not-simulator hidden">
+
+                <img class="page-avatar" src="img/ai-200.png" width="128px" alt="neural network icon">
+
+                <p>Mephito-AI - демонстрация возможностей искусственного интеллекта для игры в покер, основанного на глубинном обучении нейронных сетей, а так же удобный и уникальный инструмент для анализа и обучения игры в no-limit texas hold'em.</p>
+                <p>Программа обучалась играя сама с собой, а так же наблюдая за десятками миллионов раздач, которые были сыграны в руме Pokerstars. При создании модели оппонента Mephisto использует уникальные статистические показатели, синтезированные нейросетями во время наблюдения за игрой реальных игроков из покер рума. Программа способна принимать сложные и точные решения, эксплуатируя даже незначительные и незаметные для большинства людей отклонения от равновесия Нэша.</p>
+                <p>Помимо возможностей тотальной и "осторожной эксплуатации", программа способна рассчитывать равновесие Нэша в реальном времени на любой улице постфлопа с высокой точностью благодаря качественным gto-абстракциям и нейросетевым алгоритмам отсечения линий с существенно более низким математическим ожиданием (aналогично нашумевшей программе AlphaZero).</p>
+                <p>Искусственный интеллект Mephisto обучен игре 6max no-limit texas hold'em, а так же турнирам Spin & Go. Вы можете загрузить историю раздачи вышеупомянутого типа покера сыгранную вами в руме Pokerstars в симулятор и проанализировать ее на предмет ошибок.</p>
+
+            </section>
+            <section id="neuromodeling-html" class="pages not-simulator hidden">
+                <img class="page-avatar" src="img/neural_network_brain-256.png" width="128px" alt="neural network icon">
+                <p>В последние несколько лет мы наблюдаем взрыв интереса к нейронным сетям, которые успешно применяются в самых различных областях - бизнесе, медицине, технике, геологии , физике. Нейронные сети вошли в практику везде, где нужно решать задачи прогнозирования, классификации или управления. Такой впечатляющий успех определяется несколькими причинами:</p>
+                <ul>
+                    <li>1. Нейронные сети - исключительно мощный метод моделирования, позволяющий воспроизводить чрезвычайно сложные зависимости. В частности, нейронные сети нелинейны по свой природе. На протяжение многих лет линейное моделирование было основным методом моделирования в большинстве областей, поскольку для него хорошо разработаны процедуры оптимизации. В задачах, где линейная аппроксимация неудовлетворительна (а таких достаточно много), линейные модели работают плохо. Кроме того, нейронные сети справляются с "проклятием размерности", которое не позволяет моделировать линейные зависимости в случае большого числа переменных</li>
+                    <li>2. Нейронные сети учатся на примерах. Пользователь нейронной сети подбирает представительные данные, а затем запускает алгоритм обучения, который автоматически воспринимает структуру данных. При этом от пользователя, конечно, требуется какой-то набор эвристических знаний о том, как следует отбирать и подготавливать данные, выбирать нужную архитектуру сети и интерпретировать результаты, однако уровень знаний, необходимый для успешного применения нейронных сетей, гораздо скромнее, чем, например, при использовании традиционных методов статистики.</li>
+                </ul>
+                <p>Как правило, нейронная сеть используется тогда, когда неизвестен точный вид связей между входами и выходами, - если бы он был известен, то связь можно было бы моделировать непосредственно. Другая существенная особенность нейронных сетей состоит в том, что зависимость между входом и выходом находится в процессе обучения сети. Для обучения нейронных сетей применяются алгоритмы двух типов (разные типы сетей используют разные типы обучения): управляемое ("обучение с учителем") и не управляемое ("без учителя").</p>
+                <p>ИИ Mephisto обучался модели оппонента с учителем, наблюдая за игрой реальных игроков, используя "закрытую статистику" из стандартного майнинга. Тем не менее модель оппонента получилась практически без искажений.</p>
+            </section>
+            <section id="manual-html" class="pages not-simulator hidden">
+                <img class="page-avatar" src="img/book-manual-512.png" alt="neural network icon">
+                <p class=MsoNormal><span lang=RU>При стартовой загрузке страницы симулятора,
+будет загружена случайная рука </span>no<span lang=RU>-</span>limit texas hold<span
+                        lang=RU>'</span>em short<span lang=RU>-</span>handed NL<span lang=RU>
+25, которая была сыграна на </span>Pokerstars<span lang=RU>. Вы можете увидеть
+действия, совершенные игроками на разных улицах торгов. При нажатии правой
+кнопкой мыши на одном из действий, которое совершил какой-либо игрок, вы
+увидите выпадающий список, в котором  можно выбрать следующие действия:</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span lang=RU>•<span
+                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Show range<span lang=RU> - при нажатии на эту кнопку появится
+спектр игрока, который совершил данное действие, в котором можно увидеть каждую
+руку и ее предполагаемую вероятность. Вес рук варьируется от 0 до
+1(максимальный). Навигация в окне осуществляется колесиком мыши, а также
+зажатием левой кнопкой мыши для перемещения. </span></p>
+
+                <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span lang=RU>•<span
+                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Show strategy<span lang=RU> - при нажатии на эту кнопку
+появится окно в котором можно просмотреть стратегию игры с каждой рукой в момент
+игры, когда он еще не совершил данное действие. Чтобы отобразить стратегию оппонента на последнее действие, необходимо добавить случайное
+действие оппонента нажатием на кнопку “+”, а затем кликнуть на этом действии
+пкм и выбрать  </span>Show probabilities<span lang=RU>.</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span lang=RU>•<span
+                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Evaluate EV<span lang=RU>’</span>s<span lang=RU> – этот пункт
+выпадающего списка доступен только если вы нажали правой кнопкой мыши на
+действии игрока, чья рука точно задана(</span>mephisto<span lang=RU>). При
+нажатии на эту кнопку появится окно со списком возможные действия в данный
+момент игры с их математическим ожиданием выигрыша. В скобках после названия
+действия будет написан размер ставки, вклаываемой этим действием. В случае если
+в этом узле было рассчитано равновесие Нэша, отобразится еще вероятность, с
+которой следует совершать данное действие по равновесию </span>Нэша и символ
+                    «g» (GTO) перед ней. <span lang=RU>Если же математическое ожидание выигрыша
+было рассчитано с использованием нейронных сетей (по умолчанию), вы не увидите
+вероятности действий и буквы  «</span>g<span lang=RU>». Помните, что чем более
+ранняя улица торгов – и чем стандартнее карты борда, тем более ощутимое превосходство
+точности предсказания спектров и вероятностей действий у нейро модели, особенно
+с учетом достаточной статистики на оппонента. Если оппонент ходил последним, то
+для расчета матожиданий выигрыша вам необходимо добавить любое случайное
+действие за игрока </span>mephisto<span lang=RU> нажатием на кнопку “+”, а
+затем кликнуть на этом действии пкм и выбрать  </span>Evaluate EV<span lang=RU>’</span>s<span
+                            lang=RU>.</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in;text-indent:-.25in'><span lang=RU>•<span
+                        style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span>Start GTO from here<span lang=RU> – при нажатии на эту кнопку вы
+поставите галочку напротив этого пункта, после чего произойдет следующее: </span></p>
+
+                <p class=MsoNormal style='margin-left:.5in'><span lang=RU>а) на этом действии и
+всех последующих будет рассчитана равеновесная стратегия, устойчивая к
+эксплуатации. До этого действия стратегия рассчитывается нейросетями с
+максимальной эксплуатацией слабостей оппонента.</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in'><span lang=RU>б) все спектры и
+вероятности действий в этом узле и последующих будут равновесными.</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in'><span lang=RU>в) все строки с
+действиями после заданного (на котом будет выставлена галочка </span>Start GTO from
+                    here<span lang=RU>) изменят свой цвет</span></p>
+
+                <p class=MsoNormal style='margin-left:.5in'><span lang=RU>Выставив галочку
+можно снова нажать на кнопки </span>Show range<span lang=RU>, </span>Show probabilities<span
+                        lang=RU>, </span>Evaluate EV<span lang=RU>’</span>s<span lang=RU> и сравнить
+результаты </span>GTO<span lang=RU> и нейросетей. </span></p>
+
+                <p class=MsoNormal><span lang=RU>При нажатии на никнейме одного из игроков
+правой кнопкой мыши на любой улице торгов, появится окно со статами игрока. Из
+нестандартных статов которые требуют расшифровки:</span></p>
+
+                <p class=MsoNormal style='text-indent:.5in'><span lang=RU>а) </span>Raise<span
+                        lang=RU>% - отношение количества рейзов на постфлопе ко всем действиям когда была
+возможность рейзить. Стандартное значение 9%. </span></p>
+
+                <p class=MsoNormal style='text-indent:.5in'><span lang=RU>б) </span>Call<span
+                        lang=RU>% - отношение количества коллов на постфлопе ко всем действиям когда
+была возможность уравнять ставку. Стандартное значение 40%.</span></p>
+
+                <p class=MsoNormal><span lang=RU>Следует учитывать, что игроки на которых нет
+или мало рук(стат </span>hands<span lang=RU>) с высокой вероятностью являются
+очень слабыми игроками, поэтому не стоит удивляться «мусору» в их спектрах</span></p>
+
+                <p class=MsoNormal><span lang=RU> При нажатии на никнейме одного из игроков
+левой кнопкой мыши на любой улице торгов, можно отредактировать никнейм,
+написав реальный никнейм существующего в майнинге игрока или выбрать его из
+выпадающего списка, введя первые буквы. В выпадающем списке будут игроки
+подсвеченные разными цветами. Зеленым цветом будут подсвечены игроки с высоким
+статом </span>VPIP<span lang=RU>. Красным цветом будут подсвечены игроки, на
+которых есть 10к и более рук.  </span></p>
+
+                <p class=MsoNormal><span lang=RU>При нажатии на последнем совершенном действии,
+которое совершил любой из игроков на улицах </span>Flop<span lang=RU>, </span>Turn<span
+                        lang=RU>, </span>River<span lang=RU> или на действии которое необходимо
+совршить, добавив его кнопкой “+”  -  можно выбрать действие, и затем сразу же
+установить количество денег, которое вкладывается этим действием, если оно
+требует вложения денег. Например если выбрано агрессивное действие, но не
+выставлен размер ставки – симулятор выдаст сообщение об ошибке и попросит вас
+ввести значение вкладываемых денег.</span></p>
+
+                <p class=MsoNormal><span lang=RU>&nbsp;</span></p>
+
+                <p class=MsoNormal><span lang=RU>Теперь рассмотрим основные кнопки симулятора,
+которые находятся слева внизу основной формы программы:</span></p>
+
+                <p class=MsoNormal><span lang=RU>“</span>Upload<span lang=RU>” – при нажатии на
+эту кнопку появляется диалоговое окно, в поле которого вы можете вставить
+историю раздачи, сыгранную на </span>Pokerstars no<span lang=RU>-</span>limit texas
+                    hold<span lang=RU>'</span>em <b>short</b><span lang=RU>-</span>handed<span
+                            lang=RU>, после чего вы можете анализировать ее в симуляторе. Текст раздачи
+должен содержать открытые карты для одного из игроков. </span></p>
+
+                <p class=MsoNormal><span lang=RU>“</span>Random<span lang=RU>”  - при нажатии
+на эту кнопку в симулятор будет загружена случайная рука </span>no<span
+                        lang=RU>-</span>limit texas hold<span lang=RU>'</span>em <b>short</b><span
+                        lang=RU>-</span>handed NL<span lang=RU> 25, которая была сыграна на </span>Pokerstars<span
+                        lang=RU>, после чего вы можете анализировать ее.</span></p>
+
+                <p class=MsoNormal><span lang=RU>“</span>IQ<span lang=RU>” - при нажатии на эту
+кнопку в симулятор будет загружена рука </span>no<span lang=RU>-</span>limit texas
+                    hold<span lang=RU>'</span>em <b>short</b><span lang=RU>-</span>handed NL<span
+                            lang=RU> 25, после чего вам предлагается изучить ситуацию, статистику
+оппонентов и выбрать наилучшее на ваш взгляд действие. Далее при желании вы
+можете что-то изменить в этой раздаче или просто проанализировать ее глубже с
+инструментами </span>MEPHISTO<span lang=RU>, после чего продолжить
+тестирование, нажав снова кнопку “</span>IQ<span lang=RU>”. После ответа на
+определенное количество тестовых раздач, будет рассчитан и показан ваш покерный
+</span>IQ<span lang=RU>.</span></p>
+
+
+            </section>
+            <section id="buy-html" class="pages not-simulator hidden">
+                    <div class="price-wrapper">
+                        <div class="product-price product-free">
+                            <b>FREE</b>
+                            <p>- Анализ случайных раздач</p>
+                        </div>
+
+                        <div class="product-price">
+                            <b>$50</b>
+                            <p>- Возможность загрузки собственных рук</p>
+                            <p>- Детальное отображение спектров</p>
+                            <span>лимит 2 месяца</span>
+                            <span>600 загрузок собственных раздач</span>
+                        </div>
+
+                        <div class="product-price">
+                            <b>$100</b>
+                            <p>- Возможность загрузки собственных рук</p>
+                            <p>- Детальное отображение спектров</p>
+                            <span>лимит 6 мес</span>
+                            <span>1500 загрузок собственных раздач</span>
+                        </div>
+
+                        <div class="product-price">
+                            <b>$300</b>
+                            <p>- Возможность загрузки собственных рук</p>
+                            <p>- Детальное отображение спектров</p>
+                            <p>- Режим обучения после автоматического анализа ваших раздач</p>
+                            <p>- Расчет gto в реальном времени с флопа</p>
+                            <span>лимит 2 года</span>
+                            <span>6 000 загрузок собственных раздач</span>
+                        </div>
+                    </div>
+
+                    <div class="futures-wrapper">
+                        <div class="futures-price special-offer">
+                            <b>$100</b>
+                            <p>- Обработка 25 000 ваших сыгранных рук с отображением ошибок в симуляторе</p>
+                            <span>Обработка в течении суток</span>
+                        </div>
+
+                        <div class="futures-price special-offer">
+                            <b>$200</b>
+                            <p>- Обработка 100 000 ваших сыгранных рук с отображением ошибок в симуляторе</p>
+                            <span>Обработка в течении суток</span>
+                        </div>
+                    </div>
+
+                    <div class="cash-wrapper">
+                        <img class = "visa" src="img/visa-card-and-mastercard-logo-png-28.png" alt="visa" width="120px">
+                        <img src="img/wm.png" alt="webmoney" width="40px">
+                        <img src="img/bitcoin.png" alt="bitcoin" width="130px" height="27px">
+
+                    </div>
+            </section>
+            <section id="contacts-html" class="pages not-simulator hidden">
+                <p> </p>
+                <h4><img src="img/skype.png" alt="" width="37" height="32" class="left" /><span style="vertical-align: 10px;">   checkmate.n1</span</h4>
+                <h4><img src="img/mail_t.png" alt="" width="36" height="32" class="left" /><span style="vertical-align: 10px;">    support@mephisto-ai.com</span</h4>
+
+            </section>
+        </main>
+            <footer>
+                <h4>Mephisto - poker artificial intelligence &#169</h4>
+            </footer>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/script.js"></script>
+
+        <script src="js/particles.js"></script>
+        <script src="js/app_particles.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
+
+        <!-- custom scrollbar plugin -->
+        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+        <script src="js/d3.min.js"></script>
+        <script>
+            (function($){
+                $(window).on("load",function(){
+                    //$.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
+                    //$.mCustomScrollbar.defaults.axis="y"; //enable 2 axis scrollbars by default
+
+                    $("#content-m").mCustomScrollbar({theme:"minimal"});
+                    $("#manual-html").mCustomScrollbar({theme:"minimal"});
+                    $("#neuromodeling-html").mCustomScrollbar({theme:"minimal"});
+                });
+            })(jQuery);
+        </script>
+        </div>
+    </body>
+</html>
