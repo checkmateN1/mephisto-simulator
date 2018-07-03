@@ -5,6 +5,8 @@
         <title>Mephisto</title>
         <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
         <meta name="author" content="bred<" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        <meta name="viewport" content="height=device-height, initial-scale=1.0">
         <meta name="keywords" content="покер, poker, холдем, holdem, подсказчик, learn, обучение, анализ, равновесие, ai, Нэш, GTO, гто, EV, искусственный интеллект, ИИ" />
         <meta name="description" content="Mephisto – передовые технологии покерного искусственного интеллекта" />
         <meta name="robots" content="all" />
@@ -31,15 +33,16 @@
         <div >
         <header>
             <nav id="nav-3">
-                <ul class="navigation-menu">
+                <img src="img/menu.png" class="mmenu hidden" width="54" height="54" alt="mobile menu">
+                <ul id="main-navigation" class="navigation-menu">
                     <li><a id="contacts-link" class="link-3">contacts</a></li>
                     <li><a id="buy-link" class="link-3">buy</a></li>
                     <li><a id="manual-link" class="link-3">manual</a></li>
                     <li><a id="neuromodeling-link" class="link-3">neuromodeling</a></li>
                     <li><a id="mephisto-link" class="link-3">mephisto</a></li>
                     <li class="nav-active"><a id="simulator-link" class="link-3">simulator</a></li>
-                    <li class="link-void"><a class="login-button"></a></li>
-                    <li><a class="link-3" id="user-login" onclick="displayLoginForm()">login</a></li>
+                    <li class="link-void" id="link-void"><a class="login-button"></a></li>
+                    <li class="user-login"><a class="link-3" id="user-login" onclick="displayLoginForm()">login</a></li>
                 </ul>
             </nav>
         </header>
@@ -62,7 +65,7 @@
                 </fieldset>
 
             </div>
-            <section id="simulator-html" class="pages">
+            <section id="simulator-html" class="pages hidden">
                 <section class="cards">
                     <div class="user-cards big-cards">
                         <div id="card_1" class="hole" onclick="showModalCardsLeft()"></div>
@@ -266,7 +269,7 @@
 
                 <img class="page-avatar" src="img/ai-200.png" width="128px" alt="neural network icon">
 
-                <p>Mephito-AI - демонстрация возможностей искусственного интеллекта для игры в покер, основанного на глубинном обучении нейронных сетей, а так же удобный и уникальный инструмент для анализа и обучения игры в no-limit texas hold'em.</p>
+                <p>Mephisto-AI - демонстрация возможностей искусственного интеллекта для игры в покер, основанного на глубинном обучении нейронных сетей, а так же удобный и уникальный инструмент для анализа и обучения игры в no-limit texas hold'em.</p>
                 <p>Программа обучалась играя сама с собой, а так же наблюдая за десятками миллионов раздач, которые были сыграны в руме Pokerstars. При создании модели оппонента Mephisto использует уникальные статистические показатели, синтезированные нейросетями во время наблюдения за игрой реальных игроков из покер рума. Программа способна принимать сложные и точные решения, эксплуатируя даже незначительные и незаметные для большинства людей отклонения от равновесия Нэша.</p>
                 <p>Помимо возможностей тотальной и "осторожной эксплуатации", программа способна рассчитывать равновесие Нэша в реальном времени на любой улице постфлопа с высокой точностью благодаря качественным gto-абстракциям и нейросетевым алгоритмам отсечения линий с существенно более низким математическим ожиданием (aналогично нашумевшей программе AlphaZero).</p>
                 <p>Искусственный интеллект Mephisto обучен игре 6max no-limit texas hold'em, а так же турнирам Spin & Go. Вы можете загрузить историю раздачи вышеупомянутого типа покера сыгранную вами в руме Pokerstars в симулятор и проанализировать ее на предмет ошибок.</p>
@@ -461,14 +464,15 @@
                             <p>- Обработка 100 000 ваших сыгранных рук с отображением ошибок в симуляторе</p>
                             <span>Обработка в течении суток</span>
                         </div>
+
+                        <div class="cash-wrapper">
+                            <img class = "visa" src="img/visa-card-and-mastercard-logo-png-28.png" alt="visa" width="120px">
+                            <img src="img/wm.png" alt="webmoney" width="40px">
+                            <img src="img/bitcoin.png" alt="bitcoin" width="130px" height="27px">
+                        </div>
                     </div>
 
-                    <div class="cash-wrapper">
-                        <img class = "visa" src="img/visa-card-and-mastercard-logo-png-28.png" alt="visa" width="120px">
-                        <img src="img/wm.png" alt="webmoney" width="40px">
-                        <img src="img/bitcoin.png" alt="bitcoin" width="130px" height="27px">
 
-                    </div>
             </section>
             <section id="contacts-html" class="pages not-simulator hidden">
                 <p> </p>
@@ -476,11 +480,15 @@
                 <h4><img src="img/mail_t.png" alt="" width="36" height="32" class="left" /><span style="vertical-align: 10px;">    support@mephisto-ai.com</span</h4>
 
             </section>
+            <div id="modal-simulator-warning" class="hidden">
+                <div>Чтобы воспользоваться симулятором, необходимо посетить сайт на устройстве с высоким разрешением экрана.
+                </div>
+            </div>
         </main>
             <footer>
                 <h4>Mephisto - poker artificial intelligence &#169</h4>
             </footer>
-        <script src="js/jquery-ui.min.js"></script>
+        <!--<script src="js/jquery-ui.min.js"></script>-->
         <script src="js/jquery-3.2.1.slim.min.js"></script>
         <script src="js/script.js"></script>
 
@@ -490,20 +498,20 @@
         <script>window.jQuery || document.write('<script src="../js/minified/jquery-1.11.0.min.js"><\/script>')</script>
 
         <!-- custom scrollbar plugin -->
-        <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-        <script src="js/d3.min.js"></script>
-        <script>
-            (function($){
-                $(window).on("load",function(){
-                    //$.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
-                    //$.mCustomScrollbar.defaults.axis="y"; //enable 2 axis scrollbars by default
+        <!--<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>-->
+        <!--<script>-->
+            <!--(function($){-->
+                <!--$(window).on("load",function(){-->
+                    <!--//$.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default-->
+                    <!--//$.mCustomScrollbar.defaults.axis="y"; //enable 2 axis scrollbars by default-->
 
-                    $("#content-m").mCustomScrollbar({theme:"minimal"});
-                    $("#manual-html").mCustomScrollbar({theme:"minimal"});
-                    $("#neuromodeling-html").mCustomScrollbar({theme:"minimal"});
-                });
-            })(jQuery);
-        </script>
+                    <!--$("#content-m").mCustomScrollbar({theme:"minimal"});-->
+                    <!--$(".pages.not-simulator").mCustomScrollbar({theme:"minimal"});-->
+                    <!--//$("#manual-html").mCustomScrollbar({theme:"minimal"});-->
+                    <!--//$("#neuromodeling-html").mCustomScrollbar({theme:"minimal"});-->
+                <!--});-->
+            <!--})(jQuery);-->
+        <!--</script>-->
         </div>
     </body>
 </html>

@@ -1,0 +1,161 @@
+
+function actionToJson(rawActionListIndex, request) {
+
+    var myJSON = {
+        hand: {
+            lm: Math.max(rawActionList[0].amount, rawActionList[1].amount),
+            c1: getCardName(checkedCards[3]),
+            c2: getCardName(checkedCards[4]),
+            c3: getCardName(checkedCards[5]),
+            c4: getCardName(checkedCards[6]),
+            c5: getCardName(checkedCards[7]),
+        },
+        players: [],
+        actions: createStreets(),
+        request: createRequest()
+    }
+
+    function createStreets() {
+        if (rawActionList[rawActionList.length - 1].street === 3) {
+            var objRiver = {
+                preflop: [],
+                flop: [],
+                turn: [],
+                river: []
+            }
+            return objRiver;
+
+        } else if (rawActionList[rawActionList.length - 1].street === 2) {
+            var objTurn = {
+                preflop: [],
+                flop: [],
+                turn: []
+            }
+            return objTurn;
+        } else if (rawActionList[rawActionList.length - 1].street === 1) {
+            var objFlop = {
+                preflop: [],
+                flop: []
+            }
+            return objFlop;
+        } else {
+            var objPreflop = {
+                preflop: []
+            }
+            return objPreflop;
+        }
+    }
+
+    function createRequest() {
+        var obj = {
+            type: request,
+            street: getStreetName(rawActionList[rawActionListIndex].street),
+            act_num: actNumberAtStreet()
+        }
+
+        function actNumberAtStreet() {
+            var count = 1;
+            for (let i = rawActionListIndex - 1; i >= 0; i--) {
+                if (rawActionList[i].street === rawActionList[rawActionListIndex].street && i > 1) {
+                    count++;
+                } else {return count;}
+            }
+        }
+        return obj;
+    }
+
+    playersForJson();
+    function playersForJson() {
+        var allPlayersIndexes = initPreflopPlayersIndexes();
+        for (let i = 0; i < allPlayersIndexes.length; i++) {
+            myJSON.players.push({name: rawActionList[allPlayersIndexes[i]].player,
+                position: getPositionText(rawActionList[allPlayersIndexes[i]].position),
+                stack: rawActionList[allPlayersIndexes[i]].balance,
+                bet: rawActionList[allPlayersIndexes[i]].amount,
+                hole1: getHeroHole1(),
+                hole2: getHeroHole2()
+            });
+
+
+            function getHeroHole1() {
+                if (rawActionList[i].isHero) {
+                    return cardsName[checkedCards[1]];
+                } else {return}
+            }
+            function getHeroHole2() {
+                if (rawActionList[i].isHero) {
+                    return cardsName[checkedCards[2]];
+                } else {return}
+            }
+        }
+    }
+
+    ActionForJson();
+    function ActionForJson() {
+        //var streetNames = ["preflop", "flop", "turn", "river"];
+        for (let i = 2; i < rawActionList.length; i++) {
+            if (rawActionList[i].street === 0) {
+                myJSON.actions.preflop.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+            if (rawActionList[i].street === 1) {
+                myJSON.actions.flop.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+            if (rawActionList[i].street === 2) {
+                myJSON.actions.turn.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+            if (rawActionList[i].street === 3) {
+                myJSON.actions.river.push({act_num: i - 1,
+                    player: rawActionList[i].player,
+                    balance: rawActionList[i].balance,
+                    action: getActionText(rawActionList[i].action),
+                    pot: rawActionList[i].pot,
+                    amount: getAmountForJson(i)
+                })
+            }
+        }
+
+        function getAmountForJson(i) {
+            if (rawActionList[i].amount != 0) {
+                return rawActionList[i].amount;
+            } else {return}
+        }
+    }
+
+
+    var jsonObj = JSON.stringify(myJSON, "", 3);
+    console.log(jsonObj);
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8888/request",  //url сервера mephisto
+        dataType: "json",
+        success: function (msg) {
+            if (msg) {
+                alert("Somebody" + name + " was added in list !");
+                location.reload(true);
+            } else {
+                alert("Cannot add to list !");
+            }
+        },
+
+        data: jsonObj
+    });
+}
