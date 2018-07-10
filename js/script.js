@@ -45,7 +45,7 @@ function navigationListener() {
         left_navigation.empty();
         navigationMenu.removeClass("nav-active");
         selectedPage.removeClass("hidden");
-        if (width > mobWidth) {selectedPage.addClass("text-pages-appear");}
+        if (width > mobWidth && elNode.textContent !== 'simulator') {selectedPage.addClass("text-pages-appear");}
         if (elNode.textContent !== 'simulator') {
             if (elNode.textContent === 'mephisto') {
                 left_navigation.css("background-color", "#3578d0");
@@ -119,6 +119,8 @@ function navigationListener() {
                 $(".user-login").removeClass("hidden");
                 $(".link-void").removeClass("hidden");
             }
+        } else if (width >= descWidth) {
+            pages.css({left: 0, top: 0});
         }
         elNode.parentNode.classList.add("nav-active");
     });
@@ -229,7 +231,8 @@ if ($(window).width() >= descWidth) {
     $(".pages.not-simulator").height(height - 100 + "px");
     pages.css({left: 0, top: '60px'});
     $("body").height(height + "px");
-} else if ($(window).width() < mobWidth) {
+} else {
+    $("body").css({position: 'fixed'});
     let width = $(window).width();
     let height = $(window).height();
     setMephistoPageActive();
@@ -237,6 +240,7 @@ if ($(window).width() >= descWidth) {
     left_navigation.removeClass("left-navigation-appear");
     $(".pages.not-simulator").width((width - 60) + "px");
     $(".pages.not-simulator").height(height - 100 + "px");
+    $(".pages.not-simulator").css({'padding-right': 0, 'margin-left': '10px'});
     $("body").height(height + "px");
     pages.css({left: 0, top: '60px'});
     $(".navigation-menu").addClass('hidden');
@@ -258,6 +262,8 @@ var onresize = function(e) {
     $(".futures-wrapper").removeClass("space-around");
 
     if (width >= descWidth) {
+        $("body").css({position: 'relative'});
+        $(".pages.not-simulator").css({'padding-right': '20px', 'margin-left': '30px'});
         $("#main-navigation").removeClass("mobile");
         $("#main-navigation").removeClass("hidden");
         $(".user-login").removeClass("hidden");
@@ -280,6 +286,7 @@ var onresize = function(e) {
         document.getElementById('simulator-link').parentNode.classList.add("nav-active");
         $(".pages.not-simulator").width(width - 390 < 900 ? width - 400 + "px" : 900 + "px");
         $(".pages.not-simulator").height(height - 100 + "px");
+        pages.css({left: 0, top: 0});
         return false;
     } else if (!document.getElementById('simulator-html').classList.contains("hidden")) {
         setMephistoPageActive();
@@ -289,6 +296,8 @@ var onresize = function(e) {
     }
 
     if (width >= mobWidth && $(window).height() > 460) {
+        $("body").css({position: 'relative'});
+        $(".pages.not-simulator").css({'padding-right': '20px', 'margin-left': '30px'});
         loadScriptTablet();
         if (scriptsTabletLoaded) {
             $("#content-m").mCustomScrollbar({theme:"minimal"});
@@ -313,6 +322,8 @@ var onresize = function(e) {
     }
 
     if (width < mobWidth) {
+        $("body").css({position: 'fixed'});
+        $(".pages.not-simulator").css({'padding-right': 0, 'margin-left': '10px'});
         left_navigation.addClass("hidden");
         left_navigation.removeClass("left-navigation-appear");
         $(".pages.not-simulator").width((width - 60) + "px");
@@ -322,6 +333,7 @@ var onresize = function(e) {
         $(".navigation-menu").addClass('hidden');
         $(".mmenu").removeClass('hidden');
     } else {
+        $(".pages.not-simulator").css({'padding-right': '20px', 'margin-left': '30px'});
         $("#main-navigation").removeClass("mobile");
         //$(".user-login").removeClass("hidden");
         //$(".link-void").removeClass("hidden");
@@ -335,7 +347,7 @@ var onresize = function(e) {
         $(".mmenu").addClass('hidden');
     }
 
-    if (width <= mobWidth ) {
+    if (width < mobWidth ) {
         $(".price-wrapper").addClass("space-around");
         $(".futures-wrapper").addClass("space-around");
     }
