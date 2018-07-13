@@ -48,7 +48,6 @@ function actionToJson(rawActionListIndex, request) {
 
     function createRequest() {
         var obj = {
-            type: request,
             street: getStreetName(rawActionList[rawActionListIndex].street),
             act_num: actNumberAtStreet()
         }
@@ -159,3 +158,177 @@ function actionToJson(rawActionListIndex, request) {
         data: jsonObj
     });
 }
+
+
+/* result JSON to server
+{
+   "hand": {
+      "lm": 0.25,
+      "c1": "Ac",
+      "c2": "6h",
+      "c3": "Kd",
+      "c4": "Js"
+   },
+   "players": [
+      {
+         "name": "mammoth",
+         "position": "SB",
+         "stack": 25.15,
+         "bet": 0.1,
+         "hole1": "Ah",
+         "hole2": "Kc"
+      },
+      {
+         "name": "checkmateN1",
+         "position": "BB",
+         "stack": 37.25,
+         "bet": 0.25
+      },
+      {
+         "name": "gulyaka",
+         "position": "MP2",
+         "stack": 27,
+         "bet": 0
+      },
+      {
+         "name": "zlo-Mishka",
+         "position": "MP3",
+         "stack": 32,
+         "bet": 0
+      },
+      {
+         "name": "3D action",
+         "position": "CO",
+         "stack": 45.37,
+         "bet": 0
+      },
+      {
+         "name": "joooe84",
+         "position": "BTN",
+         "stack": 60,
+         "bet": 0.75
+      }
+   ],
+   "actions": {
+      "preflop": [
+         {
+            "act_num": 1,
+            "player": "gulyaka",
+            "balance": 27,
+            "action": "fold",
+            "pot": 0.35
+         },
+         {
+            "act_num": 2,
+            "player": "zlo-Mishka",
+            "balance": 32,
+            "action": "fold",
+            "pot": 0.35
+         },
+         {
+            "act_num": 3,
+            "player": "3D action",
+            "balance": 45.37,
+            "action": "fold",
+            "pot": 0.35
+         },
+         {
+            "act_num": 4,
+            "player": "joooe84",
+            "balance": 60,
+            "action": "raise",
+            "pot": 0.35,
+            "amount": 0.75
+         },
+         {
+            "act_num": 5,
+            "player": "mammoth",
+            "balance": 25.05,
+            "action": "call",
+            "pot": 1.1,
+            "amount": 0.75
+         },
+         {
+            "act_num": 6,
+            "player": "checkmateN1",
+            "balance": 37,
+            "action": "call",
+            "pot": 1.75,
+            "amount": 0.75
+         }
+      ],
+      "flop": [
+         {
+            "act_num": 7,
+            "player": "mammoth",
+            "balance": 24.4,
+            "action": "check",
+            "pot": 2.25
+         },
+         {
+            "act_num": 8,
+            "player": "checkmateN1",
+            "balance": 36.5,
+            "action": "check",
+            "pot": 2.25
+         },
+         {
+            "act_num": 9,
+            "player": "joooe84",
+            "balance": 59.25,
+            "action": "bet",
+            "pot": 2.25,
+            "amount": 1.6
+         },
+         {
+            "act_num": 10,
+            "player": "mammoth",
+            "balance": 24.4,
+            "action": "call",
+            "pot": 3.85,
+            "amount": 1.6
+         },
+         {
+            "act_num": 11,
+            "player": "checkmateN1",
+            "balance": 36.5,
+            "action": "call",
+            "pot": 5.45,
+            "amount": 1.6
+         }
+      ],
+      "turn": [
+         {
+            "act_num": 12,
+            "player": "mammoth",
+            "balance": 22.8,
+            "action": "bet",
+            "pot": 7.05,
+            "amount": 4
+         },
+         {
+            "act_num": 13,
+            "player": "checkmateN1",
+            "balance": 34.9,
+            "action": "raise",
+            "pot": 11.05,
+            "amount": 34.9
+         },
+         {
+            "act_num": 14,
+            "player": "joooe84",
+            "balance": 57.65,
+            "action": "raise",
+            "pot": 45.95,
+            "amount": 57.65
+         }
+      ]
+   },
+   "request": {
+      "type": "strategy",
+      "street": "turn",
+      "act_num": 1
+   }
+}
+
+ */

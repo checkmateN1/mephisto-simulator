@@ -4,10 +4,11 @@ const rankNames = "23456789TJQKA";
 //const allPerms = "01234,01235,01236,01245,01246,01256,01345,01346,01356,01456,02345,02346,02356,02456,03456,12345,12346,12356,12456,13456,23456".split(",");
 const allPerms = "01234,01235,01245,01345,02345,12345,01236,01246,01256,01346,01356,01456,02346,02356,02456,03456,12346,12356,12456,13456,23456".split(",");
 const cardToString = (card) => rankNames[card & 15] + suitNames[card >> 4];
-const rankingNames = "Royal flush,Straight flush,Four of a kind,Full house,Flush,Straight,Three of a kind,Two pair,Pair,Flash draw,HighCard".split(",");
+const rankingNames = "Royal flush,Straight flush,Four of a kind,Full house,Flush,Straight,Three of a kind,Two pair,Pair,Flush draw,Straight draw,HighCard".split(",");
 const flushes       = /00000|11111|22222|33333/;
-const flashDraw       = /0000|1111|2222|3333/;
+const flushDraw       = /0000|1111|2222|3333/;
 const straights     = /01234|12345|23456|34567|45678|56789|6789a|789ab|89abc|0123c/;
+const straightsDraw     = /0123|1234|2345|3456|4567|5678|6789|789a|89ab|9abc|1235c|02346|13457|24568|35679|4678a|5789b|689ac/;
 const fourOfKind    = /0000|1111|2222|3333|4444|5555|6666|7777|8888|9999|aaaa|bbbb|cccc/;
 const threeOfKind   = /000|111|222|333|444|555|666|777|888|999|aaa|bbb|ccc/;
 const Pair     = /00|11|22|33|44|55|66|77|88|99|aa|bb|cc/;
@@ -64,7 +65,8 @@ const handEvaluator = {
             kind3         : () => threeOfKind.test(ranked),
             twoPair       : () => twoPair.test(ranked),
             kind2         : () => Pair.test(ranked),
-            flashDraw     : () => flashDraw.test(suited),
+            flashDraw     : () => countPerms < 21 ? flushDraw.test(suited) : false,
+            straightsDraw     : () => countPerms < 21 ? straightsDraw.test(ranked) : false,
             highCard      : () => true,  // always true last type checked
             royal         : () => ranked[4] === "c",  // extra test used for royal flush
         };
@@ -79,18 +81,22 @@ const handEvaluator = {
                 //console.log(cardsArray[i]);
                 //console.log(allPerms[index]);
                 const card = cardsArray[allPerms[index][i]];
-                console.log(`ranked = ${ranked}`);
+                //console.log(`ranked = ${ranked}`);
                 ranked += (card & 15).toString(16);
-                console.log(`ranked = ${ranked}`);
-                console.log(`suited = ${suited}`);
+                //console.log(`ranked = ${ranked}`);
+                //console.log(`suited = ${suited}`);
                 suited += (card >> 4).toString(16);
-                console.log(`suited = ${suited}`);
-                console.log(`hand = ${hand}`);
+                //console.log(`suited = ${suited}`);
+                //console.log(`hand = ${hand}`);
                 hand += " " + cardToString(card);
-                console.log(`hand = ${hand}`);
+                //console.log(`hand = ${hand}`);
             });
             hand = hand.substr(1);
+            //console.log(suited);
             //console.log(hand);
+            //console.log(typeof suited);
+            suited = suited.split('').sort().join('');
+            //console.log(suited);
         };
         // Rank the current hand with best score 0
         function rankHand(permutation) {
@@ -98,11 +104,11 @@ const handEvaluator = {
             //console.log('countPerms = '+ countPerms);
             doFor(ranking.length, (i) => {  // test all hands from best comb to worst
                 if (ranking[i]()) {  // if test ok
-                    console.log(`ranking[i]() = ${ranking[i]()}`);
-                    console.log(`rankingNames[i] = ${rankingNames[i]}`);
+                    // console.log(`ranking[i]() = ${ranking[i]()}`);
+                    // console.log(`rankingNames[i] = ${rankingNames[i]}`);
                     allHandsRanked.push({
                         name : rankingNames[i],
-                        hand : hand,
+                        //hand : hand,
                         score : i * 13 + (12-parseInt(ranked[4],16)),
                     });
                     return true;
@@ -113,7 +119,7 @@ const handEvaluator = {
 
         return allHandsRanked
             .sort((a,b) => a.score - b.score)
-            .filter((hand,i,arr)=> i === 0 ? true : hand.score === arr[i-1].score)[0]
+            .filter((hand,i,arr)=> i === 0 ? true : hand.score === arr[i-1].score)[0].name
     }
 };
 
@@ -131,8 +137,29 @@ const handEvaluator = {
 // console.log(handEvaluator.evaluate(handEvaluator.parseString('2D JC 2H 4S 3S AS'))); //TURN Pair
 // console.log(handEvaluator.evaluate(handEvaluator.parseString('2D JC 2H 4S 2S AS'))); //TURN SET
 // console.log(handEvaluator.evaluate(handEvaluator.parseString('2D JC 2H 4S 3S'))); //FLOP Pair
-// console.log(handEvaluator.evaluate(handEvaluator.parseString('2C JC 6C 4C 3C'))); //FLOP Flash
+//console.log(handEvaluator.evaluate(handEvaluator.parseString('2C JC 6C 4C 3C'))); //FLOP Flash
 // console.log(handEvaluator.evaluate(handEvaluator.parseString('JC JD JH JS 3C'))); //FLOP quad
-console.log(handEvaluator.evaluate(handEvaluator.parseString('2C 3C 4D 5C AC'))); //FLOP quad
+//console.log(handEvaluator.evaluate(handEvaluator.parseString('2C 3C 4D 5C KC'))); //FLOP flush draw
+//console.log(handEvaluator.evaluate(handEvaluator.parseString('2S 3S 4S 5C KS'))); //FLOP flush draw
+//console.log(handEvaluator.evaluate(handEvaluator.parseString('2S 3S 4D 5C KS'))); //FLOP Straight draw
+//console.log(handEvaluator.evaluate(handEvaluator.parseString('3S 5S 6D 7C 9S'))); //FLOP Straight draw - double gutshot
 //console.log(handEvaluator.evaluate(handEvaluator.parseString('5D JC 2H 4S 3S')));
 //console.log(handEvaluator.parseString('2H 3S 4S 5D JC AS KC'));
+
+const getCombination = (cardsArr) => {
+    return handEvaluator.evaluate(handEvaluator.parseString(cardsArr));
+};
+
+let allCombinationArr = [];
+for (let i = 0; i < rankingNames.length; i++) {
+    allCombinationArr.push(0);
+}
+
+const getAllCombinationsWeight = (strategy, strategyORrange, board) => {    //strategyORrange == 'strategy' || 0.5, 0,66, 1, etc
+    strategy.allHands.forEach(object => {
+
+    });
+};
+
+//console.log(getCombination('2S 3S 4D 5C KS'));
+

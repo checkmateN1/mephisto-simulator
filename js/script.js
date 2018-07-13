@@ -151,6 +151,7 @@ function loadScriptsDesctop() {
     addScript('js/simulator/network.js');
     addScript('js/simulator/restartListener.js');
     addScript('js/simulator/uploadWindow.js');
+    addScript('js/simulator/getCombination.js');
     addScript('js/login.js');
 
     scriptsDesctopLoaded = true;
