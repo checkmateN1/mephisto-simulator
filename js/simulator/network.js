@@ -2,7 +2,7 @@
 function actionToJson(rawActionListIndex, request) {
 
     var myJSON = {
-        hand: {
+        board: {
             lm: Math.max(rawActionList[0].amount, rawActionList[1].amount),
             c1: getCardName(checkedCards[3]),
             c2: getCardName(checkedCards[4]),

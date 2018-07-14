@@ -5,7 +5,7 @@ var cards = document.querySelector(".cards");
 //создаем миникарты
 createMinCards();
 function createMinCards() {
-    for (var i = 0; i < 52; i++) {
+    for (let i = 0; i < 52; i++) {
         let li = document.createElement("li");
         ul.appendChild(li);
         li.id = i; // добавили мини-картам id
