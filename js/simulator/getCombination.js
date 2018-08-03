@@ -17,6 +17,8 @@ const fullHouse     = /(000|111|222|333|444|555|666|777|888|999|aaa|bbb|ccc)(00|
 const twoPair       = /(00|11|22|33|44|55|66|77|88|99|aa|bb|cc).*(00|11|22|33|44|55|66|77|88|99|aa|bb|cc)/;
 let countPerms;
 
+console.log(`rankingNames.indexOf('flush') = ${rankingNames.indexOf('Flush')}`);
+
 const handEvaluator = {
     parseString(input){
         const cards = input.split(" ");
@@ -67,7 +69,7 @@ const handEvaluator = {
             twoPair       : () => twoPair.test(ranked),
             kind2         : () => Pair.test(ranked),
             flashDraw     : () => countPerms < 21 ? flushDraw.test(suited) : false,
-            straightsDraw     : () => countPerms < 21 ? straightsDraw.test(ranked) : false,
+            straightsDraw : () => countPerms < 21 ? straightsDraw.test(ranked) : false,
             highCard      : () => true,  // always true last type checked
             royal         : () => ranked[4] === "c",  // extra test used for royal flush
         };
@@ -154,8 +156,9 @@ const getCombination = (cardsArr) => {
 //console.log(getCombination('2h 3h Ac 6h Kd Js'));
 
 const cardsNames = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
-let allHandsCombination = {};
+var allHandsCombination = {};
 
+//console.log(getCombination('2h 2c 3d 3s Ah Ks'));
 const setCombNameToAllHands = (board) => { // board === checkedCards = [null, "12", "24", "25", "4", "37", "48", null];   ///from cards.js
     let arrWithoutBoard = cardsNames.slice();
     let boardSymbols = '';
@@ -169,16 +172,22 @@ const setCombNameToAllHands = (board) => { // board === checkedCards = [null, "1
     for (let i = 0; i < arrWithoutBoard.length - 1; i++) {
         for (let j = i+1; j < arrWithoutBoard.length; j++) {
             let key;
+            let hand = arrWithoutBoard[i] + ' ' + arrWithoutBoard[j];
+
             if (rankNames.indexOf(arrWithoutBoard[i].substr(0,1)) > rankNames.indexOf(arrWithoutBoard[j].substr(0,1))) {
                 key = (arrWithoutBoard[i] + arrWithoutBoard[j]);
+            } else if (rankNames.indexOf(arrWithoutBoard[i].substr(0,1)) === rankNames.indexOf(arrWithoutBoard[j].substr(0,1))) {
+                key = (arrWithoutBoard[i] + arrWithoutBoard[j]);
+                keyReverse = (arrWithoutBoard[j] + arrWithoutBoard[i]);
+                allHandsCombination[keyReverse] = getCombination(boardSymbols + hand);
             } else {key = (arrWithoutBoard[j] + arrWithoutBoard[i]);}
 
-            let hand = arrWithoutBoard[i] + ' ' + arrWithoutBoard[j];
+            //console.log(getCombination(boardSymbols + hand));
             allHandsCombination[key] = getCombination(boardSymbols + hand);
         }
     }
-    // console.log(allHandsCombination);
-    // console.log(allHandsCombination['3h2h']);
+    //console.log(`allHandsCombination = ${allHandsCombination}`);
+    //console.log(`allHandsCombination['AhKs'] = ${allHandsCombination['AhKs']}`);
 };
 
 var testStrategy = {
@@ -312,16 +321,33 @@ var testStrategy = {
             weight: 0.88,
             preflopWeight: 0.92,
             combination: "tptk"
+        },
+        {
+            hand: '2d2s',
+            moves: {
+                "1.3": {strategy: 0.1, ev: 1.3},
+                "1": {strategy: 0, ev: 1.66},
+                "0.5": {strategy: 0, ev: 1.1},
+                "0": {strategy: 0.9, ev: 0.3},
+                "-1": {strategy: 0}
+            },
+            weight: 0.88,
+            preflopWeight: 0.92,
+            combination: "tptk"
         }
     ]
 };
 
-setCombNameToAllHands([null, "12", "24", "25", "4", "37", "48", null]);
+//const cardsNames = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
+//setCombNameToAllHands([null, "12", "24", "0", "13", "27", "40", null]);
+
 const setWeightToAllCombinations = (strategy, strategyORrange) => {    //strategyORrange == 'strategy' || 0.5, 0,66, 1, etc
     //all combinations with summary weight
     let allCombinationSummaryWeight = [];
+
     rankingNames.forEach(() => allCombinationSummaryWeight.push(0));
-    console.log(allCombinationSummaryWeight.length);
+    //console.log(allCombinationSummaryWeight);
+    //console.log(allCombinationSummaryWeight.length);
 
     if (strategyORrange !== 'strategy') {
         strategy.allHands.forEach(object => {
@@ -330,9 +356,35 @@ const setWeightToAllCombinations = (strategy, strategyORrange) => {    //strateg
     } else {
         strategy.allHands.forEach(object => {
             allCombinationSummaryWeight[allHandsCombination[object.hand]] += object.weight;
+            // console.log(allCombinationSummaryWeight);
+            // console.log(allHandsCombination[object.hand]);
+            // console.log(object.hand);
         });
+        //console.log(allHandsCombination);
     }
-    console.log(allCombinationSummaryWeight);
+    //console.log(allCombinationSummaryWeight);
+    //console.log(allCombinationSummaryWeight.length);
+    //console.log(allCombinationSummaryWeight[12]);
+    let sumWeight = 0;
+    allCombinationSummaryWeight.forEach(combWeight => {sumWeight += combWeight});
+    //console.log(sumWeight);
+    let allCombinationsWeigth = [];
+    for (let i = 0; i < rankingNames.length; i++) {
+        if (allCombinationSummaryWeight[i] > 0){
+            let obj = {};
+            obj[rankingNames[i]] = ((allCombinationSummaryWeight[i] * 100 / sumWeight).toFixed(2) + "%");
+            obj.combNumber = i;
+            allCombinationsWeigth.push(obj);
+        }
+    }
+    console.log(allCombinationsWeigth);
+    return allCombinationsWeigth;
+    //return allCombinationSummaryWeight;
+    //console.log(`allHandsCombination = ${allHandsCombination}`);
+};
+
+    const isHandCombEqual = (hand, combIndex) => {
+
 };
 
 setWeightToAllCombinations(testStrategy, 'strategy');

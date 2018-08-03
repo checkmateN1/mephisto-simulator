@@ -1841,19 +1841,6 @@ footer h4 {
     left: 3px;
 }
 
-/*#main-navigation {*/
-    /*overflow:hidden;*/
-    /*-webkit-transition:max-height 0.5s linear;*/
-    /*-moz-transition:max-height 0.5s linear;*/
-    /*transition:max-height 0.5s linear;*/
-    /*height:0px !important;*/
-/*}*/
-
-/*#main-navigation.appear-navigation {*/
-    /*height:100px !important;*/
-/*}*/
-
-
 #modal-simulator-warning {
     position: absolute;
     z-index: 1000;
@@ -1865,6 +1852,8 @@ footer h4 {
     left: 30px;
     padding: 20px;
 }
+
+
 
 
 
