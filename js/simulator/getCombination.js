@@ -160,6 +160,7 @@ var allHandsCombination = {};
 
 //console.log(getCombination('2h 2c 3d 3s Ah Ks'));
 const setCombNameToAllHands = (board) => { // board === checkedCards = [null, "12", "24", "25", "4", "37", "48", null];   ///from cards.js
+    allHandsCombination = {};
     let arrWithoutBoard = cardsNames.slice();
     let boardSymbols = '';
     for (let i = 3; i < board.length; i++) {
