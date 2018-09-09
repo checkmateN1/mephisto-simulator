@@ -1,6 +1,5 @@
 //заполняет окно спектра информацией
 function createAllCombinationsArr(strategyORrange, rawActionIndex) {
-    //объект с названием всех комбинаций
 
     //заполняем массив всех возможных комбинаций рук с текущим бордом пока сервер рассчитывает стратегию
     //console.log(allHandsCombination);
@@ -336,12 +335,18 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex) {
     //текущая выбранная конкретная рука в левой диаграмме
     var currentHandInDiagram = null;
 
-
+    //есть проблемы с рейзами: key != sizing
     function getHandEV(hand, sizing) {
+        //console.log('test getHandEV');
         for (let i = 0; i < testStrategy.allHands.length; i++) {
             if (testStrategy.allHands[i].hand == hand) {
                 for(var key in testStrategy.allHands[i].moves) {
-                    if (key == sizing) {return parseFloat(testStrategy.allHands[i].moves[key].ev);}
+                    //console.log(`key = ${key}, sizing = ${sizing}`);
+                    if (key == sizing) {
+                        //alert(`key == sizing!`);
+                        //console.log(`parseFloat(testStrategy.allHands[i].moves[key].ev) = ${parseFloat(testStrategy.allHands[i].moves[key].ev)}`);
+                        return parseFloat(testStrategy.allHands[i].moves[key].ev);
+                    }
                 }
             }
         }
@@ -449,6 +454,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex) {
                 var spanEV = document.createElement("span");
                 if (currentSizing >= 0) {
                     let EV = getHandEV(currentHandInDiagram, currentSizing);
+                    //console.log(`EV = ${EV}`);
                     if (EV >= 0) {
                         spanEV.innerHTML = "EV:$" + EV;
                     } else {spanEV.innerHTML = "EV:-$" + Math.abs(EV);}
