@@ -14,6 +14,9 @@ body {
     position: relative;
     z-index: -100;
     overflow: hidden;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 }
 
 main {

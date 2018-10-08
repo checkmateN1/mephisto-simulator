@@ -62,11 +62,11 @@ window.addEventListener("keydown", function (event) {
     }
 });
 
-var cardsName = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
+let cardsName = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];
 
 // checkedCards[0] = null || hole || flop || turn || river... все остальные элементы массива - карты
-var checkedCards = [null, null, null, null, null, null, null, null];
-var testBoard = [null, "12", "24", "25", "4", "37", "48", null];
+let checkedCards = [null, null, null, null, null, null, null, null];
+let testBoard = [null, "12", "24", "25", "4", "37", "48", null];
 loadCardsState(testBoard);
 
 //записываем в карту какой улицы мы кликнули
@@ -90,7 +90,7 @@ ul.addEventListener('click', function(e){
     changeCardState(id);  // вызываем функцию которая отображает и меняет состояние карты и добавляет/удаляет в массив
 });
 
-//
+
 function changeCardState(id) {
     if (checkedCards[0] === "hole") { // если это карта на руках
 
@@ -121,7 +121,6 @@ function changeCardState(id) {
     }
 
     if (checkedCards[0] === "flop") { // если это карта FLOP
-
         if (checkedCards.indexOf(id) >= 0) { // если эта карта уже выбрана где-то в симуляторе
 
             if (checkedCards.indexOf(id) >= 3 && checkedCards.indexOf(id) <= 5) { // если это первая карта flop отжимаем ее и выходим из ф-ции

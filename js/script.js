@@ -140,6 +140,7 @@ function addScript(src){
 function loadScriptsDesctop() {
     if (scriptsDesctopLoaded === true) {return false;}
     addScript('js/d3.min.js');
+    addScript('js/config/server.js');
     addScript('js/simulator/createAllCombinationsArr.js');
     addScript('js/simulator/cards.js');
     addScript('js/simulator/playersValidation.js');
@@ -152,6 +153,7 @@ function loadScriptsDesctop() {
     addScript('js/simulator/restartListener.js');
     addScript('js/simulator/uploadWindow.js');
     addScript('js/simulator/getCombination.js');
+    addScript('js/simulator/randomButtonClick.js');
     addScript('js/login.js');
 
     scriptsDesctopLoaded = true;

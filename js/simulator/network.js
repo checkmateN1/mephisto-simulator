@@ -13,7 +13,7 @@ function actionToJson(rawActionListIndex, request) {
         players: [],
         actions: createStreets(),
         request: createRequest()
-    }
+    };
 
     function createStreets() {
         if (rawActionList[rawActionList.length - 1].street === 3) {
@@ -140,23 +140,89 @@ function actionToJson(rawActionListIndex, request) {
 
 
     var jsonObj = JSON.stringify(myJSON, "", 3);
-    console.log(jsonObj);
+    //console.log(jsonObj);
 
-    $.ajax({
-        type: "POST",
-        url: "http://localhost:8888/request",  //url сервера mephisto
-        dataType: "json",
-        success: function (msg) {
-            if (msg) {
-                alert("Somebody" + name + " was added in list !");
-                location.reload(true);
-            } else {
-                alert("Cannot add to list !");
-            }
-        },
+    //const url = "http://192.168.137.8:5555/gettest"; // server's url
 
-        data: jsonObj
-    });
+    // const sendRequest  = async (jsonObj, TOKEN = 'default') => {
+    //     try {
+    //         const response = await fetch(url, {
+    //             method:  "GET",
+    //             mode: 'cors',
+    //             headers: {
+    //                 Authorization:  TOKEN,
+    //                 //"Content-Type": "application/json",
+    //             },
+    //             //body: jsonObj,
+    //         });
+    //
+    //         if (response.status !== 200) {
+    //             throw new Error("connection to Mephisto failed");
+    //         }
+    //
+    //         const data = response.json();
+    //
+    //         console.log(`Ответ с сервера Мефисто: ${JSON.stringify(data)}`);
+    //         //createAllCombinationsArr(data); // еще передаем strategyORrange, rawActionIndex
+    //     } catch ({ message }) {
+    //         console.error(message);
+    //     }
+    // };
+    //
+    // sendRequest(jsonObj);
+
+    // var xhr = new XMLHttpRequest();
+    //
+    // xhr.open('GET', url, true);
+    //
+    // xhr.send();
+    //
+    // xhr.onreadystatechange = function() {
+    //     if (this.readyState != 4) return;
+    //
+    //     // по окончании запроса доступны:
+    //     // status, statusText
+    //     // responseText, responseXML (при content-type: text/xml)
+    //
+    //     if (this.status != 200) {
+    //         // обработать ошибку
+    //         alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
+    //         return;
+    //     }
+    //
+    //     console.log('its ok!');
+    //     console.log(this.responseText);
+    //     // получить результат из this.responseText или this.responseXML
+    // }
+
+    (async () => {
+        const rawResponse = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({a: 1, b: 'Textual content'})
+        });
+        const content = await rawResponse.json().then(function(data) {
+            console.log(data.hand);
+        });
+    })();
+
+    // (async () => {
+    //     const rawResponse = await fetch(url, {
+    //         method: 'GET',
+    //         mode: 'cors',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //     });
+    //     const content = await rawResponse.json().then(function(data) {
+    //         console.log(data);
+    //     });
+    // })();
 }
 
 
