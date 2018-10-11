@@ -12,6 +12,7 @@ function maxAmountAtCurrentStreet() {
 
 function maxAmountAtCurrentIndex(rawActionIndex) {
     let currentStreet = rawActionList[rawActionIndex].street;
+
     for (let i = rawActionIndex - 1; i >= 0; i--) {
         if (rawActionList[i].street === currentStreet) {
             if (rawActionList[i].action < 3) {

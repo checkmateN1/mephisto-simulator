@@ -60,9 +60,11 @@ function displayStats(e) {
     $(".all-info-table td:nth-child(1)").removeClass("color-yellow");
     var el = $(this);
 
-    //let player = rawActionList[getRawActionsIndex(elNode)].player;   - НЕ  РАБОТАЕТ НА ПРЕФЛОПЕ!!!
+    let player = rawActionList[getRawActionsIndex(elNode)].player;
 
     let playerStats = $("<div id=\"player-stats\"></div>");
+
+
 
     let allStats = $("<h4>Preflop</h4>\n" +
         "\n" +

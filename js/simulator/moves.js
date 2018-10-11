@@ -49,8 +49,7 @@ rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, fa
 
 // функция копирующая в массив сырые действия из загруженной с сервера руки
 function copyActionList(arr) {
-    rawActionList.length=0;
-
+    rawActionList.length = 0;
 }
 
 function getPositionText(position) {
@@ -58,8 +57,8 @@ function getPositionText(position) {
     return arr[position];
 }
 
-function getActionText(action) {
-    let arr = [null, "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
+function getActionText(action, index) {
+    let arr = [index == 0 ? "PostSB" : "PostBB", "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
     return arr[action];
 }
 
@@ -87,7 +86,7 @@ displayActions();
 function displayActions() {
 
     if (rawActionList.length > 0) {
-        for (let i = 2; i < rawActionList.length; i++) {
+        for (let i = 0; i < rawActionList.length; i++) {
 
             let Move = document.querySelector("." + getStreetName(rawActionList[i].street) + "-moves .all-info-table");
             let tr = document.createElement("tr");  // создали строку
@@ -108,7 +107,7 @@ function displayActions() {
             tr.appendChild(td);
 
             td = document.createElement("td");
-            td.innerHTML = getActionText(rawActionList[i].action);
+            td.innerHTML = getActionText(rawActionList[i].action, i);
             tr.appendChild(td);
 
             td = document.createElement("td");
@@ -296,8 +295,13 @@ function removeLastActionString() {
     }
 }
 
+function clearAllrawActionsList() {
+    rawActionList = [];
+}
+
 //очищает таблицы c действиями постфлопа
 function removeActions() {
+    //console.log(rawActionList);
     let preflopMoves = document.querySelector(".preflop-moves .all-info-table");
     let flopMoves = document.querySelector(".flop-moves .all-info-table");
     let turnMoves = document.querySelector(".turn-moves .all-info-table");

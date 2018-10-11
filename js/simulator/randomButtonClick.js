@@ -1,6 +1,18 @@
 window.onload = () => {
     const randomButton = document.getElementById('random-button');
 
+    function maxAmountAtCurrentStreetRandom(index) {
+        let currentStreet = rawActionList[index].street;
+        for (let i = index - 1; i >= 0; i--) {
+            if (rawActionList[i].street === currentStreet) {
+                if (rawActionList[i].action < 3) {
+                    return parseFloat(rawActionList[i].amount);
+                }
+            } else {return parseFloat(0);}
+        }
+        return parseFloat(0);
+    }
+
     randomButton.addEventListener('click', () => {
         (async () => {
             const rawResponse = await fetch(url + '/random', {
@@ -24,8 +36,21 @@ window.onload = () => {
                     c4,
                     c5
                 ];
-                //console.log(testBoard);
                 loadCardsState(testBoard);
+                clearAllrawActionsList();
+                //console.log(`rawActionList.length after cleaning in random button = ${rawActionList.length}`);
+                rawActionList = data.actions.slice();
+                for (let i = 2; i < rawActionList.length; i++) {
+                    if (rawActionList[i].amount > 0 && rawActionList[i].action < 3) {
+                        rawActionList[i].amount = parseFloat(rawActionList[i].amount + maxAmountAtCurrentStreetRandom(i)).toFixed(0);
+                    }
+                }
+                console.log(rawActionList);
+                
+                removeActions();
+                displayActions();
+                displayAddRemoveButtons();
+                restartListener();
             });
         })();
     });
