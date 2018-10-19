@@ -409,3 +409,12 @@ $('.mmenu').on("click", function (e) {
         $(".link-void").removeClass("hidden");
     }
 });
+
+document.addEventListener('click', (e) => {
+    let target = e.target;
+    if (target === document.getElementById('randomHandNumber')) {return}
+    let el = document.getElementById('randomHandNumber');
+    let tmp = el.innerText;
+    el.innerText = '';
+    el.innerText = tmp;
+});

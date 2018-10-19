@@ -198,13 +198,14 @@
                         <div class="bar"></div>
                     </div>
                     <button id="upload-button" onclick="displayUploadWindow()"></button>
+                    <div id="randomHandNumber"></div>
                     <button id="random-button"></button>
                     <button id="iq-button"></button>
                     <button id="learn-button"></button>
 
                     <div id="upload-window">
                         <p><textarea id="upload-text-area" autofocus name="hand_history_text" placeholder="Copy here your Pokerstars Hold'em No Limit Short-handed hand history text"></textarea></p>
-                        <p><input  id="submit-hand-history" type="submit" value="Upload"></p>
+                        <p><input  id="submit-hand-history" type="button" value="Upload" onclick="sendHandHistoryRequest()"></p>
                         <button id="remove-upload" onclick="removeUpload()"></button>
                     </div>
                     <!--

@@ -17,7 +17,7 @@ const fullHouse     = /(000|111|222|333|444|555|666|777|888|999|aaa|bbb|ccc)(00|
 const twoPair       = /(00|11|22|33|44|55|66|77|88|99|aa|bb|cc).*(00|11|22|33|44|55|66|77|88|99|aa|bb|cc)/;
 let countPerms;
 
-console.log(`rankingNames.indexOf('flush') = ${rankingNames.indexOf('Flush')}`);
+//console.log(`rankingNames.indexOf('flush') = ${rankingNames.indexOf('Flush')}`);
 
 const handEvaluator = {
     parseString(input){
@@ -150,9 +150,7 @@ const handEvaluator = {
 //console.log(handEvaluator.evaluate(handEvaluator.parseString('5D JC 2H 4S 3S')));
 //console.log(handEvaluator.parseString('2H 3S 4S 5D JC AS KC'));
 
-const getCombination = (cardsArr) => {
-    return handEvaluator.evaluate(handEvaluator.parseString(cardsArr));
-};
+const getCombination = (cardsArr) => handEvaluator.evaluate(handEvaluator.parseString(cardsArr));
 //console.log(getCombination('2h 3h Ac 6h Kd Js'));
 
 const cardsNames = ["2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "Th", "Jh", "Qh", "Kh", "Ah", "2c", "3c", "4c", "5c", "6c", "7c", "8c", "9c", "Tc", "Jc", "Qc", "Kc", "Ac", "2d", "3d", "4d", "5d", "6d", "7d", "8d", "9d", "Td", "Jd", "Qd", "Kd", "Ad", "2s", "3s", "4s", "5s", "6s", "7s", "8s", "9s", "Ts", "Js", "Qs", "Ks", "As"];

@@ -242,6 +242,10 @@ function removeAllActions() {
 
 // добавляет строку в массив сырых действий и вызывает перерисовывание строк
 function addActionString() {
+    if (rawActionList[rawActionList.length - 1].action === 6) {
+        alert("Choose action before adding new action string!");
+        return;
+    }
     // валидатор
     if (rawActionList[rawActionList.length - 1].action === 1 && rawActionList[rawActionList.length - 1].amount === 0) {
         alert("Choose bet amount!");
@@ -256,7 +260,9 @@ function addActionString() {
     let isTerminalStreetStateTmp = isTerminalStreetState();
     let whoIsNextMoveTmp = whoIsNextMove();
     rawActionList[oldActionListLength] = new ActionString();
-    rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+    if(rawActionList[oldActionListLength - 1].street > 0) {
+        rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+    } else {rawActionList[oldActionListLength].street = 1}
 
     for (let i = oldActionListLength - 1; i > 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
