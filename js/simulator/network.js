@@ -22,7 +22,7 @@ function actionToJson(rawActionListIndex, request) {
                 flop: [],
                 turn: [],
                 river: []
-            }
+            };
             return objRiver;
 
         } else if (rawActionList[rawActionList.length - 1].street === 2) {
@@ -30,27 +30,27 @@ function actionToJson(rawActionListIndex, request) {
                 preflop: [],
                 flop: [],
                 turn: []
-            }
+            };
             return objTurn;
         } else if (rawActionList[rawActionList.length - 1].street === 1) {
             var objFlop = {
                 preflop: [],
                 flop: []
-            }
+            };
             return objFlop;
         } else {
             var objPreflop = {
                 preflop: []
-            }
+            };
             return objPreflop;
         }
     }
 
     function createRequest() {
         var obj = {
-            street: getStreetName(rawActionList[rawActionListIndex].street),
-            act_num: actNumberAtStreet()
-        }
+            street: rawActionList[rawActionListIndex].street,
+            act_num: rawActionListIndex
+        };
 
         function actNumberAtStreet() {
             var count = 1;
@@ -71,20 +71,14 @@ function actionToJson(rawActionListIndex, request) {
                 position: getPositionText(rawActionList[allPlayersIndexes[i]].position),
                 stack: rawActionList[allPlayersIndexes[i]].balance,
                 bet: rawActionList[allPlayersIndexes[i]].amount,
-                hole1: getHeroHole1(),
-                hole2: getHeroHole2()
+                hole1: getHeroHole(1),
+                hole2: getHeroHole(2)
             });
 
-
-            function getHeroHole1() {
+            function getHeroHole(index) {
                 if (rawActionList[i].isHero) {
-                    return cardsName[checkedCards[1]];
-                } else {return}
-            }
-            function getHeroHole2() {
-                if (rawActionList[i].isHero) {
-                    return cardsName[checkedCards[2]];
-                } else {return}
+                    return cardsName[checkedCards[index]];
+                }
             }
         }
     }
@@ -97,7 +91,8 @@ function actionToJson(rawActionListIndex, request) {
                 myJSON.actions.preflop.push({act_num: i - 1,
                     player: rawActionList[i].player,
                     balance: rawActionList[i].balance,
-                    action: getActionText(rawActionList[i].action),
+                    //action: getActionText(rawActionList[i].action),
+                    action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
                     amount: getAmountForJson(i)
                 })
@@ -106,7 +101,8 @@ function actionToJson(rawActionListIndex, request) {
                 myJSON.actions.flop.push({act_num: i - 1,
                     player: rawActionList[i].player,
                     balance: rawActionList[i].balance,
-                    action: getActionText(rawActionList[i].action),
+                    //action: getActionText(rawActionList[i].action),
+                    action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
                     amount: getAmountForJson(i)
                 })
@@ -115,7 +111,8 @@ function actionToJson(rawActionListIndex, request) {
                 myJSON.actions.turn.push({act_num: i - 1,
                     player: rawActionList[i].player,
                     balance: rawActionList[i].balance,
-                    action: getActionText(rawActionList[i].action),
+                    //action: getActionText(rawActionList[i].action),
+                    action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
                     amount: getAmountForJson(i)
                 })
@@ -124,7 +121,8 @@ function actionToJson(rawActionListIndex, request) {
                 myJSON.actions.river.push({act_num: i - 1,
                     player: rawActionList[i].player,
                     balance: rawActionList[i].balance,
-                    action: getActionText(rawActionList[i].action),
+                    //action: getActionText(rawActionList[i].action),
+                    action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
                     amount: getAmountForJson(i)
                 })
@@ -138,91 +136,11 @@ function actionToJson(rawActionListIndex, request) {
         }
     }
 
+    getStrategyFromServer(myJSON, rawActionListIndex);
 
-    var jsonObj = JSON.stringify(myJSON, "", 3);
-    //console.log(jsonObj);
-
-    //const url = "http://192.168.137.8:5555/gettest"; // server's url
-
-    // const sendRequest  = async (jsonObj, TOKEN = 'default') => {
-    //     try {
-    //         const response = await fetch(url, {
-    //             method:  "GET",
-    //             mode: 'cors',
-    //             headers: {
-    //                 Authorization:  TOKEN,
-    //                 //"Content-Type": "application/json",
-    //             },
-    //             //body: jsonObj,
-    //         });
-    //
-    //         if (response.status !== 200) {
-    //             throw new Error("connection to Mephisto failed");
-    //         }
-    //
-    //         const data = response.json();
-    //
-    //         console.log(`Ответ с сервера Мефисто: ${JSON.stringify(data)}`);
-    //         //createAllCombinationsArr(data); // еще передаем strategyORrange, rawActionIndex
-    //     } catch ({ message }) {
-    //         console.error(message);
-    //     }
-    // };
-    //
-    // sendRequest(jsonObj);
-
-    // var xhr = new XMLHttpRequest();
-    //
-    // xhr.open('GET', url, true);
-    //
-    // xhr.send();
-    //
-    // xhr.onreadystatechange = function() {
-    //     if (this.readyState != 4) return;
-    //
-    //     // по окончании запроса доступны:
-    //     // status, statusText
-    //     // responseText, responseXML (при content-type: text/xml)
-    //
-    //     if (this.status != 200) {
-    //         // обработать ошибку
-    //         alert( 'ошибка: ' + (this.status ? this.statusText : 'запрос не удался') );
-    //         return;
-    //     }
-    //
-    //     console.log('its ok!');
-    //     console.log(this.responseText);
-    //     // получить результат из this.responseText или this.responseXML
-    // }
-
-    (async () => {
-        const rawResponse = await fetch(url, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({a: 1, b: 'Textual content'})
-        });
-        const content = await rawResponse.json().then(function(data) {
-            console.log(data.hand);
-        });
-    })();
-
-    // (async () => {
-    //     const rawResponse = await fetch(url, {
-    //         method: 'GET',
-    //         mode: 'cors',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //     });
-    //     const content = await rawResponse.json().then(function(data) {
-    //         console.log(data);
-    //     });
-    // })();
+    // var jsonObj = JSON.stringify(myJSON, "", 3);
+    // console.log(jsonObj);
+    
 }
 
 

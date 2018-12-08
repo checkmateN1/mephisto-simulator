@@ -1,8 +1,13 @@
 //заполняет окно спектра информацией
-function createAllCombinationsArr(strategyORrange, rawActionIndex) {
+function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     //заполняем массив всех возможных комбинаций рук с текущим бордом пока сервер рассчитывает стратегию
     //console.log(allHandsCombination);
+    // console.log('inside createAllCombinationsArr!!!');
+    // console.log(strategyORrange);
+    // console.log(rawActionIndex);
+    // console.log(data);
+    // console.log(rawActionList[rawActionIndex].street);
 
     //возвращает значимые карты борда для запроса юзера в зависимости от конкретной улицы где был клик
     const getUsefulBoard = (board) => {
@@ -38,7 +43,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex) {
 
     //Width and height svg on the left
     var w = 300;
-    var h = 2000;
+    var h = 25 * data.allHands.length;
 
     //цвета диаграмм
     var agroColor = "#7d1008";
@@ -50,276 +55,279 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex) {
     var preflopColor = "#9fab00";
 
     //стратегия с сервера
-    var strategyRaw = {
-        allHands: [
-            {
-                hand: 'AhKh',
-                moves: {
-                    "1.3": {strategy: 0.24, ev: 0.8},
-                    "1": {strategy: 0.26, ev: 1},
-                    "0.5": {strategy: 0.1, ev: 0.55},
-                    "0": {strategy: 0.25, ev: 0.3},
-                    "-1": {strategy: 0.15}
-                },
-                weight: 0.67,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AcKc',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0, ev: 1},
-                    "0.5": {strategy: 0, ev: 0.55},
-                    "0": {strategy: 0, ev: 0.3},
-                    "-1": {strategy: 1}
-                },
-                weight: 0.77,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AsKs',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0.2, ev: 1},
-                    "0.5": {strategy: 0.05, ev: 0.55},
-                    "0": {strategy: 0.75, ev: 1.52},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.55,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AdKd',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0.2, ev: 1},
-                    "0.5": {strategy: 0.05, ev: 0.55},
-                    "0": {strategy: 0.75, ev: 0.55},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.2,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AdAh',
-                moves: {
-                    "1.3": {strategy: 0.33, ev: 1.8},
-                    "1": {strategy: 0.5, ev: 20.13},
-                    "0.5": {strategy: 0.17, ev: 1.55},
-                    "0": {strategy: 0, ev: 1.33},
-                    "-1": {strategy: 0}
-                },
-                weight: 1,
-                preflopWeight: 0.88,
-                combination: "tptk"
-            },
-            {
-                hand: 'KsKc',
-                moves: {
-                    "1.3": {strategy: 0.03, ev: 1.3},
-                    "1": {strategy: 0.1, ev: 1.66},
-                    "0.5": {strategy: 0.35, ev: 1.1},
-                    "0": {strategy: 0.52, ev: -0.27},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.77,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'KcKh',
-                moves: {
-                    "1.3": {strategy: 0, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0, ev: 1.1},
-                    "0": {strategy: 1, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.55,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'QsQc',
-                moves: {
-                    "1.3": {strategy: 0, ev: -0.37},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0.25, ev: 1.1},
-                    "0": {strategy: 0.1, ev: 0.3},
-                    "-1": {strategy: 0.65}
-                },
-                weight: 0.68,
-                preflopWeight: 0.83,
-                combination: "2d pair"
-            },
-            {
-                hand: 'AsKc',
-                moves: {
-                    "1.3": {strategy: 0.2, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0.03, ev: 1.1},
-                    "0": {strategy: 0.77, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.88,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'AhKs',
-                moves: {
-                    "1.3": {strategy: 0.1, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0, ev: 1.1},
-                    "0": {strategy: 0.9, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.88,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            }
-        ]
-    };
+    var strategyRaw = data;
+    // var strategyRaw = {
+    //     allHands: [
+    //         {
+    //             hand: 'AhKh',
+    //             moves: {
+    //                 "1.3": {strategy: 0.24, ev: 0.8},
+    //                 "1": {strategy: 0.26, ev: 1},
+    //                 "0.5": {strategy: 0.1, ev: 0.55},
+    //                 "0": {strategy: 0.25, ev: 0.3},
+    //                 "-1": {strategy: 0.15}
+    //             },
+    //             weight: 0.67,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AcKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0, ev: 1},
+    //                 "0.5": {strategy: 0, ev: 0.55},
+    //                 "0": {strategy: 0, ev: 0.3},
+    //                 "-1": {strategy: 1}
+    //             },
+    //             weight: 0.77,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AsKs',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0.2, ev: 1},
+    //                 "0.5": {strategy: 0.05, ev: 0.55},
+    //                 "0": {strategy: 0.75, ev: 1.52},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.55,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AdKd',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0.2, ev: 1},
+    //                 "0.5": {strategy: 0.05, ev: 0.55},
+    //                 "0": {strategy: 0.75, ev: 0.55},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.2,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AdAh',
+    //             moves: {
+    //                 "1.3": {strategy: 0.33, ev: 1.8},
+    //                 "1": {strategy: 0.5, ev: 20.13},
+    //                 "0.5": {strategy: 0.17, ev: 1.55},
+    //                 "0": {strategy: 0, ev: 1.33},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 1,
+    //             preflopWeight: 0.88,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'KsKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0.03, ev: 1.3},
+    //                 "1": {strategy: 0.1, ev: 1.66},
+    //                 "0.5": {strategy: 0.35, ev: 1.1},
+    //                 "0": {strategy: 0.52, ev: -0.27},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.77,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'KcKh',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0, ev: 1.1},
+    //                 "0": {strategy: 1, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.55,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'QsQc',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: -0.37},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0.25, ev: 1.1},
+    //                 "0": {strategy: 0.1, ev: 0.3},
+    //                 "-1": {strategy: 0.65}
+    //             },
+    //             weight: 0.68,
+    //             preflopWeight: 0.83,
+    //             combination: "2d pair"
+    //         },
+    //         {
+    //             hand: 'AsKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0.2, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0.03, ev: 1.1},
+    //                 "0": {strategy: 0.77, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.88,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'AhKs',
+    //             moves: {
+    //                 "1.3": {strategy: 0.1, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0, ev: 1.1},
+    //                 "0": {strategy: 0.9, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.88,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         }
+    //     ]
+    // };
 
     //стратегия с фильтром в зависимости от выбранной комбинации
-    var testStrategy = {
-        allHands: [
-            {
-                hand: 'AhKh',
-                moves: {
-                    "1.3": {strategy: 0.24, ev: 0.8},
-                    "1": {strategy: 0.26, ev: 1},
-                    "0.5": {strategy: 0.1, ev: 0.55},
-                    "0": {strategy: 0.25, ev: 0.3},
-                    "-1": {strategy: 0.15}
-                },
-                weight: 0.67,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AcKc',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0, ev: 1},
-                    "0.5": {strategy: 0, ev: 0.55},
-                    "0": {strategy: 0, ev: 0.3},
-                    "-1": {strategy: 1}
-                },
-                weight: 0.77,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AsKs',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0.2, ev: 1},
-                    "0.5": {strategy: 0.05, ev: 0.55},
-                    "0": {strategy: 0.75, ev: 1.52},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.55,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AdKd',
-                moves: {
-                    "1.3": {strategy: 0, ev: 0.8},
-                    "1": {strategy: 0.2, ev: 1},
-                    "0.5": {strategy: 0.05, ev: 0.55},
-                    "0": {strategy: 0.75, ev: 0.55},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.2,
-                preflopWeight: 0.97,
-                combination: "A high"
-            },
-            {
-                hand: 'AdAh',
-                moves: {
-                    "1.3": {strategy: 0.33, ev: 1.8},
-                    "1": {strategy: 0.5, ev: 20.13},
-                    "0.5": {strategy: 0.17, ev: 1.55},
-                    "0": {strategy: 0, ev: 1.33},
-                    "-1": {strategy: 0}
-                },
-                weight: 1,
-                preflopWeight: 0.88,
-                combination: "tptk"
-            },
-            {
-                hand: 'KsKc',
-                moves: {
-                    "1.3": {strategy: 0.03, ev: 1.3},
-                    "1": {strategy: 0.1, ev: 1.66},
-                    "0.5": {strategy: 0.35, ev: 1.1},
-                    "0": {strategy: 0.52, ev: -0.27},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.77,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'KcKh',
-                moves: {
-                    "1.3": {strategy: 0, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0, ev: 1.1},
-                    "0": {strategy: 1, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.55,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'QsQc',
-                moves: {
-                    "1.3": {strategy: 0, ev: -0.37},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0.25, ev: 1.1},
-                    "0": {strategy: 0.1, ev: 0.3},
-                    "-1": {strategy: 0.65}
-                },
-                weight: 0.68,
-                preflopWeight: 0.83,
-                combination: "2d pair"
-            },
-            {
-                hand: 'AsKc',
-                moves: {
-                    "1.3": {strategy: 0.2, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0.03, ev: 1.1},
-                    "0": {strategy: 0.77, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.88,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            },
-            {
-                hand: 'AhKs',
-                moves: {
-                    "1.3": {strategy: 0.1, ev: 1.3},
-                    "1": {strategy: 0, ev: 1.66},
-                    "0.5": {strategy: 0, ev: 1.1},
-                    "0": {strategy: 0.9, ev: 0.3},
-                    "-1": {strategy: 0}
-                },
-                weight: 0.88,
-                preflopWeight: 0.92,
-                combination: "tptk"
-            }
-        ]
-    };
+
+    var testStrategy = data;
+    // var testStrategy = {
+    //     allHands: [
+    //         {
+    //             hand: 'AhKh',
+    //             moves: {
+    //                 "1.3": {strategy: 0.24, ev: 0.8},
+    //                 "1": {strategy: 0.26, ev: 1},
+    //                 "0.5": {strategy: 0.1, ev: 0.55},
+    //                 "0": {strategy: 0.25, ev: 0.3},
+    //                 "-1": {strategy: 0.15}
+    //             },
+    //             weight: 0.67,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AcKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0, ev: 1},
+    //                 "0.5": {strategy: 0, ev: 0.55},
+    //                 "0": {strategy: 0, ev: 0.3},
+    //                 "-1": {strategy: 1}
+    //             },
+    //             weight: 0.77,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AsKs',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0.2, ev: 1},
+    //                 "0.5": {strategy: 0.05, ev: 0.55},
+    //                 "0": {strategy: 0.75, ev: 1.52},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.55,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AdKd',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 0.8},
+    //                 "1": {strategy: 0.2, ev: 1},
+    //                 "0.5": {strategy: 0.05, ev: 0.55},
+    //                 "0": {strategy: 0.75, ev: 0.55},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.2,
+    //             preflopWeight: 0.97,
+    //             combination: "A high"
+    //         },
+    //         {
+    //             hand: 'AdAh',
+    //             moves: {
+    //                 "1.3": {strategy: 0.33, ev: 1.8},
+    //                 "1": {strategy: 0.5, ev: 20.13},
+    //                 "0.5": {strategy: 0.17, ev: 1.55},
+    //                 "0": {strategy: 0, ev: 1.33},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 1,
+    //             preflopWeight: 0.88,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'KsKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0.03, ev: 1.3},
+    //                 "1": {strategy: 0.1, ev: 1.66},
+    //                 "0.5": {strategy: 0.35, ev: 1.1},
+    //                 "0": {strategy: 0.52, ev: -0.27},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.77,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'KcKh',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0, ev: 1.1},
+    //                 "0": {strategy: 1, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.55,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'QsQc',
+    //             moves: {
+    //                 "1.3": {strategy: 0, ev: -0.37},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0.25, ev: 1.1},
+    //                 "0": {strategy: 0.1, ev: 0.3},
+    //                 "-1": {strategy: 0.65}
+    //             },
+    //             weight: 0.68,
+    //             preflopWeight: 0.83,
+    //             combination: "2d pair"
+    //         },
+    //         {
+    //             hand: 'AsKc',
+    //             moves: {
+    //                 "1.3": {strategy: 0.2, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0.03, ev: 1.1},
+    //                 "0": {strategy: 0.77, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.88,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         },
+    //         {
+    //             hand: 'AhKs',
+    //             moves: {
+    //                 "1.3": {strategy: 0.1, ev: 1.3},
+    //                 "1": {strategy: 0, ev: 1.66},
+    //                 "0.5": {strategy: 0, ev: 1.1},
+    //                 "0": {strategy: 0.9, ev: 0.3},
+    //                 "-1": {strategy: 0}
+    //             },
+    //             weight: 0.88,
+    //             preflopWeight: 0.92,
+    //             combination: "tptk"
+    //         }
+    //     ]
+    // };
 
     //console.log(setWeightToAllCombinations(testStrategy, strategyORrange));
 

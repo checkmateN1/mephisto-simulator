@@ -253,14 +253,13 @@ function actionMenu(e) {
         tdActionMenu.off();
         actionMenu.remove();
         $("#waiting-progress-bar2").addClass("appear");
+        el.removeClass("color-violet");
         setTimeout(function() {
-            el.removeClass("color-violet");
             //$('#waiting-progress-bar').removeClass("appear");
-            $('#waiting-progress-bar2').removeClass("appear");
             //createHillInfo(); // заголовок окна со спектром
-            $(".hill-info").addClass("appear-fast");
-            createAllCombinationsArr("strategy", getRawActionsIndex(elNode)); //вызвали функцию рисующую график
-            restartListener();
+            // $(".hill-info").addClass("appear-fast");
+            // createAllCombinationsArr("strategy", getRawActionsIndex(elNode)); //вызвали функцию рисующую график
+            // restartListener();
 
         }, 2000);
 
