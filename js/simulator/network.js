@@ -47,6 +47,9 @@ function actionToJson(rawActionListIndex, request) {
     }
 
     function createRequest() {
+        console.log(`createRequest from network.js`);
+        console.log(`rawActionListIndex: ${rawActionListIndex}`);
+        console.log(`rawActionList[rawActionListIndex].street: ${rawActionList[rawActionListIndex].street}`);
         var obj = {
             street: rawActionList[rawActionListIndex].street,
             act_num: rawActionListIndex
@@ -68,7 +71,7 @@ function actionToJson(rawActionListIndex, request) {
         var allPlayersIndexes = initPreflopPlayersIndexes();
         for (let i = 0; i < allPlayersIndexes.length; i++) {
             myJSON.players.push({name: rawActionList[allPlayersIndexes[i]].player,
-                position: getPositionText(rawActionList[allPlayersIndexes[i]].position),
+                position: rawActionList[allPlayersIndexes[i]].position,
                 stack: rawActionList[allPlayersIndexes[i]].balance,
                 bet: rawActionList[allPlayersIndexes[i]].amount,
                 hole1: getHeroHole(1),
@@ -86,56 +89,51 @@ function actionToJson(rawActionListIndex, request) {
     ActionForJson();
     function ActionForJson() {
         //var streetNames = ["preflop", "flop", "turn", "river"];
-        for (let i = 2; i < rawActionList.length; i++) {
+        for (let i = 0; i < rawActionList.length; i++) {
             if (rawActionList[i].street === 0) {
-                myJSON.actions.preflop.push({act_num: i - 1,
-                    player: rawActionList[i].player,
+                myJSON.actions.preflop.push({act_num: i + 1,
+                    position: rawActionList[i].position,
                     balance: rawActionList[i].balance,
                     //action: getActionText(rawActionList[i].action),
                     action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
-                    amount: getAmountForJson(i)
+                    amount: rawActionList[i].amount
                 })
             }
             if (rawActionList[i].street === 1) {
-                myJSON.actions.flop.push({act_num: i - 1,
-                    player: rawActionList[i].player,
+                myJSON.actions.flop.push({act_num: i + 1,
+                    position: rawActionList[i].position,
                     balance: rawActionList[i].balance,
                     //action: getActionText(rawActionList[i].action),
                     action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
-                    amount: getAmountForJson(i)
+                    amount: rawActionList[i].amount
                 })
             }
             if (rawActionList[i].street === 2) {
-                myJSON.actions.turn.push({act_num: i - 1,
-                    player: rawActionList[i].player,
+                myJSON.actions.turn.push({act_num: i + 1,
+                    position: rawActionList[i].position,
                     balance: rawActionList[i].balance,
                     //action: getActionText(rawActionList[i].action),
                     action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
-                    amount: getAmountForJson(i)
+                    amount: rawActionList[i].amount
                 })
             }
             if (rawActionList[i].street === 3) {
-                myJSON.actions.river.push({act_num: i - 1,
-                    player: rawActionList[i].player,
+                myJSON.actions.river.push({act_num: i + 1,
+                    position: rawActionList[i].position,
                     balance: rawActionList[i].balance,
                     //action: getActionText(rawActionList[i].action),
                     action: rawActionList[i].action,
                     pot: rawActionList[i].pot,
-                    amount: getAmountForJson(i)
+                    amount: rawActionList[i].amount
                 })
             }
         }
-
-        function getAmountForJson(i) {
-            if (rawActionList[i].amount != 0) {
-                return rawActionList[i].amount;
-            } else {return}
-        }
     }
-
+    console.log('myJSON');
+    console.log(myJSON);
     getStrategyFromServer(myJSON, rawActionListIndex);
 
     // var jsonObj = JSON.stringify(myJSON, "", 3);

@@ -188,6 +188,8 @@ function actionMenu(e) {
 
     var el = $(this);
     let elNode = e.target; // nodeType == 1
+    // alert(elNode);
+    // console.log(elNode);
     let isGTO = "";
     if (whatIsFirstGTOindex() == getRawActionsIndex(elNode)) {
         isGTO = "checked";

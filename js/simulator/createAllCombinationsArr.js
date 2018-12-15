@@ -12,7 +12,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //возвращает значимые карты борда для запроса юзера в зависимости от конкретной улицы где был клик
     const getUsefulBoard = (board) => {
         let street = getStreetText(rawActionList[rawActionIndex].street);
-        console.log(street);
+        //console.log(street);
         if (street === 'Flop') {
           return board.slice(0, 6);
         } else if (street === 'Turn') {
@@ -21,8 +21,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
           return board.slice(0, 8);
         }
     };
-
-    setCombNameToAllHands(getUsefulBoard(testBoard));
+    if (rawActionList[rawActionIndex].street > 0) {setCombNameToAllHands(getUsefulBoard(testBoard));}
 
     var combinations = {
         "no made hand": 0,
@@ -331,8 +330,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     //console.log(setWeightToAllCombinations(testStrategy, strategyORrange));
 
-    if (strategyORrange != "strategy") {
-        strategyORrange = "1.3"; //временно - будем парсить нужный сайзинг из джейсона с сервера
+    if (strategyORrange !== "strategy") {
+        strategyORrange = "1"; //временно - будем парсить нужный сайзинг из джейсона с сервера
     }
     var currentMoveOrStrategyState = strategyORrange;
 
@@ -345,7 +344,6 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     //есть проблемы с рейзами: key != sizing
     function getHandEV(hand, sizing) {
-        //console.log('test getHandEV');
         for (let i = 0; i < testStrategy.allHands.length; i++) {
             if (testStrategy.allHands[i].hand == hand) {
                 for(var key in testStrategy.allHands[i].moves) {
@@ -406,8 +404,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     createStrategyList();
     //создает визуальное отображение всех возможных мувов с их сайзингами над матрицей в верхней части окна
     function createStrategyList() {
-        var sortable = [];
-        for (var key in testStrategy.allHands[0].moves) {
+        let sortable = [];
+        for (let key in testStrategy.allHands[0].moves) {
             sortable.push([parseFloat(key), testStrategy.allHands[0].moves[key]]);
         }
 
@@ -415,7 +413,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             return b[0] - a[0];
         });
 
-        var strategyMoves = document.getElementById("strategy-moves");
+        let strategyMoves = document.getElementById("strategy-moves");
         strategyMoves.innerHTML = ''; // удаляем childNodes
 
         let wasBet2 = wasBet(rawActionIndex);
@@ -506,7 +504,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     //выделяет цветом текущий мув в стратегии над матрицей или снимает выделение в зависимости от currentMoveOrStrategyState
     function setSelectedStrategyList() {
-        if (currentMoveOrStrategyState != "strategy") {
+        if (currentMoveOrStrategyState !== "strategy") {
             var li = document.getElementById("strategyMove_" + currentMoveOrStrategyState);
             $("#strategy-moves li").addClass("not-selected-move");
             li.classList.add("selected-move");
@@ -702,12 +700,13 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //создает и сортирует данные под конкретный мув с сайзингом или под стратегию из стратегии в джейсоне
     //подаем любую цифру в качестве второго аргумента если хотим посортировать по весу в узле или префлопу
     function createHillData(strategy, move, orderBy) { // orderBy: strategy/preflop/range
+        console.log(`зашли в createHillData`);
         let handsSize = strategy.allHands.length;
         let data_strategy = {};
         let maxWeight = 0; //максимальный вес какой-то руки в конкретном муве(для масштаба диаграммы)
         let tmpWeight = 0;
 
-        if (orderBy == "strategy") {
+        if (orderBy === "strategy") {
             maxWeight = 1;
             if (currentMatrixHand == null) {
                 for (let i = 0; i < handsSize; i++) {
@@ -721,15 +720,16 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 }
             }
 
-        } else if (orderBy == "preflop") {
+
+        } else if (orderBy === "preflop") {
             maxWeight = 1;
             for (let i = 0; i < handsSize; i++) {
                 data_strategy[strategy.allHands[i].hand] = strategy.allHands[i].preflopWeight;
             }
-        } else if (orderBy == "range") {
+        } else if (orderBy === "range") {
             if (currentMatrixHand == null) {
                 for (let i = 0; i < handsSize; i++) {
-                    for (var key in strategy.allHands[i].moves) {
+                    for (let key in strategy.allHands[i].moves) {
                         if (move == key) {
                             tmpWeight = strategy.allHands[i].moves[key].strategy * strategy.allHands[i].weight;
                             if (tmpWeight > maxWeight) {
@@ -761,16 +761,17 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         }
 
         //сортируем ключи по убыванию веса комбинации в спектре для диаграммы
-        keysSorted = Object.keys(data_strategy).sort(function(a,b){return data_strategy[b] - data_strategy[a]});
+        let keysSorted = Object.keys(data_strategy).sort(function(a,b){return data_strategy[b] - data_strategy[a]});
 
         //записали все веса агромувов в один ключ W если это стратегия для диаграммы(orderBy)
         //Нужно записать в файнал дата в ключ W для агромувов вес всех агромувов для каждой руки
         function createFinalDate(keysSorted, handsSize, move, maxWeight, orderBy) {
+
             let hillData = [];
             for (let i = 0; i < keysSorted.length; i++) {
                 let hand = keysSorted[i];
                 for (let j = 0; j < handsSize; j++) {
-                    if (strategy.allHands[j].hand == hand) {
+                    if (strategy.allHands[j].hand === hand) {
                         hillData[i] = {
                             w: 0,
                             h: hand,
@@ -799,6 +800,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 }
             }
+
             return hillData;
         }
         return createFinalDate(keysSorted, handsSize, move, maxWeight, orderBy);
@@ -808,7 +810,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     displayAllMoveStrategyInfo(strategyORrange, "all");
     function displayAllMoveStrategyInfo(move, whatDisplay) {
-        if (move == "strategy") {
+        if (move === "strategy") {
             data_strategy = createHillData(testStrategy, "0", "strategy"); //strategy, preflop, range(3й аргумент)
             currentHandInDiagram = null;
             createDiagram("strategy"); //если хотим рейнж - передаем "range" а не сайзинг

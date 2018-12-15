@@ -478,5 +478,23 @@
             <script src="js/particles.js"></script>
             <script src="js/app_particles.js"></script>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('section.cards').style.opacity = 0;
+                document.querySelector('#particles-js > canvas').style.opacity = 0;
+                document.querySelector('#particles-js > div > header').style.opacity = 0;
+                document.querySelector('#particles-js > div > footer > h4').style.opacity = 0;
+                document.getElementById('random-button').style.opacity = 0;
+                document.getElementById('learn-button').style.opacity = 0;
+                document.getElementById('iq-button').style.opacity = 0;
+                document.getElementById('upload-button').style.opacity = 0;
+
+                $('#simulator-html > section.moves-history > div > div').css('background', '#2b2b2b');
+                $('#simulator-html > section.moves-history table > caption').css('opacity', '0');
+                $('#simulator-html > section.moves-history > div > div > table > tbody > tr > th').css('opacity', '0');
+                document.querySelector('body').style.background = '#2b2b2b';
+                document.querySelector('html').style.background = '#2b2b2b';
+            })
+        </script>
     </body>
 </html>

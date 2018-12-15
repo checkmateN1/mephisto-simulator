@@ -26,24 +26,56 @@ class ActionString {
 // bet 1, raise 2, call 3, check 4, fold 5
 // 9 sb, 8 bb, BTN 0, CO 1, MP2 2 ........
 // (street, player, balance, action, pot, amount, position, isGTO, isHero)
-rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false, true); // post SB
-rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false, false); // post BB
-rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false, false);  // MP1
-rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2, false, false); // MP2
-rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1, false, false); // CO
-rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN
-rawActionList[6] = new ActionString(0, "mammoth", 25.05, 3, 1.10, 0.75, 9, false, true);
-rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false, false); // call BB
+// rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false, true); // post SB
+// rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false, false); // post BB
+// rawActionList[2] = new ActionString(0, "gulyaka", 27, 5, 0.35, 0, 3, false, false);  // MP1
+// rawActionList[3] = new ActionString(0, "zlo-Mishka", 32, 5, 0.35, 0, 2, false, false); // MP2
+// rawActionList[4] = new ActionString(0, "3D action", 45.37, 5, 0.35, 0, 1, false, false); // CO
+// rawActionList[5] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN
+// rawActionList[6] = new ActionString(0, "mammoth", 25.05, 3, 1.10, 0.75, 9, false, true);
+// rawActionList[7] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false, false); // call BB
+//
+// rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false, true);
+// rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false, false);
+// rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false, false);
+// rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false, true);
+// rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false, false);
+//
+// rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false, true);
+// rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false, false);
+// rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false, false);
 
-rawActionList[8] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false, true);
-rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false, false);
-rawActionList[10] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false, false);
-rawActionList[11] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false, true);
-rawActionList[12] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false, false);
 
-rawActionList[13] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false, true);
-rawActionList[14] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false, false);
-rawActionList[15] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false, false);
+// rawActionList[0] = new ActionString(0, "mammoth", 25.15, 3, 0, 0.10, 9, false, true); // post SB
+// rawActionList[1] = new ActionString(0, "checkmateN1", 37.25, 1, 0.10, 0.25, 8, false, false); // post BB
+// rawActionList[2] = new ActionString(0, "joooe84", 60, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN
+// rawActionList[3] = new ActionString(0, "mammoth", 25.05, 3, 1.10, 0.75, 9, false, true);
+// rawActionList[4] = new ActionString(0, "checkmateN1", 37, 3, 1.75, 0.75, 8, false, false); // call BB
+//
+// rawActionList[5] = new ActionString(1, "mammoth", 24.40, 4, 2.25, 0.00, 9, false, true);
+// rawActionList[6] = new ActionString(1, "checkmateN1", 36.5, 4, 2.25, 0.00, 8, false, false);
+// rawActionList[7] = new ActionString(1, "joooe84", 59.25, 1, 2.25, 1.6, 0, false, false);
+// rawActionList[8] = new ActionString(1, "mammoth", 24.40, 3, 3.85, 1.6, 9, false, true);
+// rawActionList[9] = new ActionString(1, "checkmateN1", 36.5, 3, 5.45, 1.6, 8, false, false);
+//
+// rawActionList[10] = new ActionString(2, "mammoth", 22.8, 1, 7.05, 4.00, 9, false, true);
+// rawActionList[11] = new ActionString(2, "checkmateN1", 34.9, 2, 11.05, 34.9, 8, false, false);
+// rawActionList[12] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false, false);
+
+// (street, player, balance, action, pot, amount, position, isGTO, isHero)
+rawActionList[0] = new ActionString(0, "mammoth", 5.15, 3, 0, 0.10, 9, false, true); // post SB   -20
+rawActionList[1] = new ActionString(0, "checkmateN1", 7.25, 1, 0.10, 0.25, 8, false, false); // post BB  -30
+rawActionList[2] = new ActionString(0, "joooe84", 5, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN    -55
+rawActionList[3] = new ActionString(0, "mammoth", 5.05, 3, 1.10, 0.75, 9, false, true);
+rawActionList[4] = new ActionString(0, "checkmateN1", 7, 3, 1.75, 0.75, 8, false, false); // call BB
+
+rawActionList[5] = new ActionString(1, "mammoth", 4.40, 4, 2.25, 0.00, 9, false, true);
+rawActionList[6] = new ActionString(1, "checkmateN1", 6.5, 4, 2.25, 0.00, 8, false, false);
+rawActionList[7] = new ActionString(1, "joooe84", 4.25, 1, 2.25, 1.6, 0, false, false);
+rawActionList[8] = new ActionString(1, "mammoth", 4.40, 3, 3.85, 1.6, 9, false, true);
+rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
+
+
 
 
 
@@ -346,9 +378,9 @@ function getRawActionsIndex(elNode) {
     let riverStrings = document.querySelector(".river-moves .all-info-table");
 
     if (preflopStrings.contains(elNode)) {
-        //alert("Зашли в улицу префлоп в getRawActionsIndex()");
         currentStreet = 0;
         curSreetTable = preflopStrings;
+
     } else if (flopStrings.contains(elNode)) {
         currentStreet = 1;
         curSreetTable = flopStrings;
@@ -362,9 +394,9 @@ function getRawActionsIndex(elNode) {
 
     for (let i = curSreetTable.children.length - 1; i >= 0; i--) {
         if (curSreetTable.children[i].contains(elNode)) {
+            if (currentStreet === 0) {return i - 2}
             for (let j = rawActionList.length - 1; j >= 0; j--) {
-                if (rawActionList[j].street == currentStreet - 1 || (j == 1 && currentStreet == 0)) {
-                    //alert("Функция возвращает i + j - 1 = " + (i + j - 1));
+                if (rawActionList[j].street == currentStreet - 1 || (j === 1 && currentStreet === 0)) {
                     return i + j - 1;
                 }
             }
