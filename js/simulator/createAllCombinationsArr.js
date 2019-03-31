@@ -1,6 +1,10 @@
 //заполняет окно спектра информацией
 function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
+    let ball = document.getElementById('draggable');
+    ball.style.left = '30px';
+    ball.style.top = '124px';
+
     //заполняем массив всех возможных комбинаций рук с текущим бордом пока сервер рассчитывает стратегию
     //console.log(allHandsCombination);
     // console.log('inside createAllCombinationsArr!!!');
@@ -532,7 +536,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
         });
         //меняем цвет кликнутой комбинации и выводим стратегию/спектр с учетом фильтра комбинации
-        $("#hill-combination td:nth-child(1)").on('click', changeFilterHands);
+        // $("#hill-combination td:nth-child(1)").on('click', changeFilterHands);
         function changeFilterHands(e) {
             let li = e.target;
 
@@ -1483,7 +1487,6 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
                 });
         }
-
     }
 
     //проверяет соответствие комбинации
@@ -1626,18 +1629,18 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         displayOrderMatrix();
         function displayOrderMatrix() {
             if (moveType != "strategy") {
-                createMatrixIMG("preflop", moveType);
-                createMatrixIMG("node", moveType);
                 createMatrixIMG("range", moveType);
+                createMatrixIMG("node", moveType);
+                createMatrixIMG("preflop", moveType);
             } else {
                 if (wasBet(rawActionIndex)) {
+                    createMatrixIMG("strategy", moveType);
+                    createMatrixIMG("0");
                     createMatrixIMG("-1");
-                    createMatrixIMG("0");
-                    createMatrixIMG("strategy", moveType);
                 } else {
-                    createMatrixIMG("-1"); //временно для проверки глюков, что ничего не фолдит сеть когда есть возможность чекать
-                    createMatrixIMG("0");
                     createMatrixIMG("strategy", moveType);
+                    createMatrixIMG("0");
+                    createMatrixIMG("-1"); //временно для проверки глюков, что ничего не фолдит сеть когда есть возможность чекать
                 }
 
             }
@@ -1682,32 +1685,49 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
                     let div = document.createElement("div");
                     div.classList.add("matrix-strategy");
-                    if (moveType == "strategy") {
-                        //div.style.background = "rgb(0, 0, 130)";
+                    if (moveType === "strategy") {
                         div.style.background = agroColor;
-                        div.style.height = "86%";
+                        div.style.height = "100%";
                         div.style.zIndex = "-30";
-                    } else if (moveType == "range") {
+                        td.setAttribute('data-internalid', weight[1]);
+                        div.style.width = (weight[1] * 100) + "%";
+                    } else if (moveType === "range") {
                         div.style.background = currentColor;
                         div.style.height = "86%";
                         div.style.zIndex = "-30";
-                    } else if (moveType == 0 || moveType == "node") {
-                        if (moveType == "node") {
+                        td.removeAttribute('data-internalid');
+                        div.style.width = (weight[1] * 100) + "%";
+                    } else if (moveType == 0 || moveType === "node") {
+                        if (moveType === "node") {
                             div.style.background = nodeColor;
+                            div.style.height = "93%";
+                            div.style.width = (weight[1] * 100) + "%";
                         } else {
                             div.style.background = callColor;
+                            div.style.height = "100%";
+                            if (td.hasAttribute('data-internalid')) {
+                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight[1]) * 100) + "%";
+                                td.setAttribute('data-internalid', parseFloat(td.getAttribute('data-internalid')) + weight[1]);
+                            } else {
+                                div.style.width = (weight[1] * 100) + "%";
+                            }
+
                         }
                         div.style.zIndex = "-50";
-                        div.style.height = "93%";
-                    } else if (moveType < 0 || moveType == "preflop") {
-                        if (moveType == "preflop") {
+                    } else if (moveType < 0 || moveType === "preflop") {
+                        if (moveType === "preflop") {
                             div.style.background = preflopColor;
-                        } else {div.style.background = foldColor}
+                            div.style.width = (weight[1] * 100) + "%";
+                        } else {
+                            div.style.background = foldColor;
+                            if (td.hasAttribute('data-internalid')) {
+                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight[1]) * 100) + "%";
+                            } else {div.style.width = (weight[1] * 100) + "%";}
+                        }
                         div.style.height = "100%";
                         div.style.zIndex = "-70";
                     }
 
-                    div.style.width = (weight[1] * 100) + "%";
                     div.style.position = "absolute";
                     div.style.top = "0";
                     td.appendChild(div);
@@ -1717,18 +1737,17 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                         div.classList.add("matrix-strategy");
 
 
-                        if (moveType == "range") {
+                        if (moveType === "range") {
                             div.style.background = setMinRangeColor(weight);
-                            //div.style.background = "#0000e7";
                             div.style.height = "86%";
                             div.style.zIndex = "-29";
-                        } else if (moveType > 0 || moveType == "strategy") {
+                        } else if (moveType > 0 || moveType === "strategy") {
                             div.style.background = setMinStrategyColor(weight);
                             div.style.zIndex = "1000";
                             div.style.height = "86%";
                             div.style.zIndex = "-29";
-                        } else if (moveType == 0 || moveType == "node") {
-                            if (moveType == "node"){
+                        } else if (moveType == 0 || moveType === "node") {
+                            if (moveType === "node"){
                                 div.style.background = setMinNodeColor(weight);
                             } else {
                                 div.style.background = setMinCallColor(weight);

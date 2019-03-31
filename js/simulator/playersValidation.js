@@ -385,11 +385,8 @@ function initPreflopPlayersIndexes() {
     var players = [];
     var playersIndexes = [];
     for (let i = 0; i < rawActionList.length; i++) {
-        if (rawActionList[i].street === 0) {
-            if (players.indexOf(rawActionList[i].player) === -1) {
+        if (players.indexOf(rawActionList[i].player) !== -1) {return playersIndexes}
                 players.push(rawActionList[i].player);
                 playersIndexes.push(i);
-            }
-        } else {return playersIndexes;}
     }
 }

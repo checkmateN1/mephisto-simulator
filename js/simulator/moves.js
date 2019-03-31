@@ -63,17 +63,36 @@ class ActionString {
 // rawActionList[12] = new ActionString(2, "joooe84", 57.65, 2, 45.95, 57.65, 0, false, false);
 
 // (street, player, balance, action, pot, amount, position, isGTO, isHero)
-rawActionList[0] = new ActionString(0, "mammoth", 5.15, 3, 0, 0.10, 9, false, true); // post SB   -20
-rawActionList[1] = new ActionString(0, "checkmateN1", 7.25, 1, 0.10, 0.25, 8, false, false); // post BB  -30
-rawActionList[2] = new ActionString(0, "joooe84", 5, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN    -55
-rawActionList[3] = new ActionString(0, "mammoth", 5.05, 3, 1.10, 0.75, 9, false, true);
-rawActionList[4] = new ActionString(0, "checkmateN1", 7, 3, 1.75, 0.75, 8, false, false); // call BB
+// multipot
+// rawActionList[0] = new ActionString(0, "mammoth", 5.15, 3, 0, 0.10, 9, false, true); // post SB   -20
+// rawActionList[1] = new ActionString(0, "checkmateN1", 7.25, 1, 0.10, 0.25, 8, false, false); // post BB  -30
+// rawActionList[2] = new ActionString(0, "joooe84", 5, 2, 0.35, 0.75, 0, false, false); // bet 0.75 BTN    -55
+// rawActionList[3] = new ActionString(0, "mammoth", 5.05, 3, 1.10, 0.75, 9, false, true);
+// rawActionList[4] = new ActionString(0, "checkmateN1", 7, 3, 1.75, 0.75, 8, false, false); // call BB
+//
+// rawActionList[5] = new ActionString(1, "mammoth", 4.40, 4, 2.25, 0.00, 9, false, true);
+// rawActionList[6] = new ActionString(1, "checkmateN1", 6.5, 4, 2.25, 0.00, 8, false, false);
+// rawActionList[7] = new ActionString(1, "joooe84", 4.25, 1, 2.25, 1.6, 0, false, false);
+// rawActionList[8] = new ActionString(1, "mammoth", 4.40, 3, 3.85, 1.6, 9, false, true);
+// rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
 
-rawActionList[5] = new ActionString(1, "mammoth", 4.40, 4, 2.25, 0.00, 9, false, true);
-rawActionList[6] = new ActionString(1, "checkmateN1", 6.5, 4, 2.25, 0.00, 8, false, false);
-rawActionList[7] = new ActionString(1, "joooe84", 4.25, 1, 2.25, 1.6, 0, false, false);
-rawActionList[8] = new ActionString(1, "mammoth", 4.40, 3, 3.85, 1.6, 9, false, true);
-rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
+// ha
+rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 8, false, false); // post BB  -30
+rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 0, false, false);       // bet 0.75 BTN   -55
+rawActionList[2] = new ActionString(0, "checkmateN1", 7.15, 2, 0.35, 0.75, 8, false, false);   // call BB
+rawActionList[3] = new ActionString(0, "joooe84", 4.75, 3, 1, 0.75, 0, false, false);       // bet 0.75 BTN   -55
+//
+
+// ha allin
+// rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 8, false, false); // post BB  -30
+// rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 0, false, false);       // bet 0.75 BTN   -55
+// rawActionList[2] = new ActionString(0, "checkmateN1", 7.15, 2, 0.35, 7.15, 8, false, false);   // call BB
+// rawActionList[3] = new ActionString(0, "joooe84", 4.75, 3, 1, 4.75, 0, false, false);       // bet 0.75 BTN   -55
+
+//
+// rawActionList[6] = new ActionString(1, "checkmateN1", 6.5, 4, 2.25, 0.00, 8, false, false);
+// rawActionList[7] = new ActionString(1, "joooe84", 4.25, 1, 2.25, 1.6, 0, false, false);
+// rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
 
 
 

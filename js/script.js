@@ -419,3 +419,66 @@ document.addEventListener('click', (e) => {
     el.innerText = '';
     el.innerText = tmp;
 });
+
+var ball = document.getElementById('draggable');
+
+ball.onmousedown = function(e) {
+
+    // if (e.target.id === 'remove-hill-info') {
+    //     removeHillInfo();
+    //     return false;
+    // }
+    if (e.target.id !== 'draggable') {
+        return false;
+    }
+
+
+    var coords = getCoords(ball);
+    var shiftX = e.pageX - coords.left;
+    var shiftY = e.pageY - coords.top;
+
+    document.body.appendChild(ball);
+    moveAt(e);
+
+    ball.style.zIndex = 1000; // над другими элементами
+
+    function moveAt(e) {
+        ball.style.left = e.pageX - shiftX + 'px';
+        ball.style.top = e.pageY - shiftY + 'px';
+    }
+
+    document.onmousemove = function(e) {
+        moveAt(e);
+    };
+
+    ball.onmouseup = function() {
+        //alert('mouseup');
+        document.onmousemove = null;
+        ball.onmouseup = null;
+        restartListener();
+        //return false;
+    };
+    document.onkeydown = function(e) {
+        if(e.which == 27){
+            // Close my modal window
+            document.onmousemove = null;
+            ball.onmouseup = null;
+            //removeHillInfo();
+            restartListener();
+            return false;
+        }
+    }
+
+};
+
+ball.ondragstart = function() {
+    return false;
+};
+
+function getCoords(elem) {   // кроме IE8-
+    var box = elem.getBoundingClientRect();
+    return {
+        top: box.top + pageYOffset,
+        left: box.left + pageXOffset
+    };
+}
