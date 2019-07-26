@@ -77,10 +77,10 @@ class ActionString {
 // rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
 
 // ha
-rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 8, false, false); // post BB  -30
-rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 0, false, false);       // bet 0.75 BTN   -55
-rawActionList[2] = new ActionString(0, "checkmateN1", 7.15, 2, 0.35, 0.75, 8, false, false);   // call BB
-rawActionList[3] = new ActionString(0, "joooe84", 4.75, 3, 1, 0.75, 0, false, false);       // bet 0.75 BTN   -55
+rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 0, false, false); // post BB  -30
+rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 8, false, false);       // bet 0.75 BTN   -55
+rawActionList[2] = new ActionString(0, "checkmateN1", 7.15, 2, 0.35, 0.75, 0, false, false);   // call BB
+rawActionList[3] = new ActionString(0, "joooe84", 4.75, 3, 1, 0.75, 8, false, false);       // bet 0.75 BTN   -55
 //
 
 // ha allin

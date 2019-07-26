@@ -47,12 +47,14 @@ function actionToJson(rawActionListIndex, request) {
     }
 
     function createRequest() {
-        console.log(`createRequest from network.js`);
-        console.log(`rawActionListIndex: ${rawActionListIndex}`);
-        console.log(`rawActionList[rawActionListIndex].street: ${rawActionList[rawActionListIndex].street}`);
+        // console.log(`createRequest from network.js`);
+        // console.log(`rawActionListIndex: ${rawActionListIndex}`);
+        // console.log(`rawActionList[rawActionListIndex].street: ${rawActionList[rawActionListIndex].street}`);
         var obj = {
             street: rawActionList[rawActionListIndex].street,
-            act_num: rawActionListIndex
+            act_num: rawActionListIndex,
+            requestType: 'strategy',
+            // requestType: 'prompter',
         };
 
         function actNumberAtStreet() {
@@ -70,7 +72,8 @@ function actionToJson(rawActionListIndex, request) {
     function playersForJson() {
         var allPlayersIndexes = initPreflopPlayersIndexes();
         for (let i = 0; i < allPlayersIndexes.length; i++) {
-            myJSON.players.push({name: rawActionList[allPlayersIndexes[i]].player,
+            myJSON.players.push({
+                name: rawActionList[allPlayersIndexes[i]].player,
                 position: rawActionList[allPlayersIndexes[i]].position,
                 stack: rawActionList[allPlayersIndexes[i]].balance,
                 bet: rawActionList[allPlayersIndexes[i]].amount,

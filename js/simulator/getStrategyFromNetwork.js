@@ -1,7 +1,7 @@
 let getStrategyFromServer = (obj, rawActionListIndex) => {
     $("#waiting-progress-bar2").addClass("appear");
     (async () => {
-        const rawResponse = await fetch(url + '/strategy', {
+        const rawResponse = await fetch(url + '/simulations', {
             method: 'POST',
             mode: 'cors',
             headers: {

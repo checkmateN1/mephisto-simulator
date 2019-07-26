@@ -141,6 +141,7 @@ function loadScriptsDesctop() {
     if (scriptsDesctopLoaded === true) {return false;}
     addScript('js/d3.min.js');
     addScript('js/config/server.js');
+    addScript('js/simulator/socket.js');
     addScript('js/simulator/createAllCombinationsArr.js');
     addScript('js/simulator/cards.js');
     addScript('js/simulator/playersValidation.js');
