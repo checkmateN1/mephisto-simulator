@@ -1,4 +1,4 @@
-const ioClient = io.connect("http://localhost:3001");
+const ioClient = io.connect(url);
 
 const token = 'uidfksicnm730pdemg662oermfyf75jdf9djf';  // simulator
 

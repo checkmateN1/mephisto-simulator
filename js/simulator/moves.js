@@ -191,15 +191,23 @@ displayAddRemoveButtons();
 // функция показывающая или скрывающая кнопки добавить/удалить действие
 function displayAddRemoveButtons() {
 
-    document.querySelector(".add-move-button.flop").classList.add("hidden"); // добавили кнопку флопа
-    document.querySelector(".sub-move-button.flop").classList.add("hidden"); // добавили кнопку флопа
+    document.querySelector(".add-move-button.preflop").classList.add("hidden");
+    document.querySelector(".sub-move-button.preflop").classList.add("hidden");
+    document.querySelector(".add-move-button.flop").classList.add("hidden");
+    document.querySelector(".sub-move-button.flop").classList.add("hidden");
     document.querySelector(".add-move-button.turn").classList.add("hidden");
     document.querySelector(".sub-move-button.turn").classList.add("hidden");
     document.querySelector(".add-move-button.river").classList.add("hidden");
     document.querySelector(".sub-move-button.river").classList.add("hidden");
 
     if(rawActionList[rawActionList.length - 1].street == 0) { // если улица последнего действия preflop
-        document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
+        if (isTerminalStreetState()) {
+            document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
+        } else {
+            document.querySelector(".add-move-button.preflop").classList.remove("hidden"); // кнопка флопа
+        }
+
+        document.querySelector(".sub-move-button.preflop").classList.remove("hidden");
         return;
     }
 
@@ -265,7 +273,7 @@ function isTerminalStreetState() {
     let currentStreet = rawActionList[rawActionList.length - 1].street;
     if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
 
-    for (let i = rawActionList.length - 1; i > 0; i--) {
+    for (let i = rawActionList.length - 1; i >= 0; i--) {
         if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
             if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
                 nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
@@ -309,6 +317,8 @@ function addActionString() {
 
     let oldActionListLength = rawActionList.length;
     let isTerminalStreetStateTmp = isTerminalStreetState();
+    console.log('test add button isTerminalStreetStateTmp');
+    console.log(isTerminalStreetStateTmp);
     let whoIsNextMoveTmp = whoIsNextMove();
     rawActionList[oldActionListLength] = new ActionString();
     if(rawActionList[oldActionListLength - 1].street > 0) {
@@ -317,12 +327,6 @@ function addActionString() {
 
     for (let i = oldActionListLength - 1; i > 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
-            //console.group("addActionString test group");
-            //console.log("rawActionList[i].player = " + rawActionList[i].player);
-            //console.log("parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2) = " + parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2)));
-            //console.log("parseFloat(whatIsThePot(oldActionListLength).toFixed(2)) = " + parseFloat(whatIsThePot(oldActionListLength).toFixed(2)));
-            //console.log("rawActionList[i].position = " + rawActionList[i].position);
-            //console.groupEnd();
             rawActionList[oldActionListLength].player = rawActionList[i].player;
             rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
             rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
@@ -343,13 +347,11 @@ function addActionString() {
 
 // удаляет последнее действие
 function removeLastActionString() {
-    if (rawActionList[rawActionList.length - 1].street > 0) {
-        rawActionList.pop();
-        removeActions();
-        displayActions();
-        displayAddRemoveButtons();
-        restartListener();
-    }
+    rawActionList.pop();
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
 }
 
 function clearAllrawActionsList() {
