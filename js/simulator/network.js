@@ -54,6 +54,7 @@ function actionToJson(rawActionListIndex, request) {
             street: rawActionList[rawActionListIndex].street,
             act_num: rawActionListIndex,
             requestType: 'strategy',
+            position: rawActionList[rawActionListIndex].position,
             // requestType: 'prompter',
         };
 

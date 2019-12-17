@@ -533,7 +533,6 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     tdPercent.appendChild(document.createTextNode(combination[property]));
                 }
             }
-
         });
         //меняем цвет кликнутой комбинации и выводим стратегию/спектр с учетом фильтра комбинации
         // $("#hill-combination td:nth-child(1)").on('click', changeFilterHands);

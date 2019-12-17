@@ -147,7 +147,45 @@
                                         <th>Amount</th>
                                     </tr>
                                 </table>
+                                <div class="preflop-sets">
+                                    <!--<ul>-->
+                                        <!--<li class="preflop-set active" value="0">ha-limp</li>-->
+                                        <!--<li class="preflop-set" value="1">ha-2bet</li>-->
+                                        <!--<li class="preflop-set" value="2">ha-3bet</li>-->
+                                        <!--<li class="preflop-set" value="3">ha-All-in</li>-->
+                                        <!--<li class="preflop-set" value="4">3x-limp</li>-->
+                                        <!--<li class="preflop-set" value="5">3x-2bet</li>-->
+                                        <!--<li class="preflop-set" value="6">3x-3bet</li>-->
+                                        <!--<li class="preflop-set" value="7">3x-All-in</li>-->
+                                    <!--</ul>-->
+                                    <ul class="players-count-list">
+                                        <li class="preflop-set" value="0">ha</li>
+                                        <li class="preflop-set" value="1">3 players</li>
+                                    </ul>
+                                    <ul class="blinds-set hidden">
+                                        <li value="20" class="active">10/20</li>
+                                        <li value="30">15/30</li>
+                                        <li value="40">20/40</li>
+                                        <li value="60">30/60</li>
+                                        <li value="80">40/80</li>
+                                        <li value="100">50/100</li>
+                                        <li value="120">60/120</li>
+                                    </ul>
+                                    <div class="ha-setup-template hidden">
+                                        <input id="btn-balance-ha" type="number" placeholder="BTN balance in BB">
+                                        <input id="bb-balance-ha" type="number" placeholder="BB balance in BB" disabled>
+                                    </div>
+                                    <div class="setup-template-3 hidden">
+                                        <input id="sb-balance-3" type="number" placeholder="SB balance in BB">
+                                        <input id="bb-balance-3" type="number" placeholder="BB balance in BB">
+                                        <input id="btn-balance-3" type="number" placeholder="BTN balance in BB" disabled>
+                                    </div>
+                                </div>
                             </div>
+                            <span class="add-button-wrapper">
+                                <button class="add-move-button preflop hidden" onclick="addActionString()"></button>
+                                <button class="sub-move-button preflop hidden" onclick="removeLastActionString()"></button>
+                            </span>
                         </div>
                     </section>
                         <div id="draggable" class="hill-info ui-widget-content">
@@ -475,8 +513,8 @@
             </footer>
             <script src="js/jquery-3.3.1.min.js"></script>
             <script src="js/script.js"></script>
-            <script src="js/particles.js"></script>
-            <script src="js/app_particles.js"></script>
+            <!--<script src="js/particles.js"></script>-->
+            <!--<script src="js/app_particles.js"></script>-->
         </div>
     </body>
 </html>
