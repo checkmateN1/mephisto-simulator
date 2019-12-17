@@ -1,5 +1,7 @@
-var tdAmount = $(".all-info-table td:nth-child(5)"); // селектим amount
+var tdAmount = $(".all-info-table.postflop td:nth-child(5)"); // селектим amount
+var tdAmountPreflop = $(".all-info-table.preflop td:nth-child(6)"); // селектим amount
 tdAmount.on('click', amountClick);
+tdAmountPreflop.on('click', amountClick);
 // функция обрабатывающая клик в amount
 function amountClick(e) {
     var el = $(this);
@@ -139,8 +141,10 @@ function displayStats(e) {
 }
 
 
-var tdAction = $(".all-info-table td:nth-child(3)"); // селектим action
+var tdAction = $(".all-info-table.postflop td:nth-child(3)"); // селектим action
+var tdActionPreflop = $(".all-info-table.preflop td:nth-child(4)"); // селектим action
 tdAction.on('click', actionClick);
+tdActionPreflop.on('click', actionClick);
 // функция обрабатывающая ЛЕВЫЙ клик в action
 function actionClick(e){
     var el = $(this);
@@ -213,6 +217,7 @@ function actionClick(e){
         if (rawActionList[rawActionList.length - 1].action === 2 && rawActionList[rawActionList.length - 1].amount < minAmount() && rawActionList[rawActionList.length - 1].balance > minAmount()) {
             rawActionList[rawActionList.length - 1].amount = parseFloat(0);
         }
+
         removeActions();
         displayActions();
         displayAddRemoveButtons();

@@ -76,6 +76,17 @@ class ActionString {
 // rawActionList[8] = new ActionString(1, "mammoth", 4.40, 3, 3.85, 1.6, 9, false, true);
 // rawActionList[9] = new ActionString(1, "checkmateN1", 6.5, 3, 5.45, 1.6, 8, false, false);
 
+const preflopTemplate = {
+    0: [],
+    1: [],
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: [],
+    7: [],
+};
+
 // ha
 rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 0, false, false); // post BB  -30
 rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 8, false, false);       // bet 0.75 BTN   -55
@@ -263,21 +274,42 @@ function displayAddRemoveButtons() {
 
 //определяет терминальное состояние на улице
 function isTerminalStreetState() {
-    let currentAmount = maxAmountAtCurrentStreet();
-    let nPlayers = whoIsInGame().slice();
+    // let currentAmount = maxAmountAtCurrentStreet();
+    // let nPlayers = whoIsInGame().slice();
+    //
+    // if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3 && whoIsInGame() == rawActionList[rawActionList.length - 1].position) {
+    //     return true;
+    // }
+    //
+    // let currentStreet = rawActionList[rawActionList.length - 1].street;
+    // if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
+    //
+    // for (let i = rawActionList.length - 1; i >= 0; i--) {
+    //     if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
+    //         if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
+    //             nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
+    //             if (nPlayers.length == 0) {
+    //                 return true;
+    //             }
+    //         } else {return false;}
+    //     }
+    // }
+    const currentAmount = this.maxAmountAtCurrentStreet();
+    const nPlayers = this.whoIsInGame();    //добавляем всех у кого УМНЫЙ баланc больше нуля и кто не делал фолд. массив с позициями
 
-    if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3 && whoIsInGame() == rawActionList[rawActionList.length - 1].position) {
-        return true;
+    const currentStreet = this.rawActionList[this.rawActionList.length - 1].street;
+    if (this.rawActionList[this.rawActionList.length - 1].action < 3) {return false;}
+
+    // BB moves ones exception
+    if (currentStreet === 0 && this.rawActionList.filter(action => action.position === this.rawActionList[1].position).length === 1) {
+        return false;
     }
 
-    let currentStreet = rawActionList[rawActionList.length - 1].street;
-    if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
-
-    for (let i = rawActionList.length - 1; i >= 0; i--) {
-        if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
-            if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
-                nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
-                if (nPlayers.length == 0) {
+    for (let i = this.rawActionList.length - 1; i >= 0; i--) {
+        if (nPlayers.indexOf(this.rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
+            if (this.rawActionList[i].amount === currentAmount && this.rawActionList[i].street === currentStreet) { // проверяем совпадает ли значение его ставки и улица
+                nPlayers.splice(nPlayers.indexOf(this.rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
+                if (nPlayers.length === 0) {
                     return true;
                 }
             } else {return false;}
@@ -320,12 +352,15 @@ function addActionString() {
     console.log('test add button isTerminalStreetStateTmp');
     console.log(isTerminalStreetStateTmp);
     let whoIsNextMoveTmp = whoIsNextMove();
+    console.log('whoIsNextMoveTmp');
+    console.log(whoIsNextMoveTmp);
+
     rawActionList[oldActionListLength] = new ActionString();
     if(rawActionList[oldActionListLength - 1].street > 0) {
         rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
     } else {rawActionList[oldActionListLength].street = 1}
 
-    for (let i = oldActionListLength - 1; i > 0; i--) {
+    for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
             rawActionList[oldActionListLength].player = rawActionList[i].player;
             rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
@@ -344,6 +379,129 @@ function addActionString() {
     displayAddRemoveButtons();
     restartListener();
 }
+
+const haBTNBalance = document.getElementById('btn-balance-ha');
+const haBBBalance = document.getElementById('bb-balance-ha');
+
+const SBBalance3 = document.getElementById('sb-balance-3');
+const BBBalance3 = document.getElementById('bb-balance-3');
+const BTNBalance3 = document.getElementById('btn-balance-3');
+let curBlindSize = 20;
+
+$(".blinds-set > li").on('click', setCurBlind);
+function setCurBlind(e) {
+    const li = e.target;
+
+    $(".blinds-set > li").removeClass('active');
+    li.classList.add('active');
+
+    if (curBlindSize !== +li.getAttribute('value')) {
+        curBlindSize = +li.getAttribute('value');
+        haBBBalance.value = '';
+        haBTNBalance.value = '';
+
+        SBBalance3.value = '';
+        BBBalance3.value = '';
+        BTNBalance3.value = '';
+    }
+}
+
+$(".players-count-list > li").on('click', setPreflopTemplate);
+function setPreflopTemplate(e) {
+    const li = e.target;
+    // alert(li.getAttribute('value'));
+
+    $(".players-count-list > li").removeClass('active');
+    li.classList.add('active');
+
+    if (li.getAttribute('value') == 0) {     // new ha
+        $('.setup-template-3').addClass('hidden');
+        $('.ha-setup-template').removeClass('hidden');
+    } else if (li.getAttribute('value') == 1) {     // new 3 players
+        $('.ha-setup-template').addClass('hidden');
+        $('.setup-template-3').removeClass('hidden');
+    }
+    $('.blinds-set').removeClass('hidden');
+
+    rawActionList = [];
+
+
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
+
+haBTNBalance.addEventListener("change", function() {
+    const curSumm = 1500/curBlindSize;
+    if (haBTNBalance.value > curSumm) {
+        alert(`enter valid value between 0 and ${curSumm} BB`);
+    } else {
+        haBBBalance.value = curSumm - haBTNBalance.value;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", +haBTNBalance.value, 0, 0, curBlindSize/40, 0, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", +haBBBalance.value, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "checkmateN1", +haBTNBalance.value - curBlindSize/40, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.ha-setup-template').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
+
+SBBalance3.addEventListener("change", function() {
+    const curSumm = 1500/curBlindSize;
+    const SBBalance = +SBBalance3.value;
+    const BBBalance = +BBBalance3.value;
+
+    if (SBBalance + BBBalance > curSumm) {
+        alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
+    } else if (BBBalance) {
+        BTNBalance3.value = curSumm - BBBalance - SBBalance;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", SBBalance, 0, 0, curBlindSize/40, 9, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", BBBalance, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "3DAction", +BTNBalance3.value, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.setup-template-3').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
+
+BBBalance3.addEventListener("change", function() {
+    const curSumm = 1500/curBlindSize;
+    const SBBalance = +SBBalance3.value;
+    const BBBalance = +BBBalance3.value;
+
+    if (SBBalance + BBBalance > curSumm) {
+        alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
+    } else if (SBBalance) {
+        BTNBalance3.value = curSumm - BBBalance - SBBalance;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", SBBalance, 0, 0, curBlindSize/40, 9, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", BBBalance, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "3DAction", +BTNBalance3.value, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.setup-template-3').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
 
 // удаляет последнее действие
 function removeLastActionString() {
