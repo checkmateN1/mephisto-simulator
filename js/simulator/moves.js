@@ -88,8 +88,8 @@ const preflopTemplate = {
 };
 
 // ha
-rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 3, 0, 0.1, 0, false, false); // post BB  -30
-rawActionList[1] = new ActionString(0, "joooe84", 5, 1, 0.1, 0.25, 8, false, false);       // bet 0.75 BTN   -55
+rawActionList[0] = new ActionString(0, "checkmateN1", 7.25, 0, 0, 0.1, 0, false, false); // post BB  -30
+rawActionList[1] = new ActionString(0, "joooe84", 5, 0, 0.1, 0.25, 8, false, false);       // bet 0.75 BTN   -55
 rawActionList[2] = new ActionString(0, "checkmateN1", 7.15, 2, 0.35, 0.75, 0, false, false);   // call BB
 rawActionList[3] = new ActionString(0, "joooe84", 4.75, 3, 1, 0.75, 8, false, false);       // bet 0.75 BTN   -55
 //
@@ -120,7 +120,7 @@ function getPositionText(position) {
 }
 
 function getActionText(action, index) {
-    let arr = [index == 0 ? "PostSB" : "PostBB", "bet", "raise", "call", "check", "fold", "\t&ltselect\t&gt"];
+    let arr = [index == 0 ? "PostSB" : "PostBB", "bet", "raise", "call", "check", "fold", "select"];
     return arr[action];
 }
 
@@ -356,9 +356,11 @@ function addActionString() {
     console.log(whoIsNextMoveTmp);
 
     rawActionList[oldActionListLength] = new ActionString();
-    if(rawActionList[oldActionListLength - 1].street > 0) {
-        rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
-    } else {rawActionList[oldActionListLength].street = 1}
+    rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+
+    // if(rawActionList[oldActionListLength - 1].street > 0) {
+    //
+    // } else {rawActionList[oldActionListLength].street = 1}
 
     for (let i = oldActionListLength - 1; i >= 0; i--) {
         if (rawActionList[i].position === whoIsNextMoveTmp) {
@@ -453,12 +455,58 @@ haBTNBalance.addEventListener("change", function() {
     }
 });
 
+haBTNBalance.addEventListener("blur", function() {
+    const curSumm = 1500/curBlindSize;
+    if (haBTNBalance.value > curSumm) {
+        alert(`enter valid value between 0 and ${curSumm} BB`);
+    } else {
+        haBBBalance.value = curSumm - haBTNBalance.value;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", +haBTNBalance.value, 0, 0, curBlindSize/40, 0, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", +haBBBalance.value, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "checkmateN1", +haBTNBalance.value - curBlindSize/40, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.ha-setup-template').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
+
 SBBalance3.addEventListener("change", function() {
     const curSumm = 1500/curBlindSize;
     const SBBalance = +SBBalance3.value;
     const BBBalance = +BBBalance3.value;
 
-    if (SBBalance + BBBalance > curSumm) {
+    if (SBBalance + BBBalance > curSumm && SBBalance > 0) {
+        alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
+    } else if (BBBalance) {
+        BTNBalance3.value = curSumm - BBBalance - SBBalance;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", SBBalance, 0, 0, curBlindSize/40, 9, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", BBBalance, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "3DAction", +BTNBalance3.value, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.setup-template-3').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
+
+SBBalance3.addEventListener("blur", function() {
+    const curSumm = 1500/curBlindSize;
+    const SBBalance = +SBBalance3.value;
+    const BBBalance = +BBBalance3.value;
+
+    if (SBBalance + BBBalance > curSumm && SBBalance > 0) {
         alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
     } else if (BBBalance) {
         BTNBalance3.value = curSumm - BBBalance - SBBalance;
@@ -483,7 +531,32 @@ BBBalance3.addEventListener("change", function() {
     const SBBalance = +SBBalance3.value;
     const BBBalance = +BBBalance3.value;
 
-    if (SBBalance + BBBalance > curSumm) {
+    if (SBBalance + BBBalance > curSumm && BBBalance > 0) {
+        alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
+    } else if (SBBalance) {
+        BTNBalance3.value = curSumm - BBBalance - SBBalance;
+
+        rawActionList = [];
+        rawActionList.push(new ActionString(0, "checkmateN1", SBBalance, 0, 0, curBlindSize/40, 9, false, false));
+        rawActionList.push(new ActionString(0, "joooe84", BBBalance, 0, curBlindSize/40, curBlindSize/20, 8, false, false));
+        rawActionList.push(new ActionString(0, "3DAction", +BTNBalance3.value, 6, curBlindSize/40 + curBlindSize/20, 0, 0, false, false));
+
+
+        removeActions();
+        displayActions();
+        displayAddRemoveButtons();
+        restartListener();
+        $('.setup-template-3').addClass('hidden');
+        $('.blinds-set').addClass('hidden');
+    }
+});
+
+BBBalance3.addEventListener("blur", function() {
+    const curSumm = 1500/curBlindSize;
+    const SBBalance = +SBBalance3.value;
+    const BBBalance = +BBBalance3.value;
+
+    if (SBBalance + BBBalance > curSumm && BBBalance > 0) {
         alert(`enter valid value between 0 and ${curSumm - BBBalance} BB`);
     } else if (SBBalance) {
         BTNBalance3.value = curSumm - BBBalance - SBBalance;

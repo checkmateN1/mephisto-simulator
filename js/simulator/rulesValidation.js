@@ -33,12 +33,12 @@ function excessSmartOverMaximum(rawActionIndex) {
 
 // возвращает минимальную возможную ставку для игрока в последней строке
 function minAmount() {
-    let lastAgroAmount = parseFloat(0);
+    let lastAgroAmount = 0;
     let indexLastAgro = 1000;
     let currentStreet = rawActionList[rawActionList.length - 1].street;
     for (let i = rawActionList.length - 2; i >= 0; i--) {
         if (rawActionList[i].street === currentStreet) {
-            if (rawActionList[i].action < 3) { // агромув
+            if (rawActionList[i].action < 3 || rawActionList[i].action === 0) { // агромув или пост ББ
                 if (indexLastAgro > 999) {
                     lastAgroAmount = rawActionList[i].amount;
                     indexLastAgro = i;

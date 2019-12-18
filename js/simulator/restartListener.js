@@ -1,20 +1,12 @@
 // функция перезагружающая listener
 function restartListener() {
     tdAmount.off();
-    tdAmount = $(".all-info-table.postflop td:nth-child(5)");
+    tdAmount = $(".all-info-table.postflop td:nth-child(5), .all-info-table.preflop td:nth-child(6)");
     tdAmount.on('click', amountClick);
 
-    tdAmountPreflop.off();
-    tdAmountPreflop = $(".all-info-table.preflop td:nth-child(6)");
-    tdAmountPreflop.on('click', amountClick);
-
     tdAction.off();
-    tdAction = $(".all-info-table.postflop td:nth-child(3)");
+    tdAction = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)");
     tdAction.on('click', actionClick);
-
-    tdActionPreflop.off();
-    tdActionPreflop = $(".all-info-table.preflop td:nth-child(4)");
-    tdActionPreflop.on('click', actionClick);
 
     tdPlayerStats.off();
     tdPlayerStats = $(".all-info-table td:nth-child(1)");

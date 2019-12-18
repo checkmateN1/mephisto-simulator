@@ -89,18 +89,16 @@ function whatIsPlayerBalance(position, oldActionListLength) {
 // возвращает начальны баланс на улице заданного игрока
 function initPlayerBalance(position, oldActionListLength) {
     let currentStreetForBalance;
-    let lastPlayerAmount; //34.45 last amount joooe84
-    let initBalance; //57.25 init balance joooe84
-    for (let i = oldActionListLength - 1; i > 0; i--) {
+    let initBalance;
+    for (let i = rawActionList.length - 1; i >= 0; i--) {
         if (rawActionList[i].position === position) {
             currentStreetForBalance = rawActionList[i].street;
-            lastPlayerAmount = rawActionList[i].amount; //34.45 last amount joooe84
-            initBalance = rawActionList[i].balance; //57.25 init balance joooe84
+            initBalance = rawActionList[i].balance;
             break;
         }
     }
 
-    for (let i = oldActionListLength - 1; i > 0; i--) {
+    for (let i = rawActionList.length - 2; i >= 0; i--) {
         if (rawActionList[i].position === position) {
             if (rawActionList[i].street === currentStreetForBalance) {
                 initBalance = rawActionList[i].balance;

@@ -1,7 +1,5 @@
-var tdAmount = $(".all-info-table.postflop td:nth-child(5)"); // селектим amount
-var tdAmountPreflop = $(".all-info-table.preflop td:nth-child(6)"); // селектим amount
+var tdAmount = $(".all-info-table.postflop td:nth-child(5), .all-info-table.preflop td:nth-child(6)"); // селектим amount
 tdAmount.on('click', amountClick);
-tdAmountPreflop.on('click', amountClick);
 // функция обрабатывающая клик в amount
 function amountClick(e) {
     var el = $(this);
@@ -13,7 +11,11 @@ function amountClick(e) {
     if (getRawActionsIndex(elNode) != rawActionList.length - 1) {
         return;
     }
-    if(Math.abs(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()).toFixed(2) - initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2)) < 0.0001) {
+
+    console.log(`initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length) = ${initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length)} `);
+    console.log(`minAmount(): ${minAmount()}`);
+
+    if(Math.abs(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length), minAmount()) - initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length)) < 0.0001) {
         let td = document.createElement("td");
         td.innerHTML = "$" + initPlayerBalance(rawActionList[rawActionList.length - 1].position, rawActionList.length).toFixed(2);
         el.replaceWith(td);
@@ -140,11 +142,36 @@ function displayStats(e) {
 
 }
 
+function getLastRawAction(position) {
+    for (let i = rawActionList.length - 2; i >= 0; i--) {
+        if (rawActionList[i].position === position) {
+            if (i === 1) {
+                return rawActionList[i].action;
+            } else {
+                return -1;
+            }
+        }
+    }
+    return -1;   // was't any move before
+}
 
-var tdAction = $(".all-info-table.postflop td:nth-child(3)"); // селектим action
-var tdActionPreflop = $(".all-info-table.preflop td:nth-child(4)"); // селектим action
+function getPrevAmountOnCurStreet(position) {
+    const currentStreet = rawActionList[rawActionList.length - 1].street;
+    for (let i = rawActionList.length - 2; i >= 0; i--) {
+        if (currentStreet === rawActionList[i].street) {
+            if (position === rawActionList[i].position) {
+                return rawActionList[i].amount;
+            }
+        } else {
+            return 0;
+        }
+    }
+    return 0;
+}
+
+
+var tdAction = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)"); // селектим action
 tdAction.on('click', actionClick);
-tdActionPreflop.on('click', actionClick);
 // функция обрабатывающая ЛЕВЫЙ клик в action
 function actionClick(e){
     var el = $(this);
@@ -158,12 +185,13 @@ function actionClick(e){
     }
 
     let oldActionListLength = rawActionList.length - 1;
+    const isBBCanCheck = getLastRawAction(rawActionList[rawActionList.length - 1].position) === 0 && getPrevAmountOnCurStreet(rawActionList[rawActionList.length - 1].position) === maxAmountAtCurrentStreet();    // bb raise last on preflop and had max amount
     if (wasBet(oldActionListLength)) {
         if (whoIsInGame().length > 1) {
             if (maxAmountAtCurrentStreet() < initPlayerBalance(rawActionList[rawActionList.length - 1].position, oldActionListLength)) {
                 var arr = [
                     {val: 1, text: 'raise'},
-                    {val: 2, text: 'call'},
+                    {val: 2, text: isBBCanCheck ? 'check' : 'call'},
                     {val: 3, text: 'fold'}
                 ];
             } else  {
@@ -216,6 +244,10 @@ function actionClick(e){
         sel.replaceWith(td);
         if (rawActionList[rawActionList.length - 1].action === 2 && rawActionList[rawActionList.length - 1].amount < minAmount() && rawActionList[rawActionList.length - 1].balance > minAmount()) {
             rawActionList[rawActionList.length - 1].amount = parseFloat(0);
+        }
+
+        if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 4 && isBBCanCheck) {
+            rawActionList[rawActionList.length - 1].amount = maxAmountAtCurrentStreet();
         }
 
         removeActions();
