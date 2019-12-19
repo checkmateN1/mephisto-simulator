@@ -1008,6 +1008,8 @@ output {
 }
 
 #upload-button,
+#open-setup-button,
+#save-setup-button,
 #random-button,
 #iq-button,
 #learn-button {
@@ -1024,6 +1026,30 @@ output {
     height: 73px;
     top: 410px;
     left: 30px;
+    background-size: cover;
+    outline: none;
+}
+
+#save-setup-button {
+    background-image: url("../img/disket.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 33px;
+    height: 33px;
+    top: 440px;
+    left: 161px;
+    background-size: cover;
+    outline: none;
+}
+
+#open-setup-button {
+    background-image: url("../img/folder-icon.png");
+    background-repeat: no-repeat;
+    display: block;
+    width: 33px;
+    height: 33px;
+    top: 439px;
+    left: 114px;
     background-size: cover;
     outline: none;
 }
@@ -1046,6 +1072,18 @@ output {
 #upload-button:hover {
     cursor: pointer;
     background-image: url("../img/upload_g_hover2.png");
+    background-repeat: no-repeat;
+}
+
+#save-setup-button:hover {
+    cursor: pointer;
+    background-image: url("../img/disket-hover.png");
+    background-repeat: no-repeat;
+}
+
+#open-setup-button:hover {
+    cursor: pointer;
+    background-image: url("../img/folder-icon-hover.png");
     background-repeat: no-repeat;
 }
 
@@ -1610,10 +1648,86 @@ div.diagram {
     z-index: -100;
 }
 
+#open-setups-window {
+    width: 600px;
+    height: 550px;
+    position: absolute;
+    top: 0;
+    left: 249px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 5px 3px;
+    background: -webkit-gradient(linear, left bottom, left top, from(#2d2e5a), to(#493680));
+    background: -webkit-linear-gradient(bottom, #2d2e5a, #493680);
+    background: -o-linear-gradient(bottom, #2d2e5a, #493680);
+    background: linear-gradient(to top, #2d2e5a, #493680);
+    opacity: 0;
+    z-index: -100;
+}
+
+#save-window {
+    width: 400px;
+    height: 150px;
+    position: absolute;
+    top: 215px;
+    left: 364px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 5px 3px;
+    background: #2d2e5a;
+    opacity: 0;
+    z-index: -100;
+}
+
+#save-window textarea {
+    height: 100px;
+}
+
 #upload-text-area {
     width: 99%;
     height: 520px;
     margin-bottom: 3px;
+}
+
+.window-buttons {
+    text-align: center;
+}
+
+.window-buttons button {
+    margin: 0 10px;
+}
+
+#table-wrapper {
+    position:relative;
+}
+#table-scroll {
+    height:510px;
+    overflow:auto;
+    margin-top:10px;
+}
+#table-wrapper table {
+    width:100%;
+}
+
+#table-wrapper table th {
+    text-align: left;
+    height: 17px;
 }
 
 #remove-upload {

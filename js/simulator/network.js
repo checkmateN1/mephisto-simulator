@@ -1,5 +1,5 @@
 
-function actionToJson(rawActionListIndex, request) {
+function actionToJson(rawActionListIndex, request, isSaveSetup) {
 
     var myJSON = {
         board: {
@@ -138,7 +138,12 @@ function actionToJson(rawActionListIndex, request) {
     }
     console.log('myJSON');
     console.log(myJSON);
-    getStrategyFromServer(myJSON, rawActionListIndex);
+
+    if (isSaveSetup) {
+        return myJSON;
+    } else {
+        getStrategyFromServer(myJSON, rawActionListIndex);
+    }
 
     // var jsonObj = JSON.stringify(myJSON, "", 3);
     // console.log(jsonObj);

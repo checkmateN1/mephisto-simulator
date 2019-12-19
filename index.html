@@ -237,6 +237,8 @@
                         <div class="bar"></div>
                     </div>
                     <button id="upload-button" onclick="displayUploadWindow()"></button>
+                    <button id="open-setup-button" onclick="openSetup()"></button>
+                    <button id="save-setup-button" onclick="saveSetupWindow()"></button>
                     <div id="randomHandNumber"></div>
                     <button id="random-button"></button>
                     <button id="iq-button"></button>
@@ -246,6 +248,32 @@
                         <p><textarea id="upload-text-area" autofocus name="hand_history_text" placeholder="Copy here your Pokerstars Hold'em No Limit Short-handed hand history text"></textarea></p>
                         <p><input  id="submit-hand-history" type="button" value="Upload" onclick="sendHandHistoryRequest()"></p>
                         <button id="remove-upload" onclick="removeUpload()"></button>
+                    </div>
+
+                    <div id="save-window">
+                        <input id="save-file-name" type="text" placeholder="enter setup file name">
+                        <textarea id="save-file-description" type="text" placeholder="enter setup description"></textarea>
+                        <div class="window-buttons">
+                            <button id="save-setup" onclick="saveSetup()">save</button>
+                            <button id="cancel-setup" onclick="cancelSaveSetup()">cancel</button>
+                        </div>
+                    </div>
+
+                    <div id="open-setups-window">
+                        <div id="table-wrapper">
+                            <div id="table-scroll">
+                                <table id="open-setups-list">
+                                    <tr>
+                                        <th>file name</th>
+                                        <th>date</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="window-buttons">
+                            <button id="open-setup" onclick="openSelectedSetup()">open</button>
+                            <button id="cancel-open-setup" onclick="cancelOpenSetups()">cancel</button>
+                        </div>
                     </div>
                     <!--
 

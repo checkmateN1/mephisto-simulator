@@ -1,19 +1,116 @@
 let uploadWindow = document.getElementById("upload-window");
 let uploadTextArea = document.getElementById('upload-text-area');
 
+const saveWindow = document.getElementById("save-window");
+const saveFileName = document.getElementById("save-file-name");
+const saveFileDescription = document.getElementById("save-file-description");
+
+const openSetupsWindow = document.getElementById("open-setups-window");
+
 function displayUploadWindow() {
     if (!uploadWindow.classList.contains("appear-fast")) {
         uploadTextArea.value = '';
         uploadWindow.classList.add("appear-fast");
     }
-};
+}
 
 function removeUpload() {
     if (uploadWindow.classList.contains("appear-fast")) {
         uploadWindow.classList.remove("appear-fast");
     }
     return false;
-};
+}
+
+function saveSetupWindow() {
+    if (!saveWindow.classList.contains("appear-fast")) {
+        saveFileName.value = '';
+        saveFileDescription.value = '';
+        saveWindow.classList.add("appear-fast");
+    }
+}
+
+function saveSetup() {
+    const fileName = saveFileName.value;
+    const fileDescription = saveFileDescription.value;
+    const data = {
+        fileName,
+        fileDescription,
+        board: {
+            c1: getCardName(checkedCards[3]),
+            c2: getCardName(checkedCards[4]),
+            c3: getCardName(checkedCards[5]),
+            c4: getCardName(checkedCards[6]),
+            c5: getCardName(checkedCards[7]),
+        },
+        hole1: getCardName(checkedCards[1]),
+        hole2: getCardName(checkedCards[2]),
+        checkedCards,
+        rawActionList,
+    };
+    ioClient.emit('saveSetup', data);
+
+    ioClient.on('saveSetupSuccess', data => {
+        saveWindow.classList.remove("appear-fast");
+    });
+
+    ioClient.on('saveSetupError', data => {
+        alert(`Error! Setup did't save!`);
+    });
+
+}
+
+function cancelSaveSetup() {
+    saveWindow.classList.remove("appear-fast");
+    saveFileName.value = '';
+    saveFileDescription.value = '';
+}
+
+function openSetup() {
+    if (!openSetupsWindow.classList.contains("appear-fast")) {
+        openSetupsWindow.classList.add("appear-fast");
+    }
+
+    ioClient.emit('openSetups');
+
+    ioClient.on('setupsList', data => {
+        console.log(data);
+        if (data.length) {
+            const tableData = data.map(file => {
+                return {
+                    fileName: file.match(/.+(?=_____)/)[0],
+                    date: file.match(/(?<=_____).+(?=\.txt)/)[0],
+                }
+            });
+
+            const table = document.getElementById('open-setups-list');
+            while (table.getElementsByTagName('tr').length > 1) {
+                table.deleteRow(1);
+            }
+
+            tableData.forEach(data => {
+                const tr = document.createElement("tr");  // создали строку
+
+                const tdFileName = document.createElement("td");
+                tdFileName.innerHTML = data.fileName;
+                tr.appendChild(tdFileName);
+
+                const tdFileDate = document.createElement("td");
+                tdFileDate.innerHTML = data.date;
+                tr.appendChild(tdFileDate);
+
+                table.appendChild(tr);
+            });
+        }
+    });
+}
+
+function openSelectedSetup() {
+    
+}
+
+function cancelOpenSetups() {
+    openSetupsWindow.classList.remove("appear-fast");
+}
 
 function maxAmountAtCurrentStreetRandom(index) {
     let currentStreet = rawActionList[index].street;
