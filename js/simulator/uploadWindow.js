@@ -89,7 +89,8 @@ function openSetup() {
             while (table.getElementsByTagName('tr').length > 1) {
                 table.deleteRow(1);
             }
-
+            // tableData.sort((a,b) => moment(a.date).format('DD-MM-YYYY-HH-mm') - new Moment(b.date).format('DD-MM-YYYY-HH-mm'));
+            tableData.sort((a,b) => moment(b.date, 'DD-MM-YYYY-HH-mm') - moment(a.date, 'DD-MM-YYYY-HH-mm'));
             tableData.forEach(data => {
                 const tr = document.createElement("tr");  // создали строку
 
@@ -144,17 +145,6 @@ function openSetup() {
                         div.remove();
                     }
                 });
-
-                // tr.addEventListener('contextmenu', (e) => {
-                //     e.preventDefault();
-                //     const val = tr.value;
-                //
-                //     if (val && !tr.querySelector('div')) {
-                //         const div = document.createElement('div');
-                //         div.innerText = val;
-                //         tr.appendChild(div);
-                //     }
-                // });
             });
 
         }

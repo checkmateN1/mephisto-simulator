@@ -140,6 +140,7 @@ function addScript(src){
 function loadScriptsDesctop() {
     if (scriptsDesctopLoaded === true) {return false;}
     addScript('js/d3.min.js');
+    addScript('js/moment.min.js');
     addScript('js/config/server.js');
     addScript('js/simulator/socket.js');
     addScript('js/simulator/createAllCombinationsArr.js');

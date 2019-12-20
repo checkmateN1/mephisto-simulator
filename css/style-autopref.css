@@ -1668,7 +1668,7 @@ div.diagram {
     background: -webkit-gradient(linear, left bottom, left top, from(#2d2e5a), to(#493680));
     background: -webkit-linear-gradient(bottom, #2d2e5a, #493680);
     background: -o-linear-gradient(bottom, #2d2e5a, #493680);
-    background: linear-gradient(to top, #2d2e5a, #493680);
+    background: linear-gradient(to top, #2d2e5a, #433861);
     opacity: 0;
     z-index: -100;
 }
@@ -1711,6 +1711,7 @@ div.diagram {
 
 .window-buttons button {
     margin: 0 10px;
+    width: 70px;
 }
 
 #table-wrapper {
@@ -1727,7 +1728,8 @@ div.diagram {
 
 #table-wrapper table th {
     text-align: left;
-    height: 17px;
+    height: 20px;
+    font-size: 14px;
 }
 
 #table-wrapper table td:first-child {
@@ -1736,7 +1738,7 @@ div.diagram {
     overflow: hidden;
 }
 
-#table-wrapper table tr:hover {
+#table-wrapper table tr:not(:first-child):hover {
     color: #ce5291;
 }
 
@@ -1753,6 +1755,10 @@ div.diagram {
 
 #open-setups-list tr.active {
     color: red !important;
+}
+
+#open-setups-list tr {
+    height: 16px;
 }
 
 #remove-upload {
