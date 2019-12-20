@@ -70,6 +70,9 @@ function openSetup() {
         openSetupsWindow.classList.add("appear-fast");
     }
 
+    ioClient.off('setupsList');
+    ioClient.off('openSetupSuccess');
+
     ioClient.emit('openSetups');
 
     ioClient.on('setupsList', data => {
@@ -100,12 +103,93 @@ function openSetup() {
 
                 table.appendChild(tr);
             });
+
+            $('#open-setups-list tr:not(:first-child)').on('click', (e) => {
+                const td = e.target;
+                const tr = td.parentNode;
+
+                $('#open-setups-list tr:not(:first-child)').removeClass('active');
+                tr.classList.add('active');
+            });
+
+            $('#open-setups-list tr:not(:first-child)').on('mouseover', (e) => {
+                const td = e.target;
+                const tr = td.parentNode;
+
+                const downloadTimeout = setTimeout(() => {
+                    ioClient.off('preOpenSetupSuccess');
+
+                    const fileName = tr.querySelector('td:first-child').innerHTML;
+                    const fileDate = tr.querySelector('td:last-child').innerHTML;
+
+                    ioClient.emit('preOpenSetup', `${fileName}_____${fileDate}.txt`);
+
+                    ioClient.on('preOpenSetupSuccess', fileDescription => {
+                        console.log(fileDescription);
+
+                        if (fileDescription && !tr.querySelector('div')) {
+                            const div = document.createElement('div');
+                            div.innerText = fileDescription;
+                            tr.appendChild(div);
+                        }
+                    });
+
+                }, 500);
+
+                tr.addEventListener('mouseout', () => {
+                    clearTimeout(downloadTimeout);
+                    const div = tr.querySelector('div');
+
+                    if (div) {
+                        div.remove();
+                    }
+                });
+
+                // tr.addEventListener('contextmenu', (e) => {
+                //     e.preventDefault();
+                //     const val = tr.value;
+                //
+                //     if (val && !tr.querySelector('div')) {
+                //         const div = document.createElement('div');
+                //         div.innerText = val;
+                //         tr.appendChild(div);
+                //     }
+                // });
+            });
+
         }
     });
 }
 
 function openSelectedSetup() {
-    
+    const tr = document.querySelector('#open-setups-list tr.active');
+    ioClient.off('openSetupSuccess');
+
+    if (tr) {
+        const fileName = tr.querySelector('td:first-child').innerHTML;
+        const fileDate = tr.querySelector('td:last-child').innerHTML;
+
+        ioClient.emit('openSetup', `${fileName}_____${fileDate}.txt`);
+
+        ioClient.on('openSetupSuccess', data => {
+            if (data) {
+                openSetupsWindow.classList.remove("appear-fast");
+
+                checkedCards = data.checkedCards;
+                testBoard = checkedCards.slice();
+
+                loadCardsState(testBoard);
+                rawActionList = data.rawActionList;
+
+                removeActions();
+                displayActions();
+                displayAddRemoveButtons();
+                restartListener();
+            } else {
+                alert(`Error: data from server is empty!`);
+            }
+        })
+    }
 }
 
 function cancelOpenSetups() {

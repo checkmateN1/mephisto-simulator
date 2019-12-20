@@ -7,7 +7,6 @@
     <list default="true" id="c0d7165d-6d2e-4ceb-9914-19a9205354b1" name="Default" comment="new version with strategy">
       <change beforePath="$PROJECT_DIR$/css/style-autopref.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style-autopref.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/simulator/network.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/simulator/network.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/simulator/uploadWindow.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/simulator/uploadWindow.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="267" column="53" lean-forward="true" selection-start-line="267" selection-start-column="53" selection-end-line="267" selection-end-column="53" />
+            <state relative-caret-position="280">
+              <caret line="253" column="94" lean-forward="true" selection-start-line="253" selection-start-column="94" selection-end-line="253" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -40,8 +39,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style-autopref.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="1727" column="25" lean-forward="true" selection-start-line="1727" selection-start-column="25" selection-end-line="1727" selection-end-column="25" />
+            <state relative-caret-position="195">
+              <caret line="1739" column="18" selection-start-line="1739" selection-start-column="11" selection-end-line="1739" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -49,8 +48,17 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/simulator/uploadWindow.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1100">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="547">
+              <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/simulator/randomButtonClick.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="366">
+              <caret line="60" column="25" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -58,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/simulator/moves.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="184" column="12" lean-forward="true" selection-start-line="184" selection-start-column="12" selection-end-line="184" selection-end-column="33" />
+            <state relative-caret-position="375">
+              <caret line="378" column="4" lean-forward="true" selection-start-line="378" selection-start-column="4" selection-end-line="381" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -92,15 +100,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/simulator/restartListener.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/config/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
@@ -122,15 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>this.player</find>
-      <find>isTerminal</find>
-      <find>maxAmountAtCurrentStreet</find>
-      <find>player</find>
-      <find>initPlayerBalance</find>
-      <find>whoIsInGame</find>
-      <find>wasBet</find>
-      <find>isTerminalStreetState</find>
-      <find>add-move-button flop</find>
       <find>preflop-moves</find>
       <find>addActionString</find>
       <find>checkmateN1</find>
@@ -150,8 +140,17 @@
       <find>checkedCards[2]</find>
       <find>getHeroHole</find>
       <find>createE</find>
+      <find>selected</find>
       <find>addA</find>
+      <find>cards</find>
+      <find>testBoard</find>
+      <find>checkedCards</find>
+      <find>contextm</find>
+      <find>#table-wrapper table th</find>
+      <find>.appear-fast</find>
       <find>upload-window</find>
+      <find>#table-wrapper table tr</find>
+      <find>setup file</find>
     </findStrings>
     <replaceStrings>
       <replace>screen.width</replace>
@@ -212,9 +211,9 @@
         <option value="$PROJECT_DIR$/js/simulator/actions.js" />
         <option value="$PROJECT_DIR$/js/simulator/moves.js" />
         <option value="$PROJECT_DIR$/js/simulator/network.js" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/css/style-autopref.css" />
         <option value="$PROJECT_DIR$/js/simulator/uploadWindow.js" />
+        <option value="$PROJECT_DIR$/css/style-autopref.css" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -485,12 +484,12 @@
       <workItem from="1573475368471" duration="7017000" />
       <workItem from="1574016622421" duration="14272000" />
       <workItem from="1574214148908" duration="1855000" />
-      <workItem from="1576411345148" duration="68042000" />
+      <workItem from="1576411345148" duration="87696000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1070477000" />
+    <option name="totallyTimeSpent" value="1090131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
@@ -626,13 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/randomButtonClick.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="78" column="63" lean-forward="true" selection-start-line="78" selection-start-column="63" selection-end-line="78" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/windowValidation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
@@ -757,29 +749,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/moves.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="184" column="12" lean-forward="true" selection-start-line="184" selection-start-column="12" selection-end-line="184" selection-end-column="33" />
+        <state relative-caret-position="375">
+          <caret line="378" column="4" lean-forward="true" selection-start-line="378" selection-start-column="4" selection-end-line="381" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/simulator/randomButtonClick.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="60" column="25" selection-start-line="60" selection-start-column="16" selection-end-line="60" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/style-autopref.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="1727" column="25" lean-forward="true" selection-start-line="1727" selection-start-column="25" selection-end-line="1727" selection-end-column="25" />
+        <state relative-caret-position="195">
+          <caret line="1739" column="18" selection-start-line="1739" selection-start-column="11" selection-end-line="1739" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="267" column="53" lean-forward="true" selection-start-line="267" selection-start-column="53" selection-end-line="267" selection-end-column="53" />
+        <state relative-caret-position="280">
+          <caret line="253" column="94" lean-forward="true" selection-start-line="253" selection-start-column="94" selection-end-line="253" selection-end-column="94" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/uploadWindow.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1100">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        <state relative-caret-position="547">
+          <caret line="142" column="30" lean-forward="true" selection-start-line="142" selection-start-column="30" selection-end-line="142" selection-end-column="30" />
         </state>
       </provider>
     </entry>

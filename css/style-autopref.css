@@ -1588,7 +1588,7 @@ div.diagram {
 }
 
 .appear-fast {
-    z-index: 100 !important;
+    z-index: 1000000000000 !important;
     opacity: 1 !important;
     -webkit-transition: opacity 1s !important;
     -o-transition: opacity 1s !important;
@@ -1728,6 +1728,31 @@ div.diagram {
 #table-wrapper table th {
     text-align: left;
     height: 17px;
+}
+
+#table-wrapper table td:first-child {
+    width: 450px;
+    max-width: 450px;
+    overflow: hidden;
+}
+
+#table-wrapper table tr:hover {
+    color: #ce5291;
+}
+
+#table-wrapper table tr div {
+    width: 300px;
+    min-height: 100px;
+    position: absolute;
+    background-color: #70d0ce;
+    word-wrap: break-word;
+    z-index: 900000000;
+    color: black;
+    padding: 5px;
+}
+
+#open-setups-list tr.active {
+    color: red !important;
 }
 
 #remove-upload {
