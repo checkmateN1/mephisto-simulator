@@ -1,21 +1,66 @@
-const ioClient = io.connect(url);
-
+// const ioClient = io.connect(url);
 const token = 'uidfksicnm730pdemg662oermfyf75jdf9djf';  // simulator
+const WebSocketServer = {
+    isConnected: false,
+    socket: null,
+    interval: null,
+    connect() {
+        if (this.socket) {
+            this.socket.destroy();
+            delete this.socket;
+            this.socket = null;
+        }
+        this.socket = io.connect(url, {
+            reconnection: false,
+            timeout: 60000,
+            pingTimeout: 60000,
+        });
+        this.socket.on('connect', () => {
+            this.isConnected = true;
+            // authorization
+            this.socket.emit('authorization', token);
+            this.socket.on('authorizationSuccess', () => {
+                console.info('authorization success: simulator');
+            });
+        });
+
+        this.socket.on('disconnect', () => {
+            this.isConnected = false;
+            this.interval = window.setInterval(() => {
+                if (this.isConnected) {
+                    clearInterval(this.interval);
+                    this.interval = null;
+                    return;
+                }
+                WebSocketServer.connect()
+            }, 3000);
+        });
+
+        return this.socket;
+    }
+};
+
+const ioClient = WebSocketServer.connect();
+// var socket = WebSocketServer.connect();
 
 let actionIndex = 0;
 
-// authorization
-ioClient.emit('authorization', token);
-ioClient.on('authorizationSuccess', () => {
-    console.info('authorization success: simulator');
-});
+// // authorization
+// ioClient.emit('authorization', token);
+// ioClient.on('authorizationSuccess', () => {
+//     console.info('authorization success: simulator');
+// });
 
 ioClient.on('unauthorizedAccess', () => {
     console.info('Unauthorized Access: please check your token');
 });
 
-ioClient.on('simulationSuccess', (id) => {
-    console.info(`server got simulation request successful`);
+ioClient.on('simulationsSuccess', () => {
+    console.log(`server got simulation request successful`);
+});
+
+ioClient.on('testInterval', () => {
+    console.log(`got test fake frame`);
 });
 
 ioClient.on('simulationError', (data) => {
@@ -23,8 +68,10 @@ ioClient.on('simulationError', (data) => {
 });
 
 ioClient.on('simulationsResponse', (data) => {
+    console.log('simulationsResponse!!!');
     console.log(data);
-    $(".hill-info").addClass("appear-fast");
+    $("#draggable").addClass("appear-fast");
+    $("#draggable").show();
     createAllCombinationsArr("strategy", actionIndex, data); //вызвали функцию рисующую график
     $('#waiting-progress-bar2').removeClass("appear");
     restartListener();
@@ -69,6 +116,7 @@ ioClient.on('simulationsResponse', (data) => {
 
 ioClient.on('disconnect', () => {
     console.info('server gone');
+
 });
 
 const getStrategyFromServer = (obj, rawActionListIndex) => {

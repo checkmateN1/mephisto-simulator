@@ -1105,7 +1105,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
             $('#content-m svg .title').on('click', function(e){
                 let el = e.target;
-                //alert(el.id);
+                // alert(el.id);
                 if (currentMatrixHand != null) {
                     if (currentHandInDiagram != null) {
                         if (el.id != currentHandInDiagram) {
@@ -1573,7 +1573,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     tr.appendChild(td);
                     td.appendChild(span);
                     td.setAttribute("class", "matrix_td");
-                    td.setAttribute("id", title);
+                    td.setAttribute("id", 'matrix_' + title);
                     span.innerHTML = title;
 
                     let div = document.createElement("div");
@@ -1604,7 +1604,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
             for(let i = 0; i < data_strategy.length; i++) {
                 if (isCombinationNameEqual(combinationName, i)) {
-                    if (moveType > 0 || moveType == "strategy" || moveType == "range") {
+                    if (moveType > 0 || moveType === "strategy" || moveType === "range") {
                         let w = data_strategy[i].w;
                         justDoIt(w);
                     } else if (moveType == 0) {
@@ -1613,10 +1613,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     } else if (moveType < 0) {
                         let w = data_strategy[i].fold;
                         justDoIt(w);
-                    } else if (moveType == "preflop") {
+                    } else if (moveType === "preflop") {
                         let w = data_strategy[i].pw;
                         justDoIt(w);
-                    } else if (moveType == "node") {
+                    } else if (moveType === "node") {
                         let w = data_strategy[i].nw;
                         justDoIt(w);
                     }
@@ -1627,7 +1627,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
         displayOrderMatrix();
         function displayOrderMatrix() {
-            if (moveType != "strategy") {
+            if (moveType !== "strategy") {
                 createMatrixIMG("range", moveType);
                 createMatrixIMG("node", moveType);
                 createMatrixIMG("preflop", moveType);
@@ -1678,7 +1678,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             for (let i = 0; i < 13; i++) {
                 for(let j = 0; j < 13; j++) {
                     let comb = createTD(i, j);
-                    let td = document.getElementById(comb);
+                    let td = document.getElementById('matrix_' + comb);
                     let weight = getCombinationWeight(comb, moveType);
                     //alert("weight = " + weight + "comb = " + comb);
 
@@ -1775,7 +1775,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     function matrixTDclick() {
         $(".matrix_td").on('click', function (e) {
             let td = e.target;
-            if (td.id == '') {
+            if (td.id === '') {
                 td = td.parentNode;
             }
 
@@ -1807,13 +1807,13 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             } else {
                 var paras = document.getElementsByClassName("td-selected");
                 if (paras.length == 1) {return;}
-                currentMatrixHand = td.id;
+                currentMatrixHand = td.id.replace('matrix_', '');
                 createStrategyList();
                 setSelectedStrategyList();
                 //alert("test");
-                $("#strategy-moves > li").off;
+                $("#strategy-moves > li").off();
                 $("#strategy-moves > li").on('click', changeStrategyListOn);
-                if (currentMoveOrStrategyState == "strategy") {
+                if (currentMoveOrStrategyState === "strategy") {
                     data_strategy = createHillData(testStrategy, "0", "strategy");
                     currentHandInDiagram = null;
                     createDiagram("strategy");
@@ -1825,8 +1825,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
                 for (let i = 0; i < 13; i++) {
                     for (let j = 0; j < 13; j++) {
-                        let tdID = document.getElementById(createTD(i, j));
-                        if (tdID.id != td.id) {
+                        const tdBlur = 'matrix_' + createTD(i, j);
+                        let tdID = document.getElementById(tdBlur);
+
+                        if (tdBlur !== td.id) {
                             let div = document.createElement("div");
                             div.classList.add("tmp-blur");
                             tdID.appendChild(div);

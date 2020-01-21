@@ -139,7 +139,14 @@ function actionToJson(rawActionListIndex, request, isSaveSetup) {
     console.log('myJSON');
     console.log(myJSON);
 
-    if (isSaveSetup) {
+    const validPreflop = myJSON.request.street === 0;
+    const validFlop = myJSON.request.street === 1 && myJSON.board.c1 && myJSON.board.c2 && myJSON.board.c3;
+    const validTurn = myJSON.request.street === 2 && myJSON.board.c4;
+    const validRiver = myJSON.request.street === 3 && myJSON.board.c5;
+
+    if (!(validPreflop || validFlop || validTurn || validRiver)) {
+        alert(`SET BOARD CARD!`);
+    } else if (isSaveSetup) {
         return myJSON;
     } else {
         getStrategyFromServer(myJSON, rawActionListIndex);

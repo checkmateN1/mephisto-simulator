@@ -11,7 +11,8 @@ function createEVinfo() {
 }
 
 function removeHillInfo() {
-    $(".hill-info").removeClass("appear-fast");
+    $("#draggable").removeClass("appear-fast");
+    $("#draggable").hide();
     let matrix = document.getElementById("matrix");
     while (matrix.firstChild) {
         matrix.removeChild(matrix.firstChild);

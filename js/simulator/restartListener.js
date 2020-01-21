@@ -4,6 +4,14 @@ function restartListener() {
     tdAmount = $(".all-info-table.postflop td:nth-child(5), .all-info-table.preflop td:nth-child(6)");
     tdAmount.on('click', amountClick);
 
+    // const plus = $(".add-move-button");
+    // plus.off();
+    // plus.on('click', addActionString);
+    //
+    // const minus = $(".sub-move-button");
+    // minus.off();
+    // minus.on('click', removeLastActionString);
+
     tdAction.off();
     tdAction = $(".all-info-table.postflop td:nth-child(3), .all-info-table.preflop td:nth-child(4)");
     tdAction.on('click', actionClick);
