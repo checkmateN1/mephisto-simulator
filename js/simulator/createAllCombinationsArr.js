@@ -810,6 +810,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     }
 
     var data_strategy = [];
+    var hands_matrix_weight = [];
 
     displayAllMoveStrategyInfo(strategyORrange, "all");
     function displayAllMoveStrategyInfo(move, whatDisplay) {
@@ -1494,11 +1495,11 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         let curCombArr = combinationName.split('');
         if (handHillArr[0] != curCombArr[0] || handHillArr[2] != curCombArr[1]) {
             return false;
-        } else if (curCombArr.length == 2) { // карманные пары
+        } else if (curCombArr.length === 2) { // карманные пары
             return true;
-        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] == "s") {
+        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] === "s") {
             return true;
-        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] == "o") {
+        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] === "o") {
             return true;
         } else {return false;}
     }
@@ -1509,11 +1510,11 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
         if (handHillArr[0] != curCombArr[0] || handHillArr[2] != curCombArr[1]) {
             return false;
-        } else if (curCombArr.length == 2) { // карманные пары
+        } else if (curCombArr.length === 2) { // карманные пары
             return true;
-        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] == "s") {
+        } else if (handHillArr[1] == handHillArr[3] && curCombArr[2] === "s") {
             return true;
-        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] == "o") {
+        } else if (handHillArr[1] != handHillArr[3] && curCombArr[2] === "o") {
             return true;
         } else {return false;}
     }
@@ -1526,12 +1527,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //функция возвращающая название комбинации для матрицы
     function createTD(i, j) {
         if (i < j) {
-            //alert(cardsArr[i] + cardsArr[j]);
             return (cardsArr[i] + cardsArr[j]) + "s";
-        } else if (i == j) {
+        } else if (i === j) {
             return (cardsArr[i] + cardsArr[j]);
         } else {
-            //alert(cardsArr[i] + cardsArr[j]);
             return (cardsArr[j] + cardsArr[i]) + "o";
         }
     };
@@ -1545,7 +1544,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         function createTD(i, j) {
             if (i < j) {
                 return (cardsArr[i] + cardsArr[j]) + "s";
-            } else if (i == j) {
+            } else if (i === j) {
                 return (cardsArr[i] + cardsArr[j]);
             } else {
                 return (cardsArr[j] + cardsArr[i]) + "o";
@@ -1554,9 +1553,9 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
         function getMatrixTdColor(title) {
             let arr = title.split('');
-            if (arr.length == 2) {
+            if (arr.length === 2) {
                 return "rgba(150, 150, 150, 0.25)";
-            } else if (arr[2] == 's') {
+            } else if (arr[2] === 's') {
                 return "rgba(251, 230, 175, 0.25)";
             } else {return "rgba(229, 240, 244, 0.25)";}
         }
@@ -1588,18 +1587,30 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             }
         }
 
+        // console.log('data_strategy');
+        // console.log(data_strategy);
+
         //возвращает массив с весами(если они разные внутри одной комбинации)
         function getCombinationWeight(combinationName, moveType) {
-            let weightMin = 1;
-            let weightMax = 0;
+            // console.log(`combinationName: ${combinationName}, moveType: ${moveType}`);
+            // let weightMin = 1;
+            // let weightMax = 0;
+
+            let count = 0;
+            let weight = 0;
+
+            // function justDoIt(w) {
+            //     if (w > weightMax) {
+            //         weightMax = w;
+            //     }
+            //     if (w < weightMin) {
+            //         weightMin = w;
+            //     }
+            // }
 
             function justDoIt(w) {
-                if (w > weightMax) {
-                    weightMax = w;
-                }
-                if (w < weightMin) {
-                    weightMin = w;
-                }
+                weight += w;
+                count++;
             }
 
             for(let i = 0; i < data_strategy.length; i++) {
@@ -1622,7 +1633,9 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 }
             }
-            return [weightMin, weightMax];
+            const finalWeight = count ? (weight/count) : 0;
+            // return [weightMin, weightMax];
+            return [finalWeight, finalWeight];
         }
 
         displayOrderMatrix();
@@ -1731,40 +1744,40 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     div.style.top = "0";
                     td.appendChild(div);
 
-                    if (weight[1] - weight[0] > 0.1) {
-                        let div = document.createElement("div");
-                        div.classList.add("matrix-strategy");
-
-
-                        if (moveType === "range") {
-                            div.style.background = setMinRangeColor(weight);
-                            div.style.height = "86%";
-                            div.style.zIndex = "-29";
-                        } else if (moveType > 0 || moveType === "strategy") {
-                            div.style.background = setMinStrategyColor(weight);
-                            div.style.zIndex = "1000";
-                            div.style.height = "86%";
-                            div.style.zIndex = "-29";
-                        } else if (moveType == 0 || moveType === "node") {
-                            if (moveType === "node"){
-                                div.style.background = setMinNodeColor(weight);
-                            } else {
-                                div.style.background = setMinCallColor(weight);
-                            }
-                            div.style.height = "93%";
-                            div.style.zIndex = "-49";
-                        } else if (moveType < 0) {
-                            div.style.background = "#525045";
-                            div.style.height = "100%";
-                            div.style.zIndex = "-69";
-                        }
-                        if (weight[0] < 0.06) {
-                            div.style.width = (0.06 * 100) + "%";
-                        } else {div.style.width = (weight[0] * 100) + "%";}
-                        div.style.position = "absolute";
-                        div.style.top = "0";
-                        td.appendChild(div);
-                    }
+                    // if (weight[1] - weight[0] > 0.1) {
+                    //     let div = document.createElement("div");
+                    //     div.classList.add("matrix-strategy");
+                    //
+                    //
+                    //     if (moveType === "range") {
+                    //         div.style.background = setMinRangeColor(weight);
+                    //         div.style.height = "86%";
+                    //         div.style.zIndex = "-29";
+                    //     } else if (moveType > 0 || moveType === "strategy") {
+                    //         div.style.background = setMinStrategyColor(weight);
+                    //         div.style.zIndex = "1000";
+                    //         div.style.height = "86%";
+                    //         div.style.zIndex = "-29";
+                    //     } else if (moveType == 0 || moveType === "node") {
+                    //         if (moveType === "node"){
+                    //             div.style.background = setMinNodeColor(weight);
+                    //         } else {
+                    //             div.style.background = setMinCallColor(weight);
+                    //         }
+                    //         div.style.height = "93%";
+                    //         div.style.zIndex = "-49";
+                    //     } else if (moveType < 0) {
+                    //         div.style.background = "#525045";
+                    //         div.style.height = "100%";
+                    //         div.style.zIndex = "-69";
+                    //     }
+                    //     if (weight[0] < 0.06) {
+                    //         div.style.width = (0.06 * 100) + "%";
+                    //     } else {div.style.width = (weight[0] * 100) + "%";}
+                    //     div.style.position = "absolute";
+                    //     div.style.top = "0";
+                    //     td.appendChild(div);
+                    // }
                 }
             }
         }
