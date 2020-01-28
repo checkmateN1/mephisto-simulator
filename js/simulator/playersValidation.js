@@ -252,16 +252,16 @@ function actionMenu(e) {
         actionToJson(getRawActionsIndex(elNode), "strategy");
         tdActionMenu.off();
         actionMenu.remove();
-        $("#waiting-progress-bar2").addClass("appear");
+        // $("#waiting-progress-bar2").addClass("appear");
         el.removeClass("color-violet");
-        setTimeout(function() {
-            //$('#waiting-progress-bar').removeClass("appear");
-            //createHillInfo(); // заголовок окна со спектром
-            // $(".hill-info").addClass("appear-fast");
-            // createAllCombinationsArr("strategy", getRawActionsIndex(elNode)); //вызвали функцию рисующую график
-            // restartListener();
-
-        }, 2000);
+        // setTimeout(function() {
+        //     //$('#waiting-progress-bar').removeClass("appear");
+        //     //createHillInfo(); // заголовок окна со спектром
+        //     // $(".hill-info").addClass("appear-fast");
+        //     // createAllCombinationsArr("strategy", getRawActionsIndex(elNode)); //вызвали функцию рисующую график
+        //     // restartListener();
+        //
+        // }, 2000);
 
         return false;
     }

@@ -894,7 +894,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         var transparentTXT = ".5";
         createOrderSVG();
         function createOrderSVG() {
-            if (move == "strategy") {
+            if (move === "strategy") {
                 if (currentMatrixHand != null) {
                     drawText();
                     drawText2();
@@ -1128,7 +1128,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                         $("#strategy-moves > li").on('click', changeStrategyListOn);
                     }
                 }
-            })
+            });
 
             $('#content-m svg .title2').on('click', function(e){
                 let el = e.target;
@@ -1164,7 +1164,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "value")
                 .text(function(d) {
-                    if (weightType == "node") {
+                    if (weightType === "node") {
                         return d.nw.toFixed(2);
                     } else {
                         if (d.ev === undefined) {
@@ -1313,8 +1313,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (d.w < 0.02) {return}
-                    return ((d.w * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                    if (!d.w || d.w < 0.02) {return '0%'}
+                    return (((d.w || 0) * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
@@ -1388,8 +1388,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (d.call < 0.002) {return}
-                    return ((d.call * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                    if (!d.call || d.call < 0.002) {return '0%'}
+                    return ((d.call * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
@@ -1464,8 +1464,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (d.fold < 0.002) {return}
-                    return ((d.fold * 100)/(d.w + d.call + d.fold)).toFixed(1) + "%";
+                    if (!d.fold || d.fold < 0.002) {return '0%'}
+                    return ((d.fold * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
@@ -1798,9 +1798,9 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 currentHandInDiagram = null;
                 createStrategyList();
                 setSelectedStrategyList();
-                $("#strategy-moves > li").off;
+                $("#strategy-moves > li").off();
                 $("#strategy-moves > li").on('click', changeStrategyListOn);
-                if (currentMoveOrStrategyState != "strategy") {
+                if (currentMoveOrStrategyState !== "strategy") {
                     data_strategy = createHillData(testStrategy, currentMoveOrStrategyState, "range");
                     currentHandInDiagram = null;
                     createDiagram(currentMoveOrStrategyState);
@@ -1819,7 +1819,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 td.classList.remove("td-selected");
             } else {
                 var paras = document.getElementsByClassName("td-selected");
-                if (paras.length == 1) {return;}
+                if (paras.length === 1) {return;}
                 currentMatrixHand = td.id.replace('matrix_', '');
                 createStrategyList();
                 setSelectedStrategyList();

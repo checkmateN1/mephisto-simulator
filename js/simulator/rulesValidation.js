@@ -43,9 +43,13 @@ function minAmount() {
                     lastAgroAmount = rawActionList[i].amount;
                     indexLastAgro = i;
                     continue;
-                } else {return (2 * lastAgroAmount - rawActionList[i].amount);}
+                } else {
+                    return Math.max((2 * lastAgroAmount - rawActionList[i].amount), 2);
+                }
             }
-        } else {return (2 * lastAgroAmount);}
+        } else {
+            return Math.max((2 * lastAgroAmount), 1);
+        }
     }
 }
 
