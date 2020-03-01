@@ -349,15 +349,16 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //есть проблемы с рейзами: key != sizing
     function getHandEV(hand, sizing) {
         for (let i = 0; i < testStrategy.allHands.length; i++) {
-            if (testStrategy.allHands[i].hand == hand) {
+            if (testStrategy.allHands[i].hand === hand) {
                 for(var key in testStrategy.allHands[i].moves) {
-                    //console.log(`key = ${key}, sizing = ${sizing}`);
+                    // console.log(`key = ${key}, sizing = ${sizing}, hand = ${hand}`);
                     if (key == sizing) {
                         //alert(`key == sizing!`);
                         //console.log(`parseFloat(testStrategy.allHands[i].moves[key].ev) = ${parseFloat(testStrategy.allHands[i].moves[key].ev)}`);
                         return parseFloat(testStrategy.allHands[i].moves[key].ev);
                     }
                 }
+                return -100500;
             }
         }
     }
@@ -466,8 +467,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     let EV = getHandEV(currentHandInDiagram, currentSizing);
                     //console.log(`EV = ${EV}`);
                     if (EV >= 0) {
-                        spanEV.innerHTML = "EV:$" + EV;
-                    } else {spanEV.innerHTML = "EV:-$" + Math.abs(EV);}
+                        spanEV.innerHTML = "Regret:$" + EV;
+                    } else {spanEV.innerHTML = "Regret:-$" + Math.abs(EV);}
                 }
                 spanEV.classList.add("ev-sizing");
                 li.appendChild(spanEV);
@@ -703,7 +704,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //создает и сортирует данные под конкретный мув с сайзингом или под стратегию из стратегии в джейсоне
     //подаем любую цифру в качестве второго аргумента если хотим посортировать по весу в узле или префлопу
     function createHillData(strategy, move, orderBy) { // orderBy: strategy/preflop/range
-        console.log(`зашли в createHillData`);
+        // console.log(`зашли в createHillData`);
         let handsSize = strategy.allHands.length;
         let data_strategy = {};
         let maxWeight = 0; //максимальный вес какой-то руки в конкретном муве(для масштаба диаграммы)
@@ -865,7 +866,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         for (let i = 0; i < testStrategy.allHands.length; i++) {
             if (testStrategy.allHands[i].hand == hand) {
                 let maxEV = -9000;
-                for (var key in testStrategy.allHands[i].moves) {
+                for (const key in testStrategy.allHands[i].moves) {
                     if (parseFloat(key) > 0 && parseFloat(testStrategy.allHands[i].moves[key].ev) > maxEV) {
                         maxEV = parseFloat(testStrategy.allHands[i].moves[key].ev);
                     }
@@ -906,6 +907,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     drawCallPercent();
                     drawFoldWeight();
                     drawFoldPercent();
+                    drawFoldEV();
                 } else {
                     drawFoldWeight();
                     drawCallWeight();
@@ -1046,9 +1048,9 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     if (currentMatrixHand != null && currentMoveOrStrategyState == "strategy") {
                         offsetTMP = 0;
                         offsetOld = offset;
-                        if (d.w < 0.002) {offsetTMP += 15;}
-                        if (d.call < 0.002) {offsetTMP += 15;}
-                        if (d.fold < 0.002) {offsetTMP += 15;}
+                        if (d.w < 0) {offsetTMP += 15;}
+                        if (d.call < 0) {offsetTMP += 15;}
+                        if (d.fold < 0) {offsetTMP += 15;}
                         if (offsetTMP > 30) {offsetTMP = 30;}
                         offset += offsetTMP;
                         return i * 85 + 26 - offsetOld - offsetTMP/2;
@@ -1085,9 +1087,9 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     if (currentMatrixHand != null && currentMoveOrStrategyState == "strategy") {
                         offsetTMP = 0;
                         offsetOld = offset;
-                        if (d.w < 0.002) {offsetTMP += 15;}
-                        if (d.call < 0.002) {offsetTMP += 15;}
-                        if (d.fold < 0.002) {offsetTMP += 15;}
+                        if (d.w < 0) {offsetTMP += 15;}
+                        if (d.call < 0) {offsetTMP += 15;}
+                        if (d.fold < 0) {offsetTMP += 15;}
                         if (offsetTMP > 30) {offsetTMP = 30;}
                         offset += offsetTMP;
                         return i * 85 + 26 - offsetOld - offsetTMP/2;
@@ -1170,8 +1172,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                         if (d.ev === undefined) {
                             return d.w.toFixed(2);
                         } else if (d.ev < 0) {
-                            return (d.w.toFixed(2) + "  \u00A0  EV: -$" + Math.abs(d.ev));
-                        } else {return (d.w.toFixed(2) + "  \u00A0  EV: $" + d.ev);}
+                            return (d.w.toFixed(2) + "  \u00A0  Regret: -$" + Math.abs(d.ev));
+                        } else {return (d.w.toFixed(2) + "  \u00A0  Regret: $" + d.ev);}
                     }
                 })
                 .attr("x", 35)
@@ -1194,10 +1196,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .attr("x", 31)
                 .attr("y", function(d, i) {
                     if (currentMatrixHand != null) {
-                        if (d.call < 0.002) {offset += 15;}
-                        if (d.w < 0.002) {offset += 15;}
-                        if (d.fold < 0.002) {offset += 15;}
-                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        if (d.call < 0) {offset += 15;}
+                        if (d.w < 0) {offset += 15;}
+                        if (d.fold < 0) {offset += 15;}
+                        if (d.call < 0 && d.w < 0 && d.fold < 0) {
                             offset -= 15;
                         }
                         return i * 85 + 30 - offset;
@@ -1234,10 +1236,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     if (currentMatrixHand != null) {
                         offsetTMP = 0;
                         offsetOld = offset;
-                        if (d.call < 0.002) {offset += 15;}
-                        if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
-                        if (d.fold < 0.002) {offset += 15;}
-                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        if (d.call < 0) {offset += 15;}
+                        if (d.w < 0) {offset += 15; offsetTMP += 15;}
+                        if (d.fold < 0) {offset += 15;}
+                        if (d.call < 0 && d.w < 0 && d.fold < 0) {
                             offset -= 15;
                         }
                         return i * 85 + 15 - offsetTMP - offsetOld;
@@ -1274,10 +1276,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .attr("y", function(d, i) {
                     if (currentMatrixHand != null) {
                         offsetOld = offset;
-                        if (d.call < 0.002) {offset += 15;}
-                        if (d.w < 0.002) {offset += 15;}
-                        if (d.fold < 0.002) {offset += 15;}
-                        if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                        if (d.call < 0) {offset += 15;}
+                        if (d.w < 0) {offset += 15;}
+                        if (d.fold < 0) {offset += 15;}
+                        if (d.call < 0 && d.w < 0 && d.fold < 0) {
                             offset -= 15;
                         }
                         return i * 85 - offsetOld;
@@ -1285,7 +1287,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     return i * 25;
                 })
                 .attr("width", function(d) {
-                    if (d.fold < 0.002 && d.call < 0.002 && d.w < 0.002) {return 0.002 * 200 + "px";}
+                    if (d.fold < 0 && d.call < 0 && d.w < 0) {return 0 * 200 + "px";}
                     if (currentMatrixHand != null) {
                         return d.w * 185 + "px";
                     } else {return d.w * 250 + "px";}
@@ -1313,16 +1315,16 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (!d.w || d.w < 0.02) {return '0%'}
+                    if (!d.w || d.w < 0) {return '0%'}
                     return (((d.w || 0) * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
                     offsetOld = offset;
-                    if (d.call < 0.002) {offset += 15;}
-                    if (d.w < 0.002) {offset += 15;}
-                    if (d.fold < 0.002) {offset += 15;}
-                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
                         offset -= 15;
                     }
                     return i * 85 + 12 - offsetOld;
@@ -1346,24 +1348,24 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (d.w < 0.02) {return}
+                    if (d.w < 0) {return ''}
                     let maxAgroEV = parseFloat(getMaxAgroEV(d.h));
-                    if(maxAgroEV > 0) {
-                        return "EVmax: $" + maxAgroEV.toFixed(2);
+                    if(maxAgroEV >= 0) {
+                        return "Regret: $" + maxAgroEV.toFixed(2);
                     } else {
-                        return "EVmax: -$" + Math.abs(maxAgroEV).toFixed(2);
+                        return "Regret: -$" + Math.abs(maxAgroEV).toFixed(2);
                     }
                 })
                 .attr("x", function(d, i) {
-                    if (d.fold < 0.002 && d.call < 0.002 && d.w < 0.002) {return 70;}
+                    if (d.fold < 0 && d.call < 0 && d.w < 0) {return 70;}
                     return Math.max((d.w * 185 + 35), 70);
                 })
                 .attr("y", function(d, i) {
                     offsetOld = offset;
-                    if (d.call < 0.002) {offset += 15;}
-                    if (d.w < 0.002) {offset += 15;}
-                    if (d.fold < 0.002) {offset += 15;}
-                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
                         offset -= 15;
                     }
                     return i * 85 + 12 - offsetOld;
@@ -1386,19 +1388,19 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .data(data_strategy)
                 .enter()
                 .append("text")
-                .attr("class", "agroPercent")
+                .attr("class", "callPercent")
                 .text(function(d) {
-                    if (!d.call || d.call < 0.002) {return '0%'}
+                    if (!d.call || d.call < 0) {return '0%'}
                     return ((d.call * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
                     offsetTMP = 0;
                     offsetOld = offset;
-                    if (d.call < 0.002) {offset += 15;}
-                    if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
-                    if (d.fold < 0.002) {offset += 15;}
-                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15; offsetTMP += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
                         offset -= 15;
                     }
                     return i * 85 + 15 + 12 - offsetTMP - offsetOld;
@@ -1423,12 +1425,12 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "agroPercent")
                 .text(function(d) {
-                    if (d.call < 0.002) {return}
+                    if (d.call < 0) {return ''}
                     let callEV = parseFloat(getHandEV(d.h, "0"));
                     if(callEV > 0) {
-                        return "EV: $" + callEV.toFixed(2);
+                        return "Regret: $" + callEV.toFixed(2);
                     } else {
-                        return "EV: -$" + Math.abs(callEV).toFixed(2);
+                        return "Regret: -$" + Math.abs(callEV).toFixed(2);
                     }
                 })
                 .attr("x", function(d, i) {
@@ -1437,10 +1439,10 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .attr("y", function(d, i) {
                     offsetTMP = 0;
                     offsetOld = offset;
-                    if (d.call < 0.002) {offset += 15;}
-                    if (d.w < 0.002) {offset += 15; offsetTMP += 15;}
-                    if (d.fold < 0.002) {offset += 15;}
-                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15; offsetTMP += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
                         offset -= 15;
                     }
                     return i * 85 + 15 + 12 - offsetTMP - offsetOld;
@@ -1462,17 +1464,57 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .data(data_strategy)
                 .enter()
                 .append("text")
-                .attr("class", "agroPercent")
+                .attr("class", "foldPercent")
                 .text(function(d) {
-                    if (!d.fold || d.fold < 0.002) {return '0%'}
+                    if (!d.fold || d.fold < 0) {return '0%'}
                     return ((d.fold * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
                 .attr("y", function(d, i) {
-                    if (d.call < 0.002) {offset += 15;}
-                    if (d.w < 0.002) {offset += 15;}
-                    if (d.fold < 0.002) {offset += 15;}
-                    if (d.call < 0.002 && d.w < 0.002 && d.fold < 0.002) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
+                        offset -= 15;
+                    }
+                    return i * 85 + 30 + 12 - offset;
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("fill", function(d) {
+                    if (currentMatrixHand == null) {
+                        return ("rgba(210, 210, 210, " + transparentTXT + ")");
+                    } else if (currentHandInDiagram != null && d.h != currentHandInDiagram) {
+                        return ("rgba(210, 210, 210, " + transparentLvl + ")");
+                    } else {return ("rgba(210, 210, 210, " + transparentTXT + ")");}
+                });
+        }
+        function drawFoldEV() {
+            // выводим процент агро действий
+            offset = 0;
+            offsetOld = 0;
+            svg.selectAll("text.value")
+                .data(data_strategy)
+                .enter()
+                .append("text")
+                .attr("class", "agroPercent")
+                .text(function(d) {
+                    if (d.fold < 0 || getHandEV(d.h, "-1") === -100500) {return ''}
+                    let callEV = parseFloat(getHandEV(d.h, "-1"));
+                    if(callEV >= 0) {
+                        return "Regret: $" + callEV.toFixed(2);
+                    } else {
+                        return "Regret: -$" + Math.abs(callEV).toFixed(2);
+                    }
+                })
+                .attr("x", function(d, i) {
+                    return Math.max((d.fold * 185 + 35), 70);
+                })
+                .attr("y", function(d, i) {
+                    if (d.call < 0) {offset += 15;}
+                    if (d.w < 0) {offset += 15;}
+                    if (d.fold < 0) {offset += 15;}
+                    if (d.call < 0 && d.w < 0 && d.fold < 0) {
                         offset -= 15;
                     }
                     return i * 85 + 30 + 12 - offset;
