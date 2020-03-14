@@ -370,12 +370,12 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         if (currentMatrixHand == null) {
             for (let i = 0; i < testStrategy.allHands.length; i++) {
                 for (let key in testStrategy.allHands[i].moves) {
-                    if (sizing == "agro" && parseFloat(key) > 0) {
-                        curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                    if (sizing === "agro" && parseFloat(key) > 0) {
+                        curWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                     } else if (key == sizing) {
-                        curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        curWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                     } else {
-                        otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        otherWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                     }
                 }
             }
@@ -384,19 +384,19 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 for (let key in testStrategy.allHands[i].moves) {
                     if (isCombinationNameEqualMatrix(currentMatrixHand, i)) {
                         if (currentHandInDiagram != null) {
-                            if (testStrategy.allHands[i].hand == currentHandInDiagram) {
+                            if (testStrategy.allHands[i].hand === currentHandInDiagram) {
                                 if (key == sizing) {
-                                    curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                                    curWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                                 } else {
-                                    otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                                    otherWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                                 }
                             }
-                        } else if (sizing == "agro" && parseFloat(key) > 0) {
-                            curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                        } else if (sizing === "agro" && parseFloat(key) > 0) {
+                            curWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                         } else if (key == sizing) {
-                            curWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                            curWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                         } else {
-                            otherWeight += testStrategy.allHands[i].moves[key].strategy * testStrategy.allHands[i].weight;
+                            otherWeight += testStrategy.allHands[i].moves[key].strategy * (testStrategy.allHands[i].weight || 0.00000001);
                         }
                     }
                 }
@@ -430,7 +430,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 li.innerHTML = "fold";
                 currentSizing = -1;
                 li.id = "strategyMove_-1";
-            } else if (sortable[i][0]  == 0) {
+            } else if (sortable[i][0]  === 0) {
                 if (wasBet2) {
                     li.style.color = callColor;
                     li.id = "strategyMove_0";
@@ -488,7 +488,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         let preflopWeight = document.getElementById("preflopWeight");
         let preflopSpan = document.querySelector("#preflopWeight + span");
 
-        if (move == "strategy") {
+        if (move === "strategy") {
             curWeight.style.background = agroColor;
             curSpan.innerHTML = "-aggressive weight";
             nodeWeight.style.background = callColor;
@@ -724,7 +724,6 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 }
             }
 
-
         } else if (orderBy === "preflop") {
             maxWeight = 1;
             for (let i = 0; i < handsSize; i++) {
@@ -784,16 +783,16 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                             cb: strategy.allHands[j].combination
                         };
                         for (var key in strategy.allHands[j].moves) {
-                            if (orderBy == "strategy" && parseFloat(key) == 0) {
-                                hillData[i].call = strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
-                            } else if (orderBy == "strategy" && parseFloat(key) < 0) {
-                                hillData[i].fold = strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
-                            } else if (orderBy == "strategy" && parseFloat(key) > 0) {
-                                hillData[i].w += strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight;
+                            if (orderBy === "strategy" && +key === 0) {
+                                hillData[i].call = strategy.allHands[j].moves[key].strategy * (strategy.allHands[j].weight || 0.00000001);
+                            } else if (orderBy === "strategy" && parseFloat(key) < 0) {
+                                hillData[i].fold = strategy.allHands[j].moves[key].strategy * (strategy.allHands[j].weight || 0.00000001);
+                            } else if (orderBy === "strategy" && parseFloat(key) > 0) {
+                                hillData[i].w += strategy.allHands[j].moves[key].strategy * (strategy.allHands[j].weight || 0.00000001);
                             } else if (move == key) {
                                 hillData[i] = {
                                     h: hand,
-                                    w: strategy.allHands[j].moves[key].strategy * strategy.allHands[j].weight * (1/Math.max(maxWeight, 0.00000001)), //weight in current move
+                                    w: strategy.allHands[j].moves[key].strategy * (strategy.allHands[j].weight || 0.00000001) * (1/Math.max(maxWeight, 0.00000001)), //weight in current move
                                     pw: strategy.allHands[j].preflopWeight,
                                     nw: strategy.allHands[j].weight,
                                     cb: strategy.allHands[j].combination,
@@ -819,7 +818,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             data_strategy = createHillData(testStrategy, "0", "strategy"); //strategy, preflop, range(3й аргумент)
             currentHandInDiagram = null;
             createDiagram("strategy"); //если хотим рейнж - передаем "range" а не сайзинг
-            if (whatDisplay == "all") {
+            if (whatDisplay === "all") {
                 createMatrix("strategy");
             }
 
@@ -837,14 +836,14 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             data_strategy = createHillData(testStrategy, move, "range"); //strategy, preflop, range(3й аргумент)
             currentHandInDiagram = null;
             createDiagram("range"); //если хотим рейнж - передаем "range" а не сайзинг
-            if (whatDisplay == "all") {
+            if (whatDisplay === "all") {
                 createMatrix(move);
             }
         }
     }
 
     function removeAllPreviousElements(whatRemove) {
-        if (whatRemove == "strategy") {
+        if (whatRemove === "strategy") {
             let strategyMoves = document.getElementById("strategy-moves");
             strategyMoves.innerHTML = '';
             return;
@@ -852,7 +851,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         let oldSVG = document.getElementById("mCSB_1_container");
         oldSVG.innerHTML = ''; // медленный способ// удаляем childNodes
 
-        if (whatRemove == "all") {
+        if (whatRemove === "all") {
             let paras = document.getElementsByClassName('matrix-strategy');
             for (let i = paras.length - 1; i >= 0; i--) {
                 paras[i].parentNode.removeChild(paras[i]);
@@ -1357,8 +1356,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 })
                 .attr("x", function(d, i) {
-                    if (d.fold < 0 && d.call < 0 && d.w < 0) {return 70;}
-                    return Math.max((d.w * 185 + 35), 70);
+                    if (d.fold < 0 && d.call < 0 && d.w < 0) {return 75;}
+                    return Math.max((d.w * 185 + 35), 75);
                 })
                 .attr("y", function(d, i) {
                     offsetOld = offset;
@@ -1434,7 +1433,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 })
                 .attr("x", function(d, i) {
-                    return Math.max((d.call * 185 + 35), 70);
+                    return Math.max((d.call * 185 + 35), 75);
                 })
                 .attr("y", function(d, i) {
                     offsetTMP = 0;
@@ -1466,7 +1465,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                 .append("text")
                 .attr("class", "foldPercent")
                 .text(function(d) {
-                    if (!d.fold || d.fold < 0) {return '0%'}
+                    if (!d.fold || d.fold < 0) {return '0%';}
                     return ((d.fold * 100)/((d.w || 0) + (d.call || 0) + (d.fold || 0))).toFixed(1) + "%";
                 })
                 .attr("x", 35)
@@ -1508,7 +1507,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 })
                 .attr("x", function(d, i) {
-                    return Math.max((d.fold * 185 + 35), 70);
+                    return Math.max((d.fold * 185 + 35), 75);
                 })
                 .attr("y", function(d, i) {
                     if (d.call < 0) {offset += 15;}
