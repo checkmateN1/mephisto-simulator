@@ -12,8 +12,8 @@ const WebSocketServer = {
         }
         this.socket = io.connect(url, {
             reconnection: false,
-            timeout: 60000,
-            pingTimeout: 60000,
+            timeout: 600000,
+            pingTimeout: 600000,
         });
         this.socket.on('connect', () => {
             this.isConnected = true;
