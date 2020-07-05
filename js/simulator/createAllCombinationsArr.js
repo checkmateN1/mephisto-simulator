@@ -1632,6 +1632,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
         // console.log(data_strategy);
 
         //возвращает массив с весами(если они разные внутри одной комбинации)
+        // нужно домножить на 1/вес максимальной йчейки
         function getCombinationWeight(combinationName, moveType) {
             // console.log(`combinationName: ${combinationName}, moveType: ${moveType}`);
             // let weightMin = 1;
@@ -1657,13 +1658,13 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             for(let i = 0; i < data_strategy.length; i++) {
                 if (isCombinationNameEqual(combinationName, i)) {
                     if (moveType > 0 || moveType === "strategy" || moveType === "range") {
-                        let w = data_strategy[i].w;
+                        let w = data_strategy[i].w || 0;
                         justDoIt(w);
-                    } else if (moveType == 0) {
-                        let w = data_strategy[i].call;
+                    } else if (moveType === 0) {
+                        let w = data_strategy[i].call || 0;
                         justDoIt(w);
                     } else if (moveType < 0) {
-                        let w = data_strategy[i].fold;
+                        let w = data_strategy[i].fold || 0;
                         justDoIt(w);
                     } else if (moveType === "preflop") {
                         let w = data_strategy[i].pw;
@@ -1674,67 +1675,126 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     }
                 }
             }
-            const finalWeight = count ? (weight/count) : 0;
             // return [weightMin, weightMax];
-            return [finalWeight, finalWeight];
+            return count ? (weight/count) : 0;
         }
 
         displayOrderMatrix();
         function displayOrderMatrix() {
             if (moveType !== "strategy") {
-                createMatrixIMG("range", moveType);
-                createMatrixIMG("node", moveType);
-                createMatrixIMG("preflop", moveType);
+                createMatrixIMG("range");
+                createMatrixIMG("node");
+                createMatrixIMG("preflop");
             } else {
-                if (wasBet(rawActionIndex)) {
-                    createMatrixIMG("strategy", moveType);
-                    createMatrixIMG("0");
-                    createMatrixIMG("-1");
-                } else {
-                    createMatrixIMG("strategy", moveType);
-                    createMatrixIMG("0");
-                    createMatrixIMG("-1"); //временно для проверки глюков, что ничего не фолдит сеть когда есть возможность чекать
-                }
+                const maxxxMatrixWeight = getMaxMatrixWeight();
+                // const maxxxMatrixWeight = undefined;
+
+                createMatrixIMG("strategy", maxxxMatrixWeight);
+                createMatrixIMG(0, maxxxMatrixWeight);
+                createMatrixIMG(-1, maxxxMatrixWeight);
+                // if (wasBet(rawActionIndex)) {
+                //     createMatrixIMG("strategy", moveType);
+                //     createMatrixIMG(0);
+                //     createMatrixIMG(-1);
+                // } else {
+                //     createMatrixIMG("strategy", moveType);
+                //     createMatrixIMG(0);
+                //     createMatrixIMG(-1); //временно для проверки глюков, что ничего не фолдит сеть когда есть возможность чекать
+                // }
 
             }
         }
 
-        function createMatrixIMG(moveType) {
-
-            function setMinRangeColor(weight) {
-                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
-                if(tmp > 3 || (weight[0] < 0.17 && tmp > 1.6) || (weight[0] < 0.12)) {
-                    return "rgb(0, 0, 250)";
-                } else {return "rgb(0, 0, " + Math.max((tmp * 12 + 130), 185) + ")";}
-            };
-
-            function setMinStrategyColor(weight) {
-                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
-                if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
-                    return "rgb(190, 16, 8)";
-                } else {return "rgb(" + Math.max((tmp * 12 + 125), 145) + ", 16, 8)";}
-            };
-
-            function setMinNodeColor(weight) {
-                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
-                if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
-                    return "rgb(120, 180, 240)";
-                } else {return "rgb(" + Math.max((tmp * 4 + 98), 101) + ", " + Math.max((tmp * 7 + 140), 150) + ", " + Math.max((tmp * 10 + 185), 200) + ")";}
-            };
-
-            function setMinCallColor(weight) {
-                let tmp = Math.round(parseInt(weight[1]/Math.max(weight[0], 0.1)));
-                if(tmp > 3 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
-                    return "rgb(191, 204, 0)";
-                } else {return "rgb(" + Math.max((tmp * 11 + 126), 150) + ", " + Math.max((tmp * 14 + 126), 167) + ", 0)";}
-            };
+        function getMaxMatrixWeight() {
+            let maxxxWeight = 0;
 
             for (let i = 0; i < 13; i++) {
                 for(let j = 0; j < 13; j++) {
                     let comb = createTD(i, j);
+
+                    // if (comb === 'K8s') {
+                    //     console.log('comb = ', comb);
+                    //     let weight = getCombinationWeight(comb, "strategy");
+                    //     console.log('getCombinationWeight(comb, "strategy")', getCombinationWeight(comb, "strategy"));
+                    //     console.log('weight > maxxxWeight', weight > maxxxWeight);
+                    //
+                    //     const weight1 = getCombinationWeight(comb, 0);
+                    //     const weight2 = getCombinationWeight(comb, -1);
+                    //
+                    //     console.log('weight1', weight1);
+                    //     console.log('weight2', weight2);
+                    // }
+
+                    let weight = getCombinationWeight(comb, "strategy");  // [weightMin, weightMax];
+                    weight += getCombinationWeight(comb, 0);  // [weightMin, weightMax];
+                    weight += getCombinationWeight(comb, -1);  // [weightMin, weightMax];
+
+                    if (weight > maxxxWeight) {
+                        maxxxWeight = weight;
+                    }
+                    // if (comb === 'K8s' || comb === 'Q6s') {
+                    //     console.log('comb = ', comb);
+                    //     console.log('weight', weight);
+                    // }
+                }
+            }
+
+            console.log('maxxxWeight = ', maxxxWeight);
+
+            return maxxxWeight;
+
+        }
+
+        function createMatrixIMG(moveType, maxxxMatrixWeight) {
+
+            // function setMinRangeColor(weight) {
+            //     let tmp = Math.round(parseInt(weight/Math.max(weight[0], 0.1)));
+            //     if(tmp > 3 || (weight[0] < 0.17 && tmp > 1.6) || (weight[0] < 0.12)) {
+            //         return "rgb(0, 0, 250)";
+            //     } else {return "rgb(0, 0, " + Math.max((tmp * 12 + 130), 185) + ")";}
+            // };
+            //
+            // function setMinStrategyColor(weight) {
+            //     let tmp = Math.round(parseInt(weight/Math.max(weight[0], 0.1)));
+            //     if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+            //         return "rgb(190, 16, 8)";
+            //     } else {return "rgb(" + Math.max((tmp * 12 + 125), 145) + ", 16, 8)";}
+            // };
+            //
+            // function setMinNodeColor(weight) {
+            //     let tmp = Math.round(parseInt(weight/Math.max(weight[0], 0.1)));
+            //     if(tmp > 4 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+            //         return "rgb(120, 180, 240)";
+            //     } else {return "rgb(" + Math.max((tmp * 4 + 98), 101) + ", " + Math.max((tmp * 7 + 140), 150) + ", " + Math.max((tmp * 10 + 185), 200) + ")";}
+            // };
+            //
+            // function setMinCallColor(weight) {
+            //     let tmp = Math.round(parseInt(weight/Math.max(weight[0], 0.1)));
+            //     if(tmp > 3 || (weight[0] < 0.15 && tmp > 1.6) || (weight[0] < 0.12)) {
+            //         return "rgb(191, 204, 0)";
+            //     } else {return "rgb(" + Math.max((tmp * 11 + 126), 150) + ", " + Math.max((tmp * 14 + 126), 167) + ", 0)";}
+            // };
+
+
+            for (let i = 0; i < 13; i++) {
+                for(let j = 0; j < 13; j++) {
+                    let comb = createTD(i, j);
+
+                    // if (comb === 'K8s') {
+                    //     console.log('comb = ', comb);
+                    //     console.log('testStrategy.allHands', testStrategy.allHands);
+                    // }
                     let td = document.getElementById('matrix_' + comb);
-                    let weight = getCombinationWeight(comb, moveType);
+                    let weight = getCombinationWeight(comb, moveType);  // [weightMin, weightMax];
+
+                    if (maxxxMatrixWeight !== undefined) {
+                        weight = weight * (1/maxxxMatrixWeight);
+                    }
                     //alert("weight = " + weight + "comb = " + comb);
+
+                    // if (comb === 'K8s') {
+                    //     console.log('K8s weight', weight);
+                    // }
 
                     let div = document.createElement("div");
                     div.classList.add("matrix-strategy");
@@ -1742,27 +1802,27 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                         div.style.background = agroColor;
                         div.style.height = "100%";
                         div.style.zIndex = "-30";
-                        td.setAttribute('data-internalid', weight[1]);
-                        div.style.width = (weight[1] * 100) + "%";
+                        td.setAttribute('data-internalid', weight);
+                        div.style.width = (weight * 100) + "%";
                     } else if (moveType === "range") {
                         div.style.background = currentColor;
                         div.style.height = "86%";
                         div.style.zIndex = "-30";
                         td.removeAttribute('data-internalid');
-                        div.style.width = (weight[1] * 100) + "%";
-                    } else if (moveType == 0 || moveType === "node") {
+                        div.style.width = (weight * 100) + "%";
+                    } else if (moveType === 0 || moveType === "node") {
                         if (moveType === "node") {
                             div.style.background = nodeColor;
                             div.style.height = "93%";
-                            div.style.width = (weight[1] * 100) + "%";
+                            div.style.width = (weight * 100) + "%";
                         } else {
                             div.style.background = callColor;
                             div.style.height = "100%";
                             if (td.hasAttribute('data-internalid')) {
-                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight[1]) * 100) + "%";
-                                td.setAttribute('data-internalid', parseFloat(td.getAttribute('data-internalid')) + weight[1]);
+                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight) * 100) + "%";
+                                td.setAttribute('data-internalid', parseFloat(td.getAttribute('data-internalid')) + weight);
                             } else {
-                                div.style.width = (weight[1] * 100) + "%";
+                                div.style.width = (weight * 100) + "%";
                             }
 
                         }
@@ -1770,12 +1830,12 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     } else if (moveType < 0 || moveType === "preflop") {
                         if (moveType === "preflop") {
                             div.style.background = preflopColor;
-                            div.style.width = (weight[1] * 100) + "%";
+                            div.style.width = (weight * 100) + "%";
                         } else {
                             div.style.background = foldColor;
                             if (td.hasAttribute('data-internalid')) {
-                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight[1]) * 100) + "%";
-                            } else {div.style.width = (weight[1] * 100) + "%";}
+                                div.style.width = ((parseFloat(td.getAttribute('data-internalid')) + weight) * 100) + "%";
+                            } else {div.style.width = (weight * 100) + "%";}
                         }
                         div.style.height = "100%";
                         div.style.zIndex = "-70";
@@ -1785,7 +1845,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
                     div.style.top = "0";
                     td.appendChild(div);
 
-                    // if (weight[1] - weight[0] > 0.1) {
+                    // if (weight - weight[0] > 0.1) {
                     //     let div = document.createElement("div");
                     //     div.classList.add("matrix-strategy");
                     //

@@ -69,15 +69,15 @@ ioClient.on('simulationError', (data) => {
 
 ioClient.on('simulationsResponse', (data) => {
     console.log('simulationsResponse!!!');
-    console.log(data);
+    console.log('data', data);
     $("#draggable").addClass("appear-fast");
     $("#draggable").show();
     createAllCombinationsArr("strategy", actionIndex, data); //вызвали функцию рисующую график
     $('#waiting-progress-bar2').removeClass("appear");
     restartListener();
 
-    let c4 = data.board.c4 == null? null : cardsName.indexOf(data.board.c4).toString();
-    let c5 = data.board.c5 == null? null : cardsName.indexOf(data.board.c5).toString();
+    let c4 = data.board.c4 == null ? null : cardsName.indexOf(data.board.c4).toString();
+    let c5 = data.board.c5 == null ? null : cardsName.indexOf(data.board.c5).toString();
     testBoard = [null,
         cardsName.indexOf(data.hand.h1).toString(),
         cardsName.indexOf(data.hand.h2).toString(),

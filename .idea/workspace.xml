@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c0d7165d-6d2e-4ceb-9914-19a9205354b1" name="Default" comment="new version with strategy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/simulator/playersValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/simulator/playersValidation.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,29 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="753">
-              <caret line="497" selection-start-line="497" selection-end-line="497" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/simulator/actions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/simulator/rulesValidation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1000">
-              <caret line="50" column="53" selection-start-line="50" selection-start-column="53" selection-end-line="50" selection-end-column="53" />
+            <state relative-caret-position="234">
+              <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
             </state>
           </provider>
         </entry>
@@ -57,7 +42,7 @@
         <entry file="file://$PROJECT_DIR$/js/config/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="13" selection-start-column="13" selection-end-column="35" />
+              <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -65,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+            <state relative-caret-position="320">
+              <caret line="85" column="52" lean-forward="true" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -74,8 +59,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33340">
-              <caret line="1667" column="56" selection-start-line="1667" selection-start-column="56" selection-end-line="1667" selection-end-column="56" />
+            <state relative-caret-position="424">
+              <caret line="1790" column="64" selection-start-line="1790" selection-start-column="64" selection-end-line="1790" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/simulator/playersValidation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="203" column="102" lean-forward="true" selection-start-line="203" selection-start-column="102" selection-end-line="203" selection-end-column="102" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/simulator/moves.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="21" column="2" lean-forward="true" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/simulator/getCombination.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3180">
+              <caret line="159" column="27" selection-start-line="159" selection-start-column="6" selection-end-line="159" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -111,17 +123,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createMatrix</find>
-      <find>createMatrix(</find>
-      <find>who</find>
-      <find>actionToJson</find>
-      <find>actNumberAtStreet</find>
-      <find>showSt</find>
-      <find>tdAm</find>
-      <find>matrixTdCl</find>
-      <find>draggable</find>
-      <find>drawCallPercent</find>
-      <find>amountC</find>
       <find>ActionForJson</find>
       <find>initPreflopPlayersIndexes</find>
       <find>agroPercent</find>
@@ -135,12 +136,23 @@
       <find>EV</find>
       <find>EV:</find>
       <find>text</find>
-      <find>strategyRaw</find>
       <find>data_strategy</find>
       <find>.product-price b</find>
       <find>matrixtdcl</find>
       <find>buy</find>
       <find>data-internalid</find>
+      <find>open-setups-window</find>
+      <find>setCombNameToAllHands</find>
+      <find>rawAc</find>
+      <find>var rawActionList</find>
+      <find>open-db-history-window</find>
+      <find>strategyRaw</find>
+      <find>testStrategy</find>
+      <find>setMinRangeColor</find>
+      <find>createMatrixIMG</find>
+      <find>getCombinationWeight</find>
+      <find>weight[1]</find>
+      <find>show ran</find>
     </findStrings>
     <replaceStrings>
       <replace>screen.width</replace>
@@ -154,6 +166,7 @@
       <replace>0.0002</replace>
       <replace>0.00001</replace>
       <replace>0</replace>
+      <replace>weight</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -200,14 +213,14 @@
         <option value="$PROJECT_DIR$/js/simulator/restartListener.js" />
         <option value="$PROJECT_DIR$/js/simulator/probabEVinfo.js" />
         <option value="$PROJECT_DIR$/js/simulator/network.js" />
-        <option value="$PROJECT_DIR$/js/simulator/playersValidation.js" />
         <option value="$PROJECT_DIR$/js/simulator/actions.js" />
         <option value="$PROJECT_DIR$/js/simulator/rulesValidation.js" />
         <option value="$PROJECT_DIR$/js/config/server.js" />
         <option value="$PROJECT_DIR$/css/style-autopref.css" />
-        <option value="$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js" />
+        <option value="$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js" />
+        <option value="$PROJECT_DIR$/js/simulator/playersValidation.js" />
       </list>
     </option>
   </component>
@@ -218,8 +231,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1008" />
-    <option name="y" value="8" />
+    <option name="x" value="-12" />
+    <option name="y" value="-12" />
     <option name="width" value="2000" />
     <option name="height" value="1860" />
   </component>
@@ -230,7 +243,31 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mephisto-simulator" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mephisto-simulator" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="simulator" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -459,18 +496,21 @@
       <workItem from="1584238285648" duration="607000" />
       <workItem from="1584274307169" duration="781000" />
       <workItem from="1584536556682" duration="599000" />
-      <workItem from="1584827538218" duration="1203000" />
+      <workItem from="1584827538218" duration="4093000" />
+      <workItem from="1589020274991" duration="599000" />
+      <workItem from="1592486315887" duration="1872000" />
+      <workItem from="1593853889889" duration="24358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1192265000" />
+    <option name="totallyTimeSpent" value="1221984000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.14101695" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.09152542" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -600,13 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/getCombination.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="342" column="32" selection-start-line="342" selection-start-column="6" selection-end-line="342" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/getCombC.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1344">
@@ -659,13 +692,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/moves.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="755">
-          <caret line="378" column="4" selection-start-line="378" selection-start-column="4" selection-end-line="381" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/randomButtonClick.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="755">
@@ -683,24 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/playersValidation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3660">
-          <caret line="183" column="24" selection-start-line="183" selection-start-column="24" selection-end-line="183" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/style-autopref.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="2156" lean-forward="true" selection-start-line="2156" selection-end-line="2156" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/actions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
@@ -711,6 +723,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/simulator/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/simulator/network.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2320">
@@ -718,17 +737,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/config/server.js">
+    <entry file="file://$PROJECT_DIR$/js/simulator/getCombination.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33340">
-          <caret line="1667" column="56" selection-start-line="1667" selection-start-column="56" selection-end-line="1667" selection-end-column="56" />
+        <state relative-caret-position="3180">
+          <caret line="159" column="27" selection-start-line="159" selection-start-column="6" selection-end-line="159" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -746,17 +758,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js">
+    <entry file="file://$PROJECT_DIR$/js/simulator/moves.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="32" selection-start-line="15" selection-start-column="32" selection-end-line="15" selection-end-column="32" />
+        <state relative-caret-position="420">
+          <caret line="21" column="2" lean-forward="true" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/config/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="753">
-          <caret line="497" selection-start-line="497" selection-end-line="497" />
+        <state relative-caret-position="234">
+          <caret line="277" lean-forward="true" selection-start-line="277" selection-end-line="277" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/simulator/getStrategyFromNetwork.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="85" column="52" lean-forward="true" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/simulator/createAllCombinationsArr.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="1790" column="64" selection-start-line="1790" selection-start-column="64" selection-end-line="1790" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/simulator/playersValidation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="203" column="102" lean-forward="true" selection-start-line="203" selection-start-column="102" selection-end-line="203" selection-end-column="102" />
         </state>
       </provider>
     </entry>
