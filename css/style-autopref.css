@@ -1018,6 +1018,12 @@ output {
     background: none;
 }
 
+#select-generation {
+    position: absolute;
+    left: 210px;
+    top: 453px;
+}
+
 #upload-button {
     background-image: url("../img/upload_g.png");
     background-repeat: no-repeat;

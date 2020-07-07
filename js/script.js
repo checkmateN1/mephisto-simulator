@@ -156,6 +156,7 @@ function loadScriptsDesctop() {
     addScript('js/simulator/uploadWindow.js');
     addScript('js/simulator/getCombination.js');
     addScript('js/simulator/randomButtonClick.js');
+    addScript('js/simulator/selectGeneration.js');
     addScript('js/simulator/getStrategyFromNetwork.js');
     addScript('js/login.js');
 

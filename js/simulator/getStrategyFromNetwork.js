@@ -119,6 +119,14 @@ ioClient.on('disconnect', () => {
 
 });
 
+ioClient.emit('getGenerationsNames');
+
+ioClient.on('generationsNames', names => {
+    console.log('generationCount', names);
+
+    createSelectGeneration(names);
+});
+
 const getStrategyFromServer = (obj, rawActionListIndex) => {
     actionIndex = rawActionListIndex;
     console.log(obj);

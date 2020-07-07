@@ -410,6 +410,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
     //создает визуальное отображение всех возможных мувов с их сайзингами над матрицей в верхней части окна
     function createStrategyList() {
         let sortable = [];
+        console.log('testStrategy');
+        console.log(testStrategy);
         for (let key in testStrategy.allHands[0].moves) {
             sortable.push([parseFloat(key), testStrategy.allHands[0].moves[key]]);
         }
