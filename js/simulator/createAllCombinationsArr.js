@@ -521,6 +521,7 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
     //функция отрисовывающая комбинации с их весами а так же обрабатывающая клик в название комбинации
     function displayCombinationWeight(move) {
+        // console.log('move inside displayCombinationWeight', move);
         let table = document.getElementById("hill-combination");
         table.innerHTML = '';
         setWeightToAllCombinations(testStrategy, move).forEach(combination => {
@@ -659,6 +660,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
             //меняем заголовок окна со стратегией
             createHillInfo("strategy");
 
+            displayCombinationWeight("strategy");
+
         } else {
             $("#strategy-moves li").addClass("not-selected-move");
             $("#strategy-moves li").removeClass("selected-move");
@@ -677,6 +680,8 @@ function createAllCombinationsArr(strategyORrange, rawActionIndex, data) {
 
             //меняем заголовок окна со стратегией
             createHillInfo(li.id.split('strategyMove_')[1]);
+
+            displayCombinationWeight(li.id.split('strategyMove_')[1]);
         }
     }
 

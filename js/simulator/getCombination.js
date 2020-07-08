@@ -341,6 +341,8 @@ var testStrategy = {
 //setCombNameToAllHands([null, "12", "24", "0", "13", "27", "40", null]);
 
 const setWeightToAllCombinations = (strategy, strategyORrange) => {    //strategyORrange == 'strategy' || 0.5, 0,66, 1, etc
+    // console.log('strategyORrange inside setWeightToAllCombinations', strategyORrange);  //strategyORrange == 'strategy' || 0.5, 0,66, 1, etc
+    // console.log('strategy inside setWeightToAllCombinations', strategy);
     //all combinations with summary weight
     let allCombinationSummaryWeight = [];
 
