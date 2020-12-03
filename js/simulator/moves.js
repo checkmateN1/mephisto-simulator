@@ -212,10 +212,13 @@ function displayAddRemoveButtons() {
     document.querySelector(".sub-move-button.river").classList.add("hidden");
 
     if(rawActionList[rawActionList.length - 1].street == 0) { // если улица последнего действия preflop
-        if (isTerminalStreetState()) {
-            document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
-        } else {
-            document.querySelector(".add-move-button.preflop").classList.remove("hidden"); // кнопка флопа
+
+        if (whoIsInGame().length) {
+            if (isTerminalStreetState()) {
+                document.querySelector(".add-move-button.flop").classList.remove("hidden"); // кнопка флопа
+            } else {
+                document.querySelector(".add-move-button.preflop").classList.remove("hidden"); // кнопка префлопа
+            }
         }
 
         document.querySelector(".sub-move-button.preflop").classList.remove("hidden");
@@ -257,12 +260,16 @@ function displayAddRemoveButtons() {
     if (isTerminalStreetState()) {   // если терминальное состояние
         if(rawActionList[rawActionList.length - 1].street == 1) { // улица последнего действия flop
             document.querySelector(".sub-move-button.flop").classList.remove("hidden"); // добавили кнопку флопа
-            document.querySelector(".add-move-button.turn").classList.remove("hidden"); // добавили кнопку флопа
+            if (whoIsInGame().length) {
+                document.querySelector(".add-move-button.turn").classList.remove("hidden"); // добавили кнопку флопа
+            }
             return;
         }
         if (rawActionList[rawActionList.length - 1].street == 2) {  // улица последнего действия turn
             document.querySelector(".sub-move-button.turn").classList.remove("hidden"); // добавили кнопку флопа
-            document.querySelector(".add-move-button.river").classList.remove("hidden"); // добавили кнопку флопа
+            if (whoIsInGame().length) {
+                document.querySelector(".add-move-button.river").classList.remove("hidden"); // добавили кнопку флопа
+            }
             return;
         }
         if (rawActionList[rawActionList.length - 1].street == 3) {  // улица последнего действия turn
@@ -274,31 +281,16 @@ function displayAddRemoveButtons() {
 
 //определяет терминальное состояние на улице
 function isTerminalStreetState() {
-    // let currentAmount = maxAmountAtCurrentStreet();
-    // let nPlayers = whoIsInGame().slice();
-    //
-    // if (nPlayers.length <= 1 && rawActionList[rawActionList.length - 1].action >= 3 && whoIsInGame() == rawActionList[rawActionList.length - 1].position) {
-    //     return true;
-    // }
-    //
-    // let currentStreet = rawActionList[rawActionList.length - 1].street;
-    // if (rawActionList[rawActionList.length - 1].action < 3) {return false;}
-    //
-    // for (let i = rawActionList.length - 1; i >= 0; i--) {
-    //     if (nPlayers.indexOf(rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
-    //         if (rawActionList[i].amount == currentAmount && rawActionList[i].street == currentStreet) { // проверяем совпадает ли значение его ставки и улица
-    //             nPlayers.splice(nPlayers.indexOf(rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
-    //             if (nPlayers.length == 0) {
-    //                 return true;
-    //             }
-    //         } else {return false;}
-    //     }
-    // }
     const currentAmount = this.maxAmountAtCurrentStreet();
     const nPlayers = this.whoIsInGame();    //добавляем всех у кого УМНЫЙ баланc больше нуля и кто не делал фолд. массив с позициями
 
+    // console.log('currentAmount', currentAmount);
+    // console.log('nPlayers', nPlayers);
+
     const currentStreet = this.rawActionList[this.rawActionList.length - 1].street;
     if (this.rawActionList[this.rawActionList.length - 1].action < 3) {return false;}
+
+    // console.log('currentStreet', currentStreet);
 
     // BB moves ones exception
     if (currentStreet === 0 && this.rawActionList.filter(action => action.position === this.rawActionList[1].position).length === 1) {
@@ -306,6 +298,10 @@ function isTerminalStreetState() {
     }
 
     for (let i = this.rawActionList.length - 1; i >= 0; i--) {
+        // console.log('nPlayers.indexOf(this.rawActionList[i].position) >= 0');
+        // console.log(nPlayers.indexOf(this.rawActionList[i].position) >= 0);
+        // console.log('nPlayers', nPlayers);
+        // console.log('i', i);
         if (nPlayers.indexOf(this.rawActionList[i].position) >= 0) { // если среди играющих есть такой игрок
             if (this.rawActionList[i].amount === currentAmount && this.rawActionList[i].street === currentStreet) { // проверяем совпадает ли значение его ставки и улица
                 nPlayers.splice(nPlayers.indexOf(this.rawActionList[i].position), 1); // удаляем игрока с совпавшей позицией
@@ -315,6 +311,8 @@ function isTerminalStreetState() {
             } else {return false;}
         }
     }
+
+    return true;
 }
 
 // удаляет все действия постфлопа
@@ -331,51 +329,86 @@ function removeAllActions() {
     displayAddRemoveButtons();
 }
 
+const template6max = document.querySelectorAll('.setup-template-6 > input');
+const SBBalance6 = document.getElementById('sb-balance-6');
+const BBBalance6 = document.getElementById('bb-balance-6');
+const mp2Balance6 = document.getElementById('mp2-balance-6');
+const mp3Balance6 = document.getElementById('mp3-balance-6');
+const coBalance6 = document.getElementById('co-balance-6');
+const BTNBalance6 = document.getElementById('btn-balance-6');
+
+const positions = ["BTN", "CO", "MP3", "MP2", "MP1", "UTG2", "UTG1", "UTG0", "BB", "SB"];
+const nicknames = ['james', 'lucky', 'polaris', '3DAction', 'joooe', 'checkmate'];
+
 // добавляет строку в массив сырых действий и вызывает перерисовывание строк
 function addActionString() {
-    if (rawActionList[rawActionList.length - 1].action === 6) {
-        alert("Choose action before adding new action string!");
-        return;
-    }
-    // валидатор
-    if (rawActionList[rawActionList.length - 1].action === 1 && rawActionList[rawActionList.length - 1].amount === 0) {
-        alert("Choose bet amount!");
-        return;
-    }
-    if (rawActionList[rawActionList.length - 1].action === 2 && rawActionList[rawActionList.length - 1].amount === 0) {
-        alert("Choose raise amount!");
-        return;
-    }
+    // проверяю на заполненность формы 6макс - если там есть данные  - тогда:
+    // если не добавлено 6 первых действий - следующее добавление в rawActions будет из списка по позициям
 
-    let oldActionListLength = rawActionList.length;
-    let isTerminalStreetStateTmp = isTerminalStreetState();
-    console.log('test add button isTerminalStreetStateTmp');
-    console.log(isTerminalStreetStateTmp);
-    let whoIsNextMoveTmp = whoIsNextMove();
-    console.log('whoIsNextMoveTmp');
-    console.log(whoIsNextMoveTmp);
+    const max6Stacks = getMax6FormValues();
+    if (max6Stacks.filter(el => el !== 0).length && rawActionList.length < 6) {     // 6max new set form with values
 
-    rawActionList[oldActionListLength] = new ActionString();
-    rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+        const SBBalance = SBBalance6.value;
+        const BBBalance = BBBalance6.value;
+        const MP2Balance = mp2Balance6.value;
+        const MP3Balance = mp3Balance6.value;
+        const COBalance = coBalance6.value;
+        const BTNBalance = BTNBalance6.value;
 
-    // if(rawActionList[oldActionListLength - 1].street > 0) {
-    //
-    // } else {rawActionList[oldActionListLength].street = 1}
+        const positionBalances = [BTNBalance, COBalance, MP3Balance, MP2Balance, BBBalance, SBBalance];
 
-    for (let i = oldActionListLength - 1; i >= 0; i--) {
-        if (rawActionList[i].position === whoIsNextMoveTmp) {
-            rawActionList[oldActionListLength].player = rawActionList[i].player;
-            rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
-            rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
-            rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength)).toFixed(2);
-            rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
-            rawActionList[oldActionListLength].position = rawActionList[i].position;
-            if (rawActionList[oldActionListLength - 1].gto) {
-                rawActionList[oldActionListLength].gto = true;
-            } else {rawActionList[oldActionListLength].gto = false;}
-            rawActionList[oldActionListLength].isHero = rawActionList[i].isHero;
+        const player = nicknames[nicknames.length - rawActionList.length - 1];
+        const balance = positionBalances[positionBalances.length - rawActionList.length - 1];
+        const pot = parseFloat(whatIsThePot(rawActionList.length)).toFixed(2);
+        const position = positionBalances.length - rawActionList.length - 1;
+
+        rawActionList.push(new ActionString(0, player, +balance, 6, +pot, 0, position, false, false));
+    } else {
+        if (rawActionList[rawActionList.length - 1].action === 6) {
+            alert("Choose action before adding new action string!");
+            return;
+        }
+        // валидатор
+        if (rawActionList[rawActionList.length - 1].action === 1 && rawActionList[rawActionList.length - 1].amount === 0) {
+            alert("Choose bet amount!");
+            return;
+        }
+        if (rawActionList[rawActionList.length - 1].action === 2 && rawActionList[rawActionList.length - 1].amount === 0) {
+            alert("Choose raise amount!");
+            return;
+        }
+
+        let oldActionListLength = rawActionList.length;
+        let isTerminalStreetStateTmp = isTerminalStreetState();
+        // console.log('test add button isTerminalStreetStateTmp');
+        // console.log(isTerminalStreetStateTmp);
+        let whoIsNextMoveTmp = whoIsNextMove();
+        // console.log('whoIsNextMoveTmp');
+        // console.log(whoIsNextMoveTmp);
+
+        rawActionList[oldActionListLength] = new ActionString();
+        rawActionList[oldActionListLength].street = isTerminalStreetStateTmp ? (rawActionList[oldActionListLength - 1].street + 1) : (rawActionList[oldActionListLength - 1].street);
+
+        // if(rawActionList[oldActionListLength - 1].street > 0) {
+        //
+        // } else {rawActionList[oldActionListLength].street = 1}
+
+        for (let i = oldActionListLength - 1; i >= 0; i--) {
+            if (rawActionList[i].position === whoIsNextMoveTmp) {
+                rawActionList[oldActionListLength].player = rawActionList[i].player;
+                rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
+                rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
+                rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength)).toFixed(2);
+                rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
+                rawActionList[oldActionListLength].position = rawActionList[i].position;
+                if (rawActionList[oldActionListLength - 1].gto) {
+                    rawActionList[oldActionListLength].gto = true;
+                } else {rawActionList[oldActionListLength].gto = false;}
+                rawActionList[oldActionListLength].isHero = rawActionList[i].isHero;
+            }
         }
     }
+
     removeActions();
     displayActions();
     displayAddRemoveButtons();
@@ -388,6 +421,25 @@ const haBBBalance = document.getElementById('bb-balance-ha');
 const SBBalance3 = document.getElementById('sb-balance-3');
 const BBBalance3 = document.getElementById('bb-balance-3');
 const BTNBalance3 = document.getElementById('btn-balance-3');
+
+// возвращает массив со стеками по всем позициям для 6макса
+function getMax6FormValues() {
+    // positionsOrder6: ["SB", "BB", "MP2", "MP3", "CO", "BTN"]
+    const arr = [];
+    template6max.forEach(el => {
+        arr.push(el.value || 0);
+    });
+
+    return arr;
+}
+
+function clearMax6FormValues() {
+    // positionsOrder6: ["SB", "BB", "MP2", "MP3", "CO", "BTN"]
+    template6max.forEach(el => {
+        el.value = '';
+    });
+}
+
 let curBlindSize = 20;
 
 $(".blinds-set > li").on('click', setCurBlind);
@@ -416,14 +468,25 @@ function setPreflopTemplate(e) {
     $(".players-count-list > li").removeClass('active');
     li.classList.add('active');
 
-    if (li.getAttribute('value') == 0) {     // new ha
+    if (li.getAttribute('value') == 0) {     // new spins HU
         $('.setup-template-3').addClass('hidden');
         $('.ha-setup-template').removeClass('hidden');
-    } else if (li.getAttribute('value') == 1) {     // new 3 players
+        $('.setup-template-6').addClass('hidden');
+        $('.blinds-set').removeClass('hidden');
+        clearMax6FormValues();
+    } else if (li.getAttribute('value') == 1) {     // new spins 3 players
         $('.ha-setup-template').addClass('hidden');
         $('.setup-template-3').removeClass('hidden');
+        $('.setup-template-6').addClass('hidden');
+        $('.blinds-set').removeClass('hidden')
+        clearMax6FormValues();
+    } else if (li.getAttribute('value') == 2) {     // new 6max
+        $('.ha-setup-template').addClass('hidden');
+        $('.setup-template-3').addClass('hidden');
+        $('.setup-template-6').removeClass('hidden');
+        $('.blinds-set').addClass('hidden');
     }
-    $('.blinds-set').removeClass('hidden');
+
 
     rawActionList = [];
 
@@ -575,6 +638,59 @@ BBBalance3.addEventListener("blur", function() {
         $('.blinds-set').addClass('hidden');
     }
 });
+
+// const max6form = [SBBalance6, BBBalance6, mp2Balance6, mp3Balance6, coBalance6, BTNBalance6];
+
+template6max.forEach(el => {
+    el.addEventListener('blur', max6Blur);
+});
+
+// max6form.forEach(el => {
+//     el.addEventListener('blur', max6Blur);
+// });
+
+
+function max6Blur() {
+    let count = 0;
+    template6max.forEach(el => {
+        if (el.value !== '') {
+            count++;
+        }
+    });
+    if (count !== 6) {
+        // alert('Enter valid stacks for all chairs!');
+        return;
+    }
+    const SBBalance = SBBalance6.value;
+    const BBBalance = BBBalance6.value;
+    const MP2Balance = mp2Balance6.value;
+    const MP3Balance = mp3Balance6.value;
+    const COBalance = coBalance6.value;
+    const BTNBalance = BTNBalance6.value;
+
+    // if (template6max.filter(el => !el.value).length) {
+    //     alert('!!!!!!!!!!!!!!!!!!1');
+    // }
+
+    $('.ha-setup-template').addClass('hidden');
+    $('.setup-template-3').addClass('hidden');
+    $('.setup-template-6').addClass('hidden');
+    $('.blinds-set').addClass('hidden');
+
+    // alert(SBBalance);
+
+    rawActionList = [];
+    rawActionList.push(new ActionString(0, "checkmateN1", +SBBalance, 0, 0, 0.5, 9, false, false));
+    rawActionList.push(new ActionString(0, "joooe84", +BBBalance, 0, 0.5, 1, 8, false, false));
+    rawActionList.push(new ActionString(0, "3DAction", +MP2Balance, 6, 1.5, 0, 3, false, false));
+
+
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
+}
+
 
 // удаляет последнее действие
 function removeLastActionString() {

@@ -65,6 +65,7 @@ ioClient.on('testInterval', () => {
 
 ioClient.on('simulationError', (data) => {
     console.info(`simulation error ${data}`);
+    alert(data);
 });
 
 ioClient.on('simulationsResponse', (data) => {

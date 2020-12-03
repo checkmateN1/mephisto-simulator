@@ -23,17 +23,23 @@ function whoIsInGame() {
             allPlayers.push(rawActionList[i].position);
         }
     }
+    console.log('rawActionList', rawActionList);
+    // console.log('allPlayers', allPlayers);
     for (let i = allPlayers.length - 1; i >= 0; i--) { // добавляем только тех кто остался
         if (blackList.indexOf(allPlayers[i]) < 0) {
             playersInGame.push(allPlayers[i]);
         }
     }
+    // console.log('blackList', blackList);
+    // console.log('playersInGame', playersInGame);
     return playersInGame;
 }
 
 // возвращает позицию того кто будет ходить следующим
 function whoIsNextMove() {
     if (isTerminalStreetState()) {
+        // console.log('Math.max.apply(null, whoIsInGame())', Math.max.apply(null, whoIsInGame()))
+        // console.log('whoIsInGame()', whoIsInGame());
         return Math.max.apply(null, whoIsInGame()); // наибольшее число из массива
     } else {
         let nPlayers = whoIsInGame().slice();
