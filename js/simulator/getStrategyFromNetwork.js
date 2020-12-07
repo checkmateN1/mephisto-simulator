@@ -65,6 +65,11 @@ ioClient.on('testInterval', () => {
 
 ioClient.on('simulationError', (data) => {
     console.info(`simulation error ${data}`);
+    $('#waiting-progress-bar2').removeClass("appear");
+    removeActions();
+    displayActions();
+    displayAddRemoveButtons();
+    restartListener();
     alert(data);
 });
 
