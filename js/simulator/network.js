@@ -55,6 +55,8 @@ function actionToJson(rawActionListIndex, request, isSaveSetup) {
             act_num: rawActionListIndex,
             requestType: 'strategy',
             position: rawActionList[rawActionListIndex].position,
+            rawActionList,
+            ante: 0,
             // requestType: 'prompter',
         };
 
