@@ -124,17 +124,19 @@ var playersSelect = $("<input class=\"type-search\" type=\"text\" id=\"nickname-
     "                                    </select>");
 
 var tdPlayer2 = $(".all-info-table td:nth-child(1)"); // nickname
+// $('.js-example-basic-single').select2();
+// tdPlayer2.select2();
 tdPlayer2.on('click', selectPlayer);
 // функция меняющая никнейм игрока в данной строке
 function selectPlayer(e) {
-    //alert("зашли в функцию правым кликом в ФФ");
+    // alert("зашли в функцию - кликнули в игрока");
     e.preventDefault();
     let elNode= e.target; // nodeType == 1
     var el = $(this);
 
     var arr = [];
     for (let i = 0; i < playersList.length; i++) {
-        arr[i] = {val: 1, text: playersList[i]};
+        arr[i] = {val: i, text: playersList[i]};
     }
     $(arr).each(function() {
         playersSelect.append($("<option>").attr('value',this.val).text(this.text));
@@ -145,6 +147,12 @@ function selectPlayer(e) {
     this.classList.add("color-yellow");
 
     el.append(playersSelect);
+
+    document.getElementById('nickname-input');
+
+    function getPlayersFromDb() {
+        alert('test change');
+    }
 
     $(".all-info-table td:nth-child(1)").css("overflow", "visible");
     tdPlayer2.off();
