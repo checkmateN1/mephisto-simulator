@@ -53,6 +53,16 @@ function minAmount() {
     }
 }
 
+function getPrevAmount(enumPosition, street) {
+    for (let i = rawActionList.length - 2; i >= 0; i--) {
+        if (rawActionList[i].street === street && rawActionList[i].position === enumPosition) {
+            return rawActionList[i].amount;
+        }
+    }
+
+    return 0;
+}
+
 // был ли бет на улице с последним ходом?
 function wasBet(oldActionListLength) {
     let currentStreet = rawActionList[oldActionListLength].street;

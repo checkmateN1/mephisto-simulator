@@ -346,6 +346,7 @@ function addActionString() {
     // если не добавлено 6 первых действий - следующее добавление в rawActions будет из списка по позициям
 
     const max6Stacks = getMax6FormValues();
+    console.log('max6Stacks:',  max6Stacks);
     if (max6Stacks.filter(el => el !== 0).length && rawActionList.length < 6) {     // 6max new set form with values
 
         const SBBalance = SBBalance6.value;
@@ -397,9 +398,9 @@ function addActionString() {
             if (rawActionList[i].position === whoIsNextMoveTmp) {
                 rawActionList[oldActionListLength].player = rawActionList[i].player;
                 rawActionList[oldActionListLength].balance = parseFloat(whatIsPlayerBalance(rawActionList[i].position, oldActionListLength).toFixed(2));
-                rawActionList[oldActionListLength].action = parseInt(6); // нужно выбрать - появляется селект
-                rawActionList[oldActionListLength].pot = parseFloat(whatIsThePot(oldActionListLength)).toFixed(2);
-                rawActionList[oldActionListLength].amount = parseFloat(0); // нужно выбрать - появляется слайдер
+                rawActionList[oldActionListLength].action = 6; // нужно выбрать - появляется селект
+                rawActionList[oldActionListLength].pot = parseFloat((whatIsThePot(oldActionListLength)).toFixed(2));
+                rawActionList[oldActionListLength].amount = 0; // нужно выбрать - появляется слайдер
                 rawActionList[oldActionListLength].position = rawActionList[i].position;
                 if (rawActionList[oldActionListLength - 1].gto) {
                     rawActionList[oldActionListLength].gto = true;

@@ -236,7 +236,9 @@ function actionClick(e){
             rawActionList[rawActionList.length - 1].amount = parseFloat(Math.min(initPlayerBalance(rawActionList[rawActionList.length - 1].position, oldActionListLength), maxAmountAtCurrentStreet()));
         }
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 5 || parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 4) {
-            rawActionList[rawActionList.length - 1].amount = parseFloat(0);
+            const street = rawActionList[rawActionList.length - 1].street;
+            const prevAmount = getPrevAmount(rawActionList[rawActionList.length - 1].position, street);
+            rawActionList[rawActionList.length - 1].amount = parseFloat(prevAmount);
         }
         if (parseFloat(getActionIndex(sel.options[sel.selectedIndex].text)) == 2) {
             rawActionList[rawActionList.length - 1].amount = parseFloat(0);
