@@ -1,5 +1,6 @@
 
 function actionToJson(rawActionListIndex, request, isSaveSetup) {
+    console.log('enter show strategy');
 
     var myJSON = {
         board: {

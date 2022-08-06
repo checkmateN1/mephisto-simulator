@@ -23,7 +23,7 @@ function whoIsInGame() {
             allPlayers.push(rawActionList[i].position);
         }
     }
-    console.log('rawActionList', rawActionList);
+    // console.log('rawActionList', rawActionList);
     // console.log('allPlayers', allPlayers);
     for (let i = allPlayers.length - 1; i >= 0; i--) { // добавляем только тех кто остался
         if (blackList.indexOf(allPlayers[i]) < 0) {
@@ -148,7 +148,7 @@ function selectPlayer(e) {
 
     el.append(playersSelect);
 
-    document.getElementById('nickname-input');
+    // document.getElementById('nickname-input');
 
     function getPlayersFromDb() {
         alert('test change');
@@ -168,7 +168,7 @@ function selectPlayer(e) {
     playersSelect.focusout(function(){
         let td = document.createElement("td");
         var sel = document.getElementById("nickname-input");
-        td.innerHTML = sel.options[sel.selectedIndex].text;
+        td.innerHTML = sel && sel.options && sel.selectedIndex && sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
         sel.replaceWith(td);
 
         removeActions();
@@ -342,23 +342,29 @@ function actionMenu(e) {
 $('#nickname-input').on('keyup', playerSearch);
 function playerSearch() {
     //console.log("зашли в функцию меняющую содержимое select");
-    var q = new RegExp($(this).val(), 'ig');
-    var field = $('#list').find('option');
-    for (var i = 0, l = field.length; i < l; i += 1) {
-        var option = $(field[i]),
-            parent = option.parent();
+    const searchStr = $(this).val();
+    console.log('key-up nickname search str:', searchStr);
 
-        if ($(field[i]).text().match(q)) {
-            if (parent.is('span')) {
-                option.show();
-                parent.replaceWith(option);
-            }
-        } else {
-            if (option.is('option') && (!parent.is('span'))) {
-                option.wrap('<span>').hide();
-            }
-        }
-    }
+    // making socket emit request for searched part of nickname
+    ioClient.emit('nicknamesSearch', searchStr);
+
+    // var q = new RegExp(searchStr, 'ig');
+    // var field = $('#list').find('option');
+    // for (var i = 0, l = field.length; i < l; i += 1) {
+    //     var option = $(field[i]),
+    //         parent = option.parent();
+    //
+    //     if ($(field[i]).text().match(q)) {
+    //         if (parent.is('span')) {
+    //             option.show();
+    //             parent.replaceWith(option);
+    //         }
+    //     } else {
+    //         if (option.is('option') && (!parent.is('span'))) {
+    //             option.wrap('<span>').hide();
+    //         }
+    //     }
+    // }
 }
 
 //работа со списком поиска и выбором никнейма
@@ -397,8 +403,10 @@ function initPreflopPlayersIndexes() {
     var players = [];
     var playersIndexes = [];
     for (let i = 0; i < rawActionList.length; i++) {
-        if (players.indexOf(rawActionList[i].player) !== -1) {return playersIndexes}
-                players.push(rawActionList[i].player);
+        if (players.indexOf(rawActionList[i].position) !== -1) {return playersIndexes}
+                players.push(rawActionList[i].position);
                 playersIndexes.push(i);
     }
+
+    return playersIndexes;
 }

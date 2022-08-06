@@ -1,5 +1,5 @@
 // const ioClient = io.connect(url);
-const token = 'uidfksicnm730pdemg662oermfyf75jdf9djf';  // simulator
+const token = 'uidfksicnm999jfolt8snejvys44f5jdf9djf';  // simulator
 const WebSocketServer = {
     isConnected: false,
     socket: null,
@@ -139,6 +139,7 @@ const getStrategyFromServer = (obj, rawActionListIndex) => {
     ioClient.emit('simulations', obj);
     $("#waiting-progress-bar2").addClass("appear");
 };
+
 //
 // const getStrategyFromServer = (obj, rawActionListIndex) => {
 //     $("#waiting-progress-bar2").addClass("appear");
